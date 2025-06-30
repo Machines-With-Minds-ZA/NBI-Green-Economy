@@ -18,8 +18,8 @@ class GreenEconomyHeader extends HTMLElement {
                             </div>
                         </div>
                         <div id="mobile-menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-y-0 md:space-x-8 text-center w-full">
-                            <a href=""../About Page/about"" class="text-gray-900 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">About Green Economy Toolkit</a>
-                            <a href="../About Page/about.html" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Why Invest</a>
+                            <a href="/index.html" class="text-gray-900 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">About Green Economy Toolkit</a>
+                            <a href="/about.html" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Why Invest</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Opportunities</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Tools and Resources</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">News and Press</a>
@@ -28,7 +28,7 @@ class GreenEconomyHeader extends HTMLElement {
                                 <option value="zu">isiZulu</option>
                                 <option value="tn">Setswana</option>
                             </select>
-                            <button class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium">Sign In</button>
+                            <a href="../Sign In & Sign Up/SignIn.html" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium">Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,6 @@ class GreenEconomyFooter extends HTMLElement {
                             <h3 class="font-semibold text-lg mb-4">COMPANY</h3>
                             <ul class="space-y-2 text-sm opacity-90">
                                 <li><a href="#" class="hover:text-white transition-colors">About us</a></li>
-                                <li><a href="#" class="hover:text-white transition房</li>
                                 <li><a href="#" class="hover:text-white transition-colors">Services</a></li>
                                 <li><a href="#" class="hover:text-white transition-colors">Portfolio</a></li>
                                 <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
