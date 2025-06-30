@@ -161,9 +161,9 @@
             });
         });
 
-        document.querySelectorAll('a[href="/about"]').forEach(link => {
+        document.querySelectorAll('a[href="about"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                window.location.href = '/about.html';
+                window.location.href = 'about.html';
             });
         });

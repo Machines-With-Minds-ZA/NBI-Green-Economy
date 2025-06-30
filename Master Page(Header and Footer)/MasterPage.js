@@ -18,8 +18,8 @@ class GreenEconomyHeader extends HTMLElement {
                             </div>
                         </div>
                         <div id="mobile-menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-y-0 md:space-x-8 text-center w-full">
-                            <a href="/" class="text-gray-900 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">About Green Economy Toolkit</a>
-                            <a href="/about" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Why Invest</a>
+                            <a href=""../About Page/about"" class="text-gray-900 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">About Green Economy Toolkit</a>
+                            <a href="../About Page/about.html" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Why Invest</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Opportunities</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Tools and Resources</a>
                             <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">News and Press</a>
