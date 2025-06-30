@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Economy Toolkit - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <link rel="stylesheet" href="../main.css">
+    
+</head>
+<body>
+    <div id="root">
+        <green-economy-header></green-economy-header>
+        <main class="flex-grow flex items-center justify-center py-16 relative">
+            <div class="blurry-bg"></div>
+            <div class="form-container max-w-md w-full mx-4 p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Create Your Account</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input id="name" type="text" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input id="email" type="email" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="password" type="password" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="••••••••">
+                    </div>
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                        <input id="confirm-password" type="password" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="••••••••">
+                    </div>
+                    <div class="flex items-center">
+                        <input id="terms" type="checkbox" required class="h-4 w-4 text-green-primary focus:ring-green-primary border-gray-300 rounded">
+                        <label for="terms" class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-green-primary hover:underline">Terms of Service</a> and <a href="#" class="text-green-primary hover:underline">Privacy Policy</a></label>
+                    </div>
+                    <button class="w-full sign-up-btn font-semibold py-2 px-4 rounded-md transition-all duration-300">Sign Up</button>
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                        </div>
+                    </div>
+                    <button class="google-btn">
+                        <img src="https://www.google.com/favicon.ico" alt="Google logo">
+                        Sign up with Google
+                    </button>
+                </div>
+                <p class="mt-6 text-center text-sm text-gray-600">
+                    Already have an account? <a href="SignIn.html" class="text-green-primary hover:underline">Sign In</a>
+                </p>
+            </div>
+        </main>
+        <green-economy-footer></green-economy-footer>
+    </div>
+    <script src="../scripts/SignUp.js"></script>
+</body>
+</html>
