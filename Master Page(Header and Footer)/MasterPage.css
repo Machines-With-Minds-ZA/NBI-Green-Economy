@@ -107,32 +107,32 @@
         }
 
         * {
-            border-color: hsl(var(--border));
+            border-color: #005d6a;
         }
 
         body {
-            background-color: hsl(var(--background));
-            color: hsl(var(--foreground));
+            background-color: #005d6a;
+            color: #005d6a;
         }
 
         .green-gradient {
-            background: linear-gradient(135deg, hsl(var(--green-primary)) 0%, hsl(var(--teal-bg)) 100%);
+            background: #005d6a;
         }
 
         .green-primary {
-            background-color: hsl(var(--green-primary));
+            background-color: #005d6a;
         }
 
         .green-dark {
-            background-color: hsl(var(--green-dark));
+            background-color: #005d6a;
         }
 
         .teal-bg {
-            background-color: hsl(var(--teal-bg));
+            background-color: #005d6a;
         }
 
         .light-section {
-            background-color: hsl(var(--light-bg));
+            background-color: #005d6a;
         }
 
         .animate-fade-in {

@@ -1,13 +1,14 @@
 class GreenEconomyHeader extends HTMLElement {
     connectedCallback() {
+        const isDashboard = window.location.pathname.includes('dashboard.html');
         this.innerHTML = `
             <nav class="bg-white shadow-sm border-b border-gray-100">
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-col md:flex-row md:items-center h-auto md:h-16">
                         <div class="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
                             <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 bg-green-primary rounded-full"></div>
-                                <span class="font-bold text-lg text-gray-900">Green Economy Toolkit</span>
+                                <div class="w-8 h-8 bg-[] rounded-full"></div>
+                                <span class="font-bold text-lg text-gray-900" data-i18n="header.title">Green Economy Toolkit</span>
                             </div>
                             <div class="md:hidden">
                                 <button id="mobile-menu-toggle" class="w-6 h-6 text-gray-600 focus:outline-none">
@@ -18,17 +19,23 @@ class GreenEconomyHeader extends HTMLElement {
                             </div>
                         </div>
                         <div id="mobile-menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-y-0 md:space-x-8 text-center w-full">
-                            <a href="/index.html" class="text-gray-900 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">About Green Economy Toolkit</a>
-                            <a href="/about.html" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Why Invest</a>
-                            <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Opportunities</a>
-                            <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">Tools and Resources</a>
-                            <a href="#" class="text-gray-600 hover:text-green-primary px-3 py-2 text-sm font-medium transition-colors duration-200">News and Press</a>
+                            <a href="/index.html" class="text-gray-900 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.about">About Green Economy Toolkit</a>
+                            <a href="/about.html" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.why_invest">Why Invest</a>
+                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.opportunities">Opportunities</a>
+                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.tools_resources">Tools and Resources</a>
+                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.news_press">News and Press</a>
                             <select id="language-selector" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium md:mx-2">
                                 <option value="en">English</option>
                                 <option value="zu">isiZulu</option>
                                 <option value="tn">Setswana</option>
                             </select>
-                            <a href="../Sign In & Sign Up/SignIn.html" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium">Sign In</a>
+                            ${isDashboard ? `
+                                <button onclick="logout()" class="bg-[#005d6a] text-white rounded-md px-4 py-2 text-sm font-medium transition-transform duration-200 hover:-translate-y-1 shadow-sm">
+                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Logout</span>
+                                </button>
+                            ` : `
+                                <a href="../Sign In & Sign Up/SignIn.html" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium" data-i18n="header.sign_in">Sign In</a>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -51,40 +58,40 @@ class GreenEconomyFooter extends HTMLElement {
                         <div>
                             <div class="flex items-center space-x-2 mb-4">
                                 <div class="w-8 h-8 bg-white rounded-full"></div>
-                                <span class="font-bold text-lg">Green Economy Toolkit</span>
+                                <span class="font-bold text-lg" data-i18n="header.title">Green Economy Toolkit</span>
                             </div>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-4">COMPANY</h3>
+                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.company">COMPANY</h3>
                             <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors">About us</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Services</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Portfolio</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_about">About us</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_services">Services</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_portfolio">Portfolio</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_pricing">Pricing</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-4">SUPPORT</h3>
+                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.support">SUPPORT</h3>
                             <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Support Center</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_faq">FAQ</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_center">Support Center</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_contact">Contact Us</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_status">Status</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-4">QUICK LINKS</h3>
+                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.quick_links">QUICK LINKS</h3>
                             <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Terms of service</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Disclaimer</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors">Credits</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.privacy_policy">Privacy Policy</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.terms_service">Terms of service</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.disclaimer">Disclaimer</a></li>
+                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.credits">Credits</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="border-t border-white/20 mt-8 pt-8">
                         <div class="flex flex-col md:flex-row justify-between items-center">
-                            <p class="text-sm opacity-90">© 2024 Green Economy Toolkit</p>
+                            <p class="text-sm opacity-90" data-i18n="footer.copyright">© 2025 Green Economy Toolkit</p>
                             <div class="flex space-x-6 mt-4 md:mt-0">
                                 <div class="flex items-center space-x-4">
                                     <img src="/placeholder.svg" alt="Logo 1" class="h-8 opacity-80">
@@ -103,3 +110,8 @@ class GreenEconomyFooter extends HTMLElement {
 
 customElements.define('green-economy-header', GreenEconomyHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
+
+// Logout function
+function logout() {
+    window.location.href = '../index.html';
+}
