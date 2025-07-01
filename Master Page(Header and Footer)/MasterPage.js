@@ -1,106 +1,97 @@
+// Define the custom header element
 class GreenEconomyHeader extends HTMLElement {
     connectedCallback() {
         const isDashboard = window.location.pathname.includes('dashboard.html');
         this.innerHTML = `
-            <nav class="bg-white shadow-sm border-b border-gray-100">
-                <div class="px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col md:flex-row md:items-center h-auto md:h-16">
-                        <div class="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 bg-[] rounded-full"></div>
-                                <span class="font-bold text-lg text-gray-900" data-i18n="header.title">Green Economy Toolkit</span>
-                            </div>
-                            <div class="md:hidden">
-                                <button id="mobile-menu-toggle" class="w-6 h-6 text-gray-600 focus:outline-none">
-                                    <svg fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
+            <header class="header">
+                <div class="container">
+                    <div class="header-content">
+                        <div class="logo">
+                            <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
                         </div>
-                        <div id="mobile-menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-center space-y-2 md:space-y-0 md:space-x-8 text-center w-full">
-                            <a href="/index.html" class="text-gray-900 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.about">About Green Economy Toolkit</a>
-                            <a href="/about.html" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.why_invest">Why Invest</a>
-                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.opportunities">Opportunities</a>
-                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.tools_resources">Tools and Resources</a>
-                            <a href="#" class="text-gray-600 hover:text-[hsl(var(--green-primary))] px-3 py-2 text-sm font-medium transition-colors duration-200" data-i18n="header.news_press">News and Press</a>
-                            <select id="language-selector" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium md:mx-2">
+                        <nav class="nav">
+                            <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
+                            <a href="/about.html" data-i18n="header.why_invest">IRM Sector</a>
+                            <a href="#" data-i18n="header.opportunities">Opportunities</a>
+                            <a href="#" data-i18n="header.tools_resources">Knowledge Hub</a>
+                        </nav>
+                        <div class="header-actions">
+                            <select id="language-selector" class="language-selector">
                                 <option value="en">English</option>
-                                <option value="zu">isiZulu</option>
-                                <option value="tn">Setswana</option>
+                                <option value="zu">IsiZulu</option>
+                                <option value="tn">Tswana</option>
                             </select>
                             ${isDashboard ? `
-                                <button onclick="logout()" class="bg-[#005d6a] text-white rounded-md px-4 py-2 text-sm font-medium transition-transform duration-200 hover:-translate-y-1 shadow-sm">
+                                <button onclick="logout()" class="logout-button">
                                     <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Logout</span>
                                 </button>
                             ` : `
-                                <a href="../Sign In & Sign Up/SignIn.html" class="border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 rounded-md px-4 py-2 text-sm font-medium" data-i18n="header.sign_in">Sign In</a>
+                                <a href="../Sign In & Sign Up/SignIn.html" class="logout-button" data-i18n="header.sign_in">Sign In</a>
                             `}
                         </div>
                     </div>
                 </div>
-            </nav>
+            </header>
         `;
-        this.querySelector('#mobile-menu-toggle').addEventListener('click', () => {
-            const mobileMenu = this.querySelector('#mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('block');
-        });
+        
+        // Add event listener for language selector
+        const languageSelector = this.querySelector('#language-selector');
+        if (languageSelector) {
+            languageSelector.addEventListener('change', (e) => {
+                this.switchLanguage(e.target.value);
+            });
+        }
+    }
+
+    switchLanguage(lang) {
+        // Implement language switching logic here
+        console.log(`Switching to ${lang} language`);
+        // This would typically involve fetching translations and updating the DOM
     }
 }
 
+// Define the custom footer element
 class GreenEconomyFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <footer class="green-gradient text-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <div>
-                            <div class="flex items-center space-x-2 mb-4">
-                                <div class="w-8 h-8 bg-white rounded-full"></div>
-                                <span class="font-bold text-lg" data-i18n="header.title">Green Economy Toolkit</span>
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <div class="logo">
+                                <img src="Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
                             </div>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.company">COMPANY</h3>
-                            <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_about">About us</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_services">Services</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_portfolio">Portfolio</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.company_pricing">Pricing</a></li>
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.about_us">ABOUT US</h4>
+                            <ul>
+                                <li><a href="#" data-i18n="footer.about_green_economy">About the green economy</a></li>
+                                <li><a href="#" data-i18n="footer.who_we_are">Who we are</a></li>
+                                <li><a href="#" data-i18n="footer.our_team">Our team</a></li>
+                                <li><a href="#" data-i18n="footer.board_directors">Board of directors</a></li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.support">SUPPORT</h3>
-                            <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_faq">FAQ</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_center">Support Center</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_contact">Contact Us</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.support_status">Status</a></li>
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.services">SERVICES</h4>
+                            <ul>
+                                <li><a href="#" data-i18n="footer.green_economy_network">Green economy network</a></li>
+                                <li><a href="#" data-i18n="footer.live_events_calendar">Live events calendar</a></li>
+                                <li><a href="#" data-i18n="footer.green_opportunities">Green opportunities</a></li>
+                                <li><a href="#" data-i18n="footer.news_updates">News and updates</a></li>
                             </ul>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-lg mb-4" data-i18n="footer.quick_links">QUICK LINKS</h3>
-                            <ul class="space-y-2 text-sm opacity-90">
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.privacy_policy">Privacy Policy</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.terms_service">Terms of service</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.disclaimer">Disclaimer</a></li>
-                                <li><a href="#" class="hover:text-white transition-colors" data-i18n="footer.credits">Credits</a></li>
+                        <div class="footer-section">
+                            <h4 data-i18n="footer.quick_links">QUICK LINKS</h4>
+                            <ul>
+                                <li><a href="#" data-i18n="footer.news_events">News & events</a></li>
+                                <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li>
+                                <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
+                                <li><a href="#" data-i18n="footer.terms_reference">Terms of reference</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="border-t border-white/20 mt-8 pt-8">
-                        <div class="flex flex-col md:flex-row justify-between items-center">
-                            <p class="text-sm opacity-90" data-i18n="footer.copyright">© 2025 Green Economy Toolkit</p>
-                            <div class="flex space-x-6 mt-4 md:mt-0">
-                                <div class="flex items-center space-x-4">
-                                    <img src="/placeholder.svg" alt="Logo 1" class="h-8 opacity-80">
-                                    <img src="/placeholder.svg" alt="Logo 2" class="h-8 opacity-80">
-                                    <img src="/placeholder.svg" alt="Logo 3" class="h-8 opacity-80">
-                                    <img src="/placeholder.svg" alt="Logo 4" class="h-8 opacity-80">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="footer-bottom">
+                        <p data-i18n="footer.copyright">&copy; ${new Date().getFullYear()} Green Economy Network. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
@@ -108,10 +99,14 @@ class GreenEconomyFooter extends HTMLElement {
     }
 }
 
+// Register the custom elements
 customElements.define('green-economy-header', GreenEconomyHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
-// Logout function
-function logout() {
+// Global logout function
+window.logout = function() {
+    // Add logout logic here
+    console.log('Logging out...');
     window.location.href = '../index.html';
-}
+};
+
