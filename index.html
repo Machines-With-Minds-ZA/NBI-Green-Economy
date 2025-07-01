@@ -1,878 +1,1215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>identical-visual-match</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-    <meta property="og:title" content="identical-visual-match" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Green Economy Toolkit</title>
     <style>
-        :root {
-            --background: #ffffff;
-            --foreground: #0f172a;
-            --card: #ffffff;
-            --card-foreground: #0f172a;
-            --popover: #ffffff;
-            --popover-foreground: #0f172a;
-            --primary: #1e293b;
-            --primary-foreground: #f9fafb;
-            --secondary: #f3f4f6;
-            --secondary-foreground: #1e293b;
-            --muted: #f3f4f6;
-            --muted-foreground: #757575;
-            --accent: #f3f4f6;
-            --accent-foreground: #1e293b;
-            --destructive: #f43f5e;
-            --destructive-foreground: #f9fafb;
-            --border: #e5e7eb;
-            --input: #e5e7eb;
-            --ring: #0f172a;
-            --radius: 0.5rem;
-            --sidebar-background: #f8fafc;
-            --sidebar-foreground: #44403c;
-            --sidebar-primary: #27272a;
-            --sidebar-primary-foreground: #f9fafb;
-            --sidebar-accent: #f5f5f5;
-            --sidebar-accent-foreground: #27272a;
-            --sidebar-border: #e5e7eb;
-            --sidebar-ring: #93c5fd;
-        }
-        .dark {
-            --background: #0f172a;
-            --foreground: #f9fafb;
-            --card: #0f172a;
-            --card-foreground: #f9fafb;
-            --popover: #0f172a;
-            --popover-foreground: #f9fafb;
-            --primary: #f9fafb;
-            --primary-foreground: #1e293b;
-            --secondary: #2f2f2f;
-            --secondary-foreground: #f9fafb;
-            --muted: #2f2f2f;
-            --muted-foreground: #a3a3a3;
-            --accent: #2f2f2f;
-            --accent-foreground: #f9fafb;
-            --destructive: #7f1d1d;
-            --destructive-foreground: #f9fafb;
-            --border: #2f2f2f;
-            --input: #2f2f2f;
-            --ring: #d1d5db;
-            --sidebar-background: #27272a;
-            --sidebar-foreground: #f5f5f5;
-            --sidebar-primary: #93c5fd;
-            --sidebar-primary-foreground: #ffffff;
-            --sidebar-accent: #404040;
-            --sidebar-accent-foreground: #f5f5f5;
-            --sidebar-border: #404040;
-            --sidebar-ring: #93c5fd;
-        }
-        * {
-            border-color: var(--border);
-        }
-        body {
-            background-color: var(--background);
-            color: var(--foreground);
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        #root {
-            width: 100%;
-            padding: 0;
-            text-align: left;
-        }
-        .logo {
-            height: 6em;
-            padding: 1.5em;
-            will-change: filter;
-            transition: filter 300ms;
-        }
-        .logo:hover {
-            filter: drop-shadow(0 0 2em #646cffaa);
-        }
-        .logo.react:hover {
-            filter: drop-shadow(0 0 2em #61dafbaa);
-        }
-        @keyframes logo-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @media (prefers-reduced-motion: no-preference) {
-            a:nth-of-type(2) .logo {
-                animation: logo-spin infinite 20s linear;
-            }
-        }
-        .card {
-            padding: 2em;
-        }
-        .read-the-docs {
-            color: #888;
-        }
-        header {
-            background-color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            width: 100%;
-        }
-        header .container {
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        header .logo div {
-            width: 2rem;
-            height: 2rem;
-            background-color: #16a34a;
-            border-radius: 0.25rem;
-        }
-        header .logo span {
-            color: #16a34a;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        header .logo small {
-            color: #6b7280;
-            font-size: 0.75rem;
-        }
-        header nav {
-            display: none;
-        }
-        header nav button {
-            background-color: #16a34a;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            margin-left: 0.25rem;
-            text-decoration: none;
-            display: inline-block;
-        }
-        header nav button:hover {
-            background-color: #15803d;
-        }
-        header nav .search {
-            position: relative;
-            margin-left: 1rem;
-        }
-        header nav .search input {
-            padding: 0.25rem 2rem 0.25rem 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            width: 8rem;
-        }
-        header nav .search svg {
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1rem;
-            height: 1rem;
-            color: #9ca3af;
-        }
-        @media (min-width: 1024px) {
-            header nav {
-                display: flex;
-                gap: 0.25rem;
-            }
-        }
-        .hero {
-            background-color: #28a745;
-            color: #ffffff;
-            padding: 3rem 0;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-        .hero .container {
-            padding: 0 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 2rem;
-        }
-        .hero .image {
-            flex: 1;
-            min-width: 300px;
-            background: url('/lovable-uploads/f2cb14c8-870b-4a99-8bca-b8b8e59c0f57.png') no-repeat center;
-            background-size: cover;
-            height: 400px;
-            position: relative;
-        }
-        .hero .image::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>') no-repeat center;
-            background-size: contain;
-        }
-        .hero .text {
-            flex: 1;
-            min-width: 300px;
-            padding: 1rem;
-            text-align: left;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .hero .buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .hero .buttons a {
-            background-color: #006400;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            border-radius: 0.25rem;
-        }
-        .hero .buttons a:hover {
-            background-color: #004d00;
-        }
-        .focus-areas {
-            padding: 3rem 0;
-            background-color: #ffffff;
-            text-align: center;
-            width: 100%;
-        }
-        .focus-areas .container {
-            padding: 0 1rem;
-        }
-        .focus-areas h2 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 1rem;
-        }
-        .focus-areas p {
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        .focus-areas .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            padding: 0 1rem;
-            justify-items: center;
-        }
-        .focus-areas .card {
-            width: 200px;
-        }
-        .focus-areas .card img {
-            width: 100%;
-            height: auto;
-        }
-        .focus-areas .card p {
-            margin: 0.5rem 0;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-            .focus-areas .grid { grid-template-columns: repeat(1, 1fr); }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .focus-areas .grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        .business {
-            padding: 3rem 0;
-            background-color: #e0f7fa;
-            text-align: center;
-            width: 100%;
-        }
-        .business .container {
-            padding: 0 1rem;
-        }
-        .business h2 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 2rem;
-        }
-        .business .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 0 1rem;
-        }
-        .business .card {
-            background-color: #26a69a;
-            color: #ffffff;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        .business .card.right {
-            background-color: #28a745;
-        }
-        .business .card img {
-            width: 100%;
-            height: 12rem;
-            object-fit: cover;
-        }
-        .business .card h3 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-        .business .card p {
-            font-size: 0.875rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .business .card a {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #26a69a;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            border-radius: 0.25rem;
-        }
-        .business .card.right a {
-            color: #28a745;
-        }
-        .business .card a:hover {
-            background-color: #f0f0f0;
-        }
-        @media (min-width: 1024px) {
-            .business .grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        .news {
-            padding: 3rem 0;
-            background-color: #28a745;
-            color: #ffffff;
-            text-align: center;
-            width: 100%;
-        }
-        .news .container {
-            padding: 0 1rem;
-        }
-        .news h2 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-        }
-        .news .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 0 1rem;
-            margin-bottom: 2rem;
-        }
-        .news .item {
-            padding: 1rem;
-        }
-        .news .item h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .news .item p {
-            font-size: 0.875rem;
-        }
-        .news .updates {
-            background-color: #218838;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=400&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        .news .updates .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            padding: 0 1rem;
-        }
-        .news .updates .card {
-            background-color: #28a745;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        .news .updates .card p {
-            margin-bottom: 0.5rem;
-        }
-        .news .updates .card h4 {
-            font-weight: bold;
-            font-size: 0.875rem;
-        }
-        @media (min-width: 640px) {
-            .news .grid { grid-template-columns: repeat(2, 1fr); }
-            .news .updates .grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .news .grid { grid-template-columns: repeat(3, 1fr); }
-            .news .updates .grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        .events {
-            padding: 3rem 0;
-            background-color: #e0f7fa;
-            background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&h=600&fit=crop');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            width: 100%;
-        }
-        .events .container {
-            padding: 0 1rem;
-        }
-        .events h2 {
-            font-size: 1.875rem;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 1rem;
-        }
-        .events p {
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        .events .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 0 1rem;
-        }
-        .events .card {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            background-color: #ffffff;
-            box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
-        }
-        .events .card.left {
-            background-color: #26a69a;
-            color: #ffffff;
-        }
-        .events .card.right {
-            background-color: #28a745;
-            color: #ffffff;
-        }
-        .events .card h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-        }
-        .events .card .inner {
-            background-color: #ffffff;
-            color: #1f2937;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        .events .card .inner h4 {
-            font-size: 1.125rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        .events .card .inner p {
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
-        }
-        .events .card.right .inner {
-            color: #ffffff;
-            background-color: transparent;
-            border-left: 0.25rem solid #22c55e;
-            padding-left: 1rem;
-        }
-        .events .card.right .inner div {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.25rem;
-        }
-        .events .card.right .inner div span {
-            width: 0.5rem;
-            height: 0.5rem;
-            background-color: #22c55e;
-            border-radius: 50%;
-        }
-        .events .card.right a {
-            background-color: #28a745;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            border-radius: 0.25rem;
-            margin-top: 1.5rem;
-            display: inline-block;
-        }
-        .events .card.right a:hover {
-            background-color: #218838;
-        }
-        @media (min-width: 1024px) {
-            .events .grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        footer {
-            background-color: #26a69a;
-            color: #ffffff;
-            width: 100%;
-        }
-        footer .partners {
-            background-color: #1e7e75;
-            padding: 2rem 0;
-        }
-        footer .partners .container {
-            padding: 0 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        footer .partners div {
-            height: 3rem;
-            padding: 0.5rem 1rem;
-            background-color: #ffffff;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        footer .partners span {
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-        footer .newsletter {
-            background-color: #26a69a;
-            padding: 2rem 0;
-        }
-        footer .newsletter .container {
-            padding: 0 1rem;
-            text-align: center;
-        }
-        footer .newsletter h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        footer .newsletter .input-group {
-            display: flex;
-            justify-content: center;
-            max-width: 20rem;
-            margin: 0 auto;
-        }
-        footer .newsletter input {
-            padding: 0.75rem;
-            border-top-left-radius: 0.5rem;
-            border-bottom-left-radius: 0.5rem;
-            border: none;
-            width: 100%;
-            color: #1f2937;
-        }
-        footer .newsletter button {
-            padding: 0.75rem 1rem;
-            background-color: #ffffff;
-            border-top-right-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        footer .newsletter button:hover {
-            background-color: #f3f4f6;
-        }
-        footer .newsletter button svg {
-            width: 1.25rem;
-            height: 1.25rem;
-            color: #26a69a;
-        }
-        footer .newsletter p {
-            font-size: 0.75rem;
-            opacity: 0.75;
-            margin-top: 0.5rem;
-        }
-        footer .details {
-            background-color: #1e7e75;
-            padding: 3rem 0;
-        }
-        footer .details .container {
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        footer .details div {
-            text-align: center;
-        }
-        footer .details h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        footer .details p {
-            font-size: 0.875rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-        footer .details .info {
-            margin-top: 2rem;
-        }
-        footer .details .info div {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        footer .bottom {
-            background-color: #26a69a;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        footer .bottom p {
-            font-size: 0.75rem;
-            opacity: 0.75;
-        }
-        @media (min-width: 768px) {
-            footer .details .container { grid-template-columns: repeat(4, 1fr); }
-            footer .details .info div { grid-template-columns: repeat(4, 1fr); }
-        }
-    </style>
-</head>
-<body>
-    <div id="root">
-        <header>
-            <div class="container">
-                <div class="logo">
-                    <div></div>
-                    <div>
-                        <span>A GREEN ECONOMY TOOLKIT</span>
-                        <small>FOR SOUTH AFRICAN SMMES IN THE IRM SECTOR</small>
-                    </div>
-                </div>
-                <nav>
-                    <button>About the Green Economy</button>
-                    <button>RM Sector</button>
-                    <button>Opportunities</button>
-                    <button>Knowledge HUB</button>
-                    <button>Select Language</button>
-                    <div class="search">
-                        <input type="text" placeholder="Search" />
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5.2-5.2m0 0A7.5 7.5 0 1112 3.5a7.5 7.5 0 014.3 13.3z" />
-                        </svg>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <section class="hero">
-            <div class="container">
-                <div class="image"></div>
-                <div class="text">
-                    <h1>A GREEN ECONOMY TOOLKIT</h1>
-                    <p>South Africa and the world are switching to a green economy, and that is creating a lot of opportunities for businesses in the installation, repair and maintenance (RM) sector. We want to share these opportunities with you, so we've put together this comprehensive green economy toolkit that's a digital tool to help you gain full understanding of what a green economy is, and how your business fits into the growing trend towards green business. Here you will find short explanations, support tools and various initiatives that are giving helping hands to green economy, we've also put together a step-by-step guide on how to access the benefits of a green economy, and information where to go for support.</p>
-                    <div class="buttons">
-                        <a href="#">Get Funding</a>
-                        <a href="#">Opportunities</a>
-                        <a href="#">Find a HUB</a>
-                        <a href="#">Training</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="focus-areas">
-            <div class="container">
-                <h2>Nine priority focus areas for the green economy in South Africa (Green Economy Summit, 2010)</h2>
-                <p></p>
-                <div class="grid">
-                    <div class="card"><img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop" alt="Agriculture"><p>Agriculture</p></div>
-                    <div class="card"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop" alt="Energy"><p>Energy (clean and efficient)</p></div>
-                    <div class="card"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" alt="Natural Resource"><p>Natural resource conservation and management (including mining)</p></div>
-                    <!-- Add remaining six focus areas as needed -->
-                </div>
-            </div>
-        </section>
-        <section class="business">
-            <div class="container">
-                <h2>Preparing your business for the green economy</h2>
-                <div class="grid">
-                    <div class="card">
-                        <img src="/lovable-uploads/28281baa-df76-4a47-9e01-861cbce32f17.png" alt="For your business">
-                        <h3>For your business</h3>
-                        <p>The world is moving towards a green economy, and South Africa must do so if it is to continue trading internationally. Our existing buildings and infrastructure must be adapted to make the way they are operated more sustainable, and new infrastructure must be built according to green principles, so it does not use more natural resources than absolutely necessary. A lot of work needs to be done.</p>
-                        <p>This is where you come in. But how do you make sure you can get some of this work?</p>
-                        <a href="#">Find out more</a>
-                    </div>
-                    <div class="card right">
-                        <img src="/lovable-uploads/2c2f0292-8afa-49dd-ad66-316684cdd316.png" alt="For your future">
-                        <h3>For your future</h3>
-                        <p>The South African government has chosen nine areas to focus on in the switch to a green economy; agriculture; energy (clean and efficient); natural resource conservation and management (including mining); sustainable transport and infrastructure; environmental sustainability (incl tourism education); green building and the built environment; sustainable waste management and recycling; water management; and sustainable production and consumption. Find out about green economy opportunities in the RM sector.</p>
-                        <a href="#">Find out more</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="news">
-            <div class="container">
-                <h2>Green economy news and updates</h2>
-                <div class="grid">
-                    <div class="item">
-                        <h3>Join the SMME Green Economy Network</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac ornare felis. Nam velit neque, blandit id placerat eu, venenatis purus.</p>
-                    </div>
-                    <div class="item">
-                        <h3>Opportunities</h3>
-                        <p>This page is your go-to hub for all the information you need, right at your fingertips. Use the filter to select resources tailored to your specific category of interest.</p>
-                    </div>
-                    <div class="item">
-                        <h3>Live Events Calendar</h3>
-                        <p>Highlighting local events, workshops and training sessions, as well as local and international calendar days of significance.</p>
-                    </div>
-                </div>
-                <div class="updates">
-                    <div class="grid">
-                        <div class="card">11 April 2025 - Indalopreneur Climate-smart Cleantech Enterprise Support Programme</div>
-                        <div class="card">11 November 2024 - South African Pavilion at COP29</div>
-                        <div class="card">08 November 2024 - JET Funding Platform to close first application window on Dec 15</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="events">
-            <div class="container">
-                <h2>Events calendar</h2>
-                <p>Highlighting local events, workshops and training sessions, as well as local and international calendar days of significance.</p>
-                <div class="grid">
-                    <div class="card left">
-                        <h3>Upcoming Event</h3>
-                        <div class="inner">
-                            <h4>ESG</h4>
-                            <h4>(Environmental, Social, Governance) Africa Conference & Expo 2025</h4>
-                            <p>Event Details:</p>
-                            <p>17 October - 27 October 2025</p>
-                            <p>08:00 to 16:00 (SAST)</p>
-                        </div>
-                    </div>
-                    <div class="card right">
-                        <h3>Past Events</h3>
-                        <div class="inner">
-                            <div><span></span><span>2025</span></div>
-                            <h4>Green Building Convention 2025</h4>
-                            <p>Event Details:</p>
-                            <p>11 November - 13 November 2025</p>
-                            <p>08:00 to 16:00 (SAST)</p>
-                            <div><span></span><span>2025</span></div>
-                            <h4>Future of Sustainability</h4>
-                            <p>Event Details:</p>
-                            <p>26 March - 27 March 2025</p>
-                            <p>08:00 to 16:00 (SAST)</p>
-                        </div>
-                        <a href="#">View all events</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <footer>
-            <div class="partners">
-                <div class="container">
-                    <div><span>German Cooperation</span></div>
-                    <div><span>GIZ</span></div>
-                    <div><span>Swiss Confederation</span></div>
-                    <div><span>Republic of South Africa</span></div>
-                    <div><span>IRM</span></div>
-                    <div><span>NBI</span></div>
-                </div>
-            </div>
-            <div class="newsletter">
-                <div class="container">
-                    <h3>Subscribe to our newsletter to get the latest information</h3>
-                    <div class="input-group">
-                        <input type="email" placeholder="Your email" />
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                    <p>*Only relevant information, no spam</p>
-                </div>
-            </div>
-            <div class="details">
-                <div class="container">
-                    <div>
-                        <div class="flex items-center gap-0.5 mb-1">
-                            <div class="w-2 h-2 bg-white rounded"></div>
-                            <span class="font-bold">A Green Economy Toolkit</span>
-                        </div>
-                        <p>FOR SOUTH AFRICAN SMMES IN THE IRM SECTOR</p>
-                    </div>
-                    <div>
-                        <h4>CONTACT</h4>
-                        <p>+27 (0)11 544 6000</p>
-                        <p>info@nbi.org.za</p>
-                    </div>
-                    <div>
-                        <h4>ADDRESS</h4>
-                        <p><span class="font-semibold">Address:</span> 61 Katherine Street, Dennehof Sandton, 2196</p>
-                        <p><span class="font-semibold">Postal Address:</span> 61 Katherine Street, Dennehof Sandton, 2196</p>
-                    </div>
-                    <div>
-                        <h4>QUICK LINKS</h4>
-                        <p>Home</p>
-                        <p>About the green economy</p>
-                        <p>RM sector</p>
-                        <p>Knowledge hub</p>
-                        <p>Opportunities</p>
-                    </div>
-                    <div class="info">
-                        <h4>INFORMATION</h4>
-                        <div>
-                            <p>FAQs</p>
-                            <p>Terms & Conditions</p>
-                            <p>Privacy Policy</p>
-                            <p>Help</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom">
-                <p>© 2025 A Green Economy Toolkit</p>
-            </div>
-        </footer>
-    </div>
-    <script>
-        // Simulate 404 error logging
-        window.addEventListener('load', () => {
-            const path = window.location.pathname;
-            if (path !== '/') {
-                console.error('404 Error: User attempted to access non-existent route:', path);
-            }
-        });
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        // Add hover effects for buttons and links
-        document.querySelectorAll('button, a').forEach(el => {
-            el.addEventListener('mouseover', () => {
-                const bg = el.style.backgroundColor || getComputedStyle(el).backgroundColor;
-                if (bg.includes('#16a34a')) el.style.backgroundColor = '#15803d';
-                else if (bg.includes('#28a745')) el.style.backgroundColor = '#218838';
-            });
-            el.addEventListener('mouseout', () => {
-                const bg = el.style.backgroundColor || getComputedStyle(el).backgroundColor;
-                if (bg === '#15803d') el.style.backgroundColor = '#16a34a';
-                else if (bg === '#218838') el.style.backgroundColor = '#28a745';
-            });
-        });
-    </script>
-</body>
+      body {
+        font-family:
+          ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* Header Styles */
+      .header {
+        background: white;
+        display: flex;
+        align-items: center;
+        height: 64px;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        padding: 0 1rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: #0c973f;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+
+      .logo-text {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .header-right {
+        background: #0c973f;
+        display: flex;
+        align-items: center;
+        height: 64px;
+        padding: 0 24px;
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .nav {
+        display: flex;
+        gap: 24px;
+      }
+
+      .nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s;
+      }
+
+      .nav a:hover {
+        color: #a7f3d0;
+      }
+
+      .search-icon {
+        width: 20px;
+        height: 20px;
+        color: white;
+        margin-left: 16px;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: #0c973f;
+        color: white;
+        padding: 64px 0;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero-image {
+        position: relative;
+      }
+
+      .hero-image img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin-top: 0;
+      }
+
+      .hero-button {
+        padding: 16px;
+        background: #15803d;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 14px;
+      }
+
+      .hero-button:nth-child(1) {
+        background: #15803d;
+      }
+      .hero-button:nth-child(2) {
+        background: #16a34a;
+      }
+      .hero-button:nth-child(3) {
+        background: #22c55e;
+      }
+      .hero-button:nth-child(4) {
+        background: #4ade80;
+      }
+
+      .hero-button:hover {
+        opacity: 0.8;
+      }
+
+      .hero-text h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 24px;
+        line-height: 1.1;
+      }
+
+      .hero-text p {
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      /* Focus Areas */
+      .focus-areas {
+        padding: 64px 0;
+        background: #f8fafc;
+      }
+
+      .focus-title {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .focus-title h2 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        color: #1f2937;
+      }
+
+      .focus-title p {
+        color: #6b7280;
+      }
+
+      .focus-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+
+      .focus-item {
+        position: relative;
+        height: 256px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .focus-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 0.3s;
+      }
+
+      .focus-item:nth-child(1)::before {
+        background-image: url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(2)::before {
+        background-image: url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(3)::before {
+        background-image: url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(4)::before {
+        background-image: url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(5)::before {
+        background-image: url("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(6)::before {
+        background-image: url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(7)::before {
+        background-image: url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(8)::before {
+        background-image: url("https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop");
+      }
+      .focus-item:nth-child(9)::before {
+        background-image: url("https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop");
+      }
+
+      .focus-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        transition: background 0.3s;
+      }
+
+      .focus-item:hover::after {
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .focus-content {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        padding: 24px;
+      }
+
+      .focus-content h3 {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      /* Business Preparation */
+      .business-prep {
+        padding: 64px 0;
+        background: #dbeafe;
+      }
+
+      .business-title {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .business-title h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: #1f2937;
+      }
+
+      .business-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        max-width: 896px;
+        margin: 0 auto;
+      }
+
+      .business-card {
+        background: #0c973f;
+        border-radius: 8px;
+        overflow: hidden;
+        color: white;
+        position: relative;
+        padding-bottom: 48px;
+      }
+
+      .business-card-image {
+        height: 192px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .business-card:nth-child(1) .business-card-image {
+        background-image: url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop");
+      }
+
+      .business-card:nth-child(2) .business-card-image {
+        background-image: url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop");
+      }
+
+      .business-card-content {
+        padding: 24px;
+      }
+
+      .business-card h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+
+      .business-card p {
+        color: #d1fae5;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .business-card .small-text {
+        font-size: 14px;
+      }
+
+      .business-card-button {
+        position: absolute;
+        bottom: -12px;
+        left: 24px;
+        background: white;
+        color: #0c973f;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .business-card-button:hover {
+        background: #f3f4f6;
+      }
+
+      /* Three Column Info Section */
+      .info-section {
+        padding: 64px 0;
+        background: #0c973f;
+        color: white;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .info-item {
+        text-align: center;
+        padding: 32px;
+        border-right: 1px solid #4ade80;
+      }
+
+      .info-item:last-child {
+        border-right: none;
+      }
+
+      .info-icon {
+        width: 64px;
+        height: 64px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+      }
+
+      .info-icon svg {
+        width: 32px;
+        height: 32px;
+        color: #0c973f;
+      }
+
+      .info-item h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+
+      .info-item p {
+        color: #d1fae5;
+        line-height: 1.6;
+      }
+
+      /* News Section */
+      .news-section {
+        background: #0c973f;
+        color: white;
+      }
+
+      .news-header {
+        text-align: center;
+        padding: 64px 0;
+        background: #064e3b;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .news-header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=600&fit=crop");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+      }
+
+      .news-header h2 {
+        position: relative;
+        z-index: 10;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background: #0c973f;
+      }
+
+      .news-item {
+        padding: 24px;
+        border-right: 1px solid #4ade80;
+      }
+
+      .news-item:last-child {
+        border-right: none;
+      }
+
+      .news-date {
+        font-size: 14px;
+        color: #a7f3d0;
+        margin-bottom: 8px;
+      }
+
+      .news-item h3 {
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .news-item p {
+        font-size: 14px;
+        color: #d1fae5;
+      }
+
+      /* Events Calendar */
+      .events-section {
+        padding: 64px 0;
+        background-image: url("https://images.unsplash.com/photo-1560472355-536de3962603?w=1200&h=600&fit=crop");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .events-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .events-content {
+        position: relative;
+        z-index: 10;
+      }
+
+      .events-title {
+        text-align: center;
+        margin-bottom: 48px;
+        color: white;
+      }
+
+      .events-title h2 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .events-title p {
+        color: #d1d5db;
+      }
+
+      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        max-width: 896px;
+        margin: 0 auto;
+      }
+
+      .event-card {
+        position: relative;
+        padding-bottom: 48px;
+      }
+
+      .event-header {
+        background: #0c973f;
+        color: white;
+        padding: 16px;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .event-card:nth-child(2) .event-header {
+        background: #16a34a;
+      }
+
+      .event-header h3 {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .event-content {
+        background: white;
+        padding: 24px;
+        border-radius: 0 0 8px 8px;
+        color: #1f2937;
+      }
+
+      .event-item {
+        display: flex;
+        gap: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 16px;
+      }
+
+      .event-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .event-date {
+        background: #0c973f;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .event-date .dot {
+        color: #ef4444;
+        margin-right: 4px;
+      }
+
+      .event-details h4 {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .event-details p {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .event-button {
+        position: absolute;
+        bottom: -12px;
+        left: 24px;
+        background: #0c973f;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .event-button.outline {
+        background: white;
+        color: #0c973f;
+        border: 1px solid #0c973f;
+      }
+
+      .event-button:hover {
+        opacity: 0.9;
+      }
+
+      /* Partner Logos */
+      .partners {
+        padding: 48px 0;
+        background: white;
+        border-top: 2px solid #0c973f;
+      }
+
+      .partners-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .partner-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .partner-icon {
+        margin-right: 8px;
+      }
+
+      .partner-icon.orange {
+        width: 64px;
+        height: 32px;
+        background: #f97316;
+        border-radius: 4px;
+      }
+
+      .partner-icon.red {
+        width: 32px;
+        height: 32px;
+        background: #ef4444;
+        border-radius: 50%;
+      }
+
+      .partner-icon.blue {
+        width: 48px;
+        height: 48px;
+        background: #2563eb;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .partner-badge {
+        color: white;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .partner-badge.green {
+        background: #0c973f;
+      }
+
+      .partner-badge.blue {
+        background: #1e40af;
+      }
+
+      .partner-text {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .partner-text .title {
+        font-weight: 500;
+      }
+
+      /* Footer */
+      .footer {
+        background: #0c973f;
+        color: white;
+        padding: 48px 0;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+
+      .footer-section h4 {
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section li {
+        margin-bottom: 8px;
+      }
+
+      .footer-section a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: text-decoration 0.3s;
+      }
+
+      .footer-section a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #16a34a;
+        padding-top: 32px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .hero-buttons {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero-text h1 {
+          font-size: 32px;
+        }
+
+        .focus-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .business-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .info-item {
+          border-right: none;
+          border-bottom: 1px solid #4ade80;
+        }
+
+        .info-item:last-child {
+          border-bottom: none;
+        }
+
+        .news-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .news-item {
+          border-right: none;
+          border-bottom: 1px solid #4ade80;
+        }
+
+        .news-item:last-child {
+          border-bottom: none;
+        }
+
+        .events-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .partners-content {
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <div class="logo-icon"></div>
+          <span class="logo-text">Green Economy Network</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav class="nav">
+          <a href="#">About the Green Economy</a>
+          <a href="#">RM Sector</a>
+          <a href="#">Opportunities</a>
+          <a href="#">Knowledge Hub</a>
+          <a href="#">Select Language</a>
+        </nav>
+        <svg
+          class="search-icon"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&h=400&fit=crop"
+              alt="Construction workers with green economy focus"
+            />
+            <div class="hero-buttons">
+              <button class="hero-button">Get Funding</button>
+              <button class="hero-button">Opportunities</button>
+              <button class="hero-button">RMCS Hub</button>
+              <button class="hero-button">Training</button>
+            </div>
+          </div>
+          <div class="hero-text">
+            <h1>A GREEN ECONOMY TOOLKIT</h1>
+            <p>
+              South Africa and the world are switching to green economy, and
+              that is creating a lot of opportunities for businesses in the
+              renewable, repair and remanufacturing sectors.
+            </p>
+            <p>
+              We want to share these opportunities with you, so we help people
+              who are entrepreneurs grow their economy fund 10 x faster. The
+              Green Economy Toolkit helps governments and institutions to plan
+              their green economy transition. From insights, green business bank
+              you will find green information, support and development to
+              transition their conventional business models into green economy
+              We help you together a step-by-step guide on how to access the
+              benefits of a green economy and position your business to operate
+              in a greener global
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="focus-areas">
+      <div class="container">
+        <div class="focus-title">
+          <h2>
+            Nine priority focus areas for the green economy in South Africa
+          </h2>
+          <p>(Green Economy Summit, 2010)</p>
+        </div>
+        <div class="focus-grid">
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Agriculture</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Energy (clean and efficient)</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>
+                Natural resource conservation and management (including mining)
+              </h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable transport and infrastructure</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Environmental sustainability, including tourism education</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Green buildings and the built environment</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable waste management and recycling</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Water management</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable production and consumption</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Preparation -->
+    <section class="business-prep">
+      <div class="container">
+        <div class="business-title">
+          <h2>Preparing your business for the green economy</h2>
+        </div>
+        <div class="business-cards">
+          <div class="business-card">
+            <div class="business-card-image"></div>
+            <div class="business-card-content">
+              <h3>For your business</h3>
+              <p>
+                The world is moving towards a green economy, and South Africa
+                must do so too if it is to continue trading internationally. Our
+                existing buildings and new projects must be designed, built,
+                operated, maintained, and owned and operated more sustainably,
+                and new infrastructure must be built according to green
+                principles, so it does not use too much energy and water, and
+                the country's quality of work needs to be done.
+              </p>
+              <p class="small-text">
+                This is where you come in. But how do you make sure you can get
+                some of this work?
+              </p>
+            </div>
+            <button class="business-card-button">Find out more</button>
+          </div>
+          <div class="business-card">
+            <div class="business-card-image"></div>
+            <div class="business-card-content">
+              <h3>For your future</h3>
+              <p>
+                The South African government has chosen nine areas to focus on
+                in the switch to a green economy: agriculture, energy (clean and
+                efficient), natural resource conservation and management
+                (including mining), sustainable transport and infrastructure,
+                environmental sustainability (including tourism education),
+                green buildings and the built environment, sustainable waste
+                management and recycling, water management, and sustainable
+                production and consumption.
+              </p>
+              <p class="small-text">
+                Find out about green economy opportunities in the RM sector.
+              </p>
+            </div>
+            <button class="business-card-button">Find out more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Column Info Section -->
+    <section class="info-section">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"
+                />
+              </svg>
+            </div>
+            <h3>Join the SAGE Green Economy Network</h3>
+            <p>
+              Access opportunities for entrepreneurship within the green economy
+              value chains, to help connect entrepreneurs to each other and to
+              markets, as well as to finance, business training
+            </p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3>Opportunities</h3>
+            <p>
+              Find out the latest job opportunities as they become available
+              within the green economy space – from research and innovation to
+              production and services
+            </p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3>Live Events Calendar</h3>
+            <p>
+              View the live events calendar and network with entrepreneurs and
+              experts within the green economy space via our events platform
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+      <div class="container">
+        <div class="news-header">
+          <h2>Green economy news and updates</h2>
+        </div>
+        <div class="news-grid">
+          <div class="news-item">
+            <div class="news-date">11 April, 2025</div>
+            <h3>
+              Indalopreneur Climate-smart Cleantech Enterprise Support Programme
+            </h3>
+            <p>
+              Access to funding support for small businesses and emerging
+              entrepreneurs to help grow their enterprises
+            </p>
+          </div>
+          <div class="news-item">
+            <div class="news-date">11 November, 2024</div>
+            <h3>South African Pavilion at COP29</h3>
+            <p>
+              Updates on compensation for occupational injuries and diseases in
+              the green economy sector
+            </p>
+          </div>
+          <div class="news-item">
+            <div class="news-date">08 November, 2024</div>
+            <h3>
+              JET Funding Platform to close first application window on Dec 15
+            </h3>
+            <p>
+              Important deadline approaching for green economy funding
+              applications
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Calendar -->
+    <section class="events-section">
+      <div class="container events-content">
+        <div class="events-title">
+          <h2>Events calendar</h2>
+          <p>
+            View our live events calendar and network with entrepreneurs and
+            experts within the green economy space via our events platform
+          </p>
+        </div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-header">
+              <h3>Upcoming Event</h3>
+            </div>
+            <div class="event-content">
+              <div class="event-item">
+                <div class="event-date">17 Oct</div>
+                <div class="event-details">
+                  <h4>
+                    ESG (Environmental Social Governance) Africa Conference &
+                    Expo 2025
+                  </h4>
+                  <p>
+                    Event Details: 17 October - 17 October 2025<br />08:00 to
+                    16:00 (SAST)
+                  </p>
+                </div>
+              </div>
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
+                    Event Details: 11 November-13 November 2025<br />Full day
+                    conference (SAST)
+                  </p>
+                </div>
+              </div>
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Future of Sustainability</h4>
+                  <p>
+                    Event Details: 25 March-27 March 2025<br />09:00 to 16:00
+                    (SAST)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button class="event-button">View more</button>
+          </div>
+          <div class="event-card">
+            <div class="event-header">
+              <h3>Past Events</h3>
+            </div>
+            <div class="event-content">
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
+                    Event Details: 11 November-13 November 2025<br />Full day
+                    conference (SAST)
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button class="event-button outline">View more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partner Logos -->
+    <section class="partners">
+      <div class="container">
+        <div class="partners-content">
+          <div class="partner-item">
+            <div class="partner-icon orange"></div>
+            <div class="partner-text">
+              <div class="title">Department of</div>
+              <div>Trade & Industry</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-icon red"></div>
+            <div style="font-weight: bold; color: #374151">GIZ</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-icon blue">ZA</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-badge green">IRM</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-badge blue">NBI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="logo">
+              <div class="logo-icon"></div>
+              <span class="logo-text">Green Economy Network</span>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>ABOUT US</h4>
+            <ul>
+              <li><a href="#">About the green economy</a></li>
+              <li><a href="#">Who we are</a></li>
+              <li><a href="#">Our team</a></li>
+              <li><a href="#">Board of directors</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>SERVICES</h4>
+            <ul>
+              <li><a href="#">Green economy network</a></li>
+              <li><a href="#">Live events calendar</a></li>
+              <li><a href="#">Green opportunities</a></li>
+              <li><a href="#">News and updates</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>QUICK LINKS</h4>
+            <ul>
+              <li><a href="#">News & events</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Knowledge hub</a></li>
+              <li><a href="#">Terms of reference</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Green Economy Network. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
