@@ -7,7 +7,7 @@ class GreenEconomyHeader extends HTMLElement {
                     <div class="flex flex-col md:flex-row md:items-center h-auto md:h-16">
                         <div class="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
                             <div class="flex items-center space-x-2">
-                                <div class="w-8 h-8 bg-[hsl(var(--green-primary))] rounded-full"></div>
+                                <div class="w-8 h-8 bg-[] rounded-full"></div>
                                 <span class="font-bold text-lg text-gray-900" data-i18n="header.title">Green Economy Toolkit</span>
                             </div>
                             <div class="md:hidden">
@@ -30,7 +30,7 @@ class GreenEconomyHeader extends HTMLElement {
                                 <option value="tn">Setswana</option>
                             </select>
                             ${isDashboard ? `
-                                <button onclick="logout()" class="bg-[hsl(var(--green-primary))] text-white hover:bg-[hsl(var(--green-dark))] rounded-md px-4 py-2 text-sm font-medium transition-transform duration-200 hover:-translate-y-1 shadow-sm">
+                                <button onclick="logout()" class="bg-[#005d6a] text-white rounded-md px-4 py-2 text-sm font-medium transition-transform duration-200 hover:-translate-y-1 shadow-sm">
                                     <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Logout</span>
                                 </button>
                             ` : `
