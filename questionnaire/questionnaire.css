@@ -1,13 +1,9 @@
-
         :root {
             --green-primary: 0, 147, 130;
         }
 
         body {
-            background-image: url('../Images/istockphoto-1253106050-612x612.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #f7fafc;
             min-height: 100vh;
         }
 
@@ -59,4 +55,24 @@
             outline: none;
             border-color: rgb(var(--green-primary));
             box-shadow: 0 0 0 3px rgba(var(--green-primary), 0.2);
+        }
+
+        .hero-image {
+            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }

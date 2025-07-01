@@ -8,6 +8,42 @@
     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
     <script src="../Master Page(Header and Footer)/translation.js"></script>
     <link rel="stylesheet" href="../main.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <style>
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 8px solid #e5e7eb;
+            border-top: 8px solid #10b981; /* Green theme color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <div id="root">
@@ -29,7 +65,8 @@
                         <label for="confirm-password" class="block text-sm font-medium text-gray-700" data-i18n="signup.confirm_password_label">Confirm Password</label>
                         <input id="confirm-password" type="password" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="••••••••" data-i18n="signup.confirm_password_placeholder">
                     </div>
-                    <button class="w-full sign-up-btn font-semibold py-2 px-4 rounded-md transition-all duration-300" data-i18n="signup.sign_up_button">Sign Up</button>
+                    <div id="error-message" class="error-message hidden"></div>
+                    <button id="sign-up-btn" class="w-full sign-up-btn font-semibold py-2 px-4 rounded-md transition-all duration-300" data-i18n="signup.sign_up_button">Sign Up</button>
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center">
                             <div class="w-full border-t border-gray-300"></div>
@@ -38,20 +75,102 @@
                             <span class="px-2 bg-white text-gray-500" data-i18n="signup.or_continue">Or continue with</span>
                         </div>
                     </div>
-                    <button class="google-btn" data-i18n="signup.google_button">
+                    <button id="google-sign-up-btn" class="google-btn" data-i18n="signup.google_button">
                         <img src="https://www.google.com/favicon.ico" alt="Google logo">
                         Sign up with Google
                     </button>
                 </div>
                 <p class="mt-6 text-center text-sm text-gray-600">
-                    <span data-i18n="signup.have_account">Already have an account?</span> <a href="../Sign In & Sign Up/SignIn.html" class="text-green-primary hover:underline inline-link" data-i18n="signup.sign_in_link">Sign In</a>
+                    <span data-i18n="signup.have_account">Already have an account?</span> <a href="SignIn.html" class="text-green-primary hover:underline inline-link" data-i18n="signup.sign_in_link">Sign In</a>
                 </p>
             </div>
         </main>
         <green-economy-footer></green-economy-footer>
     </div>
-    <script src="../scripts/SignUp.js">
-     
+    <div class="loader-overlay" id="loader-overlay"></div>
+    <div class="loader" id="loader"></div>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+        // Loader Functions
+        const loader = document.getElementById('loader');
+        const loaderOverlay = document.getElementById('loader-overlay');
+
+        function showLoader() {
+            loader.style.display = 'block';
+            loaderOverlay.style.display = 'block';
+        }
+
+        function hideLoader() {
+            loader.style.display = 'none';
+            loaderOverlay.style.display = 'none';
+        }
+
+        // Sign Up with Email
+        document.getElementById('sign-up-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            showLoader();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                hideLoader();
+                alert('Passwords do not match!');
+                return;
+            }
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                await db.collection('users').doc(userCredential.user.uid).set({
+                    email: userCredential.user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../questionnaire/questionnaire.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert(error.message);
+            }
+        });
+
+        // Google Sign Up
+        document.getElementById('google-sign-up-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            showLoader();
+            try {
+                const result = await auth.signInWithPopup(googleProvider);
+                await db.collection('users').doc(result.user.uid).set({
+                    email: result.user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../questionnaire/questionnaire.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert(error.message);
+            }
+        });
     </script>
 </body>
 </html>
