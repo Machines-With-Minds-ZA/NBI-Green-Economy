@@ -1,4 +1,4 @@
- const priorityAreas = [
+const priorityAreas = [
             {
                 title: "Agriculture",
                 image: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
@@ -46,25 +46,22 @@
             }
         ];
 
-        function renderPriorityAreas(containerId) {
-            const container = document.getElementById(containerId);
+        document.addEventListener('DOMContentLoaded', function () {
+            const grid = document.getElementById('priority-areas');
+            if (!grid) return;
+            grid.innerHTML = '';
             priorityAreas.forEach(area => {
                 const card = document.createElement('div');
-                card.className = 'card group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer';
+                card.className = 'relative group overflow-hidden';
                 card.innerHTML = `
-                    <div class="relative h-48">
-                        <img src="${area.image}" alt="${area.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 flex items-center justify-center p-4">
-                            <h3 class="text-white font-semibold text-center text-sm lg:text-base leading-tight">${area.overlay}</h3>
-                        </div>
+                    <img src="${area.image}" class="w-full h-48 object-cover" alt="${area.title}">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <span class="text-white text-xl font-semibold text-center">${area.overlay}</span>
                     </div>
                 `;
-                container.appendChild(card);
+                grid.appendChild(card);
             });
-        }
-
-        renderPriorityAreas('priority-areas');
+        });
 
         document.querySelectorAll('a[href="/"]').forEach(link => {
             link.addEventListener('click', (e) => {

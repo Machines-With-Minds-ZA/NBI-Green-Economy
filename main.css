@@ -1,4 +1,3 @@
-
 /*========================================= Index Page css*=============================================================================================*/
 
 
@@ -39,6 +38,8 @@
 
 .card {
     padding: 2em;
+    position: relative;
+    z-index: 1;
 }
 
 .read-the-docs {
@@ -888,3 +889,6 @@ html, body {
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out;
         }
+
+.group.overflow-visible { overflow: visible !important; }
+.learn-more-btn-outside { z-index: 10; }
