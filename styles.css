@@ -1,0 +1,70 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f9f4;
+  color: #333;
+}
+
+header, footer {
+  background: #cdeecd;
+  padding: 2rem;
+  text-align: center;
+}
+
+.actions button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #006b3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+main {
+  padding: 2rem;
+}
+
+.focus-areas ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.focus-areas li {
+  background: #e2f7e2;
+  padding: 1rem;
+  border-left: 5px solid #009e60;
+}
+
+.business-help {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.business-help div {
+  flex: 1;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.events {
+  background: #eef6ee;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+form input[type="email"] {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}

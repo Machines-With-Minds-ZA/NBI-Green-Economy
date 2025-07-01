@@ -1,169 +1,458 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="index.title">Green Economy Toolkit - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="Master Page(Header and Footer)/MasterPage.js"></script>
-    <script src="Master Page(Header and Footer)/translation.js"></script>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <div id="root">
-        <green-economy-header></green-economy-header>
-        <main>
-            <section class="relative min-h-[600px] flex items-center">
-                <div class="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Construction worker" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/20"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Economy Toolkit</title>
+     <link rel="stylesheet" href="new.css">
+
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon"></div>
+            Green Economy Toolkit
+          </div>
+          <nav class="nav">
+            <a href="#about">About Green Economy Toolkit</a>
+            <a href="#invest">IRM Sector</a>
+            <a href="#opportunities">Opportunities</a>
+            <a href="#tools">Knowledge Hub</a>
+          </nav>
+          <div class="header-actions">
+            <select
+              class="language-selector"
+              onchange="switchLanguage(this.value)"
+            >
+              <option value="en">English</option>
+              <option value="zu">IsiZulu</option>
+              <option value="tn">Tswana</option>
+            </select>
+            <button
+              class="logout-button"
+              onclick="window.location.href='Sign In & Sign Up/SignIn.html'"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&h=400&fit=crop"
+              alt="Construction workers with green economy focus"
+            />
+            <div class="hero-buttons">
+              <button class="hero-button">Get Funding</button>
+              <button class="hero-button">Opportunities</button>
+              <button class="hero-button">RMCS Hub</button>
+              <button class="hero-button">Training</button>
+            </div>
+          </div>
+          <div class="hero-text">
+            <h1>A GREEN ECONOMY TOOLKIT</h1>
+            <p>
+              South Africa and the world are switching to green economy, and
+              that is creating a lot of opportunities for businesses in the
+              renewable, repair and remanufacturing sectors.
+            </p>
+            <p>
+              We want to share these opportunities with you, so we help people
+              who are entrepreneurs grow their economy fund 10 x faster. The
+              Green Economy Toolkit helps governments and institutions to plan
+              their green economy transition. From insights, green business bank
+              you will find green information, support and development to
+              transition their conventional business models into green economy
+              We help you together a step-by-step guide on how to access the
+              benefits of a green economy and position your business to operate
+              in a greener global
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="focus-areas">
+      <div class="container">
+        <div class="focus-title">
+          <h2>
+            Nine priority focus areas for the green economy in South Africa
+          </h2>
+          <p>(Green Economy Summit, 2010)</p>
+        </div>
+        <div class="focus-grid">
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Agriculture</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Energy (clean and efficient)</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>
+                Natural resource conservation and management (including mining)
+              </h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable transport and infrastructure</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Environmental sustainability, including tourism education</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Green buildings and the built environment</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable waste management and recycling</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Water management</h3>
+            </div>
+          </div>
+          <div class="focus-item">
+            <div class="focus-content">
+              <h3>Sustainable production and consumption</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Preparation -->
+    <section class="business-prep">
+      <div class="container">
+        <div class="business-title">
+          <h2>Preparing your business for the green economy</h2>
+        </div>
+        <div class="business-cards">
+          <div class="business-card">
+            <div class="business-card-image"></div>
+            <div class="business-card-content">
+              <h3>For your business</h3>
+              <p>
+                The world is moving towards a green economy, and South Africa
+                must do so too if it is to continue trading internationally. Our
+                existing buildings and new projects must be designed, built,
+                operated, maintained, and owned and operated more sustainably,
+                and new infrastructure must be built according to green
+                principles, so it does not use too much energy and water, and
+                the country's quality of work needs to be done.
+              </p>
+              <p class="small-text">
+                This is where you come in. But how do you make sure you can get
+                some of this work?
+              </p>
+            </div>
+            <button class="business-card-button">Find out more</button>
+          </div>
+          <div class="business-card">
+            <div class="business-card-image"></div>
+            <div class="business-card-content">
+              <h3>For your future</h3>
+              <p>
+                The South African government has chosen nine areas to focus on
+                in the switch to a green economy: agriculture, energy (clean and
+                efficient), natural resource conservation and management
+                (including mining), sustainable transport and infrastructure,
+                environmental sustainability (including tourism education),
+                green buildings and the built environment, sustainable waste
+                management and recycling, water management, and sustainable
+                production and consumption.
+              </p>
+              <p class="small-text">
+                Find out about green economy opportunities in the RM sector.
+              </p>
+            </div>
+            <button class="business-card-button">Find out more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Column Info Section -->
+    <section class="info-section">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"
+                />
+              </svg>
+            </div>
+            <h3>Join the SAGE Green Economy Network</h3>
+            <p>
+              Access opportunities for entrepreneurship within the green economy
+              value chains, to help connect entrepreneurs to each other and to
+              markets, as well as to finance, business training
+            </p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3>Opportunities</h3>
+            <p>
+              Find out the latest job opportunities as they become available
+              within the green economy space – from research and innovation to
+              production and services
+            </p>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3>Live Events Calendar</h3>
+            <p>
+              View the live events calendar and network with entrepreneurs and
+              experts within the green economy space via our events platform
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+      <div class="container">
+        <div class="news-header">
+          <h2>Green economy news and updates</h2>
+        </div>
+        <div class="news-grid">
+          <div class="news-item">
+            <div class="news-date">11 April, 2025</div>
+            <h3>
+              Indalopreneur Climate-smart Cleantech Enterprise Support Programme
+            </h3>
+            <p>
+              Access to funding support for small businesses and emerging
+              entrepreneurs to help grow their enterprises
+            </p>
+          </div>
+          <div class="news-item">
+            <div class="news-date">11 November, 2024</div>
+            <h3>South African Pavilion at COP29</h3>
+            <p>
+              Updates on compensation for occupational injuries and diseases in
+              the green economy sector
+            </p>
+          </div>
+          <div class="news-item">
+            <div class="news-date">08 November, 2024</div>
+            <h3>
+              JET Funding Platform to close first application window on Dec 15
+            </h3>
+            <p>
+              Important deadline approaching for green economy funding
+              applications
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Calendar -->
+    <section class="events-section">
+      <div class="container events-content">
+        <div class="events-title">
+          <h2>Events calendar</h2>
+          <p>
+            View our live events calendar and network with entrepreneurs and
+            experts within the green economy space via our events platform
+          </p>
+        </div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-header">
+              <h3>Upcoming Event</h3>
+            </div>
+            <div class="event-content">
+              <div class="event-item">
+                <div class="event-date">17 Oct</div>
+                <div class="event-details">
+                  <h4>
+                    ESG (Environmental Social Governance) Africa Conference &
+                    Expo 2025
+                  </h4>
+                  <p>
+                    Event Details: 17 October - 17 October 2025<br />08:00 to
+                    16:00 (SAST)
+                  </p>
                 </div>
-                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div class="text-white"></div>
-                        <div class="green-gradient p-8 lg:p-12 rounded-lg text-white animate-fade-in">
-                            <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight" data-i18n="index.hero_title">A GREEN ECONOMY TOOLKIT</h1>
-                            <p class="text-lg lg:text-xl mb-8 leading-relaxed opacity-95" data-i18n="index.hero_desc">
-                                Our path to sustainable prosperity by building back better economy, creating quality jobs and addressing climate change at the same time. 
-                                This toolkit provides practical tools and resources to help businesses, policymakers and communities transition to a green economy that benefits everyone while protecting our planet for future generations.
-                            </p>
-                            <button class="bg-white text-green-primary hover:bg-gray-100 font-semibold px-8 py-3 rounded-md transition-all duration-300 hover:scale-105" data-i18n="index.hero_button">Get Started</button>
-                        </div>
-                    </div>
+              </div>
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
+                    Event Details: 11 November-13 November 2025<br />Full day
+                    conference (SAST)
+                  </p>
                 </div>
-            </section>
-            <section class="py-16 light-section">
-                <div class="px-4 sm:px-6 lg:px-8 text-left">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900" data-i18n="index.priority_title">Nine priority focus areas for the green economy in South Africa</h2>
-                    <p class="text-lg text-gray-600 mb-12" data-i18n="index.priority_subtitle">(Green Economy Summit, 2010)</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="priority-areas">
-                    </div>
+              </div>
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Future of Sustainability</h4>
+                  <p>
+                    Event Details: 25 March-27 March 2025<br />09:00 to 16:00
+                    (SAST)
+                  </p>
                 </div>
-            </section>
-            <section class="py-16 bg-white">
-                <div class="px-4 sm:px-6 lg:px-8 text-left">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-gray-900" data-i18n="index.business_title">Preparing your business for the green economy</h2>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="card overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                            <div class="relative h-64">
-                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Business team" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6 teal-bg text-white">
-                                <h3 class="text-xl font-bold mb-4" data-i18n="index.business_card1_title">For your business</h3>
-                                <p class="text-sm leading-relaxed mb-6 opacity-95" data-i18n="index.business_card1_desc">
-                                    Discover comprehensive resources and tools designed to help your business transition to sustainable practices. From energy efficiency assessments to green certification programs, we provide the guidance you need to reduce environmental impact while maintaining profitability and competitive advantage in the evolving marketplace.
-                                </p>
-                                <button class="bg-transparent border border-white text-white hover:bg-white hover:text-teal-bg rounded-md px-4 py-2" data-i18n="index.business_card1_button">GET STARTED</button>
-                            </div>
-                        </div>
-                        <div class="card overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                            <div class="relative h-64">
-                                <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b" alt="Solar panels" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6 green-primary text-white">
-                                <h3 class="text-xl font-bold mb-4" data-i18n="index.business_card2_title">For your future</h3>
-                                <p class="text-sm leading-relaxed mb-6 opacity-95" data-i18n="index.business_card2_desc">
-                                    Explore emerging opportunities in the green economy and prepare for the jobs of tomorrow. Whether you're looking to upskill in renewable energy, sustainable agriculture, or environmental management, our resources will help you build the expertise needed for a thriving career in the green economy.
-                                </p>
-                                <button class="bg-transparent border border-white text-white hover:bg-white hover:text-green-primary rounded-md px-4 py-2" data-i18n="index.business_card2_button">GET STARTED</button>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <button class="event-button">View more</button>
+          </div>
+          <div class="event-card">
+            <div class="event-header">
+              <h3>Past Events</h3>
+            </div>
+            <div class="event-content">
+              <div class="event-item">
+                <div class="event-date"><span class="dot">●</span> 2025</div>
+                <div class="event-details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
+                    Event Details: 11 November-13 November 2025<br />Full day
+                    conference (SAST)
+                  </p>
                 </div>
-            </section>
-            <section class="py-16 green-gradient">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2" data-i18n="index.cta_network_title">Join the Green Economy Network</h3>
-                            <p class="text-sm opacity-90" data-i18n="index.cta_network_desc">Connect with like-minded businesses and organizations committed to sustainable practices.</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2" data-i18n="index.cta_opportunities_title">Opportunities</h3>
-                            <p class="text-sm opacity-90" data-i18n="index.cta_opportunities_desc">Discover funding opportunities, grants, and investment programs for green economy initiatives.</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2" data-i18n="index.cta_events_title">Live Events Calendar</h3>
-                            <p class="text-sm opacity-90" data-i18n="index.cta_events_desc">Stay updated with workshops, conferences, and networking events in the green economy sector.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="py-16 bg-gradient-to-b from-green-50 to-white">
-                <div class="px-4 sm:px-6 lg:px-8 text-left">
-                    <div class="mb-12">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1500673922987-e212871fec22" alt="Forest background" class="w-full h-32 object-cover rounded-lg opacity-80">
-                            <div class="absolute inset-0 bg-green-primary/80 rounded-lg flex items-center">
-                                <h2 class="text-3xl lg:text-4xl font-bold text-white px-4" data-i18n="index.news_title">Green economy news and updates</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="card p-6 hover:shadow-lg transition-shadow duration-300">
-                            <h3 class="font-bold text-lg mb-2 text-green-primary" data-i18n="index.news1_title">Financing and Climate - Green Convening Programme launched by Genesis!</h3>
-                            <p class="text-gray-600 text-sm" data-i18n="index.news1_desc">The programme aims to support entrepreneurs and small businesses in accessing green finance and climate-resilient solutions.</p>
-                        </div>
-                        <div class="card p-6 hover:shadow-lg transition-shadow duration-300">
-                            <h3 class="font-bold text-lg mb-2 text-green-primary" data-i18n="index.news2_title">South African Position at COP28</h3>
-                            <p class="text-gray-600 text-sm" data-i18n="index.news2_desc">South Africa's commitment to renewable energy transition and climate action on the global stage.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="py-16 bg-white">
-                <div class="px-4 sm:px-6 lg:px-8 text-left">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Professional woman" class="w-full h-64 object-cover rounded-lg">
-                        <div class="absolute inset-0 bg-black/40 rounded-lg">
-                            <div class="text-white p-4">
-                                <h2 class="text-3xl lg:text-4xl font-bold mb-4" data-i18n="index.events_title">Events calendar</h2>
-                                <p class="text-lg opacity-90 mb-8" data-i18n="index.events_desc">The South African Green Economy Network events calendar showcases some of the sector events across the country.</p>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="card bg-white/95 p-6 text-left">
-                                        <h3 class="font-bold text-green-primary mb-2" data-i18n="index.event_upcoming_title">Upcoming Event</h3>
-                                        <h4 class="font-semibold text-gray-900 mb-2" data-i18n="index.event_upcoming_name">R2B (Business-2-Business) Africa Conference & Expo 2024</h4>
-                                        <p class="text-sm text-gray-600 mb-2" data-i18n="index.event_upcoming_date">17 June 2024</p>
-                                        <p class="text-sm text-gray-600" data-i18n="index.event_upcoming_location">Johannesburg</p>
-                                    </div>
-                                    <div class="card bg-green-primary p-6 text-left text-white">
-                                        <h3 class="font-bold mb-2" data-i18n="index.event_past_title">Past Events</h3>
-                                        <div class="space-y-3">
-                                            <div>
-                                                <h4 class="font-semibold mb-1" data-i18n="index.event_past1_name">Green Building Convention 2024</h4>
-                                                <p class="text-sm opacity-90" data-i18n="index.event_past1_details">Cape Town - 15 May 2024</p>
-                                            </div>
-                                            <div>
-                                                <h4 class="font-semibold mb-1" data-i18n="index.event_past2_name">Future of Sustainability Summit</h4>
-                                                <p class="text-sm opacity-90" data-i18n="index.event_past2_details">Durban - 20 April 2024</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="mt-8 bg-green-primary hover:bg-green-dark text-white rounded-md px-4 py-2" data-i18n="index.events_button">VIEW ALL EVENTS</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <green-economy-footer></green-economy-footer>
-    </div>
-    <script src="scripts/index.js"></script>
-</body>
+              </div>
+            </div>
+            <button class="event-button outline">View more</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partner Logos -->
+    <section class="partners">
+      <div class="container">
+        <div class="partners-content">
+          <div class="partner-item">
+            <div class="partner-icon orange"></div>
+            <div class="partner-text">
+              <div class="title">Department of</div>
+              <div>Trade & Industry</div>
+            </div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-icon red"></div>
+            <div style="font-weight: bold; color: #374151">GIZ</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-icon blue">ZA</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-badge green">IRM</div>
+          </div>
+          <div class="partner-item">
+            <div class="partner-badge blue">NBI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section">
+      <div class="container">
+        <h3 style="margin-bottom: 16px">Access Your Green Economy Dashboard</h3>
+        <p style="margin-bottom: 24px; opacity: 0.9">
+          Login to track your progress, access personalized funding
+          opportunities, and connect with the green economy network.
+        </p>
+        <button
+          class="login-button"
+          onclick="window.location.href='dashboard.html'"
+        >
+          Login to Dashboard
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="logo">
+              <div class="logo-icon"></div>
+              <span class="logo-text">Green Economy Network</span>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>ABOUT US</h4>
+            <ul>
+              <li><a href="#">About the green economy</a></li>
+              <li><a href="#">Who we are</a></li>
+              <li><a href="#">Our team</a></li>
+              <li><a href="#">Board of directors</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>SERVICES</h4>
+            <ul>
+              <li><a href="#">Green economy network</a></li>
+              <li><a href="#">Live events calendar</a></li>
+              <li><a href="#">Green opportunities</a></li>
+              <li><a href="#">News and updates</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>QUICK LINKS</h4>
+            <ul>
+              <li><a href="#">News & events</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Knowledge hub</a></li>
+              <li><a href="#">Terms of reference</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Green Economy Network. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/new.js">
+   
+    </script>
+  </body>
 </html>
