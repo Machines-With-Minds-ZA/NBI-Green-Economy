@@ -6,15 +6,21 @@
     <title>Green Economy Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="MasterPage.js"></script>
-    <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="MasterPage.css">
 </head>
 <body>
-    <div id="root">
-        <green-economy-header></green-economy-header>
-        <main id="content">
-            <!-- Page-specific content will be injected here -->
-        </main>
-        <green-economy-footer></green-economy-footer>
-    </div>
+   <!-- Header will be loaded dynamically -->
+    <green-economy-header></green-economy-header>
+
+    <!-- Main content placeholder - this will be replaced by page-specific content -->
+    <main id="main-content">
+        <!-- Page content will be inserted here -->
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <green-economy-footer></green-economy-footer>
+
+    <script src="master.js"></script>
+    <!-- Page-specific JS can be added here -->
 </body>
 </html>

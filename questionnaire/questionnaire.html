@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Economy Toolkit - Questionnaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <link rel="stylesheet" href="questionnaire.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <style>
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 8px solid #e5e7eb;
+            border-top: 8px solid #10b981; /* Green theme color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div id="root" class="flex flex-col flex-grow">
+        <green-economy-header></green-economy-header>
+        <main id="content" class="flex-grow flex items-center justify-center py-12">
+            <div class="w-full">
+                <div class="hero-image">
+                    <h3 class="text-3xl font-bold" data-i18n="questionnaire.hero">Join the Green Economy Movement</h3>
+                </div>
+                <div class="questionnaire-container mx-auto">
+                    <h2 class="text-2xl font-bold text-black mb-6 text-center" data-i18n="questionnaire.title">Tell Us About Your Interests</h2>
+                    <form id="user-questionnaire" class="space-y-6">
+                        <div>
+                            <label for="user-type" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.user_type">Who are you?</label>
+                            <select id="user-type" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
+                                <option value="" disabled selected>Select your role</option>
+                                <option value="township-enterprise">Township IRM Enterprise</option>
+                                <option value="youth">Youth from Underrepresented Community</option>
+                                <option value="stakeholder">Stakeholder or Partner</option>
+                                <option value="community">Local Community Member</option>
+                                <option value="tvet">TVET College Student/Staff</option>
+                                <option value="entrepreneur-hub">Entrepreneurial Hub Member</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="primary-interest" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.primary_interest">What is your primary interest in the green economy?</label>
+                            <select id="primary-interest" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
+                                <option value="" disabled selected>Select your primary interest</option>
+                                <option value="funding">Green Funding Opportunities</option>
+                                <option value="business-support">SMME Business Support</option>
+                                <option value="education">Green Economy Education</option>
+                                <option value="tools">Access to Green Tools</option>
+                                <option value="networking">Networking with Stakeholders</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="funding-needs" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.funding_needs">What type of funding are you seeking?</label>
+                            <select id="funding-needs" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
+                                <option value="" disabled selected>Select funding type (optional)</option>
+                                <option value="grants">Grants</option>
+                                <option value="loans">Loans</option>
+                                <option value="equity">Equity Investments</option>
+                                <option value="crowdfunding">Crowdfunding</option>
+                                <option value="none">Not seeking funding</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="business-sector" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.business_sector">What is your business or community sector?</label>
+                            <select id="business-sector" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
+                                <option value="" disabled selected>Select your sector (optional)</option>
+                                <option value="renewable-energy">Renewable Energy</option>
+                                <option value="waste-management">Waste Management</option>
+                                <option value="agriculture">Sustainable Agriculture</option>
+                                <option value="green-technology">Green Technology</option>
+                                <option value="community-development">Community Development</option>
+                                <option value="education">Education</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="skill-level" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.skill_level">What is your experience level with green economy practices?</label>
+                            <select id="skill-level" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
+                                <option value="" disabled selected>Select your experience level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tool-access" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.tool_access">Which green economy tools are you interested in accessing?</label>
+                            <select id="tool-access" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
+                                <option value="" disabled selected>Select tools (optional)</option>
+                                <option value="carbon-calculator">Carbon Footprint Calculator</option>
+                                <option value="sustainability-assessment">Sustainability Assessment</option>
+                                <option value="energy-audit">Energy Audit Tools</option>
+                                <option value="supply-chain">Green Supply Chain Management</option>
+                                <option value="none">None at this time</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="language" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.language">Preferred Language</label>
+                            <select id="language" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
+                                <option value="en">English</option>
+                                <option value="zu">isiZulu</option>
+                                <option value="tn">Setswana</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-green-primary text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-opacity-90 transition-transform duration-200 hover:-translate-y-1 shadow-sm">
+                            <span data-i18n="questionnaire.submit">Submit</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <green-economy-footer></green-economy-footer>
+    </div>
+    <div class="loader-overlay" id="loader-overlay"></div>
+    <div class="loader" id="loader"></div>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Loader Functions
+        const loader = document.getElementById('loader');
+        const loaderOverlay = document.getElementById('loader-overlay');
+
+        function showLoader() {
+            loader.style.display = 'block';
+            loaderOverlay.style.display = 'block';
+        }
+
+        function hideLoader() {
+            loader.style.display = 'none';
+            loaderOverlay.style.display = 'none';
+        }
+
+        // Check Authentication State
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = '../Sign In & Sign Up/SignIn.html';
+            }
+        });
+
+        // Handle Questionnaire Submission
+        document.getElementById('user-questionnaire').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showLoader();
+            const user = auth.currentUser;
+            if (!user) {
+                hideLoader();
+                alert('Please sign in to submit the questionnaire.');
+                return;
+            }
+
+            const userType = document.getElementById('user-type').value;
+            const primaryInterest = document.getElementById('primary-interest').value;
+            const fundingNeeds = document.getElementById('funding-needs').value;
+            const businessSector = document.getElementById('business-sector').value;
+            const skillLevel = document.getElementById('skill-level').value;
+            const toolAccess = document.getElementById('tool-access').value;
+            const language = document.getElementById('language').value;
+
+            try {
+                await db.collection('questionnaires').doc(user.uid).set({
+                    userId: user.uid,
+                    userType,
+                    primaryInterest,
+                    fundingNeeds,
+                    businessSector,
+                    skillLevel,
+                    toolAccess,
+                    language,
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../Dashboard/dashboard.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert('Error saving data: ' + error.message);
+            }
+        });
+    </script>
+     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+</body>
+</html>

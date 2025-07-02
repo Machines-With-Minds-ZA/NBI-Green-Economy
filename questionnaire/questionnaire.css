@@ -1,0 +1,78 @@
+        :root {
+            --green-primary: 0, 147, 130;
+        }
+
+        body {
+            background-color: #f7fafc;
+            min-height: 100vh;
+        }
+
+        .green-gradient {
+            background: linear-gradient(to right, rgb(var(--green-primary)), rgb(0, 100, 88));
+        }
+
+        nav .bg-white {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        footer.green-gradient {
+            background: linear-gradient(to right, rgb(var(--green-primary)), rgb(0, 100, 88));
+        }
+
+        .text-green-primary {
+            color: rgb(var(--green-primary));
+        }
+
+        .bg-green-primary {
+            background-color: rgb(var(--green-primary));
+        }
+
+        .hover\:text-green-primary:hover {
+            color: rgb(var(--green-primary));
+        }
+
+        .hover\:bg-green-primary:hover {
+            background-color: rgb(var(--green-primary));
+        }
+
+        .border-green-primary {
+            border-color: rgb(var(--green-primary));
+        }
+
+        .questionnaire-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        select, button {
+            transition: all 0.3s ease;
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            border-color: rgb(var(--green-primary));
+            box-shadow: 0 0 0 3px rgba(var(--green-primary), 0.2);
+        }
+
+        .hero-image {
+            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
