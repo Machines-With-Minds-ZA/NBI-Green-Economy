@@ -68,3 +68,10 @@ form input[type="email"] {
   padding: 0.5rem;
   margin-right: 0.5rem;
 }
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}

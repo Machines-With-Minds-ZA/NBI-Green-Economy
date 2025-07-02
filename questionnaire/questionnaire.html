@@ -7,85 +7,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
-    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+    <link rel="stylesheet" href="questionnaire.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <style>
-        :root {
-            --green-primary: 0, 147, 130;
-        }
-
-        body {
-            background-color: #f7fafc;
-            min-height: 100vh;
-        }
-
-        .green-gradient {
-            background: linear-gradient(to right, rgb(var(--green-primary)), rgb(0, 100, 88));
-        }
-
-        nav .bg-white {
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-
-        footer.green-gradient {
-            background: linear-gradient(to right, rgb(var(--green-primary)), rgb(0, 100, 88));
-        }
-
-        .text-green-primary {
-            color: rgb(var(--green-primary));
-        }
-
-        .bg-green-primary {
-            background-color: rgb(var(--green-primary));
-        }
-
-        .hover\:text-green-primary:hover {
-            color: rgb(var(--green-primary));
-        }
-
-        .hover\:bg-green-primary:hover {
-            background-color: rgb(var(--green-primary));
-        }
-
-        .border-green-primary {
-            border-color: rgb(var(--green-primary));
-        }
-
-        .questionnaire-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            padding: 2rem;
-        }
-
-        select, button {
-            transition: all 0.3s ease;
-        }
-
-        select:focus, button:focus {
-            outline: none;
-            border-color: rgb(var(--green-primary));
-            box-shadow: 0 0 0 3px rgba(var(--green-primary), 0.2);
-        }
-
-        .hero-image {
-            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 300px;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: rgb(0, 0, 0);
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.99);
-            width: 100vw;
-            position: relative;
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
             left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 8px solid #e5e7eb;
+            border-top: 8px solid #10b981; /* Green theme color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
 </head>
@@ -184,9 +140,58 @@
         </main>
         <green-economy-footer></green-economy-footer>
     </div>
+    <div class="loader-overlay" id="loader-overlay"></div>
+    <div class="loader" id="loader"></div>
+
     <script>
-        document.getElementById('user-questionnaire').addEventListener('submit', (e) => {
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Loader Functions
+        const loader = document.getElementById('loader');
+        const loaderOverlay = document.getElementById('loader-overlay');
+
+        function showLoader() {
+            loader.style.display = 'block';
+            loaderOverlay.style.display = 'block';
+        }
+
+        function hideLoader() {
+            loader.style.display = 'none';
+            loaderOverlay.style.display = 'none';
+        }
+
+        // Check Authentication State
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = '../Sign In & Sign Up/SignIn.html';
+            }
+        });
+
+        // Handle Questionnaire Submission
+        document.getElementById('user-questionnaire').addEventListener('submit', async (e) => {
             e.preventDefault();
+            showLoader();
+            const user = auth.currentUser;
+            if (!user) {
+                hideLoader();
+                alert('Please sign in to submit the questionnaire.');
+                return;
+            }
+
             const userType = document.getElementById('user-type').value;
             const primaryInterest = document.getElementById('primary-interest').value;
             const fundingNeeds = document.getElementById('funding-needs').value;
@@ -195,12 +200,26 @@
             const toolAccess = document.getElementById('tool-access').value;
             const language = document.getElementById('language').value;
 
-            // Store user preferences (e.g., in localStorage or send to backend)
-            const userPreferences = { userType, primaryInterest, fundingNeeds, businessSector, skillLevel, toolAccess, language };
-            console.log('User Preferences:', userPreferences);
-
-            // Redirect to personalized dashboard or content page
-            window.location.href = '/dashboard.html';
+            try {
+                await db.collection('questionnaires').doc(user.uid).set({
+                    userId: user.uid,
+                    userType,
+                    primaryInterest,
+                    fundingNeeds,
+                    businessSector,
+                    skillLevel,
+                    toolAccess,
+                    language,
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../Dashboard/dashboard.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert('Error saving data: ' + error.message);
+            }
         });
     </script>
      <script src="../Master Page(Header and Footer)/MasterPage.js"></script>

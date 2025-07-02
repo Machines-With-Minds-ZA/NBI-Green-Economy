@@ -11,45 +11,135 @@
 <body>
     <div id="root">
         <green-economy-header></green-economy-header>
+
         <main id="content">
             <section class="signup-section">
                 <div class="blurry-bg"></div>
-                <div class="form-container">
-                    <h2 data-i18n="signup.header">Create Your Account</h2>
-                    <form class="signup-form">
-                        <div class="form-group">
-                            <label for="email" data-i18n="signup.email_label">Email Address</label>
-                            <input id="email" type="email" required placeholder="you@example.com" data-i18n="signup.email_placeholder">
+        <main class="flex-grow flex items-center justify-center py-16 relative">
+            <div class="blurry-bg"></div>
+            <div class="form-container max-w-md w-full mx-4 p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-i18n="signup.header">Create Your Account</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700" data-i18n="signup.email_label">Email Address</label>
+                        <input id="email" type="email" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="you@example.com" data-i18n="signup.email_placeholder">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700" data-i18n="signup.password_label">Password</label>
+                        <input id="password" type="password" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="••••••••" data-i18n="signup.password_placeholder">
+                    </div>
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-gray-700" data-i18n="signup.confirm_password_label">Confirm Password</label>
+                        <input id="confirm-password" type="password" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="••••••••" data-i18n="signup.confirm_password_placeholder">
+                    </div>
+                    <div id="error-message" class="error-message hidden"></div>
+                    <button id="sign-up-btn" class="w-full sign-up-btn font-semibold py-2 px-4 rounded-md transition-all duration-300" data-i18n="signup.sign_up_button">Sign Up</button>
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+>>>>>>> origin/main
                         </div>
                         <div class="form-group">
                             <label for="password" data-i18n="signup.password_label">Password</label>
                             <input id="password" type="password" required placeholder="••••••••" data-i18n="signup.password_placeholder">
                         </div>
-                        <div class="form-group">
-                            <label for="confirm-password" data-i18n="signup.confirm_password_label">Confirm Password</label>
-                            <input id="confirm-password" type="password" required placeholder="••••••••" data-i18n="signup.confirm_password_placeholder">
-                        </div>
-                        <button type="submit" class="signup-btn" data-i18n="signup.sign_up_button">Sign Up</button>
-                        <div class="divider">
-                            <span data-i18n="signup.or_continue">Or continue with</span>
-                        </div>
-                        <button type="button" class="google-btn" data-i18n="signup.google_button">
-                            <img src="../assets/google-icon.svg" alt="Google logo">
-                            Sign up with Google
-                        </button>
-                    </form>
-                    <p class="login-link">
-                        <span data-i18n="signup.have_account">Already have an account?</span>
-                        <a href="../Sign In & Sign Up/SignIn.html" data-i18n="signup.sign_in_link">Sign In</a>
-                    </p>
+                    </div>
+                    <button id="google-sign-up-btn" class="google-btn" data-i18n="signup.google_button">
+                        <img src="https://www.google.com/favicon.ico" alt="Google logo">
+                        Sign up with Google
+                    </button>
                 </div>
-            </section>
+                <p class="mt-6 text-center text-sm text-gray-600">
+                    <span data-i18n="signup.have_account">Already have an account?</span> <a href="SignIn.html" class="text-green-primary hover:underline inline-link" data-i18n="signup.sign_in_link">Sign In</a>
+                </p>
+            </div>
         </main>
         <green-economy-footer></green-economy-footer>
     </div>
+    <div class="loader-overlay" id="loader-overlay"></div>
+    <div class="loader" id="loader"></div>
 
-    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
-    <script src="../Master Page(Header and Footer)/translation.js"></script>
-    <script src="../scripts/SignUp.js"></script>
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+        // Loader Functions
+        const loader = document.getElementById('loader');
+        const loaderOverlay = document.getElementById('loader-overlay');
+
+        function showLoader() {
+            loader.style.display = 'block';
+            loaderOverlay.style.display = 'block';
+        }
+
+        function hideLoader() {
+            loader.style.display = 'none';
+            loaderOverlay.style.display = 'none';
+        }
+
+        // Sign Up with Email
+        document.getElementById('sign-up-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            showLoader();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                hideLoader();
+                alert('Passwords do not match!');
+                return;
+            }
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                await db.collection('users').doc(userCredential.user.uid).set({
+                    email: userCredential.user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../questionnaire/questionnaire.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert(error.message);
+            }
+        });
+
+        // Google Sign Up
+        document.getElementById('google-sign-up-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            showLoader();
+            try {
+                const result = await auth.signInWithPopup(googleProvider);
+                await db.collection('users').doc(result.user.uid).set({
+                    email: result.user.email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                setTimeout(() => {
+                    hideLoader();
+                    window.location.href = '../questionnaire/questionnaire.html';
+                }, 2000); // Delay to show loader
+            } catch (error) {
+                hideLoader();
+                alert(error.message);
+            }
+        });
+    </script>
 </body>
 </html>
