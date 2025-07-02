@@ -489,6 +489,41 @@
             }, 3000);
         }
 
+        // Track filter usage
+        ['sector', 'funding-type', 'deadline'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('change', function() {
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('filter_change', { filter: id, value: el.value });
+                    }
+                });
+            }
+        });
+
+        // Track refresh button
+        const refreshBtn = document.querySelector('button[onclick="fetchNewOpportunities()"]');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function() {
+                if (typeof trackEvent === 'function') {
+                    trackEvent('refresh_opportunities');
+                }
+            });
+        }
+
+        // Track funding card clicks (after cards are rendered)
+        const origRenderFundingCards = renderFundingCards;
+        renderFundingCards = async function(data) {
+            await origRenderFundingCards(data);
+            document.querySelectorAll('.funding-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('funding_card_click', { cardTitle: card.querySelector('h3')?.innerText });
+                    }
+                });
+            });
+        };
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             // Sort data initially

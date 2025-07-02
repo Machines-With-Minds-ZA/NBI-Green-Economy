@@ -14,6 +14,7 @@ class GreenEconomyHeader extends HTMLElement {
                             <a href="/about.html" data-i18n="header.why_invest">IRM Sector</a>
                             <a href="#" data-i18n="header.opportunities">Opportunities</a>
                             <a href="#" data-i18n="header.tools_resources">Knowledge Hub</a>
+                            <a href="/disclaimer.html">Disclaimer</a>
                         </nav>
                         <div class="header-actions">
                             <select id="language-selector" class="language-selector">
