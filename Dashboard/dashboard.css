@@ -206,7 +206,7 @@
         }
 
         .modal-content {
-            background: hsl(var(--card));
+            background: white;
             margin: 5% auto;
             padding: 2rem;
             max-width: 600px;
