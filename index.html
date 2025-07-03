@@ -4,20 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Green Economy Toolkit</title>
-    
-<link rel="stylesheet" href="new.css">
-
+    <link rel="stylesheet" href="new.css">
   </head>
   <body>
     <!-- Header -->
     <header class="header">
       <div class="header-content">
         <div class="logo">
-  <div class="logo-icon">
-    <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
-  </div>
-</div>
-
+          <div class="logo-icon">
+            <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
+          </div>
+        </div>
         <nav class="nav">
           <a href="#">About the green economy</a>
           <a href="#">IRM Sector</a>
@@ -50,10 +47,19 @@
       <div class="hero-content">
         <div class="hero-image-section">
           <div class="hero-image">
-            <img
-              src="https://png.pngtree.com/thumb_back/fw800/background/20250303/pngtree-a-smiling-black-male-construction-worker-wearing-yellow-helmet-and-jacket-image_17042586.jpg"
-              alt="Construction worker"
-            />
+            <video
+              src="https://www.greeneconomytoolkit.com/uploads/files/Videos/Introduction-to-the-Green-Economy.mp4"
+              alt="Introduction to the Green Economy"
+              muted
+              loop
+              playsinline
+              class="hero-video"
+            ></video>
+            <button class="play-button" aria-label="Play video">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="white">
+                <polygon points="5,3 19,12 5,21 5,3"></polygon>
+              </svg>
+            </button>
           </div>
           <div class="hero-buttons">
             <button class="hero-button">Get Funding</button>
@@ -95,9 +101,7 @@
       <div class="focus-grid">
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('agriculture')"
         >
           <div class="focus-content">
@@ -106,9 +110,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('energy')"
         >
           <div class="focus-content">
@@ -117,22 +119,16 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('natural-resource')"
         >
           <div class="focus-content">
-            <h3>
-              Natural resource conservation and management (including mining)
-            </h3>
+            <h3>Natural resource conservation and management (including mining)</h3>
           </div>
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('transport')"
         >
           <div class="focus-content">
@@ -141,9 +137,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('environmental')"
         >
           <div class="focus-content">
@@ -152,9 +146,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('buildings')"
         >
           <div class="focus-content">
@@ -163,9 +155,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('waste')"
         >
           <div class="focus-content">
@@ -174,9 +164,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('water')"
         >
           <div class="focus-content">
@@ -185,9 +173,7 @@
         </div>
         <div
           class="focus-item"
-          style="
-            background-image: url("https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop");
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=300&fit=crop');"
           onclick="navigateToFocusArea('production')"
         >
           <div class="focus-content">
@@ -206,8 +192,7 @@
         <div class="business-card">
           <div
             class="business-card-image"
-            style="background-image: url"("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop");
-            "
+            style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop');"
           ></div>
           <div class="business-card-content">
             <h3>For your business</h3>
@@ -230,9 +215,7 @@
         <div class="business-card">
           <div
             class="business-card-image"
-            style="
-              background-image: url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop");
-            "
+            style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop');"
           ></div>
           <div class="business-card-content">
             <h3>For your future</h3>
@@ -420,9 +403,7 @@
         <div class="partner-item">
           <div class="partner-icon orange"></div>
           <span class="partner-text"
-            >Department of<br /><span class="title"
-              >Trade & Industry</span
-            ></span
+            >Department of<br /><span class="title">Trade & Industry</span></span
           >
         </div>
         <div class="partner-item">
@@ -456,13 +437,7 @@
         <div class="footer-section">
           <div style="display: flex; align-items: center; margin-bottom: 16px">
             <div
-              style="
-                width: 24px;
-                height: 24px;
-                background: white;
-                border-radius: 4px;
-                margin-right: 8px;
-              "
+              style="width: 24px; height: 24px; background: white; border-radius: 4px; margin-right: 8px;"
             ></div>
             <span style="font-weight: bold">Green Economy Network</span>
           </div>
@@ -502,11 +477,9 @@
 
     <script>
       function navigateToFocusArea(areaId) {
-        // Create focus area URL - you can change this to navigate to focus-area.html with parameter
         window.location.href = `focus-area.html?area=${areaId}`;
       }
 
-      // Add smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
@@ -519,41 +492,38 @@
         });
       });
 
-      // Add click handlers for buttons
       document.querySelectorAll(".hero-button").forEach((button) => {
         button.addEventListener("click", function () {
           console.log("Button clicked:", this.textContent);
-          // Add your button functionality here
         });
       });
 
       document.querySelectorAll(".business-card-button").forEach((button) => {
         button.addEventListener("click", function () {
           console.log("Business card button clicked");
-          // Add your button functionality here
         });
       });
 
       document.querySelectorAll(".event-button").forEach((button) => {
         button.addEventListener("click", function () {
           console.log("Event button clicked");
-          // Add your button functionality here
         });
       });
 
-      document
-        .querySelector(".login-button")
-        .addEventListener("click", function () {
-          console.log("Login button clicked");
-          // Add your login functionality here
-        });
+      document.querySelector(".login-button").addEventListener("click", function () {
+        console.log("Login button clicked");
+      });
 
-      document
-        .querySelector(".dashboard-button")
-        .addEventListener("click", function () {
-          window.location.href = "questionnaire/questionnaire.html";
-          // Add your dashboard functionality here
-        });
+      document.querySelector(".dashboard-button").addEventListener("click", function () {
+        window.location.href = "questionnaire/questionnaire.html";
+      });
+
+      // Play button functionality
+      document.querySelector(".play-button").addEventListener("click", function () {
+        const video = document.querySelector(".hero-video");
+        video.play();
+        this.classList.add("hidden");
+      });
     </script>
   </body>
 </html>
