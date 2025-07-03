@@ -23,10 +23,9 @@ class GreenEconomyHeader extends HTMLElement {
                             </select>
                             ${isDashboard ? `
                                 <button onclick="logout()" class="logout-button">
-                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Logout</span>
+                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Home</span>
                                 </button>
                             ` : `
-                                <a href="../Sign In & Sign Up/SignIn.html" class="logout-button" data-i18n="header.sign_in">Sign In</a>
                             `}
                         </div>
                     </div>
