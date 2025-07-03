@@ -82,7 +82,7 @@ body {
 }
 
 .logout-button {
-    background: #0c973f;
+    background: #0891b2;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -94,12 +94,12 @@ body {
 }
 
 .logout-button:hover {
-    background: #0a7e33;
+    background: #0891b2;
 }
 
 /* Footer Styles */
 .footer {
-    background: #0c973f;
+    background: #21b457;
     color: white;
     padding: 48px 0;
 }

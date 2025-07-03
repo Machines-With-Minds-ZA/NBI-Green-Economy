@@ -9,10 +9,7 @@
     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
     <script src="../Master Page(Header and Footer)/translation.js"></script>
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
-
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <style>
         .loader {
@@ -56,6 +53,7 @@
                     <p id="total-interactions" class="mb-2"></p>
                     <p id="interactions-by-category" class="mb-2"></p>
                     <p id="avg-per-day" class="mb-2"></p>
+                    <p id="ai-chat-count" class="mb-2"></p>
                 </div>
                 <div class="interactions-list p-4 bg-white rounded-lg shadow">
                     <h3 class="text-xl font-semibold mb-4" data-i18n="interactions.list">Interaction Logs</h3>
@@ -68,104 +66,95 @@
     <div class="loader-overlay" id="loader-overlay"></div>
     <div class="loader" id="loader"></div>
 
-<script>
-    // Firebase Config
-    const firebaseConfig = {
-        apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-        authDomain: "nbi-database.firebaseapp.com",
-        projectId: "nbi-database",
-        storageBucket: "nbi-database.appspot.com",
-        messagingSenderId: "497517200595",
-        appId: "1:497517200595:web:c862996d49fba97baf8026",
-        measurementId: "G-NHZB2WJF9L"
-    };
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
 
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-    // Loader Functions
-    const loader = document.getElementById('loader');
-    const loaderOverlay = document.getElementById('loader-overlay');
+        // Loader Functions
+        const loader = document.getElementById('loader');
+        const loaderOverlay = document.getElementById('loader-overlay');
 
-    function showLoader() {
-        loader.style.display = 'block';
-        loaderOverlay.style.display = 'block';
-    }
-
-    function hideLoader() {
-        loader.style.display = 'none';
-        loaderOverlay.style.display = 'none';
-    }
-
-    // Check Authentication State
-    auth.onAuthStateChanged((user) => {
-        if (!user) {
-            window.location.href = '../Sign In & Sign Up/SignIn.html';
-        } else {
-            loadInteractions();
+        function showLoader() {
+            loader.style.display = 'block';
+            loaderOverlay.style.display = 'block';
         }
-    });
 
-    // Load and Display Interactions
-    async function loadInteractions() {
-        showLoader();
-        try {
-            const snapshot = await db.collection('interactions').orderBy('timestamp', 'desc').get();
-            const interactions = snapshot.docs.map(doc => doc.data());
-            displayStats(interactions);
-            displayInteractionsList(interactions);
-        } catch (error) {
-            console.error("Error loading interactions: ", error);
-            alert('Error loading interactions: ' + error.message);
-        } finally {
-            hideLoader();
+        function hideLoader() {
+            loader.style.display = 'none';
+            loaderOverlay.style.display = 'none';
         }
-    }
 
-    // Display Statistics
-    function displayStats(interactions) {
-        const total = interactions.length;
-        const byCategory = interactions.reduce((acc, curr) => {
-            acc[curr.category] = (acc[curr.category] || 0) + 1;
-            return acc;
-        }, {});
-        const aiChatCount = interactions.filter(i => i.category === 'ai_chat').length;
-        const firstTimestamp = interactions[interactions.length - 1]?.timestamp?.toDate();
-        const lastTimestamp = interactions[0]?.timestamp?.toDate();
-        const daysDiff = firstTimestamp ? Math.ceil((lastTimestamp - firstTimestamp) / (1000 * 60 * 60 * 24)) || 1 : 1;
-        const avgPerDay = total / daysDiff;
+        // Load and Display Interactions on Page Load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadInteractions();
+        });
 
-        document.getElementById('total-interactions').textContent = `Total Interactions: ${total}`;
-        document.getElementById('interactions-by-category').textContent = `Interactions by Category: ${Object.entries(byCategory).map(([k, v]) => `${k}: ${v}`).join(', ')}`;
-        document.getElementById('avg-per-day').textContent = `Average per Day: ${avgPerDay.toFixed(2)}`;
-        // Add AI chat specific stat
-        const aiChatStat = document.createElement('p');
-        aiChatStat.className = 'mb-2';
-        aiChatStat.textContent = `AI Chat Messages: ${aiChatCount}`;
-        document.querySelector('.stats-container').appendChild(aiChatStat);
-    }
-
-    // Display Interactions List
-    function displayInteractionsList(interactions) {
-        const list = document.getElementById('interactions-list');
-        list.innerHTML = interactions.map(interaction => {
-            let displayLabel = interaction.label || 'N/A';
-            let styleClass = '';
-            if (interaction.category === 'ai_chat' && interaction.action === 'message_sent') {
-                displayLabel = `User Message: "${displayLabel}"`;
-                styleClass = 'bg-blue-100';
+        // Load and Display Interactions
+        async function loadInteractions() {
+            showLoader();
+            try {
+                const snapshot = await db.collection('interactions').orderBy('timestamp', 'desc').get();
+                const interactions = snapshot.docs.map(doc => doc.data());
+                displayStats(interactions);
+                displayInteractionsList(interactions);
+            } catch (error) {
+                console.error("Error loading interactions: ", error);
+                alert('Error loading interactions: ' + error.message);
+            } finally {
+                hideLoader();
             }
-            return `
-                <li class="p-2 border-b border-gray-200 ${styleClass}">
-                    <strong>${interaction.category}</strong> - ${interaction.action} 
-                    <span class="text-gray-500">(${displayLabel})</span>
-                    <br><small>${new Date(interaction.timestamp?.toDate()).toLocaleString()}</small>
-                </li>
-            `;
-        }).join('');
-    }
-</script>
-</head>
+        }
+
+        // Display Statistics
+        function displayStats(interactions) {
+            const total = interactions.length;
+            const byCategory = interactions.reduce((acc, curr) => {
+                acc[curr.category] = (acc[curr.category] || 0) + 1;
+                return acc;
+            }, {});
+            const aiChatCount = interactions.filter(i => i.category === 'ai_chat').length;
+            const firstTimestamp = interactions[interactions.length - 1]?.timestamp?.toDate();
+            const lastTimestamp = interactions[0]?.timestamp?.toDate();
+            const daysDiff = firstTimestamp ? Math.ceil((lastTimestamp - firstTimestamp) / (1000 * 60 * 60 * 24)) || 1 : 1;
+            const avgPerDay = total / daysDiff;
+
+            document.getElementById('total-interactions').textContent = `Total Interactions: ${total}`;
+            document.getElementById('interactions-by-category').textContent = `Interactions by Category: ${Object.entries(byCategory).map(([k, v]) => `${k}: ${v}`).join(', ')}`;
+            document.getElementById('avg-per-day').textContent = `Average per Day: ${avgPerDay.toFixed(2)}`;
+            document.getElementById('ai-chat-count').textContent = `AI Chat Messages: ${aiChatCount}`;
+        }
+
+        // Display Interactions List
+        function displayInteractionsList(interactions) {
+            const list = document.getElementById('interactions-list');
+            list.innerHTML = interactions.map(interaction => {
+                let displayLabel = interaction.label || 'N/A';
+                let styleClass = '';
+                if (interaction.category === 'ai_chat' && interaction.action === 'message_sent') {
+                    displayLabel = `User Message: "${displayLabel}"`;
+                    styleClass = 'bg-blue-100';
+                }
+                return `
+                    <li class="p-2 border-b border-gray-200 ${styleClass}">
+                        <strong>${interaction.category}</strong> - ${interaction.action} 
+                        <span class="text-gray-500">(${displayLabel})</span>
+                        <br><small>${new Date(interaction.timestamp?.toDate()).toLocaleString()}</small>
+                    </li>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
 </html>
