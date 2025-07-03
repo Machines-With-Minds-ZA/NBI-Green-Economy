@@ -37,13 +37,13 @@ body {
   align-items: center;
   font-size: 18px;
   font-weight: bold;
-  color: #0c973f;
+  color: #31b45a;
 }
 
 .logo-icon {
   width: 32px;
   height: 32px;
-  background: #0c973f;
+  background: #31b45a;
   border-radius: 4px;
   margin-right: 12px;
 }
@@ -62,7 +62,7 @@ body {
 }
 
 .nav a:hover {
-  color: #1a8934;
+  color: #31b45a;
 }
 
 .header-actions {
@@ -101,7 +101,7 @@ body {
   width: 20px;
   height: 20px;
   color: #6b7280;
-  margin-left: 16px;
+  margin-left: 12px;
 }
 
 /* Hero Section */
@@ -150,7 +150,7 @@ body {
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
-  background: #2eb54e;
+  background: #36aa51;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -192,16 +192,16 @@ body {
 }
 
 .hero-button:nth-child(1) {
-  background: #0891b2;
+  background: #40a095;
 }
 .hero-button:nth-child(2) {
-  background: #1a9dbe;
+  background: #2b9589;
 }
 .hero-button:nth-child(3) {
-  background: #0891b2;
-}
+  background: #40a095;
+} 
 .hero-button:nth-child(4) {
-  background: #1a9dbe;
+  background: #2b9589;
 }
 
 .hero-button:hover {
@@ -330,7 +330,7 @@ body {
 }
 
 .business-card {
-  background: #34ba54;
+  background: #36aa51;
   border-radius: 8px;
   overflow: hidden;
   color: white;
@@ -366,7 +366,7 @@ body {
   bottom: -12px;
   left: 24px;
   background: white;
-  color: #1a8934;
+  color: #36aa51;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -398,7 +398,7 @@ body {
 .info-item {
   text-align: center;
   padding: 32px;
-  border-right: 1px solid #0891b2;
+  border-right: 1px solid #2b9589;
 }
 
 
@@ -418,7 +418,7 @@ body {
 
 /* News Section */
 .news-section {
-  background: #1a8934;
+  background: #36aa51;
   color: white;
 }
 
@@ -531,14 +531,14 @@ body {
 }
 
 .event-header {
-  background: #1a8934;
+  background: #36aa51;
   color: white;
   padding: 16px;
   border-radius: 8px 8px 0 0;
 }
 
 .event-card:nth-child(2) .event-header {
-  background: #16a34a;
+  background: #36aa51;
 }
 
 .event-header h3 {
@@ -567,7 +567,7 @@ body {
 }
 
 .event-date {
-  background: #1a8934;
+  background: #36aa51;
   color: white;
   padding: 4px 12px;
   border-radius: 4px;
@@ -598,7 +598,7 @@ body {
   position: absolute;
   bottom: -12px;
   left: 24px;
-  background: #1a8934;
+  background: #36aa51;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -612,8 +612,8 @@ body {
 
 .event-button.outline {
   background: white;
-  color: #1a8934;
-  border: 1px solid #1a8934;
+  color: #36aa51;
+  border: 1px solid #36aa51;
 }
 
 .event-button:hover {
@@ -624,7 +624,7 @@ body {
 .partners {
   padding: 48px 0;
   background: white;
-  border-top: 2px solid #1a8934;
+  border-top: 2px solid #36aa51;
 }
 
 .partners-content {
@@ -683,7 +683,7 @@ body {
 }
 
 .partner-badge.green {
-  background: #1a8934;
+  background: #36aa51;
 }
 
 .partner-badge.blue {
@@ -732,7 +732,7 @@ body {
 
 /* Footer */
 .footer {
-  background: #1a8934;
+  background: #36aa51;
   color: white;
   padding: 48px 0;
 }
@@ -772,7 +772,7 @@ body {
 }
 
 .footer-bottom {
-  border-top: 1px solid #16a34a;
+  border-top: 1px solid #36aa51;
   padding-top: 32px;
   text-align: center;
   font-size: 14px;
