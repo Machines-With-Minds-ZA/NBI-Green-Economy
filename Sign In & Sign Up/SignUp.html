@@ -4,17 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="signup.title">Green Economy Toolkit - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
-    <!--<link rel="stylesheet" href="../styles/signup.css">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="signup&signin.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <style>
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 8px solid #e5e7eb;
+            border-top: 8px solid #10b981; /* Green theme color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <div id="root">
         <green-economy-header></green-economy-header>
-
-        <main id="content">
-            <section class="signup-section">
-                <div class="blurry-bg"></div>
         <main class="flex-grow flex items-center justify-center py-16 relative">
             <div class="blurry-bg"></div>
             <div class="form-container max-w-md w-full mx-4 p-8">
@@ -37,11 +72,9 @@
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center">
                             <div class="w-full border-t border-gray-300"></div>
->>>>>>> origin/main
                         </div>
-                        <div class="form-group">
-                            <label for="password" data-i18n="signup.password_label">Password</label>
-                            <input id="password" type="password" required placeholder="••••••••" data-i18n="signup.password_placeholder">
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500" data-i18n="signup.or_continue">Or continue with</span>
                         </div>
                     </div>
                     <button id="google-sign-up-btn" class="google-btn" data-i18n="signup.google_button">
@@ -60,86 +93,110 @@
     <div class="loader" id="loader"></div>
 
     <script>
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
+// Firebase Config and Initialization (same as before)
+const firebaseConfig = {
+    apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+    authDomain: "nbi-database.firebaseapp.com",
+    projectId: "nbi-database",
+    storageBucket: "nbi-database.appspot.com",
+    messagingSenderId: "497517200595",
+    appId: "1:497517200595:web:c862996d49fba97baf8026",
+    measurementId: "G-NHZB2WJF9L"
+};
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        const googleProvider = new firebase.auth.GoogleAuthProvider();
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-        // Loader Functions
-        const loader = document.getElementById('loader');
-        const loaderOverlay = document.getElementById('loader-overlay');
+// Loader Functions (same as before)
+const loader = document.getElementById('loader');
+const loaderOverlay = document.getElementById('loader-overlay');
 
-        function showLoader() {
-            loader.style.display = 'block';
-            loaderOverlay.style.display = 'block';
-        }
+function showLoader() {
+    loader.style.display = 'block';
+    loaderOverlay.style.display = 'block';
+}
 
-        function hideLoader() {
-            loader.style.display = 'none';
-            loaderOverlay.style.display = 'none';
-        }
+function hideLoader() {
+    loader.style.display = 'none';
+    loaderOverlay.style.display = 'none';
+}
 
-        // Sign Up with Email
-        document.getElementById('sign-up-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            showLoader();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (password !== confirmPassword) {
-                hideLoader();
-                alert('Passwords do not match!');
-                return;
-            }
-
-            try {
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                await db.collection('users').doc(userCredential.user.uid).set({
-                    email: userCredential.user.email,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                setTimeout(() => {
-                    hideLoader();
-                    window.location.href = '../questionnaire/questionnaire.html';
-                }, 2000); // Delay to show loader
-            } catch (error) {
-                hideLoader();
-                alert(error.message);
-            }
+// Interaction Tracking Function
+function trackInteraction(category, action, label = "") {
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('interactions').add({
+            userId: user.uid,
+            category: category,
+            action: action,
+            label: label,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            language: document.documentElement.lang || 'en',
+            userAgent: navigator.userAgent
+        }).catch((error) => {
+            console.error("Error logging interaction: ", error);
         });
+    } else {
+        console.log("No user logged in, interaction not tracked:", { category, action, label });
+    }
+}
 
-        // Google Sign Up
-        document.getElementById('google-sign-up-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            showLoader();
-            try {
-                const result = await auth.signInWithPopup(googleProvider);
-                await db.collection('users').doc(result.user.uid).set({
-                    email: result.user.email,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-                setTimeout(() => {
-                    hideLoader();
-                    window.location.href = '../questionnaire/questionnaire.html';
-                }, 2000); // Delay to show loader
-            } catch (error) {
-                hideLoader();
-                alert(error.message);
-            }
+// Sign Up with Email
+document.getElementById('sign-up-btn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    trackInteraction('signup', 'attempt', `Email: ${email}`);
+    showLoader();
+    if (password !== confirmPassword) {
+        hideLoader();
+        trackInteraction('signup', 'failure', 'Passwords do not match');
+        alert('Passwords do not match!');
+        return;
+    }
+    try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await db.collection('users').doc(userCredential.user.uid).set({
+            email: userCredential.user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
+        trackInteraction('signup', 'success', `Email: ${email}`);
+        setTimeout(() => {
+            hideLoader();
+            window.location.href = '../questionnaire/questionnaire.html';
+        }, 2000);
+    } catch (error) {
+        hideLoader();
+        trackInteraction('signup', 'failure', `${error.message}`);
+        alert(error.message);
+    }
+});
+
+// Google Sign Up
+document.getElementById('google-sign-up-btn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    trackInteraction('signup', 'attempt', 'Google');
+    showLoader();
+    try {
+        const result = await auth.signInWithPopup(googleProvider);
+        await db.collection('users').doc(result.user.uid).set({
+            email: result.user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        trackInteraction('signup', 'success', 'Google');
+        setTimeout(() => {
+            hideLoader();
+            window.location.href = '../questionnaire/questionnaire.html';
+        }, 2000);
+    } catch (error) {
+        hideLoader();
+        trackInteraction('signup', 'failure', `${error.message}`);
+        alert(error.message);
+    }
+});
     </script>
 </body>
 </html>

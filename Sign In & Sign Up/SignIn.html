@@ -7,10 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
     <script src="../Master Page(Header and Footer)/translation.js"></script>
-    <link rel="stylesheet" href="../main.css">
+
+    <link rel="stylesheet" href="signup&signin.css">
+
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <style>
         .loader {
             display: none;
@@ -93,70 +98,97 @@
     <div class="loader" id="loader"></div>
 
     <script>
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const googleProvider = new firebase.auth.GoogleAuthProvider();
+// Firebase Config and Initialization (same as before)
 
-        // Loader Functions
-        const loader = document.getElementById('loader');
-        const loaderOverlay = document.getElementById('loader-overlay');
+const firebaseConfig = {
+    apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+    authDomain: "nbi-database.firebaseapp.com",
+    projectId: "nbi-database",
+    storageBucket: "nbi-database.appspot.com",
+    messagingSenderId: "497517200595",
+    appId: "1:497517200595:web:c862996d49fba97baf8026",
+    measurementId: "G-NHZB2WJF9L"
+};
 
-        function showLoader() {
-            loader.style.display = 'block';
-            loaderOverlay.style.display = 'block';
-        }
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore(); // Initialize Firestore
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-        function hideLoader() {
-            loader.style.display = 'none';
-            loaderOverlay.style.display = 'none';
-        }
+// Loader Functions (same as before)
+const loader = document.getElementById('loader');
+const loaderOverlay = document.getElementById('loader-overlay');
 
-        // Email Sign In
-        document.getElementById('sign-in-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            showLoader();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+function showLoader() {
+    loader.style.display = 'block';
+    loaderOverlay.style.display = 'block';
+}
 
-            try {
-                await auth.signInWithEmailAndPassword(email, password);
-                setTimeout(() => {
-                    hideLoader();
-                    window.location.href = '../questionnaire/questionnaire.html';
-                }, 2000); // Delay to show loader
-            } catch (error) {
-                hideLoader();
-                alert(error.message);
-            }
+function hideLoader() {
+    loader.style.display = 'none';
+    loaderOverlay.style.display = 'none';
+}
+
+// Interaction Tracking Function
+function trackInteraction(category, action, label = "") {
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('interactions').add({
+            userId: user.uid,
+            category: category,
+            action: action,
+            label: label,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            language: document.documentElement.lang || 'en',
+            userAgent: navigator.userAgent
+        }).catch((error) => {
+            console.error("Error logging interaction: ", error);
         });
+    } else {
+        console.log("No user logged in, interaction not tracked:", { category, action, label });
+    }
+}
 
-        // Google Sign In
-        document.getElementById('google-sign-in-btn').addEventListener('click', async (e) => {
-            e.preventDefault();
-            showLoader();
-            try {
-                await auth.signInWithPopup(googleProvider);
-                setTimeout(() => {
-                    hideLoader();
-                    window.location.href = '../questionnaire/questionnaire.html';
-                }, 2000); // Delay to show loader
-            } catch (error) {
-                hideLoader();
-                alert(error.message);
-            }
-        });
+// Email Sign In
+document.getElementById('sign-in-btn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    trackInteraction('login', 'attempt', `Email: ${email}`);
+    showLoader();
+    try {
+        await auth.signInWithEmailAndPassword(email, password);
+        trackInteraction('login', 'success', `Email: ${email}`);
+        setTimeout(() => {
+            hideLoader();
+            window.location.href = '../Dashboard/dashboard.html';
+        }, 2000);
+    } catch (error) {
+        hideLoader();
+        trackInteraction('login', 'failure', `${error.message}`);
+        alert(error.message);
+    }
+});
+
+// Google Sign In
+document.getElementById('google-sign-in-btn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    trackInteraction('login', 'attempt', 'Google');
+    showLoader();
+    try {
+        await auth.signInWithPopup(googleProvider);
+        trackInteraction('login', 'success', 'Google');
+        setTimeout(() => {
+            hideLoader();
+            window.location.href = '../Dashboard/dashboard.html';
+        }, 2000);
+    } catch (error) {
+        hideLoader();
+        trackInteraction('login', 'failure', `${error.message}`);
+        alert(error.message);
+    }
+});
     </script>
 </body>
 </html>

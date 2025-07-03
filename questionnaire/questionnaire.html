@@ -7,11 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+
     <link rel="stylesheet" href="questionnaire.css">
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
     <style>
         .loader {
             display: none;
@@ -144,83 +149,113 @@
     <div class="loader" id="loader"></div>
 
     <script>
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
+// Firebase Config and Initialization (same as before)
+const firebaseConfig = {
+    apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+    authDomain: "nbi-database.firebaseapp.com",
+    projectId: "nbi-database",
+    storageBucket: "nbi-database.appspot.com",
+    messagingSenderId: "497517200595",
+    appId: "1:497517200595:web:c862996d49fba97baf8026",
+    measurementId: "G-NHZB2WJF9L"
+};
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-        // Loader Functions
-        const loader = document.getElementById('loader');
-        const loaderOverlay = document.getElementById('loader-overlay');
+// Loader Functions (same as before)
+const loader = document.getElementById('loader');
+const loaderOverlay = document.getElementById('loader-overlay');
 
-        function showLoader() {
-            loader.style.display = 'block';
-            loaderOverlay.style.display = 'block';
-        }
+function showLoader() {
+    loader.style.display = 'block';
+    loaderOverlay.style.display = 'block';
+}
 
-        function hideLoader() {
-            loader.style.display = 'none';
-            loaderOverlay.style.display = 'none';
-        }
+function hideLoader() {
+    loader.style.display = 'none';
+    loaderOverlay.style.display = 'none';
+}
 
-        // Check Authentication State
-        auth.onAuthStateChanged((user) => {
-            if (!user) {
-                window.location.href = '../Sign In & Sign Up/SignIn.html';
-            }
+// Interaction Tracking Function
+function trackInteraction(category, action, label = "") {
+    const user = auth.currentUser;
+    if (user) {
+        db.collection('interactions').add({
+            userId: user.uid,
+            category: category,
+            action: action,
+            label: label,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            language: document.documentElement.lang || 'en',
+            userAgent: navigator.userAgent
+        }).catch((error) => {
+            console.error("Error logging interaction: ", error);
         });
+    } else {
+        console.log("No user logged in, interaction not tracked:", { category, action, label });
+    }
+}
 
-        // Handle Questionnaire Submission
-        document.getElementById('user-questionnaire').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            showLoader();
-            const user = auth.currentUser;
-            if (!user) {
-                hideLoader();
-                alert('Please sign in to submit the questionnaire.');
-                return;
-            }
+// Check Authentication State
+auth.onAuthStateChanged((user) => {
+    if (!user) {
+        window.location.href = '../Sign In & Sign Up/SignIn.html';
+    }
+});
 
-            const userType = document.getElementById('user-type').value;
-            const primaryInterest = document.getElementById('primary-interest').value;
-            const fundingNeeds = document.getElementById('funding-needs').value;
-            const businessSector = document.getElementById('business-sector').value;
-            const skillLevel = document.getElementById('skill-level').value;
-            const toolAccess = document.getElementById('tool-access').value;
-            const language = document.getElementById('language').value;
+// Handle Questionnaire Submission
+document.getElementById('user-questionnaire').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    showLoader();
+    const user = auth.currentUser;
+    if (!user) {
+        hideLoader();
+        alert('Please sign in to submit the questionnaire.');
+        return;
+    }
 
-            try {
-                await db.collection('questionnaires').doc(user.uid).set({
-                    userId: user.uid,
-                    userType,
-                    primaryInterest,
-                    fundingNeeds,
-                    businessSector,
-                    skillLevel,
-                    toolAccess,
-                    language,
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-                setTimeout(() => {
-                    hideLoader();
-                    window.location.href = '../Dashboard/dashboard.html';
-                }, 2000); // Delay to show loader
-            } catch (error) {
-                hideLoader();
-                alert('Error saving data: ' + error.message);
-            }
-        });
+    const userType = document.getElementById('user-type').value;
+    const primaryInterest = document.getElementById('primary-interest').value;
+    const fundingNeeds = document.getElementById('funding-needs').value;
+    const businessSector = document.getElementById('business-sector').value;
+    const skillLevel = document.getElementById('skill-level').value;
+    const toolAccess = document.getElementById('tool-access').value;
+    const language = document.getElementById('language').value;
+
+    trackInteraction('questionnaire', 'submit_attempt', `UserType: ${userType}, Interest: ${primaryInterest}`);
+    try {
+        await db.collection('questionnaires').doc(user.uid).set({
+            userId: user.uid,
+            userType,
+            primaryInterest,
+            fundingNeeds,
+            businessSector,
+            skillLevel,
+            toolAccess,
+            language,
+            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+        trackInteraction('questionnaire', 'submit_success', `UserType: ${userType}`);
+        setTimeout(() => {
+            hideLoader();
+            window.location.href = '../Dashboard/dashboard.html';
+        }, 2000);
+    } catch (error) {
+        hideLoader();
+        trackInteraction('questionnaire', 'submit_failure', `${error.message}`);
+        alert('Error saving data: ' + error.message);
+    }
+});
+
+// Track Dropdown Changes
+['user-type', 'primary-interest', 'funding-needs', 'business-sector', 'skill-level', 'tool-access', 'language'].forEach(id => {
+    document.getElementById(id).addEventListener('change', (e) => {
+        trackInteraction('questionnaire', 'dropdown_select', `${id}: ${e.target.value}`);
+    });
+});
+
     </script>
      <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
 </body>
