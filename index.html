@@ -11,7 +11,7 @@
     <header class="header">
       <div class="header-content">
         <div class="logo">
-            <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
+          <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
         </div>
         <nav class="nav">
           <a href="#">About the green economy</a>
@@ -187,7 +187,7 @@
         <h2>Preparing your business for the green economy</h2>
       </div>
       <div class="business-cards">
-        <div class="business-card">
+        <div class="business-card green-card">
           <div
             class="business-card-image"
             style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop');"
@@ -208,9 +208,9 @@
               some of this work?
             </p>
           </div>
-          <button class="business-card-button">Find out more</button>
+          <button class="business-card-button blue-button">Find out more</button>
         </div>
-        <div class="business-card">
+        <div class="business-card blue-card">
           <div
             class="business-card-image"
             style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop');"
@@ -229,7 +229,7 @@
             </p>
             <p>Find out about green economy opportunities in the RM sector.</p>
           </div>
-          <button class="business-card-button">Find out more</button>
+          <button class="business-card-button green-button">Find out more</button>
         </div>
       </div>
     </section>
@@ -398,22 +398,11 @@
     <!-- Partner Logos -->
     <section class="partners">
       <div class="partners-content">
-        <div class="partner-item">
-          <div class="partner-icon orange"></div>
-          <span class="partner-text"
-            >Department of<br /><span class="title">Trade & Industry</span></span
-          >
-        </div>
-        <div class="partner-item">
-          <div class="partner-icon red"></div>
-          <span class="partner-text title">GIZ</span>
-        </div>
-        <div class="partner-item">
-          <div class="partner-icon blue">Z</div>
-          <span class="partner-text title">ZA</span>
-        </div>
-        <div class="partner-badge green">IRM</div>
-        <div class="partner-badge blue">NBI</div>
+        <img src="Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
+        <img src="Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
+        <img src="Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
+        <img src="Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
+        <img src="Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
       </div>
     </section>
 
@@ -434,10 +423,7 @@
       <div class="footer-content">
         <div class="footer-section">
           <div style="display: flex; align-items: center; margin-bottom: 16px">
-            <div
-              style="width: 24px; height: 24px; background: white; border-radius: 4px; margin-right: 8px;"
-            ></div>
-            <span style="font-weight: bold">Green Economy Network</span>
+            <img src="Images/GET.png" alt="Green Economy Network Logo" style="height: 60px; margin-right: 8px;">
           </div>
         </div>
         <div class="footer-section">
@@ -469,9 +455,17 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Green Economy Network. All rights reserved.</p>
+        <p>© 2025 Green Economy Network. All rights reserved.</p>
       </div>
     </footer>
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "s9a5dtbonc");
+</script>
 
     <script>
       function navigateToFocusArea(areaId) {
@@ -516,7 +510,6 @@
         window.location.href = "questionnaire/questionnaire.html";
       });
 
-      // Play button functionality
       document.querySelector(".play-button").addEventListener("click", function () {
         const video = document.querySelector(".hero-video");
         video.play();

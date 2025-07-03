@@ -37,13 +37,13 @@ body {
   align-items: center;
   font-size: 18px;
   font-weight: bold;
-  color: #31b45a;
+  color: #36aa51;
 }
 
 .logo-icon {
   width: 32px;
   height: 32px;
-  background: #31b45a;
+  background: #36aa51;
   border-radius: 4px;
   margin-right: 12px;
 }
@@ -62,7 +62,7 @@ body {
 }
 
 .nav a:hover {
-  color: #31b45a;
+  color: #36aa51;
 }
 
 .header-actions {
@@ -131,7 +131,7 @@ body {
 .hero-image {
   flex: 1;
   margin: 0;
-  position: relative; /* Positioning context for play button */
+  position: relative;
 }
 
 .hero-image video.hero-video {
@@ -140,7 +140,7 @@ body {
   object-fit: cover;
   display: block;
   margin: 0;
-  border-radius: 8px 8px 0 0;
+  border-radius: 0px 0px 0 0;
 }
 
 .play-button {
@@ -150,7 +150,7 @@ body {
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
-  background: #36aa51;
+  background: #51ae05;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -203,6 +203,7 @@ body {
 .hero-button:nth-child(4) {
   background: #2b9589;
 }
+
 
 .hero-button:hover {
   opacity: 0.8;
@@ -330,12 +331,19 @@ body {
 }
 
 .business-card {
-  background: #36aa51;
   border-radius: 8px;
   overflow: hidden;
   color: white;
   position: relative;
   padding-bottom: 48px;
+}
+
+.business-card.green-card {
+  background: #36aa51;
+}
+
+.business-card.blue-card {
+  background: #0891b2;
 }
 
 .business-card-image {
@@ -365,8 +373,6 @@ body {
   position: absolute;
   bottom: -12px;
   left: 24px;
-  background: white;
-  color: #36aa51;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -375,10 +381,19 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
   font-size: 14px;
+  color: white;
+}
+
+.business-card-button.green-button {
+  background: #36aa51;
+}
+
+.business-card-button.blue-button {
+  background: #0891b2;
 }
 
 .business-card-button:hover {
-  background: #f3f4f6;
+  opacity: 0.8;
 }
 
 /* Three Column Info */
@@ -398,10 +413,7 @@ body {
 .info-item {
   text-align: center;
   padding: 32px;
-  border-right: 1px solid #2b9589;
 }
-
-
 
 
 .info-item h3 {
@@ -451,6 +463,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   background: #36aa51;
+  border-left: 1px solid #4ade80;
 }
 
 .news-item {
@@ -538,7 +551,7 @@ body {
 }
 
 .event-card:nth-child(2) .event-header {
-  background: #36aa51;
+  background: #0891b2;
 }
 
 .event-header h3 {
@@ -612,8 +625,8 @@ body {
 
 .event-button.outline {
   background: white;
-  color: #36aa51;
-  border: 1px solid #36aa51;
+  color: #0891b2;
+  border: 1px solid #0891b2;
 }
 
 .event-button:hover {
@@ -626,16 +639,21 @@ body {
   background: white;
   border-top: 2px solid #36aa51;
 }
-
 .partners-content {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 48px;
-  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.partner-logo {
+  height: 50px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
 }
 
 .partner-item {
@@ -664,7 +682,7 @@ body {
 .partner-icon.blue {
   width: 12px;
   height: 12px;
-  background: #2563eb;
+  background: #0891b2;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -687,7 +705,7 @@ body {
 }
 
 .partner-badge.blue {
-  background: #1e40af;
+  background: #0891b2;
 }
 
 .partner-text {
@@ -715,7 +733,7 @@ body {
 
 .login-button {
   background: white;
-  color: #2563eb;
+  color: #0891b2;
   border: none;
   padding: 12px 24px;
   border-radius: 6px;
@@ -772,7 +790,7 @@ body {
 }
 
 .footer-bottom {
-  border-top: 1px solid #36aa51;
+  border-top: 1px solid #4ade80;
   padding-top: 32px;
   text-align: center;
   font-size: 14px;
@@ -784,6 +802,16 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+.partners-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .partner-logo {
+    max-width: 120px;
+  }
+
   .hero-content {
     grid-template-columns: 1fr;
     padding: 0;
@@ -825,6 +853,7 @@ body {
 
   .info-item {
     border-right: none;
+    border-bottom: 1px solid #4ade80;
   }
 
   .info-item:last-child {
@@ -837,7 +866,7 @@ body {
 
   .news-item {
     border-right: none;
-    border-bottom: 1px solid #0891b2;
+    border-bottom: 1px solid #4ade80;
   }
 
   .news-item:last-child {
