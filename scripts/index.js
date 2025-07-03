@@ -179,6 +179,33 @@ const priorityAreas = [
                 });
             }
 
+            // Add Save Logs button
+            const saveBtn = document.createElement('button');
+            saveBtn.innerText = 'Save Logs';
+            saveBtn.style.float = 'right';
+            saveBtn.style.background = '#0c973f';
+            saveBtn.style.color = 'white';
+            saveBtn.style.border = 'none';
+            saveBtn.style.padding = '6px 16px';
+            saveBtn.style.borderRadius = '6px';
+            saveBtn.style.cursor = 'pointer';
+            saveBtn.style.marginRight = '8px';
+            saveBtn.onclick = function() {
+                const blob = new Blob([JSON.stringify(logs, null, 2)], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ui-usage-logs.json';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 0);
+            };
+
+            content.appendChild(saveBtn);
+
             modal.appendChild(content);
             document.body.appendChild(modal);
         }
