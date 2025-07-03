@@ -88,6 +88,15 @@ const priorityAreas = [
             let logs = JSON.parse(localStorage.getItem('uiUsageLogs') || '[]');
             logs.push(event);
             localStorage.setItem('uiUsageLogs', JSON.stringify(logs));
+            // Send to Google Analytics if available
+            if (typeof gtag === 'function') {
+                gtag('event', eventType, {
+                    event_category: 'UI Usage',
+                    event_label: details.filter || details.cardTitle || '',
+                    page_path: window.location.pathname,
+                    ...details
+                });
+            }
         }
 
         // Track page load
