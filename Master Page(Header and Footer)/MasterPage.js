@@ -7,7 +7,7 @@ class GreenEconomyHeader extends HTMLElement {
                 <div class="container">
                     <div class="header-content">
                         <div class="logo">
-                            <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
+                            <img src="../Images/GET.png" alt="Logo" href="index.html" style="height:50px ; width:160px"/>
                         </div>
                         <nav class="nav">
                             <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
