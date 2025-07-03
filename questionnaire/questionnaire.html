@@ -6,257 +6,452 @@
     <title>Green Economy Toolkit - Questionnaire</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
-    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
-    <script src="../../Master Page(Header and Footer)/translation.js"></script>
+    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
-
     <link rel="stylesheet" href="questionnaire.css">
-
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-    
-    <style>
-        .loader {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            border: 8px solid #e5e7eb;
-            border-top: 8px solid #10b981; /* Green theme color */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            z-index: 1000;
-        }
-
-        .loader-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="questionnaire.css">
 </head>
-<body class="flex flex-col min-h-screen">
-    <div id="root" class="flex flex-col flex-grow">
-        <green-economy-header></green-economy-header>
-        <main id="content" class="flex-grow flex items-center justify-center py-12">
-            <div class="w-full">
-                <div class="hero-image">
-                    <h3 class="text-3xl font-bold" data-i18n="questionnaire.hero">Join the Green Economy Movement</h3>
-                </div>
-                <div class="questionnaire-container mx-auto">
-                    <h2 class="text-2xl font-bold text-black mb-6 text-center" data-i18n="questionnaire.title">Tell Us About Your Interests</h2>
-                    <form id="user-questionnaire" class="space-y-6">
-                        <div>
-                            <label for="user-type" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.user_type">Who are you?</label>
-                            <select id="user-type" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
-                                <option value="" disabled selected>Select your role</option>
-                                <option value="township-enterprise">Township IRM Enterprise</option>
-                                <option value="youth">Youth from Underrepresented Community</option>
-                                <option value="stakeholder">Stakeholder or Partner</option>
-                                <option value="community">Local Community Member</option>
-                                <option value="tvet">TVET College Student/Staff</option>
-                                <option value="entrepreneur-hub">Entrepreneurial Hub Member</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="primary-interest" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.primary_interest">What is your primary interest in the green economy?</label>
-                            <select id="primary-interest" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
-                                <option value="" disabled selected>Select your primary interest</option>
-                                <option value="funding">Green Funding Opportunities</option>
-                                <option value="business-support">SMME Business Support</option>
-                                <option value="education">Green Economy Education</option>
-                                <option value="tools">Access to Green Tools</option>
-                                <option value="networking">Networking with Stakeholders</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="funding-needs" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.funding_needs">What type of funding are you seeking?</label>
-                            <select id="funding-needs" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
-                                <option value="" disabled selected>Select funding type (optional)</option>
-                                <option value="grants">Grants</option>
-                                <option value="loans">Loans</option>
-                                <option value="equity">Equity Investments</option>
-                                <option value="crowdfunding">Crowdfunding</option>
-                                <option value="none">Not seeking funding</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="business-sector" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.business_sector">What is your business or community sector?</label>
-                            <select id="business-sector" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
-                                <option value="" disabled selected>Select your sector (optional)</option>
-                                <option value="renewable-energy">Renewable Energy</option>
-                                <option value="waste-management">Waste Management</option>
-                                <option value="agriculture">Sustainable Agriculture</option>
-                                <option value="green-technology">Green Technology</option>
-                                <option value="community-development">Community Development</option>
-                                <option value="education">Education</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="skill-level" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.skill_level">What is your experience level with green economy practices?</label>
-                            <select id="skill-level" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
-                                <option value="" disabled selected>Select your experience level</option>
-                                <option value="beginner">Beginner</option>
-                                <option value="intermediate">Intermediate</option>
-                                <option value="advanced">Advanced</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="tool-access" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.tool_access">Which green economy tools are you interested in accessing?</label>
-                            <select id="tool-access" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary">
-                                <option value="" disabled selected>Select tools (optional)</option>
-                                <option value="carbon-calculator">Carbon Footprint Calculator</option>
-                                <option value="sustainability-assessment">Sustainability Assessment</option>
-                                <option value="energy-audit">Energy Audit Tools</option>
-                                <option value="supply-chain">Green Supply Chain Management</option>
-                                <option value="none">None at this time</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="language" class="block text-sm font-medium text-black mb-2" data-i18n="questionnaire.language">Preferred Language</label>
-                            <select id="language" class="w-full border border-gray-300 rounded-md px-4 py-2 text-black bg-white hover:bg-gray-50 focus:border-green-primary" required>
-                                <option value="en">English</option>
-                                <option value="zu">isiZulu</option>
-                                <option value="tn">Setswana</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-green-primary text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-opacity-90 transition-transform duration-200 hover:-translate-y-1 shadow-sm">
-                            <span data-i18n="questionnaire.submit">Submit</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </main>
-        <green-economy-footer></green-economy-footer>
-    </div>
+<body>
     <div class="loader-overlay" id="loader-overlay"></div>
     <div class="loader" id="loader"></div>
+    <green-economy-header></green-economy-header>
+    <div class="bg-container">
+        <div class="bg-primary"></div>
+        <div class="bg-animated"></div>
+        <div class="bg-orb-1"></div>
+        <div class="bg-orb-2"></div>
+        <div class="bg-orb-3"></div>
+        <div class="bg-pattern"></div>
+    </div>
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Join the Green Economy Movement</h1>
+            <p class="hero-subtitle">Tell Us About Your Interests</p>
+            <div class="hero-decoration-1"></div>
+            <div class="hero-decoration-2"></div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-bg">
+            <div class="content-decoration-1"></div>
+            <div class="content-decoration-2"></div>
+        </div>
+        <div class="questionnaire-container">
+            <div class="question-nav">
+                <div class="nav-item" data-question="1"><span class="step-number">1</span> Enter Your Email</div>
+                <div class="nav-item" data-question="2"><span class="step-number">2</span> Who are you?</div>
+                <div class="nav-item" data-question="3"><span class="step-number">3</span> Your Interests</div>
+                <div class="nav-item" data-question="4"><span class="step-number">4</span> Funding Types</div>
+                <div class="nav-item" data-question="5"><span class="step-number">5</span> Business Sectors</div>
+                <div class="nav-item" data-question="6"><span class="step-number">6</span> Experience Level</div>
+                <div class="nav-item" data-question="7"><span class="step-number">7</span> Green Tools</div>
+                <div class="nav-item" data-question="8"><span class="step-number">8</span> Preferred Language</div>
+            </div>
+            <div class="question-panel">
+                <form id="questionnaireForm">
+                    <div class="question-content" data-question="1">
+                        <label for="email" class="form-label">Enter Your Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required />
+                        <button type="button" class="submit-btn" id="nextBtn" style="display: none;">Next</button>
+                    </div>
+                    <div class="question-content" data-question="2">
+                        <label class="form-label">Who are you? (Select at least one)</label>
+                        <div class="button-group">
+                            <button type="button" class="option-button" data-value="township-irm">Township IRM Enterprise</button>
+                            <button type="button" class="option-button" data-value="youth-underrepresented">Youth from Underrepresented Community</button>
+                            <button type="button" class="option-button" data-value="stakeholder-partner">Stakeholder or Partner</button>
+                            <button type="button" class="option-button" data-value="local-community">Local Community Member</button>
+                            <button type="button" class="option-button" data-value="tvet-student-staff">TVET College Student/Staff</button>
+                            <button type="button" class="option-button" data-value="entrepreneurial-hub">Entrepreneurial Hub Member</button>
+                        </div>
+                    </div>
+                    <div class="question-content" data-question="3">
+                        <label class="form-label">What are your interests in the green economy? (Select at least one)</label>
+                        <div class="button-group">
+                            <button type="button" class="option-button" data-value="green-funding">Green Funding Opportunities</button>
+                            <button type="button" class="option-button" data-value="smme-support">SMME Business Support</button>
+                            <button type="button" class="option-button" data-value="green-education">Green Economy Education</button>
+                            <button type="button" class="option-button" data-value="green-tools">Access to Green Tools</button>
+                            <button type="button" class="option-button" data-value="networking">Networking with Stakeholders</button>
+                        </div>
+                    </div>
+                    <div class="question-content" data-question="4">
+                        <label class="form-label">What types of funding are you seeking? (Select at least one)</label>
+                        <div class="button-group">
+                            <button type="button" class="option-button" data-value="grants">Grants</button>
+                            <button type="button" class="option-button" data-value="loans">Loans</button>
+                            <button type="button" class="option-button" data-value="equity">Equity Investments</button>
+                            <button type="button" class="option-button" data-value="crowdfunding">Crowdfunding</button>
+                            <button type="button" class="option-button" data-value="not-seeking">Not seeking funding</button>
+                        </div>
+                    </div>
+                    <div class="question-content" data-question="5">
+                        <label class="form-label">What are your business or community sectors? (Select at least one)</label>
+                        <div class="button-group">
+                            <button type="button" class="option-button" data-value="renewable-energy">Renewable Energy</button>
+                            <button type="button" class="option-button" data-value="waste-management">Waste Management</button>
+                            <button type="button" class="option-button" data-value="sustainable-agriculture">Sustainable Agriculture</button>
+                            <button type="button" class="option-button" data-value="green-technology">Green Technology</button>
+                            <button type="button" class="option-button" data-value="community-development">Community Development</button>
+                            <button type="button" class="option-button" data-value="education">Education</button>
+                            <button type="button" class="option-button" data-value="other">Other</button>
+                        </div>
+                    </div>
+                    <div class="question-content" data-question="6">
+                        <label for="experienceLevel" class="form-label">What is your experience level with green economy practices?</label>
+                        <select id="experienceLevel" name="experienceLevel" class="form-select" required>
+                            <option value="">Select your experience level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <button type="button" class="submit-btn" id="nextBtn" style="display: none;">Next</button>
+                    </div>
+                    <div class="question-content" data-question="7">
+                        <label class="form-label">Which green economy tools are you interested in accessing? (Select at least one)</label>
+                        <div class="button-group">
+                            <button type="button" class="option-button" data-value="carbon-calculator">Carbon Footprint Calculator</button>
+                            <button type="button" class="option-button" data-value="sustainability-assessment">Sustainability Assessment</button>
+                            <button type="button" class="option-button" data-value="energy-audit">Energy Audit Tools</button>
+                            <button type="button" class="option-button" data-value="supply-chain">Green Supply Chain Management</button>
+                            <button type="button" class="option-button" data-value="none">None at this time</button>
+                        </div>
+                    </div>
+                    <div class="question-content" data-question="8">
+                        <label for="preferredLanguage" class="form-label">Preferred Language</label>
+                        <select id="preferredLanguage" name="preferredLanguage" class="form-select" required>
+                            <option value="English">English</option>
+                            <option value="isiZulu">isiZulu</option>
+                            <option value="Setswana">Setswana</option>
+                        </select>
+                        <button type="submit" class="submit-btn" id="finishBtn" style="display: none;">
+                            <span id="finishText">Finish</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <green-economy-footer></green-economy-footer>
 
     <script>
-// Firebase Config and Initialization (same as before)
-const firebaseConfig = {
-    apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-    authDomain: "nbi-database.firebaseapp.com",
-    projectId: "nbi-database",
-    storageBucket: "nbi-database.appspot.com",
-    messagingSenderId: "497517200595",
-    appId: "1:497517200595:web:c862996d49fba97baf8026",
-    measurementId: "G-NHZB2WJF9L"
-};
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
+            authDomain: "nbi-database.firebaseapp.com",
+            projectId: "nbi-database",
+            storageBucket: "nbi-database.appspot.com",
+            messagingSenderId: "497517200595",
+            appId: "1:497517200595:web:c862996d49fba97baf8026",
+            measurementId: "G-NHZB2WJF9L"
+        };
 
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-// Loader Functions (same as before)
-const loader = document.getElementById('loader');
-const loaderOverlay = document.getElementById('loader-overlay');
+        // Loader Functions
+        function showLoader() {
+            const loader = document.getElementById('loader');
+            const loaderOverlay = document.getElementById('loader-overlay');
+            if (loader && loaderOverlay) {
+                loader.style.display = 'block';
+                loaderOverlay.style.display = 'block';
+            }
+        }
 
-function showLoader() {
-    loader.style.display = 'block';
-    loaderOverlay.style.display = 'block';
-}
+        function hideLoader() {
+            const loader = document.getElementById('loader');
+            const loaderOverlay = document.getElementById('loader-overlay');
+            if (loader && loaderOverlay) {
+                loader.style.display = 'none';
+                loaderOverlay.style.display = 'none';
+            }
+        }
 
-function hideLoader() {
-    loader.style.display = 'none';
-    loaderOverlay.style.display = 'none';
-}
+        // Interaction Tracking Function
+        function trackUserInteraction(tempUserId, category, action, label = "") {
+            return db.collection('interactions').add({
+                tempUserId: tempUserId,
+                category: category,
+                action: action,
+                label: label,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                language: document.getElementById('preferredLanguage')?.value || 'en',
+                userAgent: navigator.userAgent
+            }).catch((error) => {
+                console.error("Error logging interaction to Firestore: ", error);
+                throw error;
+            });
+        }
 
-// Interaction Tracking Function
-function trackInteraction(category, action, label = "") {
-    const user = auth.currentUser;
-    if (user) {
-        db.collection('interactions').add({
-            userId: user.uid,
-            category: category,
-            action: action,
-            label: label,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            language: document.documentElement.lang || 'en',
-            userAgent: navigator.userAgent
-        }).catch((error) => {
-            console.error("Error logging interaction: ", error);
+        // Inactivity Timeout
+        let inactivityTimeout;
+        function resetInactivityTimer(tempUserId) {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(async () => {
+                try {
+                    await db.collection('temp_users').doc(tempUserId).delete();
+                    await trackUserInteraction(tempUserId, 'session', 'timeout', 'Redirected to index due to inactivity');
+                    window.location.href = '../index.html';
+                } catch (error) {
+                    console.error("Error deleting temp user:", error);
+                }
+            }, 4 * 60 * 1000); // 4 minutes
+        }
+
+        // Generate Temporary User ID
+        function generateTempUserId() {
+            return 'temp_user_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Initialize Questionnaire
+        document.addEventListener("DOMContentLoaded", async () => {
+            let tempUserId = new URLSearchParams(window.location.search).get('tempUserId');
+            let currentQuestion = 1;
+            const totalQuestions = document.querySelectorAll('.question-content').length;
+            const navItems = document.querySelectorAll('.nav-item');
+            const questionContents = document.querySelectorAll('.question-content');
+            const nextBtn = document.getElementById('nextBtn');
+            const finishBtn = document.getElementById('finishBtn');
+            const finishText = document.getElementById('finishText');
+
+            // If tempUserId exists, validate it
+            if (tempUserId) {
+                try {
+                    const userDoc = await db.collection('temp_users').doc(tempUserId).get();
+                    if (!userDoc.exists) {
+                        console.log("Invalid temp user ID, generating new one on submission");
+                        tempUserId = null;
+                    }
+                } catch (error) {
+                    console.error("Error validating temp user:", error);
+                    tempUserId = null;
+                }
+            }
+
+            // Show question with pop-up animation and manage finish button
+            function showQuestion(index) {
+                navItems.forEach(item => item.classList.remove('active'));
+                questionContents.forEach(content => {
+                    content.classList.remove('active');
+                    content.style.opacity = '0';
+                    content.style.transform = 'scale(0.9)';
+                });
+
+                setTimeout(() => {
+                    const activeNav = document.querySelector(`.nav-item[data-question="${index}"]`);
+                    const activeContent = document.querySelector(`.question-content[data-question="${index}"]`);
+                    if (activeNav && activeContent) {
+                        activeNav.classList.add('active');
+                        activeContent.classList.add('active');
+                        activeContent.style.opacity = '1';
+                        activeContent.style.transform = 'scale(1)';
+                    }
+
+                    nextBtn.style.display = index === 1 || index === 6 ? 'block' : 'none';
+                    finishBtn.style.display = index === 8 && isFormComplete() ? 'block' : 'none';
+
+                    // Initialize tracking when reaching question 3 (SMME-related interests)
+                    if (index >= 3 && tempUserId) {
+                        trackUserInteraction(tempUserId, 'page', 'loaded', 'Questionnaire page');
+                        resetInactivityTimer(tempUserId);
+
+                        document.addEventListener('click', (e) => {
+                            const target = e.target.closest('button, select, input, a, .submit-btn, .nav-item, .option-button');
+                            if (target) {
+                                trackUserInteraction(tempUserId, 'interaction', 'click', target.id || target.className || target.tagName);
+                            }
+                            resetInactivityTimer(tempUserId);
+                        });
+
+                        document.addEventListener('input', (e) => {
+                            if (e.target.matches('input, select')) {
+                                trackUserInteraction(tempUserId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
+                            }
+                            resetInactivityTimer(tempUserId);
+                        });
+                    }
+                }, 400);
+            }
+
+            function isFormComplete() {
+                const selections = {
+                    2: document.querySelectorAll('.question-content[data-question="2"] .option-button.selected').length > 0,
+                    3: document.querySelectorAll('.question-content[data-question="3"] .option-button.selected').length > 0,
+                    4: document.querySelectorAll('.question-content[data-question="4"] .option-button.selected').length > 0,
+                    5: document.querySelectorAll('.question-content[data-question="5"] .option-button.selected').length > 0,
+                    7: document.querySelectorAll('.question-content[data-question="7"] .option-button.selected').length > 0,
+                    1: document.getElementById('email')?.value.trim() !== '',
+                    6: document.getElementById('experienceLevel')?.value !== '',
+                    8: document.getElementById('preferredLanguage')?.value !== ''
+                };
+                return Object.values(selections).every(Boolean);
+            }
+
+            showQuestion(currentQuestion);
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const questionIndex = parseInt(item.getAttribute('data-question'));
+                    if (questionIndex !== currentQuestion) {
+                        currentQuestion = questionIndex;
+                        showQuestion(currentQuestion);
+                    }
+                });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestion === 1 && document.getElementById('email').value.trim() !== '') {
+                    currentQuestion = 2;
+                    showQuestion(currentQuestion);
+                } else if (currentQuestion === 6 && document.getElementById('experienceLevel').value !== '') {
+                    currentQuestion = 7;
+                    showQuestion(currentQuestion);
+                }
+            });
+
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const questionIndex = parseInt(button.closest('.question-content').getAttribute('data-question'));
+                    button.classList.toggle('selected');
+                    if (questionIndex >= 3 && tempUserId) {
+                        trackUserInteraction(tempUserId, 'interaction', 'click', `${button.getAttribute('data-value')}: ${button.classList.contains('selected') ? 'selected' : 'deselected'}`);
+                    }
+                    resetInactivityTimer(tempUserId);
+
+                    if ([2, 3, 4, 5, 7].includes(questionIndex) && button.classList.contains('selected')) {
+                        if (document.querySelectorAll(`.question-content[data-question="${questionIndex}"] .option-button.selected`).length === 1) {
+                            currentQuestion = Math.min(questionIndex + 1, totalQuestions);
+                            showQuestion(currentQuestion);
+                        }
+                    }
+                });
+            });
+
+            const form = document.getElementById("questionnaireForm");
+            form.addEventListener("submit", async function (e) {
+                e.preventDefault();
+                finishBtn.disabled = true;
+                finishText.innerHTML = '<span class="loading-spinner"></span>Finishing...';
+                showLoader();
+
+                if (!tempUserId) {
+                    tempUserId = generateTempUserId();
+                    try {
+                        await db.collection('temp_users').doc(tempUserId).set({
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            page: 'questionnaire'
+                        });
+                        if (currentQuestion >= 3) {
+                            await trackUserInteraction(tempUserId, 'user', 'created', 'Temporary user created on questionnaire submission');
+                        }
+                    } catch (error) {
+                        console.error("Error creating temp user:", error);
+                        alert("Error initializing user session. Please try again.");
+                        finishBtn.disabled = false;
+                        finishText.textContent = "Finish";
+                        hideLoader();
+                        return;
+                    }
+                }
+
+                const selectedButtons = {
+                    role: Array.from(document.querySelectorAll('.question-content[data-question="2"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+                    primaryInterest: Array.from(document.querySelectorAll('.question-content[data-question="3"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+                    fundingType: Array.from(document.querySelectorAll('.question-content[data-question="4"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+                    businessSector: Array.from(document.querySelectorAll('.question-content[data-question="5"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+                    greenTools: Array.from(document.querySelectorAll('.question-content[data-question="7"] .option-button.selected')).map(btn => btn.getAttribute('data-value'))
+                };
+
+                const data = {
+                    email: document.getElementById('email').value,
+                    experienceLevel: document.getElementById('experienceLevel').value,
+                    preferredLanguage: document.getElementById('preferredLanguage').value,
+                    role: selectedButtons.role,
+                    primaryInterest: selectedButtons.primaryInterest,
+                    fundingType: selectedButtons.fundingType,
+                    businessSector: selectedButtons.businessSector,
+                    greenTools: selectedButtons.greenTools,
+                    tempUserId: tempUserId,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                try {
+                    await db.collection('questionnaire_responses').add(data);
+                    if (currentQuestion >= 3) {
+                        await trackUserInteraction(tempUserId, 'form', 'submitted', JSON.stringify(data));
+                    }
+                    alert("Thank you for joining the Green Economy Movement! We'll be in touch soon.");
+                    form.reset();
+                    document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+                    window.location.href = `../Dashboard/dashboard.html?tempUserId=${tempUserId}`;
+                } catch (error) {
+                    console.error("Submission error:", error);
+                    alert("There was an error submitting your form. Please try again.");
+                    if (currentQuestion >= 3) {
+                        await trackUserInteraction(tempUserId, 'form', 'error', error.message);
+                    }
+                } finally {
+                    finishBtn.disabled = false;
+                    finishText.textContent = "Finish";
+                    hideLoader();
+                }
+            });
+
+            document.querySelectorAll(".nav-link").forEach((link) => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    if (currentQuestion >= 3 && tempUserId) {
+                        trackUserInteraction(tempUserId, 'navigation', 'click', this.href);
+                    }
+                });
+            });
+
+            const formElements = document.querySelectorAll(".form-input, .form-select");
+            formElements.forEach((element) => {
+                element.addEventListener("focus", function () {
+                    this.parentElement.style.transform = "scale(1.02)";
+                    this.parentElement.style.transition = "transform 0.2s ease";
+                });
+                element.addEventListener("blur", function () {
+                    this.parentElement.style.transform = "scale(1)";
+                });
+            });
+
+            window.addEventListener("scroll", function () {
+                const hero = document.querySelector(".hero");
+                const scrolled = window.pageYOffset;
+                const parallax = scrolled * 0.5;
+                if (hero) {
+                    hero.style.transform = `translateY(${parallax}px)`;
+                }
+            });
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px",
+            };
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            const questionnaireContainer = document.querySelector(".questionnaire-container");
+            if (questionnaireContainer) {
+                questionnaireContainer.style.opacity = "0";
+                questionnaireContainer.style.transform = "translateY(30px)";
+                questionnaireContainer.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(questionnaireContainer);
+            }
         });
-    } else {
-        console.log("No user logged in, interaction not tracked:", { category, action, label });
-    }
-}
-
-// Check Authentication State
-auth.onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = '../Sign In & Sign Up/SignIn.html';
-    }
-});
-
-// Handle Questionnaire Submission
-document.getElementById('user-questionnaire').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    showLoader();
-    const user = auth.currentUser;
-    if (!user) {
-        hideLoader();
-        alert('Please sign in to submit the questionnaire.');
-        return;
-    }
-
-    const userType = document.getElementById('user-type').value;
-    const primaryInterest = document.getElementById('primary-interest').value;
-    const fundingNeeds = document.getElementById('funding-needs').value;
-    const businessSector = document.getElementById('business-sector').value;
-    const skillLevel = document.getElementById('skill-level').value;
-    const toolAccess = document.getElementById('tool-access').value;
-    const language = document.getElementById('language').value;
-
-    trackInteraction('questionnaire', 'submit_attempt', `UserType: ${userType}, Interest: ${primaryInterest}`);
-    try {
-        await db.collection('questionnaires').doc(user.uid).set({
-            userId: user.uid,
-            userType,
-            primaryInterest,
-            fundingNeeds,
-            businessSector,
-            skillLevel,
-            toolAccess,
-            language,
-            submittedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-        trackInteraction('questionnaire', 'submit_success', `UserType: ${userType}`);
-        setTimeout(() => {
-            hideLoader();
-            window.location.href = '../Dashboard/dashboard.html';
-        }, 2000);
-    } catch (error) {
-        hideLoader();
-        trackInteraction('questionnaire', 'submit_failure', `${error.message}`);
-        alert('Error saving data: ' + error.message);
-    }
-});
-
-// Track Dropdown Changes
-['user-type', 'primary-interest', 'funding-needs', 'business-sector', 'skill-level', 'tool-access', 'language'].forEach(id => {
-    document.getElementById(id).addEventListener('change', (e) => {
-        trackInteraction('questionnaire', 'dropdown_select', `${id}: ${e.target.value}`);
-    });
-});
-
     </script>
-     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
 </body>
 </html>
