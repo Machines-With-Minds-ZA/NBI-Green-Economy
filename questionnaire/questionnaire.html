@@ -385,7 +385,6 @@
                     if (currentQuestion >= 3) {
                         await trackUserInteraction(tempUserId, 'form', 'submitted', JSON.stringify(data));
                     }
-                    alert("Thank you for joining the Green Economy Movement! We'll be in touch soon.");
                     form.reset();
                     document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
                     window.location.href = `../Dashboard/dashboard.html?tempUserId=${tempUserId}`;
