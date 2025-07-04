@@ -2,12 +2,15 @@
 class GreenEconomyHeader extends HTMLElement {
     connectedCallback() {
         const isDashboard = window.location.pathname.includes('dashboard.html');
+
         this.innerHTML = `
             <header class="header">
                 <div class="container">
                     <div class="header-content">
                         <div class="logo">
-                            <img src="../Images/GET.png" alt="Logo" href="index.html" style="height:50px ; width:160px"/>
+                            <a href="../index.html">
+                                <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
+                            </a>
                         </div>
                         <nav class="nav">
                         
@@ -23,15 +26,15 @@ class GreenEconomyHeader extends HTMLElement {
                                 <option value="zu">IsiZulu</option>
                                 <option value="tn">Tswana</option>
                             </select>
-                            <button onclick="home()" class="logout-button">
-                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.home">Home</span>
-                                </button>
+                            
                             ${isDashboard ? `
                                 <button onclick="logout()" class="logout-button">
                                     <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Home</span>
                                 </button>
-                            ` : `
-                            `}
+                            ` :  `
+                            <button onclick="logout()" class="logout-button">
+                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.home">Home</span>
+                                </button>`}
                         </div>
                     </div>
                 </div>
