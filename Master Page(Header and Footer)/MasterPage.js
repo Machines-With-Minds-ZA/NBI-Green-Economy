@@ -7,7 +7,7 @@ class GreenEconomyHeader extends HTMLElement {
                 <div class="container">
                     <div class="header-content">
                         <div class="logo">
-                            <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
+                            <img src="../Images/GET.png" alt="Logo" style="height:65px ; width:240px"/>
                         </div>
                         <nav class="nav">
                             <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
@@ -57,7 +57,7 @@ class GreenEconomyFooter extends HTMLElement {
                 <div class="container">
                     <div class="footer-content">
                         <div class="footer-section">
-                            
+                              <img src="../Images/GETBG.webp" alt="Logo" style="height:65px ; width:240px"/>
                         </div>
                         <div class="footer-section">
                             <h4 data-i18n="footer.about_us">ABOUT US</h4>
