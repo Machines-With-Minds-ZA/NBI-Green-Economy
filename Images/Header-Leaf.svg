@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90px" height="86px" viewBox="0 0 90 86" version="1.1">
+  <title>graphic/header_leaf</title>
+  <defs>
+    <linearGradient x1="100%" y1="35.9872616%" x2="-10.5007253%" y2="62.1442445%" id="linearGradient-1">
+      <stop stop-color="#7EC954" offset="0%"></stop>
+      <stop stop-color="#009382" offset="100%"></stop>
+      <stop stop-color="#009382" offset="100%"></stop>
+    </linearGradient>
+  </defs>
+  <g id="NBI-Toolkit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="NBI_GreenEconomies_Toolkit_Styleguide" transform="translate(-671.000000, -1578.000000)">
+      <g id="graphic/header_leaf" transform="translate(671.000000, 1578.000000)">
+        <rect id="Block" fill="#7EC954" x="0" y="0" width="53" height="86"></rect>
+        <path d="M40.9734497,71.0135342 L15.81515,63.5623648 C15.814449,63.5623648 15.814449,63.5623648 15.814449,63.5623648 C15.814449,63.5623648 15.814449,63.5623648 15.814449,63.5623648 L23.1842998,38.678165 C27.2544371,24.9353176 41.695503,17.0936787 55.4383503,21.163816 L80.597351,28.6142843 C80.597351,28.6142843 80.597351,28.6149853 80.597351,28.6149853 L73.2275002,53.4991851 C69.1573629,67.2420325 54.7169981,75.0836715 40.9734497,71.0135342" id="Leaf" fill="url(#linearGradient-1)" transform="translate(48.205900, 46.088675) rotate(-28.000000) translate(-48.205900, -46.088675) "></path>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knowledge Hub</title>
+    <link rel="stylesheet" href="index.css">
+      <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.welcome {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+}
+
+.welcome h1 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.welcome-image {
+    max-width: 300px;
+    height: auto;
+}
+
+.feature-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    background-color: #e8f5e9;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.feature h2 {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.feature h2::before {
+    content: "🌿";
+    margin-right: 0.5rem;
+}
+
+.feature-image {
+    max-width: 50%;
+    height: auto;
+    margin-right: 2rem;
+}
+
+.feature-content {
+    flex: 1;
+}
+
+.feature-content p {
+    margin-bottom: 1rem;
+}
+
+.app-links {
+    margin: 1rem 0;
+}
+
+.app-button {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+.app-button:hover {
+    background-color: #1b5e20;
+}
+
+.register-button {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.register-button:hover {
+    background-color: #1b5e20;
+}
+
+@media (max-width: 768px) {
+    .feature {
+        flex-direction: column;
+        text-align: center;
+    }
+    .feature-image {
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+     
+    </style>
+
+
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
+        </div>
+        <nav class="nav">
+          <a href="#">About the green economy</a>
+          <a href="IRMSector.html">IRM Sector</a>
+          <a href="#">Opportunities</a>
+          <a href="KnowledgeHub.html">Knowledge Hub</a>
+        </nav>
+        <div class="header-actions">
+          <select class="language-selector">
+            <option>English</option>
+            <option>IsiZulu</option>
+            <option>Tswana</option>
+          </select>
+          <button class="dashboard-button">Dashboard</button>
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+         <section class="feature-section">
+            <div class="feature">
+                <h2>Access to learning opportunities</h2>
+                <img src="Images/GuyWriting.webp" alt="Person writing" class="feature-image">
+                <div class="feature-content">
+                    <p>The National Business Initiative (NBI) has created an online application to improve the learning experience for technical and business-related topics. Key features of the app include offline content, the ability to download management system when connected, self-paced learning, progress tracking, and tracking of learning progress.</p>
+                    <p>This app is part of the Installation, Repair, and Maintenance (IRM) Initiative, which jobs, the initiative is a collaboration between the NBI, government and the private sector, offering demand-led skills training and workplace-based learning and enterprise development with technology integration for a more dynamic learning process.</p>
+                    <p>You can download the app or provided for downloadable content on your mobile device.</p>
+                    <div class="app-links">
+                        <a href="#" class="app-button">Download on the App Store</a>
+                        <a href="#" class="app-button">Get it on Google Play</a>
+                    </div>
+                    <a href="#" class="register-button">Register</a>
+                </div>
+            </div>
+
+            <div class="feature">
+                <h2>Access to market opportunities</h2>
+                <img src="Images/SolarWorkers.webp" alt="Workers with solar panels" class="feature-image">
+                <div class="feature-content">
+                    <p>The IRM Initiative hub is a platform that provides access to various opportunities including procurement, access to market, capacity building, training and enterprise development support.</p>
+                    <p>To gain access to the various opportunities, click the link below, register and complete the application form, which will give you access to various opportunities under the 'Opportunities' tab on the hub.</p>
+                    <a href="#" class="register-button">Register</a>
+                </div>
+            </div>
+
+            <div class="feature">
+                <h2>Access to business development support</h2>
+                <img src="Images/WorkingPC.webp" alt="People at computers" class="feature-image">
+                <div class="feature-content">
+                    <p>Our business development support services are designed to help you thrive in today's competitive market. Through our hubs, we assist township-based SMMEs in identifying opportunities, and equipping them with the skills and tools to ensure that they adapt to market trends. We also help them create new networks and partnerships.</p>
+                    <a href="#" class="register-button">Register</a>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+    
+     <!-- Partner Logos -->
+    <section class="partners">
+      <div class="partners-content">
+        <img src="Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
+        <img src="Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
+        <img src="Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
+        <img src="Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
+        <img src="Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
+      </div>
+    </section>
+
+   
+
+        <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div style="display: flex; align-items: center; margin-bottom: 16px">
+            <img src="Images/GET.png" alt="Green Economy Network Logo" style="height: 60px; margin-right: 8px;">
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>ABOUT US</h4>
+          <ul>
+            <li><a href="#">About the green economy</a></li>
+            <li><a href="#">Who we are</a></li>
+            <li><a href="#">Our team</a></li>
+            <li><a href="#">Board of directors</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>SERVICES</h4>
+          <ul>
+            <li><a href="#">Green economy network</a></li>
+            <li><a href="#">Live events calendar</a></li>
+            <li><a href="#">Green opportunities</a></li>
+            <li><a href="#">News and updates</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li><a href="#">News & events</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Knowledge hub</a></li>
+            <li><a href="#">Terms of reference</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Green Economy Network. All rights reserved.</p>
+      </div>
+    </footer>
+
+    </body>
+</html>
