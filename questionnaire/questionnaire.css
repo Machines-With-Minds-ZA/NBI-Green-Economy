@@ -569,3 +569,101 @@
                 min-height: 400px;
             }
         }
+
+        @media (max-width: 480px) {
+    .hero {
+        height: 200px;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .hero-content {
+        padding: 12px;
+        max-width: 100%;
+    }
+
+    .hero-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .hero-decoration-1, .hero-decoration-2 {
+        display: none;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+
+    .questionnaire-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .question-nav {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .nav-item {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .nav-item .step-number {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+
+    .question-panel {
+        padding: 16px;
+    }
+
+    .question-content {
+        width: 100%;
+        min-height: 300px;
+        padding: 16px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-input, .form-select {
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .button-group {
+        padding: 8px;
+        gap: 4px;
+    }
+
+    .option-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .submit-btn {
+        width: 100px;
+        height: 36px;
+        font-size: 12px;
+        margin-top: 12px;
+    }
+
+    .content-decoration-1, .content-decoration-2 {
+        display: none;
+    }
+
+    .bg-orb-1, .bg-orb-2, .bg-orb-3 {
+        width: 150px;
+        height: 150px;
+        filter: blur(32px);
+    }
+}
