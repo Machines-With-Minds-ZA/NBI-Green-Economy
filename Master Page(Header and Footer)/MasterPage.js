@@ -10,6 +10,7 @@ class GreenEconomyHeader extends HTMLElement {
                             <img src="../Images/GET.png" alt="Logo" href="index.html" style="height:50px ; width:160px"/>
                         </div>
                         <nav class="nav">
+                        
                             <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
                             <a href="/about.html" data-i18n="header.why_invest">IRM Sector</a>
                             <a href="#" data-i18n="header.opportunities">Opportunities</a>
@@ -17,10 +18,14 @@ class GreenEconomyHeader extends HTMLElement {
                         </nav>
                         <div class="header-actions">
                             <select id="language-selector" class="language-selector">
+                                <option value="en">Select</option>
                                 <option value="en">English</option>
                                 <option value="zu">IsiZulu</option>
                                 <option value="tn">Tswana</option>
                             </select>
+                            <button onclick="home()" class="logout-button">
+                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.home">Home</span>
+                                </button>
                             ${isDashboard ? `
                                 <button onclick="logout()" class="logout-button">
                                     <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Home</span>
@@ -106,4 +111,10 @@ window.logout = function() {
     console.log('Logging out...');
     window.location.href = '../index.html';
 };
+
+window.home = function() {
+
+    window.locate.href = '../index.html'
+
+}
 
