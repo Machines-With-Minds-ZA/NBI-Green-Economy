@@ -1,57 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Website Analytics Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Google Analytics Dashboard</title>
+  <script src="https://apis.google.com/js/api.js"></script>
   <style>
-    body {
-      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      background: #f8fafc;
-      margin: 0;
-      padding: 0;
-    }
-    .analytics-header {
-      text-align: center;
-      color: #0c973f;
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-top: 40px;
-      margin-bottom: 32px;
-      letter-spacing: -1px;
-    }
-    .analytics-container {
-      max-width: 1200px;
-      margin: 0 auto 40px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-      padding: 32px 24px 24px 24px;
-      min-height: 300px;
-    }
-    .analytics-iframe {
-      width: 100%;
-      height: 2125px;
-      border: none;
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      margin: 0;
-      display: block;
-    }
-    @media (max-width: 900px) {
-      .analytics-container { padding: 12px 2vw; }
-      .analytics-iframe { height: 1200px; }
-      .analytics-header { font-size: 1.4rem; }
-    }
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    #data { margin-top: 2em; }
+    .hidden { display: none; }
+    button { padding: 0.5em 1em; font-size: 1em; }
+    #error { color: red; }
   </style>
 </head>
 <body>
-  <div class="analytics-header">Website Analytics Dashboard</div>
-  <div class="analytics-container">
-    <iframe class="analytics-iframe"
-      src="https://lookerstudio.google.com/embed/reporting/43d53996-0c4d-46c8-959d-ebdd45f17dae/page/kIV1C"
-      allowfullscreen
-      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-    </iframe>
+  <h1>Custom Google Analytics Dashboard</h1>
+  <div>
+
+    <label>OAuth Client ID: <input type="text" id="clientId" placeholder="367220905944-f1rbdj12lsak94jr65i11jfamqpu6u5k.apps.googleusercontent.com"></label><br><br>
+    <label>GA4 Property ID: <input type="text" id="propertyId" placeholder="G-E7CEWW2ZSW"></label><br><br>
+    <label>Start Date: <input type="date" id="startDate"></label>
+    <label>End Date: <input type="date" id="endDate"></label><br><br>
+    <button id="authBtn">Authenticate & Load Data</button>
+    <div id="error"></div>
   </div>
+  <div id="data" class="hidden">
+    <h2>Overview</h2>
+    <div id="overview">
+      <div>Total Users: <span id="users"></span></div>
+      <div>Total Sessions: <span id="sessions"></span></div>
+      <div>Total Pageviews: <span id="pageviews"></span></div>
+      <div>Bounce Rate: <span id="bounceRate"></span></div>
+      <div>Avg. Session Duration: <span id="avgSessionDuration"></span></div>
+    </div>
+    <h2>Trends</h2>
+    <canvas id="usersChart" width="400" height="200"></canvas>
+    <canvas id="sessionsChart" width="400" height="200"></canvas>
+    <canvas id="pageviewsChart" width="400" height="200"></canvas>
+    <h2>Top Pages</h2>
+    <table id="topPagesTable" border="1" cellpadding="4" style="margin-bottom:2em;"><thead><tr><th>Page</th><th>Pageviews</th></tr></thead><tbody></tbody></table>
+    <h2>Traffic by Source/Medium</h2>
+    <canvas id="sourceMediumChart" width="400" height="200"></canvas>
+    <h2>Geographic Distribution (Country)</h2>
+    <canvas id="countryChart" width="400" height="200"></canvas>
+    <h2>Device Category</h2>
+    <canvas id="deviceChart" width="400" height="200"></canvas>
+    <h2>New vs Returning Users</h2>
+    <canvas id="newReturningChart" width="400" height="200"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let clientId, propertyId;
+    let chartInstance = null;
+    document.getElementById('authBtn').onclick = function() {
+      clientId = document.getElementById('clientId').value.trim();
+      propertyId = document.getElementById('propertyId').value.trim();
+      if (!clientId || !propertyId) {
+        document.getElementById('error').textContent = 'Please fill in all fields.';
+        return;
+      }
+      document.getElementById('error').textContent = '';
+      gapi.load('client:auth2', initClientGA4);
+    };
+
+    function initClientGA4() {
+      gapi.auth2.init({client_id: clientId}).then(() => {
+        gapi.auth2.getAuthInstance().signIn({scope: 'https://www.googleapis.com/auth/analytics.readonly'})
+          .then(() => {
+            // Ready to call GA4 Data API
+            // fetchGA4Data(); // Will be implemented next
+            document.getElementById('data').classList.remove('hidden');
+            showError('Authenticated! (Data fetching coming next...)');
+          })
+          .catch(err => showError('Authentication failed: ' + err.error));
+      });
+    }
+
+    function showError(msg) {
+      document.getElementById('error').textContent = msg;
+    }
+  </script>
 </body>
 </html> 
