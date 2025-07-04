@@ -2,14 +2,18 @@
 class GreenEconomyHeader extends HTMLElement {
     connectedCallback() {
         const isDashboard = window.location.pathname.includes('dashboard.html');
+
         this.innerHTML = `
             <header class="header">
                 <div class="container">
                     <div class="header-content">
                         <div class="logo">
-                            <img src="../Images/GET.png" alt="Logo" href="index.html" style="height:50px ; width:160px"/>
+                            <a href="../index.html">
+                                <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
+                            </a>
                         </div>
                         <nav class="nav">
+                        
                             <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
                             <a href="/about.html" data-i18n="header.why_invest">IRM Sector</a>
                             <a href="#" data-i18n="header.opportunities">Opportunities</a>
@@ -18,16 +22,20 @@ class GreenEconomyHeader extends HTMLElement {
                         </nav>
                         <div class="header-actions">
                             <select id="language-selector" class="language-selector">
+                                <option value="en">Select</option>
                                 <option value="en">English</option>
                                 <option value="zu">IsiZulu</option>
                                 <option value="tn">Tswana</option>
                             </select>
+                            
                             ${isDashboard ? `
                                 <button onclick="logout()" class="logout-button">
                                     <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Home</span>
                                 </button>
-                            ` : `
-                            `}
+                            ` :  `
+                            <button onclick="logout()" class="logout-button">
+                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.home">Home</span>
+                                </button>`}
                         </div>
                     </div>
                 </div>
@@ -107,4 +115,10 @@ window.logout = function() {
     console.log('Logging out...');
     window.location.href = '../index.html';
 };
+
+window.home = function() {
+
+    window.locate.href = '../index.html'
+
+}
 
