@@ -150,7 +150,7 @@ body {
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
-  background: #51ae05;
+  background: #43dc67;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -253,7 +253,7 @@ body {
 }
 
 .focus-title p {
-  color: #6b7280;
+  color: #36aa51;
 }
 
 .focus-grid {
