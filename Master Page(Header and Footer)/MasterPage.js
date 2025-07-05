@@ -1,34 +1,32 @@
-class GreenEconomyHeader extends HTMLElement {
-    connectedCallback() {
-        const isDashboard = window.location.pathname.includes('dashboard.html');
+        class GreenEconomyHeader extends HTMLElement {
+            connectedCallback() {
+                const isDashboard = window.location.pathname.includes('dashboard.html');
 
-        this.innerHTML = `
-            <header class="header">
-                <div class="logo">
-                    <a href="../index.html">
-                        <img src="../Images/GET.png" alt="Logo" />
-                    </a>
-                </div>
-                <nav class="nav">
-                    <a href="/index.html" data-i18n="nav.funding">Funding</a>
-                    <a href="/opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
-                    <a href="/jobs.html" data-i18n="nav.find_a_job">Find a Job</a>
-                    <a href="/training.html" data-i18n="nav.training">Training</a>
-                    <div class="blue-section">
-                        <select class="language-selector" onchange="changeLanguage(this.value)">
-                            <option value="en">English</option>
-                            <option value="zu">isiZulu</option>
-                            <option value="tn">Tswana</option>
-                        </select>
-                    </div>
-                    <span class="search-icon">🔍</span>
-                    
-                </nav>
-            </header>
-        `;
-    }
-}
-
+                this.innerHTML = `
+                    <header class="header">
+                        <div class="logo">
+                            <a href="../index.html">
+                                <img src="../Images/GET.png" alt="Logo" />
+                            </a>
+                        </div>
+                        <nav class="nav">
+                            <a href="/index.html">Funding</a>
+                            <a href="/opportunities.html">Opportunities</a>
+                            <a href="/jobs.html">Find a Job</a>
+                            <a href="/training.html">Training</a>
+                            <select class="language-selector" onchange="changeLanguage(this.value)">
+                                <option value="" disabled selected>Select</option>
+                                <option value="en">English</option>
+                                <option value="zu">isiZulu</option>
+                                <option value="tn">Tswana</option>
+                            </select>
+                            <span class="search-icon">🔍</span>
+                            <div class="blue-section"></div>
+                        </nav>
+                    </header>
+                `;
+            }
+        }
 // Define the custom footer element
 class GreenEconomyFooter extends HTMLElement {
     connectedCallback() {

@@ -25,7 +25,7 @@ body {
     align-items: center;
     padding: 1rem;
     background: linear-gradient(to right, #ffffff, #ffffff); /* White gradient */
-    height: 80px; /* Fixed navbar height */
+    height: 70px; /* Fixed navbar height */
 }
 
 .logo {
@@ -43,78 +43,67 @@ body {
 
 .nav {
     display: flex;
-    gap: 0; /* Remove gap to join buttons and search icon */
-    margin-left: 20px; /* White space between logo and buttons */
-    margin-left: auto; /* Push buttons to the right end */
-    height: 80px; /* Match navbar height */
-    align-items: center; /* Vertically center text */
+    gap: 0;
+    margin-left: 20px;
+    margin-left: auto;
+    height: 80px;
+    align-items: center;
 }
 
 .nav a {
     color: white;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1rem;
-    background-color: #2b9589; /* Teal color for each button */
-    padding: 0.5rem 2rem; /* Maintain wider padding */
-    height: 80px; /* Match navbar height */
+    font-size: 0.9rem;
+    background-color: #2b9589;
+    padding: 0.5rem 2rem;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0; /* Sharp corners */
-    width: 150px; /* Maintain increased width */
+    border-radius: 0;
+    width: 140px;
 }
 
 .nav a:hover {
-    background-color: #4ec3b0; /* Light blue hover effect */
-    text-decoration: none; /* Remove underline on hover if desired */
+    background-color: #4ec3b0;
+    text-decoration: none;
 }
 
 .language-selector {
-    background-color: #2b9589; /* Match teal color of nav buttons */
-    color: white; /* White text to match nav links */
-    border: none; /* Remove border to match nav style */
-    padding: 0.5rem 2rem; /* Match nav button padding */
-    height: 80px; /* Match navbar height */
-    font-size: 1rem; /* Match font size of nav links */
-    font-weight: 700; /* Match font weight of nav links */
+    background-color: #2b9589;
+    color: white;
+    border: none;
+    padding: 0.5rem 2rem;
+    height: 70px;
+    font-size: 0.9rem;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0; /* Sharp corners to match nav buttons */
-    width: 150px; /* Match width of nav buttons */
+    border-radius: 0;
+    width: 150px;
 }
 
 .language-selector:hover {
-    background-color: #4ec3b0; /* Match hover effect of nav buttons */
+    background-color: #4ec3b0;
 }
 
 .search-icon {
-    margin-left: 0; /* Remove space to join with buttons */
-    color: white; /* Match text color of buttons */
+    margin-left: 0;
+    color: white;
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.5rem 4rem; /* Increased padding to make it bigger and reach the end */
-    height: 80px; /* Match navbar height */
+    padding: 0.5rem 2rem; /* Reduced right padding */
+    height: 70px; /* Match navbar height */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #2b9589; /* Same teal color as buttons */
     border-radius: 0; /* Sharp corners for square shape */
-    width: auto; /* Allow it to expand with padding */
-    flex-grow: 1; /* Fill the remaining space */
-}
-
-/* New Blue Section Style */
-.blue-section {
-    background-color: #1e90ff; /* Blue color to fill white space */
-    height: 80px; /* Match navbar height */
-    flex-grow: 1; /* Fill remaining space */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0; /* Sharp corners */
+    width: 70px; /* Fixed width to avoid extra space */
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 /* Footer Styles (unchanged) */
@@ -191,7 +180,7 @@ body {
     .nav {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 0; /* Remove gap so buttons touch each other */
         width: 100%;
         margin-left: 0; /* Remove margin for mobile */
         height: auto; /* Adjust height for mobile */
@@ -201,26 +190,36 @@ body {
         width: 100%; /* Full width on mobile */
         height: auto; /* Adjust height for mobile */
         border-radius: 0; /* Maintain sharp corners */
+        margin-bottom: 0; /* Remove margin between buttons */
+        border-bottom: 1px solid #21b457; /* Add a thin border for separation */
+    }
+
+    .nav a:last-child {
+        border-bottom: none;
     }
 
     .language-selector {
         width: 100%; /* Full width on mobile */
         height: auto; /* Adjust height for mobile */
         padding: 0.5rem 1rem; /* Adjust padding for mobile */
+        border-radius: 0; /* Maintain sharp corners */
+        margin-bottom: 0;
+        border-bottom: 1px solid #21b457;
     }
 
     .search-icon {
         margin-left: 0; /* Adjust for mobile layout */
-        margin-top: 12px;
+        margin-top: 0;
         height: auto; /* Adjust height for mobile */
         width: 100%; /* Full width on mobile */
         padding: 0.5rem 1rem; /* Reset padding for mobile */
         flex-grow: 0; /* Remove grow for mobile */
+        border-radius: 0;
+        border-bottom: none;
     }
 
     .blue-section {
-        width: 100%; /* Full width on mobile */
-        height: auto; /* Adjust height for mobile */
+        display: none !important; /* Hide blue section on mobile */
     }
 
     .footer-content {

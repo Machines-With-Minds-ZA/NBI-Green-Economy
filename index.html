@@ -4,41 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Green Economy Toolkit</title>
-    <link rel="stylesheet" href="index.css">
+      <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+
+<link rel="stylesheet" href="index.css">
+
+
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
-        </div>
-        <nav class="nav">
-          <a href="#">About the green economy</a>
-          <a href="IRMSector.html">IRM Sector</a>
-          <a href="opportunities.html">Opportunities</a>
-          <a href="#">Knowledge Hub</a>
-        </nav>
-        <div class="header-actions">
-          <select class="language-selector">
-            <option>English</option>
-            <option>IsiZulu</option>
-            <option>Tswana</option>
-          </select>
-          <button class="dashboard-button">Dashboard</button>
-          <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-        </div>
-      </div>
-    </header>
+        <green-economy-header></green-economy-header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -418,46 +394,8 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div style="display: flex; align-items: center; margin-bottom: 16px">
-            <img src="Images/GET.png" alt="Green Economy Network Logo" style="height: 60px; margin-right: 8px;">
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>ABOUT US</h4>
-          <ul>
-            <li><a href="#">About the green economy</a></li>
-            <li><a href="#">Who we are</a></li>
-            <li><a href="#">Our team</a></li>
-            <li><a href="#">Board of directors</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>SERVICES</h4>
-          <ul>
-            <li><a href="#">Green economy network</a></li>
-            <li><a href="#">Live events calendar</a></li>
-            <li><a href="#">Green opportunities</a></li>
-            <li><a href="#">News and updates</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>QUICK LINKS</h4>
-          <ul>
-            <li><a href="#">News & events</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Knowledge hub</a></li>
-            <li><a href="#">Terms of reference</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 Green Economy Network. All rights reserved.</p>
-      </div>
-    </footer>
+    <green-economy-footer></green-economy-footer>
+
 
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -510,11 +448,21 @@
         window.location.href = "questionnaire/questionnaire.html";
       });
 
-      document.querySelector(".play-button").addEventListener("click", function () {
-        const video = document.querySelector(".hero-video");
-        video.play();
-        this.classList.add("hidden");
-      });
+      // Fix: Only hide play button and play video if video is paused
+      const playBtn = document.querySelector(".play-button");
+      const heroVideo = document.querySelector(".hero-video");
+      if (playBtn && heroVideo) {
+        playBtn.addEventListener("click", function () {
+          if (heroVideo.paused) {
+            heroVideo.play();
+            playBtn.classList.add("hidden");
+          }
+        });
+        // Show play button again if video is paused (optional UX improvement)
+        heroVideo.addEventListener("pause", function () {
+          playBtn.classList.remove("hidden");
+        });
+      }
     </script>
   </body>
 </html>
