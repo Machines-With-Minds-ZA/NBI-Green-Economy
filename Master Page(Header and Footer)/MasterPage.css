@@ -21,86 +21,103 @@ body {
 
 /* Header Styles */
 .header {
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
+    padding: 1rem;
+    background: linear-gradient(to right, #ffffff, #ffffff); /* White gradient */
+    height: 80px; /* Fixed navbar height */
 }
 
 .logo {
+    margin-left: 0;
+    background-color: #fff; /* White background for logo */
+    padding: 0.5rem 1rem; /* Adjusted padding */
     display: flex;
     align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #0c973f;
 }
 
 .logo img {
-    height: 50px;
-    width: 160px;
+    height: 70px;
+    width: 190px;
 }
 
 .nav {
     display: flex;
-    align-items: center;
-    gap: 24px;
+    gap: 0; /* Remove gap to join buttons and search icon */
+    margin-left: 20px; /* White space between logo and buttons */
+    margin-left: auto; /* Push buttons to the right end */
+    height: 80px; /* Match navbar height */
+    align-items: center; /* Vertically center text */
 }
 
 .nav a {
-    color: #0891b2 !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    text-decoration: none !important;
-    transition: color 0.3s;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    background-color: #2b9589; /* Teal color for each button */
+    padding: 0.5rem 2rem; /* Maintain wider padding */
+    height: 80px; /* Match navbar height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Sharp corners */
+    width: 150px; /* Maintain increased width */
 }
 
 .nav a:hover {
-    color: #36aa51 !important;
-    text-decoration: none !important;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    background-color: #4ec3b0; /* Light blue hover effect */
+    text-decoration: none; /* Remove underline on hover if desired */
 }
 
 .language-selector {
-    padding: 6px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    background: white;
-    color: #374151;
-    font-size: 14px;
+    background-color: #2b9589; /* Match teal color of nav buttons */
+    color: white; /* White text to match nav links */
+    border: none; /* Remove border to match nav style */
+    padding: 0.5rem 2rem; /* Match nav button padding */
+    height: 80px; /* Match navbar height */
+    font-size: 1rem; /* Match font size of nav links */
+    font-weight: 700; /* Match font weight of nav links */
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Sharp corners to match nav buttons */
+    width: 150px; /* Match width of nav buttons */
 }
 
-.logout-button {
-    background: #0891b2;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
+.language-selector:hover {
+    background-color: #4ec3b0; /* Match hover effect of nav buttons */
+}
+
+.search-icon {
+    margin-left: 0; /* Remove space to join with buttons */
+    color: white; /* Match text color of buttons */
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    padding: 0.5rem 4rem; /* Increased padding to make it bigger and reach the end */
+    height: 80px; /* Match navbar height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2b9589; /* Same teal color as buttons */
+    border-radius: 0; /* Sharp corners for square shape */
+    width: auto; /* Allow it to expand with padding */
+    flex-grow: 1; /* Fill the remaining space */
 }
 
-.logout-button:hover {
-    background: #0891b2;
+/* New Blue Section Style */
+.blue-section {
+    background-color: #1e90ff; /* Blue color to fill white space */
+    height: 80px; /* Match navbar height */
+    flex-grow: 1; /* Fill remaining space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Sharp corners */
 }
 
-/* Footer Styles */
+/* Footer Styles (unchanged) */
 .footer {
     background: #21b457;
     color: white;
@@ -165,10 +182,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .header-content {
+    .header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        height: auto; /* Adjust height for mobile */
     }
 
     .nav {
@@ -176,11 +193,34 @@ body {
         align-items: flex-start;
         gap: 12px;
         width: 100%;
+        margin-left: 0; /* Remove margin for mobile */
+        height: auto; /* Adjust height for mobile */
     }
 
-    .header-actions {
-        width: 100%;
-        justify-content: space-between;
+    .nav a {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height for mobile */
+        border-radius: 0; /* Maintain sharp corners */
+    }
+
+    .language-selector {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height for mobile */
+        padding: 0.5rem 1rem; /* Adjust padding for mobile */
+    }
+
+    .search-icon {
+        margin-left: 0; /* Adjust for mobile layout */
+        margin-top: 12px;
+        height: auto; /* Adjust height for mobile */
+        width: 100%; /* Full width on mobile */
+        padding: 0.5rem 1rem; /* Reset padding for mobile */
+        flex-grow: 0; /* Remove grow for mobile */
+    }
+
+    .blue-section {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height for mobile */
     }
 
     .footer-content {

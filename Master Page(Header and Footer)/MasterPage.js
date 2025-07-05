@@ -1,60 +1,31 @@
-// Define the custom header element
 class GreenEconomyHeader extends HTMLElement {
     connectedCallback() {
         const isDashboard = window.location.pathname.includes('dashboard.html');
 
         this.innerHTML = `
             <header class="header">
-                <div class="container">
-                    <div class="header-content">
-                        <div class="logo">
-                            <a href="../index.html">
-                                <img src="../Images/GET.png" alt="Logo" style="height:50px ; width:160px"/>
-                            </a>
-                        </div>
-                        <nav class="nav">
-                        
-                            <a href="/index.html" data-i18n="header.about">About Green Economy Toolkit</a>
-                            <a href="/about.html" data-i18n="header.why_invest">IRM Sector</a>
-                            <a href="#" data-i18n="header.opportunities">Opportunities</a>
-                            <a href="#" data-i18n="header.tools_resources">Knowledge Hub</a>
-                            <a href="/disclaimer.html">Disclaimer</a>
-                        </nav>
-                        <div class="header-actions">
-                            <select id="language-selector" class="language-selector">
-                                <option value="en">Select</option>
-                                <option value="en">English</option>
-                                <option value="zu">IsiZulu</option>
-                                <option value="tn">Tswana</option>
-                            </select>
-                            
-                            ${isDashboard ? `
-                                <button onclick="logout()" class="logout-button">
-                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.logout">Home</span>
-                                </button>
-                            ` :  `
-                            <button onclick="logout()" class="logout-button">
-                                    <i class="fas fa-sign-out-alt mr-2"></i><span data-i18n="header.home">Home</span>
-                                </button>`}
-                        </div>
-                    </div>
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../Images/GET.png" alt="Logo" />
+                    </a>
                 </div>
+                <nav class="nav">
+                    <a href="/index.html" data-i18n="nav.funding">Funding</a>
+                    <a href="/opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+                    <a href="/jobs.html" data-i18n="nav.find_a_job">Find a Job</a>
+                    <a href="/training.html" data-i18n="nav.training">Training</a>
+                    <div class="blue-section">
+                        <select class="language-selector" onchange="changeLanguage(this.value)">
+                            <option value="en">English</option>
+                            <option value="zu">isiZulu</option>
+                            <option value="tn">Tswana</option>
+                        </select>
+                    </div>
+                    <span class="search-icon">🔍</span>
+                    
+                </nav>
             </header>
         `;
-        
-        // Add event listener for language selector
-        const languageSelector = this.querySelector('#language-selector');
-        if (languageSelector) {
-            languageSelector.addEventListener('change', (e) => {
-                this.switchLanguage(e.target.value);
-            });
-        }
-    }
-
-    switchLanguage(lang) {
-        // Implement language switching logic here
-        console.log(`Switching to ${lang} language`);
-        // This would typically involve fetching translations and updating the DOM
     }
 }
 
@@ -97,7 +68,7 @@ class GreenEconomyFooter extends HTMLElement {
                         </div>
                     </div>
                     <div class="footer-bottom">
-                        <p data-i18n="footer.copyright">&copy; ${new Date().getFullYear()} Green Economy Network. All rights reserved.</p>
+                        <p data-i18n="footer.copyright">© ${new Date().getFullYear()} Green Economy Network. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
@@ -117,8 +88,5 @@ window.logout = function() {
 };
 
 window.home = function() {
-
-    window.locate.href = '../index.html'
-
+    window.location.href = '../index.html'; // Fixed typo: 'locate' to 'location'
 }
-
