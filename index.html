@@ -3,42 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="title">Green Economy Toolkit</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Green Economy Toolkit</title>
+      <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+
+<link rel="stylesheet" href="index.css">
+
+
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <img src="Images/GET.png" data-i18n="[alt]logoAlt" alt="Green Economy Toolkit Logo" style="height: 50px;" />
-        </div>
-        <nav class="nav">
-          <a href="#" data-i18n="nav.about">About the green economy</a>
-          <a href="IRMSector.html" data-i18n="nav.irm">IRM Sector</a>
-          <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
-          <a href="#" data-i18n="nav.knowledge">Knowledge Hub</a>
-        </nav>
-        <div class="header-actions">
-          <select class="language-selector" onchange="changeLanguage(this.value)">
-            <option value="en" data-i18n="languages.english">English</option>
-            <option value="zu" data-i18n="languages.zulu">IsiZulu</option>
-            <option value="tn" data-i18n="languages.tswana">Tswana</option>
-          </select>
-          <button class="dashboard-button" data-i18n="buttons.dashboard">Dashboard</button>
-          <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-        </div>
-      </div>
-    </header>
+        <green-economy-header></green-economy-header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -47,7 +23,6 @@
           <div class="hero-image">
             <video
               src="https://www.greeneconomytoolkit.com/uploads/files/Videos/Introduction-to-the-Green-Economy.mp4"
-              data-i18n="[alt]hero.videoAlt"
               alt="Introduction to the Green Economy"
               muted
               loop
@@ -61,20 +36,20 @@
             </button>
           </div>
           <div class="hero-buttons">
-            <button class="hero-button" data-i18n="buttons.getFunding">Get Funding</button>
-            <button class="hero-button" data-i18n="buttons.opportunities">Opportunities</button>
-            <button class="hero-button" data-i18n="buttons.rmcsHub">RMCS Hub</button>
-            <button class="hero-button" data-i18n="buttons.training">Training</button>
+            <button class="hero-button">Get Funding</button>
+            <button class="hero-button">Opportunities</button>
+            <button class="hero-button">RMCS Hub</button>
+            <button class="hero-button">Training</button>
           </div>
         </div>
         <div class="hero-text">
-          <h1 data-i18n="hero.title">A GREEN ECONOMY TOOLKIT</h1>
-          <p data-i18n="hero.paragraph1">
+          <h1>A GREEN ECONOMY TOOLKIT</h1>
+          <p>
             South Africa and the world are switching to green economy, and that
             is creating a lot of opportunities for businesses in the renewable,
             repair and remanufacturing sectors.
           </p>
-          <p data-i18n="hero.paragraph2">
+          <p>
             We want to share these opportunities with you, so we help people who
             are entrepreneurs grow their economy fund 10 x faster. The Green
             Economy Toolkit helps governments and institutions to plan their
@@ -82,7 +57,7 @@
             will find green information, support and development to transition
             their conventional business models into green economy
           </p>
-          <p data-i18n="hero.paragraph3">
+          <p>
             We help you together a step-by-step guide on how to access the
             benefits of a green economy and position your business to operate in
             a greener global
@@ -94,8 +69,8 @@
     <!-- Focus Areas -->
     <section class="focus-areas">
       <div class="focus-title">
-        <h2 data-i18n="focus.title">Nine priority focus areas for the green economy in South Africa</h2>
-        <p data-i18n="focus.subtitle">(Green Economy Summit, 2010)</p>
+        <h2>Nine priority focus areas for the green economy in South Africa</h2>
+        <p>(Green Economy Summit, 2010)</p>
       </div>
       <div class="focus-grid">
         <div
@@ -104,7 +79,7 @@
           onclick="navigateToFocusArea('agriculture')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.agriculture">Agriculture</h3>
+            <h3>Agriculture</h3>
           </div>
         </div>
         <div
@@ -113,7 +88,7 @@
           onclick="navigateToFocusArea('energy')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.energy">Energy (clean and efficient)</h3>
+            <h3>Energy (clean and efficient)</h3>
           </div>
         </div>
         <div
@@ -122,7 +97,7 @@
           onclick="navigateToFocusArea('natural-resource')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.naturalResource">Natural resource conservation and management (including mining)</h3>
+            <h3>Natural resource conservation and management (including mining)</h3>
           </div>
         </div>
         <div
@@ -131,7 +106,7 @@
           onclick="navigateToFocusArea('transport')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.transport">Sustainable transport and infrastructure</h3>
+            <h3>Sustainable transport and infrastructure</h3>
           </div>
         </div>
         <div
@@ -140,7 +115,7 @@
           onclick="navigateToFocusArea('environmental')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.environmental">Environmental sustainability, including tourism education</h3>
+            <h3>Environmental sustainability, including tourism education</h3>
           </div>
         </div>
         <div
@@ -149,7 +124,7 @@
           onclick="navigateToFocusArea('buildings')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.buildings">Green buildings and the built environment</h3>
+            <h3>Green buildings and the built environment</h3>
           </div>
         </div>
         <div
@@ -158,7 +133,7 @@
           onclick="navigateToFocusArea('waste')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.waste">Sustainable waste management and recycling</h3>
+            <h3>Sustainable waste management and recycling</h3>
           </div>
         </div>
         <div
@@ -167,7 +142,7 @@
           onclick="navigateToFocusArea('water')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.water">Water management</h3>
+            <h3>Water management</h3>
           </div>
         </div>
         <div
@@ -176,7 +151,7 @@
           onclick="navigateToFocusArea('production')"
         >
           <div class="focus-content">
-            <h3 data-i18n="focus.production">Sustainable production and consumption</h3>
+            <h3>Sustainable production and consumption</h3>
           </div>
         </div>
       </div>
@@ -185,7 +160,7 @@
     <!-- Business Preparation -->
     <section class="business-prep">
       <div class="business-title">
-        <h2 data-i18n="business.title">Preparing your business for the green economy</h2>
+        <h2>Preparing your business for the green economy</h2>
       </div>
       <div class="business-cards">
         <div class="business-card green-card">
@@ -194,8 +169,8 @@
             style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop');"
           ></div>
           <div class="business-card-content">
-            <h3 data-i18n="business.card1.title">For your business</h3>
-            <p data-i18n="business.card1.paragraph1">
+            <h3>For your business</h3>
+            <p>
               The world is moving towards a green economy, and South Africa must
               do so too if it is to continue trading internationally. Our
               existing buildings and new projects must be designed, built,
@@ -204,12 +179,12 @@
               it does not use too much energy and water, and the country's
               quality of work needs to be done.
             </p>
-            <p data-i18n="business.card1.paragraph2">
+            <p>
               This is where you come in. But how do you make sure you can get
               some of this work?
             </p>
           </div>
-          <button class="business-card-button blue-button" data-i18n="buttons.findOutMore">Find out more</button>
+          <button class="business-card-button blue-button">Find out more</button>
         </div>
         <div class="business-card blue-card">
           <div
@@ -217,8 +192,8 @@
             style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop');"
           ></div>
           <div class="business-card-content">
-            <h3 data-i18n="business.card2.title">For your future</h3>
-            <p data-i18n="business.card2.paragraph1">
+            <h3>For your future</h3>
+            <p>
               The South African government has chosen nine areas to focus on in
               the switch to a green economy: agriculture, energy (clean and
               efficient), natural resource conservation and management
@@ -228,9 +203,9 @@
               and recycling, water management, and sustainable production and
               consumption.
             </p>
-            <p data-i18n="business.card2.paragraph2">Find out about green economy opportunities in the RM sector.</p>
+            <p>Find out about green economy opportunities in the RM sector.</p>
           </div>
-          <button class="business-card-button green-button" data-i18n="buttons.findOutMore">Find out more</button>
+          <button class="business-card-button green-button">Find out more</button>
         </div>
       </div>
     </section>
@@ -242,8 +217,8 @@
           <div class="info-icon">
             <div></div>
           </div>
-          <h3 data-i18n="info.joinNetwork.title">Join the SAGE Green Economy Network</h3>
-          <p data-i18n="info.joinNetwork.description">
+          <h3>Join the SAGE Green Economy Network</h3>
+          <p>
             Access opportunities for entrepreneurship within the green economy
             value chains, to help connect entrepreneurs to each other and to
             markets, as well as to finance, business training
@@ -253,8 +228,8 @@
           <div class="info-icon">
             <div></div>
           </div>
-          <h3 data-i18n="info.opportunities.title">Opportunities</h3>
-          <p data-i18n="info.opportunities.description">
+          <h3>Opportunities</h3>
+          <p>
             Find out the latest job opportunities as they become available
             within the green economy space – from research and innovation to
             production and services
@@ -264,8 +239,8 @@
           <div class="info-icon">
             <div></div>
           </div>
-          <h3 data-i18n="info.events.title">Live Events Calendar</h3>
-          <p data-i18n="info.events.description">
+          <h3>Live Events Calendar</h3>
+          <p>
             View the live events calendar and network with entrepreneurs and
             experts within the green economy space via our events platform
           </p>
@@ -276,33 +251,33 @@
     <!-- News Section -->
     <section class="news-section">
       <div class="news-header">
-        <h2 data-i18n="news.title">Green economy news and updates</h2>
+        <h2>Green economy news and updates</h2>
       </div>
       <div class="news-grid">
         <div class="news-item">
           <div class="news-date">11 April, 2025</div>
-          <h3 data-i18n="news.item1.title">
+          <h3>
             Indalopreneur Climate-smart Cleantech Enterprise Support Programme
           </h3>
-          <p data-i18n="news.item1.description">
+          <p>
             Access to funding support for small businesses and emerging
             entrepreneurs to help grow their enterprises
           </p>
         </div>
         <div class="news-item">
           <div class="news-date">11 November, 2024</div>
-          <h3 data-i18n="news.item2.title">South African Pavilion at COP29</h3>
-          <p data-i18n="news.item2.description">
+          <h3>South African Pavilion at COP29</h3>
+          <p>
             Updates on compensation for occupational injuries and diseases in
             the green economy sector
           </p>
         </div>
         <div class="news-item">
           <div class="news-date">08 November, 2024</div>
-          <h3 data-i18n="news.item3.title">
+          <h3>
             JET Funding Platform to close first application window on Dec 15
           </h3>
-          <p data-i18n="news.item3.description">
+          <p>
             Important deadline approaching for green economy funding
             applications
           </p>
@@ -314,8 +289,8 @@
     <section class="events-section">
       <div class="events-content">
         <div class="events-title">
-          <h2 data-i18n="events.title">Events calendar</h2>
-          <p data-i18n="events.description">
+          <h2>Events calendar</h2>
+          <p>
             View our live events calendar and network with entrepreneurs and
             experts within the green economy space via our events platform
           </p>
@@ -323,7 +298,7 @@
         <div class="events-grid">
           <div class="event-card">
             <div class="event-header">
-              <h3 data-i18n="events.upcoming">Upcoming Event</h3>
+              <h3>Upcoming Event</h3>
             </div>
             <div class="event-content">
               <div class="event-item">
@@ -332,11 +307,11 @@
                   17 Oct
                 </div>
                 <div class="event-details">
-                  <h4 data-i18n="events.event1.title">
+                  <h4>
                     ESG (Environmental Social Governance) Africa Conference &
                     Expo 2025
                   </h4>
-                  <p data-i18n="events.event1.details">
+                  <p>
                     Event Details: 17 October - 17 October 2025<br />08:00 to
                     16:00 (SAST)
                   </p>
@@ -348,8 +323,8 @@
                   2025
                 </div>
                 <div class="event-details">
-                  <h4 data-i18n="events.event2.title">Green Building Convention 2025</h4>
-                  <p data-i18n="events.event2.details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
                     Event Details: 11 November-13 November 2025<br />Full day
                     conference (SAST)
                   </p>
@@ -361,19 +336,19 @@
                   2025
                 </div>
                 <div class="event-details">
-                  <h4 data-i18n="events.event3.title">Future of Sustainability</h4>
-                  <p data-i18n="events.event3.details">
+                  <h4>Future of Sustainability</h4>
+                  <p>
                     Event Details: 25 March-27 March 2025<br />09:00 to 16:00
                     (SAST)
                   </p>
                 </div>
               </div>
             </div>
-            <button class="event-button" data-i18n="buttons.viewMore">View more</button>
+            <button class="event-button">View more</button>
           </div>
           <div class="event-card">
             <div class="event-header">
-              <h3 data-i18n="events.past">Past Events</h3>
+              <h3>Past Events</h3>
             </div>
             <div class="event-content">
               <div class="event-item">
@@ -382,15 +357,15 @@
                   2025
                 </div>
                 <div class="event-details">
-                  <h4 data-i18n="events.pastEvent1.title">Green Building Convention 2025</h4>
-                  <p data-i18n="events.pastEvent1.details">
+                  <h4>Green Building Convention 2025</h4>
+                  <p>
                     Event Details: 11 November-13 November 2025<br />Full day
                     conference (SAST)
                   </p>
                 </div>
               </div>
             </div>
-            <button class="event-button outline" data-i18n="buttons.viewMore">View more</button>
+            <button class="event-button outline">View more</button>
           </div>
         </div>
       </div>
@@ -399,66 +374,28 @@
     <!-- Partner Logos -->
     <section class="partners">
       <div class="partners-content">
-        <img src="Images/giz-logo_2024-11-11-133203_nara.jpg" data-i18n="[alt]partners.giz" alt="GIZ Logo" class="partner-logo">
-        <img src="Images/SECO-Logo.jpg" data-i18n="[alt]partners.seco" alt="SECO Logo" class="partner-logo">
-        <img src="Images/GDED-Logo.jpg" data-i18n="[alt]partners.gded" alt="GDED Logo" class="partner-logo">
-        <img src="Images/LMS-Platform-Logo.png" data-i18n="[alt]partners.lms" alt="LMS Platform Logo" class="partner-logo">
-        <img src="Images/NBI-Logo.jpg" data-i18n="[alt]partners.nbi" alt="NBI Logo" class="partner-logo">
+        <img src="Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
+        <img src="Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
+        <img src="Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
+        <img src="Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
+        <img src="Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
       </div>
     </section>
 
     <!-- Login Section -->
     <section class="login-section">
       <div class="login-content">
-        <p data-i18n="login.title">Access Your Green Economy Dashboard</p>
-        <p data-i18n="login.subtitle" style="color: #93c5fd; font-size: 14px; margin-bottom: 16px">
+        <p>Access Your Green Economy Dashboard</p>
+        <p style="color: #93c5fd; font-size: 14px; margin-bottom: 16px">
           Login to track your progress, access personalized funding
           opportunities, and connect with the green economy network.
         </p>
-        <button class="login-button" data-i18n="buttons.login">Login to Dashboard</button>
+        <button class="login-button">Login to Dashboard</button>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div style="display: flex; align-items: center; margin-bottom: 16px">
-            <img src="Images/GET.png" data-i18n="[alt]footer.logoAlt" alt="Green Economy Network Logo" style="height: 60px; margin-right: 8px;">
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4 data-i18n="footer.about">ABOUT US</h4>
-          <ul>
-            <li><a href="#" data-i18n="footer.aboutLink1">About the green economy</a></li>
-            <li><a href="#" data-i18n="footer.aboutLink2">Who we are</a></li>
-            <li><a href="#" data-i18n="footer.aboutLink3">Our team</a></li>
-            <li><a href="#" data-i18n="footer.aboutLink4">Board of directors</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4 data-i18n="footer.services">SERVICES</h4>
-          <ul>
-            <li><a href="#" data-i18n="footer.servicesLink1">Green economy network</a></li>
-            <li><a href="#" data-i18n="footer.servicesLink2">Live events calendar</a></li>
-            <li><a href="#" data-i18n="footer.servicesLink3">Green opportunities</a></li>
-            <li><a href="#" data-i18n="footer.servicesLink4">News and updates</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4 data-i18n="footer.links">QUICK LINKS</h4>
-          <ul>
-            <li><a href="#" data-i18n="footer.linksLink1">News & events</a></li>
-            <li><a href="#" data-i18n="footer.linksLink2">Contact us</a></li>
-            <li><a href="#" data-i18n="footer.linksLink3">Knowledge hub</a></li>
-            <li><a href="#" data-i18n="footer.linksLink4">Terms of reference</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p data-i18n="footer.copyright">© 2025 Green Economy Network. All rights reserved.</p>
-      </div>
-    </footer>
+    <green-economy-footer></green-economy-footer>
+
 
     <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -466,22 +403,9 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "s9a5dtbonc");
-    </script>
+</script>
 
-    <!-- i18n Libraries -->
-    <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
-    <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
-    <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
-    <script src="scripts/Trans.js"></script>
-
-    <script>  
-
-      // Initialize language selector
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('.language-selector').value = i18next.language;
-      });
-
-      // Original functionality
+    <script>
       function navigateToFocusArea(areaId) {
         window.location.href = `focus-area.html?area=${areaId}`;
       }
@@ -524,11 +448,21 @@
         window.location.href = "questionnaire/questionnaire.html";
       });
 
-      document.querySelector(".play-button").addEventListener("click", function () {
-        const video = document.querySelector(".hero-video");
-        video.play();
-        this.classList.add("hidden");
-      });
+      // Fix: Only hide play button and play video if video is paused
+      const playBtn = document.querySelector(".play-button");
+      const heroVideo = document.querySelector(".hero-video");
+      if (playBtn && heroVideo) {
+        playBtn.addEventListener("click", function () {
+          if (heroVideo.paused) {
+            heroVideo.play();
+            playBtn.classList.add("hidden");
+          }
+        });
+        // Show play button again if video is paused (optional UX improvement)
+        heroVideo.addEventListener("pause", function () {
+          playBtn.classList.remove("hidden");
+        });
+      }
     </script>
   </body>
 </html>

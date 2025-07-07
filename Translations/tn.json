@@ -1,0 +1,26 @@
+{
+  "footer": {
+    "about_us": "Ka ga Rona",
+    "about_green_economy": "Ka ga Ekonomi e Tala",
+    "who_we_are": "Re Bo Mang",
+    "our_team": "Sehlopha sa Rona",
+    "board_directors": "Boto ya Batsamaisi",
+    "services": "Ditirelo",
+    "green_economy_network": "Netweke ya Ekonomi e Tala",
+    "live_events_calendar": "Khalendara ya Ditiragalo tse di Tshelang",
+    "green_opportunities": "Ditshono tse di Tala",
+    "news_updates": "Ditaba le Dintlafatsa",
+    "quick_links": "Dikhukhwane tse di Potlakileng",
+    "news_events": "Ditaba le Ditiragalo",
+    "contact_us": "Ikopanye le Rona",
+    "knowledge_hub": "Setsha sa Tsebo",
+    "terms_reference": "Melao ya Tshedimosetso",
+    "copyright": "© {{year}} Netweke ya Ekonomi e Tala. Ditshwanelo tsotlhe di sireleditswe."
+  },
+  "header": {
+    "funding": "Tshekelo",
+    "opportunities": "Ditshono",
+    "find_a_job": "Bona Mosebetsi",
+    "training": "Thupelo"
+  }
+}
