@@ -1,0 +1,26 @@
+{
+  "footer": {
+    "about_us": "Mayelana Nathi",
+    "about_green_economy": "Mayelana Nomnotho Oluhlaza",
+    "who_we_are": "Siyini Esikuyo",
+    "our_team": "Ithimba Lethu",
+    "board_directors": "Ibhodi Labaqondisi",
+    "services": "Izinsiza",
+    "green_economy_network": "Inethiwekhi Yomnotho Oluhlaza",
+    "live_events_calendar": "Ikhalenda Lezehlakalo Ezibukhoma",
+    "green_opportunities": "Amathuba Aluhlaza",
+    "news_updates": "Izindaba Nezibuyekezo",
+    "quick_links": "Izixhumanisi Ezisheshayo",
+    "news_events": "Izindaba Nezehlakalo",
+    "contact_us": "Xhumana Nathi",
+    "knowledge_hub": "Isizinda Solwazi",
+    "terms_reference": "Imigomo Yesethenjwa",
+    "copyright": "© {{year}} Inethiwekhi Yomnotho Oluhlaza. Wonke amalungelo agodliwe."
+  },
+  "header": {
+    "funding": "Uxhaso",
+    "opportunities": "Amathuba",
+    "find_a_job": "Thola Umsebenzi",
+    "training": "Ukuqeqesha"
+  }
+}
