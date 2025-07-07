@@ -41,38 +41,38 @@
     "title": "Preparing your business for the green economy",
     "card1": {
       "title": "For your business",
-      "paragraph1": "The world is moving towards a green economy, and South Africa must do so too if it is to continue trading internationally...",
+      "paragraph1": "The world is moving towards a green economy, and South Africa must do so too if it is to continue trading internationally. Our existing buildings and new projects must be designed, built, operated, maintained, and owned and operated more sustainably, and new infrastructure must be built according to green principles, so it does not use too much energy and water, and the country's quality of work needs to be done.",
       "paragraph2": "This is where you come in. But how do you make sure you can get some of this work?"
     },
     "card2": {
       "title": "For your future",
-      "paragraph1": "The South African government has chosen nine areas to focus on in the switch to a green economy...",
+      "paragraph1": "The South African government has chosen nine areas to focus on in the switch to a green economy: agriculture, energy (clean and efficient), natural resource conservation and management (including mining), sustainable transport and infrastructure, environmental sustainability (including tourism education), green buildings and the built environment, sustainable waste management and recycling, water management, and sustainable production and consumption.",
       "paragraph2": "Find out about green economy opportunities in the RM sector."
     }
   },
   "info": {
     "joinNetwork": {
       "title": "Join the SAGE Green Economy Network",
-      "description": "Access opportunities for entrepreneurship within the green economy value chains..."
+      "description": "Access opportunities for entrepreneurship within the green economy value chains, to help connect entrepreneurs to each other and to markets, as well as to finance, business training"
     },
     "opportunities": {
       "title": "Opportunities",
-      "description": "Find out the latest job opportunities as they become available..."
+      "description": "Find out the latest job opportunities as they become available within the green economy space – from research and innovation to production and services"
     },
     "events": {
       "title": "Live Events Calendar",
-      "description": "View the live events calendar and network with entrepreneurs..."
+      "description": "View the live events calendar and network with entrepreneurs and experts within the green economy space via our events platform"
     }
   },
   "news": {
     "title": "Green economy news and updates",
     "item1": {
       "title": "Indalopreneur Climate-smart Cleantech Enterprise Support Programme",
-      "description": "Access to funding support for small businesses and emerging entrepreneurs..."
+      "description": "Access to funding support for small businesses and emerging entrepreneurs to help grow their enterprises"
     },
     "item2": {
       "title": "South African Pavilion at COP29",
-      "description": "Updates on compensation for occupational injuries and diseases..."
+      "description": "Updates on compensation for occupational injuries and diseases in the green economy sector"
     },
     "item3": {
       "title": "JET Funding Platform to close first application window on Dec 15",
@@ -81,24 +81,24 @@
   },
   "events": {
     "title": "Events calendar",
-    "description": "View our live events calendar and network with entrepreneurs...",
+    "description": "View our live events calendar and network with entrepreneurs and experts within the green economy space via our events platform",
     "upcoming": "Upcoming Event",
     "past": "Past Events",
     "event1": {
       "title": "ESG (Environmental Social Governance) Africa Conference & Expo 2025",
-      "details": "Event Details: 17 October - 17 October 2025\n08:00 to 16:00 (SAST)"
+      "details": "Event Details: 17 October - 17 October 2025<br />08:00 to 16:00 (SAST)"
     },
     "event2": {
       "title": "Green Building Convention 2025",
-      "details": "Event Details: 11 November-13 November 2025\nFull day conference (SAST)"
+      "details": "Event Details: 11 November-13 November 2025<br />Full day conference (SAST)"
     },
     "event3": {
       "title": "Future of Sustainability",
-      "details": "Event Details: 25 March-27 March 2025\n09:00 to 16:00 (SAST)"
+      "details": "Event Details: 25 March-27 March 2025<br />09:00 to 16:00 (SAST)"
     },
     "pastEvent1": {
       "title": "Green Building Convention 2025",
-      "details": "Event Details: 11 November-13 November 2025\nFull day conference (SAST)"
+      "details": "Event Details: 11 November-13 November 2025<br />Full day conference (SAST)"
     }
   },
   "partners": {

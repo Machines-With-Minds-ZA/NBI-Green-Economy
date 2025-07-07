@@ -1,0 +1,139 @@
+{
+  "title": "Sediriswa sa Ikonomi ya Boswa",
+  "logoAlt": "Logo ya Sediriswa sa Ikonomi ya Boswa",
+  "nav": {
+    "about": "Ka ga Ikonomi ya Boswa",
+    "irm": "Karolo ya IRM",
+    "opportunities": "Ditshono",
+    "knowledge": "Setsi sa Kitso"
+  },
+  "buttons": {
+    "dashboard": "Dashboard",
+    "getFunding": "Fumana Ditshelete",
+    "opportunities": "Ditshono",
+    "rmcsHub": "Hub ya RMCS",
+    "training": "Thuto",
+    "findOutMore": "Batlisisa ka botlalo",
+    "viewMore": "Bona tse dingwe",
+    "login": "Tsena mo Dashboard"
+  },
+  "hero": {
+    "title": "SEDIRISWA SA IKONOMI YA BOSWA",
+    "videoAlt": "Tlhaloso ya Ikonomi ya Boswa",
+    "paragraph1": "Aforika Borwa le lefatshe ka bophara di fetoga go ya kwa Ikonoming ya Boswa, mme seno se tlhagisa ditshono tse dintsi mo dikgwebong tsa go ntsha matsogo, go lokisa le go dirisa gape merero.",
+    "paragraph2": "Re batla go aba ditshono tseno le wena, ka jalo re thusa batho ba ba dirang dikgwebo go oketsa madi a ikonomi ya bone ka 10 x ka bonako. Sediriswa sa Ikonomi ya Boswa se thusa mebuso le mekgwa ya thuto go rulaganya phetogo ya bone ya Ikonomi ya Boswa. Go tswa mo dikakanyong, banka ya dikgwebo tsa boswa o tla fumana tshedimosetso ya boswa, tshegetso le thuso ya go fetola mekgwa ya bone ya dikgwebo e e tlwaelegileng go nna Ikonomi ya Boswa",
+    "paragraph3": "Re a go thusa ka tataiso e e tsamaisaneng le maano a go fitlhelela melemo ya Ikonomi ya Boswa le go beakanya kgwebo ya gago gore e bereke mo lefatsheng le le boswa"
+  },
+  "focus": {
+    "title": "Dikarolo tse some tsa tlhokego mo Ikonoming ya Boswa mo Aforika Borwa",
+    "subtitle": "(Kopano ya Ikonomi ya Boswa, 2010)",
+    "agriculture": "Temo",
+    "energy": "Matla (a a phepa le a a sebetsang sentle)",
+    "naturalResource": "Tlhokomelo le taolo ya didiriswa tsa tlhago (go akaretsa meepo)",
+    "transport": "Ditsamaiso tsa bojanala le dibaka tse di tswelelang pele",
+    "environmental": "Boitshoko jwa tikologo, go akaretsa thuto ya bojanala",
+    "buildings": "Dikago tse di boswa le tikologo e e agilweng",
+    "waste": "Taolo ya ditlakala le tirisodiso gape",
+    "water": "Taolo ya metsi",
+    "production": "Tlhago le tiriso e e tswelelang pele"
+  },
+  "business": {
+    "title": "Go baakanya kgwebo ya gago bakeng sa Ikonomi ya Boswa",
+    "card1": {
+      "title": "Bakeng sa kgwebo ya gago",
+      "paragraph1": "Lefatshe le ya kwa Ikonoming ya Boswa, mme Aforika Borwa e tshwanetse go dira jalo le yone fa e batla go tswelela ka kgwebo mo lefatsheng ka bophara...",
+      "paragraph2": "Ke mo o tlang mo go gone. Mme o itlhokomolosa jang gore o ka bona tiriso e le nngwe ya tseno?"
+    },
+    "card2": {
+      "title": "Bakeng sa bokamoso jwa gago",
+      "paragraph1": "Mmuso wa Aforika Borwa o kgethile dikarolo tse some tse o tla di lebisitse mo phetogong ya Ikonomi ya Boswa: temo, matla (a a phepa le a a sebetsang sentle), tlhokomelo le taolo ya didiriswa tsa tlhago (go akaretsa meepo), ditsamaiso tsa bojanala le dibaka tse di tswelelang pele, boitshoko jwa tikologo (go akaretsa thuto ya bojanala), dikago tse di boswa le tikologo e e agilweng, taolo ya ditlakala le tirisodiso gape, taolo ya metsi, le tlhago le tiriso e e tswelelang pele.",
+      "paragraph2": "Batlisisa ka ditshono tsa Ikonomi ya Boswa mo karolong ya RM."
+    }
+  },
+  "info": {
+    "joinNetwork": {
+      "title": "Tsena mo Mafaratlhatlheng a SAGE a Ikonomi ya Boswa",
+      "description": "Fumana ditshono tsa boithuto mo dikgokgantshong tsa Ikonomi ya Boswa, go thusa go kopanya ba ba dirang dikgwebo le go ba isa kwa mebarakeng, mmogo le ditshelete, thuto ya dikgwebo"
+    },
+    "opportunities": {
+      "title": "Ditshono",
+      "description": "Batlisisa ditshono tsa mesebetsi tse disha fa di ntse di tshwanelwa mo lefelong la Ikonomi ya Boswa – go tloga mo dipatlisisong le boikaelelo go ya kwa tlhagong le ditirelong"
+    },
+    "events": {
+      "title": "Khalenda ya Ditiragalo tse di Tshwereng",
+      "description": "Lebelela khalenda ya rona ya ditiragalo tse di tshwereng mme o kopane le ba ba dirang dikgwebo le baitseanape mo lefelong la Ikonomi ya Boswa ka tsela ya setilwe sa rona sa ditiragalo"
+    }
+  },
+  "news": {
+    "title": "Dikgang le ditlhabololo tsa Ikonomi ya Boswa",
+    "item1": {
+      "title": "Lenaneo la Tshegetso la Indalopreneur Climate-smart Cleantech Enterprise",
+      "description": "Fumana tshegetso ya ditshelete bakeng sa dikgwebo tse dinnye le ba ba ntseng ba simolola go dira dikgwebo go thusa go nonotsa dikgwebo tsa bone"
+    },
+    "item2": {
+      "title": "Pavilione ya Aforika Borwa mo COP29",
+      "description": "Ditlhabololo ka ga tuelo ya dikotsi tsa mosomo le malwetse mo karolong ya Ikonomi ya Boswa"
+    },
+    "item3": {
+      "title": "Setilwe sa JET Funding se tla tswalela lefelo la pele la dikopo ka Dec 15",
+      "description": "Nako e e botlhokwa e atamela bakeng sa dikopo tsa ditshelete tsa Ikonomi ya Boswa"
+    }
+  },
+  "events": {
+    "title": "Khalenda ya ditiragalo",
+    "description": "Lebelela khalenda ya rona ya ditiragalo tse di tshwereng mme o kopane le ba ba dirang dikgwebo le baitseanape mo lefelong la Ikonomi ya Boswa ka tsela ya setilwe sa rona sa ditiragalo",
+    "upcoming": "Tiro e e tlang",
+    "past": "Ditiragalo tse di fetileng",
+    "event1": {
+      "title": "Kopano le Expo ya ESG (Environmental Social Governance) Africa Conference 2025",
+      "details": "Dintlha tsa tiro: 17 October - 17 October 2025<br />08:00 go ya 16:00 (SAST)"
+    },
+    "event2": {
+      "title": "Kopano ya Dikago tse di Boswa 2025",
+      "details": "Dintlha tsa tiro: 11 November-13 November 2025<br />Kopano ya letsatsi lotlhe (SAST)"
+    },
+    "event3": {
+      "title": "Bokamoso jwa Boitshoko",
+      "details": "Dintlha tsa tiro: 25 March-27 March 2025<br />09:00 go ya 16:00 (SAST)"
+    },
+    "pastEvent1": {
+      "title": "Kopano ya Dikago tse di Boswa 2025",
+      "details": "Dintlha tsa tiro: 11 November-13 November 2025<br />Kopano ya letsatsi lotlhe (SAST)"
+    }
+  },
+  "partners": {
+    "giz": "Logo ya GIZ",
+    "seco": "Logo ya SECO",
+    "gded": "Logo ya GDED",
+    "lms": "Logo ya LMS Platform",
+    "nbi": "Logo ya NBI"
+  },
+  "login": {
+    "title": "Fihlela Dashboard ya gago ya Ikonomi ya Boswa",
+    "subtitle": "Tsena go lebelela tswelopele ya gago, fumana ditshono tsa ditshelete tse di ikemiseditseng, mme o kopane le mafaratlhatlha a Ikonomi ya Boswa."
+  },
+  "footer": {
+    "logoAlt": "Logo ya Mafaratlhatlha a Ikonomi ya Boswa",
+    "about": "KA GA RONA",
+    "aboutLink1": "Ka ga Ikonomi ya Boswa",
+    "aboutLink2": "Batho ba rona",
+    "aboutLink3": "Sehlopha sa rona",
+    "aboutLink4": "Bao ba lekgotla la baetapele",
+    "services": "DITIRELO",
+    "servicesLink1": "Mafaratlhatlha a Ikonomi ya Boswa",
+    "servicesLink2": "Khalenda ya ditiragalo tse di tshwereng",
+    "servicesLink3": "Ditshono tsa boswa",
+    "servicesLink4": "Dikgang le ditlhabololo",
+    "links": "DIKGOKA TSA BOFEFO",
+    "linksLink1": "Dikgang le ditiragalo",
+    "linksLink2": "Ikopanye le rona",
+    "linksLink3": "Setsi sa kitso",
+    "linksLink4": "Melawana ya tshiamiso",
+    "copyright": "© 2025 Mafaratlhatlha a Ikonomi ya Boswa. Ditshwanelo tsotlhe di bolokilwe."
+  },
+  "languages": {
+    "english": "Sekgoa",
+    "zulu": "IsiZulu",
+    "tswana": "Setswana"
+  }
+}

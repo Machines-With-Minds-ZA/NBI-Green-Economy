@@ -10,42 +10,7 @@
     <link rel="stylesheet" href="dashboard.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-    <style>
-        .dashboard-card, .news-item, .news-category-btn, .btn {
-            cursor: pointer;
-            pointer-events: auto;
-            position: relative;
-            z-index: 1;
-        }
-        .loader-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-        .loader {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            z-index: 1000;
-        }
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-    </style>
+    
 </head>
 <body>
     <div class="loader-overlay" id="loader-overlay"></div>
@@ -61,9 +26,7 @@
             </section>
             <section class="search-section" style="margin: 0 1.5rem 3rem 1.5rem">
                 <div class="search-header">
-                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
+                    
                     <h3 data-translate="ai-search-title">AI-Enhanced Search</h3>
                 </div>
                 <div class="search-container">
@@ -628,56 +591,71 @@
             //setInterval(updateNews, 30000);
         }
 
-        async function fetchNews() {
-            const query = "green economy OR renewable energy OR sustainable finance OR green technology OR SMME OR sustainability education +South Africa";
-            const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&apiKey=${API_KEY}`;
 
-            try {
-                showLoader();
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                const data = await response.json();
 
-                newsData = data.articles
-                    .filter(article => article.title && article.description && article.url && article.source.name)
-                    .map((article, index) => {
-                        const content = `${article.title.toLowerCase()} ${article.description.toLowerCase()}`;
-                        let category = "Business";
-                        if (content.includes("energy") || content.includes("solar") || content.includes("wind")) category = "Energy";
-                        else if (content.includes("finance") || content.includes("funding") || content.includes("carbon credit")) category = "Finance";
-                        else if (content.includes("technology") || content.includes("innovation")) category = "Technology";
-                        else if (content.includes("education") || content.includes("training") || content.includes("skills")) category = "Education";
+async function fetchNews() {
+    try {
+        showLoader();
+        const apiKey = "e00b07155a6c49aa90b8f84ad3115ec1"; // Your News API key
+        const query = "green economy OR sustainability OR renewable energy OR carbon credit OR green technology OR environmental education";
+        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&apiKey=${apiKey}`;
 
-                        const publishedAt = new Date(article.publishedAt);
-                        const now = new Date();
-                        const diffMs = now - publishedAt;
-                        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-                        const time = diffHours < 24 ? `${diffHours}h ago` : `${Math.floor(diffHours / 24)}d ago`;
-
-                        return {
-                            id: `news-${index}-${Date.now()}`,
-                            title: article.title,
-                            description: article.description.length > 150 ? article.description.substring(0, 147) + "..." : article.description,
-                            category: category,
-                            source: article.source.name,
-                            time: time,
-                            image: article.urlToImage || DEFAULT_IMAGE,
-                            url: article.url
-                        };
-                    })
-                    .slice(0, 20);
-
-                if (newsData.length === 0) {
-                    newsData = [...fallbackNewsData];
-                }
-            } catch (error) {
-                console.error("Error fetching news:", error);
-                newsData = [...fallbackNewsData];
-                displayErrorMessage("Failed to load news. Showing cached content.");
-            } finally {
-                hideLoader();
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
             }
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
+
+        if (!data.articles || data.articles.length === 0) {
+            throw new Error("No articles found");
         }
+
+        newsData = data.articles
+            .filter(article => article.title && article.description && article.url && article.source.name)
+            .map((article, index) => {
+                const content = `${article.title.toLowerCase()} ${article.description.toLowerCase()}`;
+                let category = "Business";
+                if (content.includes("energy") || content.includes("solar") || content.includes("wind") || content.includes("renewable")) category = "Energy";
+                else if (content.includes("finance") || content.includes("funding") || content.includes("carbon credit")) category = "Finance";
+                else if (content.includes("technology") || content.includes("innovation")) category = "Technology";
+                else if (content.includes("education") || content.includes("training") || content.includes("skills")) category = "Education";
+
+                const publishedAt = new Date(article.publishedAt);
+                const now = new Date();
+                const diffMs = now - publishedAt;
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const time = diffHours < 24 ? `${diffHours}h ago` : `${Math.floor(diffHours / 24)}d ago`;
+
+                return {
+                    id: `news-${index}-${Date.now()}`,
+                    title: article.title,
+                    description: article.description.length > 150 ? article.description.substring(0, 147) + "..." : article.description,
+                    category: category,
+                    source: article.source.name,
+                    time: time,
+                    image: article.urlToImage || DEFAULT_IMAGE,
+                    url: article.url
+                };
+            })
+            .slice(0, 20);
+
+        if (newsData.length === 0) {
+            newsData = [...fallbackNewsData];
+            displayErrorMessage("No news articles available. Showing cached content.");
+        }
+    } catch (error) {
+        console.error("Error fetching news:", error);
+        newsData = [...fallbackNewsData];
+        displayErrorMessage("Failed to load news. Showing cached content.");
+    } finally {
+        hideLoader();
+    }
+}
+
 
         function displayErrorMessage(message) {
             const newsGrid = document.getElementById("newsGrid");
