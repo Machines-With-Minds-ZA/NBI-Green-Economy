@@ -7,24 +7,201 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+    <link rel="stylesheet" href="../new.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Optional: Add smooth fade-in animation */
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+   
+    /* Base styles */
+    .hero-section {
+        display: flex;
+        min-height: 600px;
+        width: 100%;
+    }
+    
+    .hero-image {
+        width: 55%;
+        height: 100%;
+    }
+    
+    .image-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .hero-text-container {
+        width: 45%;
+        background-color: #31b45a; /* Green color */
+        position: relative;
+    }
+    
+    .hero-text-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+    }
+    
+    .hero-text {
+        color: white;
+        animation: fadeIn 1s ease-in-out;
+    }
+    
+    .hero-text h1 {
+        font-size: 4.5rem; /* Large heading size */
+        font-weight: 650;  /* Semi-bold */
+        margin-bottom: 1.5rem;
+        line-height: 1.1;  /* Tighter line height */
+        margin-bottom: 80px; /* Increased bottom margin */
+        letter-spacing: -0.05em; /* Slightly tighter letter spacing */
+    }
+    
+    .hero-text p {
+        font-size: 1.25rem; /* Slightly larger paragraph text */
+        line-height: 1.6;
+        opacity: 0.95;
+        max-width: 90%; /* Constrains line length for better readability */
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Priority Areas Section */
+    .light-section {
+        background-color: #f8f9fa;
+    }
+    
+    .focus-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        gap: 0;
+    }
+    
+    .focus-item {
+        position: relative;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .focus-item:hover {
+        transform: scale(1.02);
+        z-index: 1;
+    }
+    
+    .focus-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    .focus-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .hero-section {
+            flex-direction: column;
+            min-height: auto;
+        }
+        
+        .hero-image,
+        .hero-text-container {
+            width: 100%;
+        }
+        
+        .hero-image {
+            height: 300px;
+        }
+        
+        .hero-text-content {
+            position: relative;
+            padding: 1.5rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+        }
+        
+        .focus-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-text h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .focus-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .focus-item {
+            height: 250px;
+        }
+    }
+    </style>
 </head>
 <body>
     <div id="root">
         <green-economy-header></green-economy-header>
         <main>
             <!-- About Hero Section -->
-            <section class="relative min-h-[600px] flex items-center">
-                <div class="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" alt="Professional woman in safety vest" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/20"></div>
+            <section class="hero-section">
+                <!-- Image section (55% width) -->
+                <div class="hero-image">
+                    <img src="../Images/about.JPG" 
+                         alt="Professional woman in safety vest" 
+                         class="image-cover">
                 </div>
-                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div class="text-white"></div>
-                        <div class="green-gradient p-8 lg:p-12 rounded-lg text-white animate-fade-in">
-                            <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">ABOUT THE GREEN ECONOMY</h1>
-                            <p class="text-lg lg:text-xl leading-relaxed opacity-95">
-                                A green economy is one which is socially inclusive and environmentally sustainable. It improves human well-being and builds social equity while reducing environmental risks and ecological scarcities. In simple terms, we can think of a green economy as one which is low carbon, resource efficient and socially inclusive.
+                
+                <!-- Text content section (45% width) with full-height green background -->
+                <div class="hero-text-container">
+                    <div class="hero-text-content">
+                        <div class="hero-text" style="margin-left: 50px;">
+                            <h1>ABOUT THE GREEN ECONOMY</h1>
+                            <p>
+                                A green economy is one which is socially inclusive and environmentally sustainable. 
+                                It improves human well-being and builds social equity while reducing environmental 
+                                risks and ecological scarcities. In simple terms, we can think of a green economy 
+                                as one which is low carbon, resource efficient and socially inclusive.
                             </p>
                         </div>
                     </div>
@@ -32,37 +209,292 @@
             </section>
 
             <!-- Priority Areas Section -->
-            <section class="py-16 light-section">
-                <div class="px-4 sm:px-6 lg:px-8 text-left">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Nine priority focus areas for the green economy in South Africa</h2>
-                    <p class="text-lg text-gray-600 mb-12">(Green Economy Summit, 2010)</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="about-priority-areas">
+            <section class="py-16 light-section" style="color: #31b45a;text-align: center;">
+                <div class="w-full">
+                    <div class="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Nine priority focus areas for the green economy in South Africa</h2>
+                        <p class="text-lg font-bold mb-12">(Green Economy Summit, 2010)</p>
+                    </div>
+                    
+                    <div class="focus-grid">
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('agriculture')">
+                            <div class="focus-content">
+                                <h3>Agriculture</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('energy')">
+                            <div class="focus-content">
+                                <h3>Energy (clean and efficient)</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('natural-resource')">
+                            <div class="focus-content">
+                                <h3>Natural resource conservation and management (including mining)</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('transport')">
+                            <div class="focus-content">
+                                <h3>Sustainable transport and infrastructure</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('environmental')">
+                            <div class="focus-content">
+                                <h3>Environmental sustainability, including tourism education</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('buildings')">
+                            <div class="focus-content">
+                                <h3>Green buildings and the built environment</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('waste')">
+                            <div class="focus-content">
+                                <h3>Sustainable waste management and recycling</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('water')">
+                            <div class="focus-content">
+                                <h3>Water management</h3>
+                            </div>
+                        </div>
+                        <div class="focus-item"
+                            style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=1600&h=900&fit=crop');"
+                            onclick="navigateToFocusArea('production')">
+                            <div class="focus-content">
+                                <h3>Sustainable production and consumption</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Climate Risks Section -->
-            <section class="py-16 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Climate risks</h2>
-                    <p class="text-lg text-gray-600 mb-12">How will climate change affect your business?</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="climate-risks">
-                    </div>
-                </div>
-            </section>
+<section class="py-16 bg-white" style="color: #009381;text-align: center;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Climate risks</h2>
+        <p class="text-lg font-bold">How will climate change affect your business?</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="climate-risks">
+        </div>
+    </div>
+</section>
 
-            <!-- Climate Response Section -->
-            <section class="py-16 light-section">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-gray-900">How we can respond to climate change</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="climate-responses">
-                    </div>
+<section style="width: 100%; height: 70vh; margin: 0; background-color: #009381; padding: 0; overflow: hidden;">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 0; width: 100%; height: 100%; margin: 0; background-color: #009381; border: 1px solid white; border-collapse: collapse;">
+
+        <!-- Top row - 3 equal blocks -->
+        <div style="grid-column: 1; grid-row: 1; padding: 2% 3%; color: white; border-right: 1px solid white; border-bottom: 1px solid white; display: flex; flex-direction: column; justify-content: center;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <img src="../Images/riskofphysicaldamage.png" style="width: 20px; height: 20px; margin-right: 8px;" alt="Trees icon">
+                    <h3 style="font-size: min(20px, 2.2vw); margin: 0; font-weight: 600;">Risk of physical damage & disruption</h3>
                 </div>
-            </section>
+                <p style="font-size: min(15px, 1.6vw); line-height: 1.3; margin: 0;">Climate change can cause extreme weather events like floods and wildfires. These events can damage buildings, roads and farms, which can make it harder for people to do their jobs and for businesses to operate smoothly.</p>
+            </div>
+        </div>
+        
+        <div style="grid-column: 2; grid-row: 1; padding: 2% 3%; color: white; border-right: 1px solid white; border-bottom: 1px solid white; display: flex; flex-direction: column; justify-content: center;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <img src="../Images/riskofincreasedoperatingcosts.png" style="width: 20px; height: 20px; margin-right: 8px;" alt="Money icon">
+                    <h3 style="font-size: min(20px, 2.2vw); margin: 0; font-weight: 600;">Risk of increased operating costs</h3>
+                </div>
+                <p style="font-size: min(15px, 1.6vw); line-height: 1.3; margin: 0;">As the climate gets hotter, businesses might need more energy to cool down their buildings. Also, if water becomes scarce, some industries might have to pay more for the water they use. These extra expenses can make it more expensive for businesses to run.</p>
+            </div>
+        </div>
+        
+        <div style="grid-column: 3; grid-row: 1; padding: 2% 3%; color: white; border-bottom: 1px solid white; display: flex; flex-direction: column; justify-content: center;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <img src="../Images/riskofsupplychain.png" style="width: 20px; height: 20px; margin-right: 8px;" alt="Truck icon">
+                    <h3 style="font-size: min(20px, 2.2vw); margin: 0; font-weight: 600;">Risk of supply chain disruptions</h3>
+                </div>
+                <p style="font-size: min(15px, 1.6vw); line-height: 1.3; margin: 0;">Sometimes, companies in South Africa get the materials they need from other countries. However, climate change can disrupt this by causing problems like hurlingness that affect shipping or extreme weather that stops production in other places. This can lead to delays and higher costs for businesses.</p>
+            </div>
+        </div>
+        
+        <!-- Bottom row - left block (double width) -->
+        <div style="grid-column: 1 / span 2; grid-row: 2; padding: 2% 3%; color: white; border-right: 1px solid white; display: flex; flex-direction: column; justify-content: center;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <img src="../Images/reputationrisk.png" style="width: 20px; height: 20px; margin-right: 8px;" alt="People icon">
+                    <h3 style="font-size: min(20px, 2.2vw); margin: 0; font-weight: 600;">Reputation risk</h3>
+                </div>
+                <p style="font-size: min(15px, 1.6vw); line-height: 1.3; margin: 0;">If a company appears not to show care or concern about the environment or has business practices and operations that are detrimental to the environment, people (consumers) might not want to buy their products or support them. This can hurt a company's image and make it harder for them to perform well in their respective industry or stay competitive in the market.</p>
+            </div>
+        </div>
+        
+        <!-- Bottom row - right block (single width) -->
+        <div style="grid-column: 3; grid-row: 2; padding: 2% 3%; color: white; display: flex; flex-direction: column; justify-content: center;">
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <img src="../Images/regulatoryrisk.png" style="width: 20px; height: 20px; margin-right: 8px;" alt="Bank icon">
+                    <h3 style="font-size: min(20px, 2.2vw); margin: 0; font-weight: 600;">Regulatory risk</h3>
+                </div>
+                <p style="font-size: min(15px, 1.6vw); line-height: 1.3; margin: 0;">Governments are making stricter rules to protect the environment from climate change. Businesses in South Africa need to know these rules, and sometimes it can be expensive to do so. If they do not follow the rules, they can get fired or face legal implications.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Preparation Section -->
+<section style="width: 100%; background-color: #aedfe4; padding: 40px 0;">
+    <div style="width: 90%; max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 28px; margin-bottom: 40px; color: #009381;">How we can respond to climate change</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 30px;">
+            <!-- Adaptation Block -->
+            <div style="background: #009381; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background-image: url('../Images/adaptation.webp'); background-size: cover; background-position: center;"></div>
+                <div style="padding: 25px; color: white;">
+                    <h3 style="font-size: 22px; margin-top: 0; margin-bottom: 15px; font-weight: 600;">Adaptation</h3>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Adaptation means keeping abreast of and staying ready to adapt to changes caused by climate change. It's about making plans and changes to deal with events like droughts or floods that might happen more often because of climate change.</p>
+                    <p style="font-size: 16px; line-height: 1.6;">An example: farmers in South Africa are changing the way in which they harvest and grow crops in order to use less water, due to a decrease in rainfall. This is an example of adapting to the changing climate.</p>
+                </div>
+            </div>
+            
+            <!-- Mitigation Block -->
+            <div style="background: #20b04f; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background-image: url('../Images/Mitigation.webp'); background-size: cover; background-position: center;"></div>
+                <div style="padding: 25px; color: white;">
+                    <h3 style="font-size: 22px; margin-top: 0; margin-bottom: 15px; font-weight: 600;">Mitigation</h3>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Mitigation means trying to stop or reduce activities that make climate change worse. This may include reducing gas emissions that come from burning coal or oil, which release large amounts of carbon dioxide into the atmosphere, in turn causing climate change through an increase in temperature by trapping heat in the atmosphere.</p>
+                    <p style="font-size: 16px; line-height: 1.6;">An example: South Africa is building more wind and solar power plants to make electricity and generate alternative sources of energy without using as much coal, a fossil fuel. This aids in reducing the gases that cause climate change.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+            <!-- Climate Finance Block -->
+            <div style="background: #009381; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background-image: url('../Images/climate.webp'); background-size: cover; background-position: center;"></div>
+                <div style="padding: 25px; color: white;">
+                    <h3 style="font-size: 22px; margin-top: 0; margin-bottom: 15px; font-weight: 600;">Climate finance</h3>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Climate finance refers to funds that help governments and organisations develop projects aimed at fighting climate change. These funds can be used to build and promote initiatives such as clean energy projects or to help communities prepare for climate impacts.</p>
+                    <p style="font-size: 16px; line-height: 1.6;">An example: South Africa might get money from a global fund to build solar panels in a town. This contributes to clean energy and reduces the effects of climate change. Climate finance helps pay for such projects.</p>
+                </div>
+            </div>
+            
+            <!-- Climate Resilience Block -->
+            <div style="background: #20b04f; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div style="height: 200px; background-image: url('../Images/resilience.webp'); background-size: cover; background-position: center;"></div>
+                <div style="padding: 25px; color: white;">
+                    <h3 style="font-size: 22px; margin-top: 0; margin-bottom: 15px; font-weight: 600;">Climate resilience</h3>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Climate resilience means being strong and ready to handle the problems that are caused by climate change. It's about making sure communities and nature can "bounce back" after climate change effects such as floods or storms.</p>
+                    <p style="font-size: 16px; line-height: 1.6;">An example in South Africa: in areas where there is not much water, people might learn ways to save water and grow drought-resistant crops. This helps them survive and do well even when there is less rain due to a changing climate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Logos Section -->
+<section style="width: 100%; background-color: white; padding: 60px 0;">
+    <div style="width: 90%; max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 60px;">
+        <!-- Logos in specified order -->
+        <img src="../Images/german.jpg" alt="GEMMN Logo" style="height: 90px; width: auto; object-fit: contain;">
+        <img src="../Images/swiss.jpg" alt="Swiss Logo" style="height: 100px; width: auto; object-fit: contain;">
+        <img src="../Images/gauteng.jpg" alt="Gauteng Logo" style="height: 95px; width: auto; object-fit: contain;">
+        <img src="../Images/irm.png" alt="IRM Logo" style="height: 85px; width: auto; object-fit: contain;">
+        <img src="../Images/nbi.jpg" alt="NBI Logo" style="height: 100px; width: auto; object-fit: contain;">
+    </div>
+</section>
+<!-- Newsletter Subscription Section -->
+
+<section style="width: 100%; background-color: #009381; padding: 80px 20px;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+        <!-- Title -->
+        <h2 style="color: white; font-size: 20px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Subscribe to our newsletter to get the latest information
+        </h2>
+        
+        <!-- Input Box -->
+        <div style="position: relative; max-width: 700px; margin: 0 auto;">
+            <input 
+                type="email" 
+                placeholder="Your email" 
+                style="width: 100%; padding: 18px 50px 18px 25px; border: none; border-radius: 4px; font-size: 16px; color: #333; background: white;"
+            >
+            <span style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: #009381; font-size: 22px; font-weight: bold;">→</span>
+        </div>
+        
+        <!-- Disclaimer Text -->
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 15px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            *Only relevant information, no spam
+        </p>
+    </div>
+</section>
+
+            
         </main>
         <green-economy-footer></green-economy-footer>
     </div>
 
-    <script src="about.js"> </script>
+    <script src="about.js"></script>
+    <script>
+      function navigateToFocusArea(areaId) {
+        window.location.href = `focus-area.html?area=${areaId}`;
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      document.querySelectorAll(".hero-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          console.log("Button clicked:", this.textContent);
+        });
+      });
+
+      document.querySelectorAll(".business-card-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          console.log("Business card button clicked");
+        });
+      });
+
+      document.querySelectorAll(".event-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          console.log("Event button clicked");
+        });
+      });
+
+      document.querySelector(".login-button").addEventListener("click", function () {
+        console.log("Login button clicked");
+      });
+
+      document.querySelector(".dashboard-button").addEventListener("click", function () {
+        window.location.href = "questionnaire/questionnaire.html";
+      });
+
+      // Play button functionality
+      document.querySelector(".play-button").addEventListener("click", function () {
+        const video = document.querySelector(".hero-video");
+        video.play();
+        this.classList.add("hidden");
+      });
+    </script>
 </body>
 </html>

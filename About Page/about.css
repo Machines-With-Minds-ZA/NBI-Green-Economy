@@ -1,0 +1,451 @@
+/* about.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    min-height: 600px;
+    width: 100%;
+}
+
+.hero-image {
+    width: 55%;
+    height: 100%;
+}
+
+.image-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text-container {
+    width: 45%;
+    background-color: #31b45a;
+    position: relative;
+}
+
+.hero-text-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.hero-text {
+    color: white;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.hero-text h1 {
+    font-size: 4.5rem;
+    font-weight: 650;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    margin-bottom: 80px;
+    letter-spacing: -0.05em;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    max-width: 90%;
+}
+
+/* Priority Areas Section */
+.light-section {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.light-section h2 {
+    color: #31b45a;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.light-section p {
+    color: #31b45a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 0;
+}
+
+.focus-item {
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.focus-item:hover {
+    transform: scale(1.02);
+    z-index: 1;
+}
+
+.focus-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.focus-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Climate Risks Section */
+.climate-risks-section {
+    padding: 80px 0;
+    background-color: white;
+    color: #009381;
+    text-align: center;
+}
+
+.climate-risks-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.climate-risks-section p.subtitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.climate-risks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0;
+    width: 100%;
+    height: 70vh;
+    border: 1px solid white;
+}
+
+.climate-risk-item {
+    padding: 2% 3%;
+    color: white;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.climate-risk-item h3 {
+    font-size: 1.25rem;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.climate-risk-item img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.climate-risk-item p {
+    font-size: 0.9375rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Double width items */
+.climate-risk-item.double-width {
+    grid-column: span 2;
+}
+
+/* Business Preparation Section */
+.business-prep-section {
+    width: 100%;
+    background-color: #aedfe4;
+    padding: 80px 0;
+}
+
+.business-prep-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.business-prep-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 60px;
+    color: #009381;
+    font-weight: 700;
+}
+
+.prep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.prep-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.prep-card-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.prep-card-content {
+    padding: 25px;
+    color: white;
+}
+
+.prep-card-content h3 {
+    font-size: 1.375rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.prep-card-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Card color variations */
+.prep-card.green {
+    background: #009381;
+}
+
+.prep-card.light-green {
+    background: #20b04f;
+}
+
+/* Logos Section */
+.logos-section {
+    width: 100%;
+    background-color: white;
+    padding: 60px 0;
+}
+
+.logos-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.logos-section img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    width: 100%;
+    background-color: #009381;
+    padding: 80px 20px;
+}
+
+.newsletter-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.newsletter-section h2 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+}
+
+.newsletter-input-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.newsletter-input-container input {
+    width: 100%;
+    padding: 18px 50px 18px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.newsletter-input-container span {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #009381;
+    font-size: 1.375rem;
+    font-weight: bold;
+}
+
+.newsletter-disclaimer {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.875rem;
+    margin-top: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .hero-image,
+    .hero-text-container {
+        width: 100%;
+    }
+    
+    .hero-image {
+        height: 300px;
+    }
+    
+    .hero-text-content {
+        position: relative;
+        padding: 1.5rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+    }
+    
+    .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .climate-risks-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+    }
+
+    .climate-risk-item.double-width {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+    
+    .focus-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .focus-item {
+        height: 250px;
+    }
+
+    .prep-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logos-container {
+        gap: 30px;
+    }
+
+    .logos-section img {
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .light-section h2,
+    .climate-risks-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .logos-container {
+        gap: 20px;
+    }
+
+    .logos-section img {
+        height: 50px;
+    }
+}

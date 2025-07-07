@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="questionnaire.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-    <link rel="stylesheet" href="questionnaire.css">
 </head>
 <body>
     <div class="loader-overlay" id="loader-overlay"></div>
@@ -61,36 +60,36 @@
                     <div class="question-content" data-question="2">
                         <label class="form-label">Who are you? (Select at least one)</label>
                         <div class="button-group">
-                            <button type="button" class="option-button" data-value="township-irm">Township IRM Enterprise</button>
-                            <button type="button" class="option-button" data-value="youth-underrepresented">Youth from Underrepresented Community</button>
-                            <button type="button" class="option-button" data-value="stakeholder-partner">Stakeholder or Partner</button>
-                            <button type="button" class="option-button" data-value="local-community">Local Community Member</button>
-                            <button type="button" class="option-button" data-value="tvet-student-staff">TVET College Student/Staff</button>
-                            <button type="button" class="option-button" data-value="entrepreneurial-hub">Entrepreneurial Hub Member</button>
+                            <button type="button" class="option-button" data-value="township-irm">Township IRM</button>
+                            <button type="button" class="option-button" data-value="youth-underrepresented">Youth Underrepresented</button>
+                            <button type="button" class="option-button" data-value="stakeholder-partner">Stakeholder/Partner</button>
+                            <button type="button" class="option-button" data-value="local-community">Local Community</button>
+                            <button type="button" class="option-button" data-value="tvet-student-staff">TVET Student/Staff</button>
+                            <button type="button" class="option-button" data-value="entrepreneurial-hub">Entrepreneurial Hub</button>
                         </div>
                     </div>
                     <div class="question-content" data-question="3">
-                        <label class="form-label">What are your interests in the green economy? (Select at least one)</label>
+                        <label class="form-label">What are your interests? (Select at least one)</label>
                         <div class="button-group">
-                            <button type="button" class="option-button" data-value="green-funding">Green Funding Opportunities</button>
-                            <button type="button" class="option-button" data-value="smme-support">SMME Business Support</button>
-                            <button type="button" class="option-button" data-value="green-education">Green Economy Education</button>
-                            <button type="button" class="option-button" data-value="green-tools">Access to Green Tools</button>
-                            <button type="button" class="option-button" data-value="networking">Networking with Stakeholders</button>
+                            <button type="button" class="option-button" data-value="green-funding">Green Funding</button>
+                            <button type="button" class="option-button" data-value="smme-support">SMME Support</button>
+                            <button type="button" class="option-button" data-value="green-education">Green Education</button>
+                            <button type="button" class="option-button" data-value="green-tools">Green Tools</button>
+                            <button type="button" class="option-button" data-value="networking">Networking</button>
                         </div>
                     </div>
                     <div class="question-content" data-question="4">
-                        <label class="form-label">What types of funding are you seeking? (Select at least one)</label>
+                        <label class="form-label">What funding types? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="grants">Grants</button>
                             <button type="button" class="option-button" data-value="loans">Loans</button>
-                            <button type="button" class="option-button" data-value="equity">Equity Investments</button>
+                            <button type="button" class="option-button" data-value="equity">Equity</button>
                             <button type="button" class="option-button" data-value="crowdfunding">Crowdfunding</button>
-                            <button type="button" class="option-button" data-value="not-seeking">Not seeking funding</button>
+                            <button type="button" class="option-button" data-value="not-seeking">Not Seeking</button>
                         </div>
                     </div>
                     <div class="question-content" data-question="5">
-                        <label class="form-label">What are your business or community sectors? (Select at least one)</label>
+                        <label class="form-label">What are your sectors? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="renewable-energy">Renewable Energy</button>
                             <button type="button" class="option-button" data-value="waste-management">Waste Management</button>
@@ -102,9 +101,9 @@
                         </div>
                     </div>
                     <div class="question-content" data-question="6">
-                        <label for="experienceLevel" class="form-label">What is your experience level with green economy practices?</label>
+                        <label for="experienceLevel" class="form-label">Your experience level?</label>
                         <select id="experienceLevel" name="experienceLevel" class="form-select" required>
-                            <option value="">Select your experience level</option>
+                            <option value="">Select experience</option>
                             <option value="beginner">Beginner</option>
                             <option value="intermediate">Intermediate</option>
                             <option value="advanced">Advanced</option>
@@ -112,13 +111,13 @@
                         <button type="button" class="submit-btn" id="nextBtn" style="display: none;">Next</button>
                     </div>
                     <div class="question-content" data-question="7">
-                        <label class="form-label">Which green economy tools are you interested in accessing? (Select at least one)</label>
+                        <label class="form-label">Which green tools? (Select at least one)</label>
                         <div class="button-group">
-                            <button type="button" class="option-button" data-value="carbon-calculator">Carbon Footprint Calculator</button>
+                            <button type="button" class="option-button" data-value="carbon-calculator">Carbon Calculator</button>
                             <button type="button" class="option-button" data-value="sustainability-assessment">Sustainability Assessment</button>
-                            <button type="button" class="option-button" data-value="energy-audit">Energy Audit Tools</button>
-                            <button type="button" class="option-button" data-value="supply-chain">Green Supply Chain Management</button>
-                            <button type="button" class="option-button" data-value="none">None at this time</button>
+                            <button type="button" class="option-button" data-value="energy-audit">Energy Audit</button>
+                            <button type="button" class="option-button" data-value="supply-chain">Green Supply Chain</button>
+                            <button type="button" class="option-button" data-value="none">None</button>
                         </div>
                     </div>
                     <div class="question-content" data-question="8">
@@ -137,7 +136,7 @@
         </div>
     </div>
     <green-economy-footer></green-economy-footer>
-
+    
     <script>
         // Firebase Config
         const firebaseConfig = {
