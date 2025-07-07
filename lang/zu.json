@@ -1,6 +1,37 @@
 {
   "title": "Ithuluzi Lezomnotho Oluhlaza",
   "logoAlt": "Ilogo yethuluzi lezomnotho oluhlaza",
+
+  "header": {
+      "funding": "Ukuthola imali",
+      "opportunities": "Amathuba",
+      "find_a_job": "Thola umsebenzi",
+      "training": "Ukuqeqeshwa"
+    },
+    "footer": {
+      "about_us": "MAYELANA NATHI",
+      "about_green_economy": "Mayelana nezomnotho oluhlaza",
+      "who_we_are": "Thina",
+      "our_team": "Ithimba lethu",
+      "board_directors": "Ibhodu labaqondisi",
+      "services": "IZINSIZAKALO",
+      "green_economy_network": "Inethiwekhi yezomnotho oluhlaza",
+      "live_events_calendar": "Ikhalenda lemicimbi ebuya",
+      "green_opportunities": "Amathuba oluhlaza",
+      "news_updates": "Izindaba nokubuyekezwa",
+      "quick_links": "IZIXhumanisi EZISHISHA",
+      "news_events": "Izindaba nemicimbi",
+      "contact_us": "Xhumana nathi",
+      "knowledge_hub": "Inqolobane yolwazi",
+      "terms_reference": "Imigomo yokubhekiselwa",
+      "copyright": "© [year] Inethiwekhi Yezomnotho Oluhlaza. Wonke amalungelo agodliwe."
+    },
+    "language": {
+      "select": "Khetha",
+      "english": "IsiNgisi",
+      "zulu": "IsiZulu",
+      "tswana": "Setswana"
+    },
   "nav": {
     "about": "Mayelana nezomnotho oluhlaza",
     "irm": "ISektri ye-IRM",

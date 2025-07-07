@@ -1,6 +1,41 @@
 {
   "title": "Green Economy Toolkit",
   "logoAlt": "Green Economy Toolkit Logo",
+
+    "header": {
+      "funding": "Funding",
+      "opportunities": "Opportunities",
+      "find_a_job": "Find a Job",
+      "training": "Training"
+    },
+    "footer": {
+      "about_us": "ABOUT US",
+      "about_green_economy": "About the green economy",
+      "who_we_are": "Who we are",
+      "our_team": "Our team",
+      "board_directors": "Board of directors",
+      "services": "SERVICES",
+      "green_economy_network": "Green economy network",
+      "live_events_calendar": "Live events calendar",
+      "green_opportunities": "Green opportunities",
+      "news_updates": "News and updates",
+      "quick_links": "QUICK LINKS",
+      "news_events": "News & events",
+      "contact_us": "Contact us",
+      "knowledge_hub": "Knowledge hub",
+      "terms_reference": "Terms of reference",
+      "copyright": "© [year] Green Economy Network. All rights reserved."
+    },
+    "language": {
+      "select": "Select",
+      "english": "English",
+      "zulu": "isiZulu",
+      "tswana": "Setswana"
+    },
+
+
+
+
   "nav": {
     "about": "About the green economy",
     "irm": "IRM Sector",

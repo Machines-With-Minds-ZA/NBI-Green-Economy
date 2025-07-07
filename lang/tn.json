@@ -1,6 +1,38 @@
 {
   "title": "Sediriswa sa Ikonomi ya Boswa",
   "logoAlt": "Logo ya Sediriswa sa Ikonomi ya Boswa",
+
+  "header": {
+      "funding": "Fumana Ditshelete",
+      "opportunities": "Ditshono",
+      "find_a_job": "Fumana Mosebetsi",
+      "training": "Thuto"
+    },
+    "footer": {
+      "about_us": "KA GA RONA",
+      "about_green_economy": "Ka ga Ikonomi ya Boswa",
+      "who_we_are": "Batho ba rona",
+      "our_team": "Sehlopha sa rona",
+      "board_directors": "Bao ba lekgotla la baetapele",
+      "services": "DITIRELO",
+      "green_economy_network": "Mafaratlhatlha a Ikonomi ya Boswa",
+      "live_events_calendar": "Khalenda ya ditiragalo tse di tshwereng",
+      "green_opportunities": "Ditshono tsa boswa",
+      "news_updates": "Dikgang le ditlhabololo",
+      "quick_links": "DIKGOKA TSA BOFEFO",
+      "news_events": "Dikgang le ditiragalo",
+      "contact_us": "Ikopanye le rona",
+      "knowledge_hub": "Setsi sa kitso",
+      "terms_reference": "Melawana ya tshiamiso",
+      "copyright": "© [year] Mafaratlhatlha a Ikonomi ya Boswa. Ditshwanelo tsotlhe di bolokilwe."
+    },
+    "language": {
+      "select": "Kgetha",
+      "english": "Sekgoa",
+      "zulu": "IsiZulu",
+      "tswana": "Setswana"
+    },
+
   "nav": {
     "about": "Ka ga Ikonomi ya Boswa",
     "irm": "Karolo ya IRM",
@@ -136,4 +168,6 @@
     "zulu": "IsiZulu",
     "tswana": "Setswana"
   }
+
+  
 }

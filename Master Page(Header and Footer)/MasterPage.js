@@ -6,7 +6,7 @@ class GreenEconomyHeader extends HTMLElement {
       <header class="header">
         <div class="logo">
           <a href="../index.html">
-            <img src="../Images/GET.png" alt="Logo" />
+            <img src="../Images/GET.png" data-i18n="[alt]logoAlt" alt="Green Economy Toolkit Logo" />
           </a>
         </div>
         <nav class="nav">
@@ -15,10 +15,10 @@ class GreenEconomyHeader extends HTMLElement {
           <a href="/jobs.html" data-i18n="header.find_a_job">Find a Job</a>
           <a href="/training.html" data-i18n="header.training">Training</a>
           <select class="language-selector" onchange="changeLanguage(this.value)">
-            <option value="" disabled selected>Select</option>
-            <option value="en">English</option>
-            <option value="zu">isiZulu</option>
-            <option value="tn">Tswana</option>
+            <option value="" disabled selected data-i18n="language.select">Select</option>
+            <option value="en" data-i18n="language.english">English</option>
+            <option value="zu" data-i18n="language.zulu">isiZulu</option>
+            <option value="tn" data-i18n="language.tswana">Setswana</option>
           </select>
           <span class="search-icon">🔍</span>
           <div class="blue-section"></div>
@@ -28,7 +28,6 @@ class GreenEconomyHeader extends HTMLElement {
   }
 }
 
-// GreenEconomyFooter remains unchanged as it already uses data-i18n attributes
 class GreenEconomyFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -58,7 +57,7 @@ class GreenEconomyFooter extends HTMLElement {
               <h4 data-i18n="footer.quick_links">QUICK LINKS</h4>
               <ul>
                 <li><a href="#" data-i18n="footer.news_events">News & events</a></li>
-                <li><a href="#" data-i18n">Contact us</a></li>
+                <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li>
                 <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
                 <li><a href="#" data-i18n="footer.terms_reference">Terms of reference</a></li>
               </ul>
@@ -73,17 +72,15 @@ class GreenEconomyFooter extends HTMLElement {
   }
 }
 
-// Register the custom elements
 customElements.define('green-economy-header', GreenEconomyHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
-// Global logout function
+// Global functions
 window.logout = function() {
   console.log('Logging out...');
   window.location.href = '../index.html';
 };
 
-// Global home function
 window.home = function() {
   window.location.href = '../index.html';
 };
