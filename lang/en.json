@@ -1,0 +1,139 @@
+{
+  "title": "Green Economy Toolkit",
+  "logoAlt": "Green Economy Toolkit Logo",
+  "nav": {
+    "about": "About the green economy",
+    "irm": "IRM Sector",
+    "opportunities": "Opportunities",
+    "knowledge": "Knowledge Hub"
+  },
+  "buttons": {
+    "dashboard": "Dashboard",
+    "getFunding": "Get Funding",
+    "opportunities": "Opportunities",
+    "rmcsHub": "RMCS Hub",
+    "training": "Training",
+    "findOutMore": "Find out more",
+    "viewMore": "View more",
+    "login": "Login to Dashboard"
+  },
+  "hero": {
+    "title": "A GREEN ECONOMY TOOLKIT",
+    "videoAlt": "Introduction to the Green Economy",
+    "paragraph1": "South Africa and the world are switching to green economy, and that is creating a lot of opportunities for businesses in the renewable, repair and remanufacturing sectors.",
+    "paragraph2": "We want to share these opportunities with you, so we help people who are entrepreneurs grow their economy fund 10 x faster. The Green Economy Toolkit helps governments and institutions to plan their green economy transition. From insights, green business bank you will find green information, support and development to transition their conventional business models into green economy",
+    "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global"
+  },
+  "focus": {
+    "title": "Nine priority focus areas for the green economy in South Africa",
+    "subtitle": "(Green Economy Summit, 2010)",
+    "agriculture": "Agriculture",
+    "energy": "Energy (clean and efficient)",
+    "naturalResource": "Natural resource conservation and management (including mining)",
+    "transport": "Sustainable transport and infrastructure",
+    "environmental": "Environmental sustainability, including tourism education",
+    "buildings": "Green buildings and the built environment",
+    "waste": "Sustainable waste management and recycling",
+    "water": "Water management",
+    "production": "Sustainable production and consumption"
+  },
+  "business": {
+    "title": "Preparing your business for the green economy",
+    "card1": {
+      "title": "For your business",
+      "paragraph1": "The world is moving towards a green economy, and South Africa must do so too if it is to continue trading internationally...",
+      "paragraph2": "This is where you come in. But how do you make sure you can get some of this work?"
+    },
+    "card2": {
+      "title": "For your future",
+      "paragraph1": "The South African government has chosen nine areas to focus on in the switch to a green economy...",
+      "paragraph2": "Find out about green economy opportunities in the RM sector."
+    }
+  },
+  "info": {
+    "joinNetwork": {
+      "title": "Join the SAGE Green Economy Network",
+      "description": "Access opportunities for entrepreneurship within the green economy value chains..."
+    },
+    "opportunities": {
+      "title": "Opportunities",
+      "description": "Find out the latest job opportunities as they become available..."
+    },
+    "events": {
+      "title": "Live Events Calendar",
+      "description": "View the live events calendar and network with entrepreneurs..."
+    }
+  },
+  "news": {
+    "title": "Green economy news and updates",
+    "item1": {
+      "title": "Indalopreneur Climate-smart Cleantech Enterprise Support Programme",
+      "description": "Access to funding support for small businesses and emerging entrepreneurs..."
+    },
+    "item2": {
+      "title": "South African Pavilion at COP29",
+      "description": "Updates on compensation for occupational injuries and diseases..."
+    },
+    "item3": {
+      "title": "JET Funding Platform to close first application window on Dec 15",
+      "description": "Important deadline approaching for green economy funding applications"
+    }
+  },
+  "events": {
+    "title": "Events calendar",
+    "description": "View our live events calendar and network with entrepreneurs...",
+    "upcoming": "Upcoming Event",
+    "past": "Past Events",
+    "event1": {
+      "title": "ESG (Environmental Social Governance) Africa Conference & Expo 2025",
+      "details": "Event Details: 17 October - 17 October 2025\n08:00 to 16:00 (SAST)"
+    },
+    "event2": {
+      "title": "Green Building Convention 2025",
+      "details": "Event Details: 11 November-13 November 2025\nFull day conference (SAST)"
+    },
+    "event3": {
+      "title": "Future of Sustainability",
+      "details": "Event Details: 25 March-27 March 2025\n09:00 to 16:00 (SAST)"
+    },
+    "pastEvent1": {
+      "title": "Green Building Convention 2025",
+      "details": "Event Details: 11 November-13 November 2025\nFull day conference (SAST)"
+    }
+  },
+  "partners": {
+    "giz": "GIZ Logo",
+    "seco": "SECO Logo",
+    "gded": "GDED Logo",
+    "lms": "LMS Platform Logo",
+    "nbi": "NBI Logo"
+  },
+  "login": {
+    "title": "Access Your Green Economy Dashboard",
+    "subtitle": "Login to track your progress, access personalized funding opportunities, and connect with the green economy network."
+  },
+  "footer": {
+    "logoAlt": "Green Economy Network Logo",
+    "about": "ABOUT US",
+    "aboutLink1": "About the green economy",
+    "aboutLink2": "Who we are",
+    "aboutLink3": "Our team",
+    "aboutLink4": "Board of directors",
+    "services": "SERVICES",
+    "servicesLink1": "Green economy network",
+    "servicesLink2": "Live events calendar",
+    "servicesLink3": "Green opportunities",
+    "servicesLink4": "News and updates",
+    "links": "QUICK LINKS",
+    "linksLink1": "News & events",
+    "linksLink2": "Contact us",
+    "linksLink3": "Knowledge hub",
+    "linksLink4": "Terms of reference",
+    "copyright": "© 2025 Green Economy Network. All rights reserved."
+  },
+  "languages": {
+    "english": "English",
+    "zulu": "IsiZulu",
+    "tswana": "Tswana"
+  }
+}

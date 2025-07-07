@@ -1,0 +1,139 @@
+{
+  "title": "Ithuluzi Lezomnotho Oluhlaza",
+  "logoAlt": "Ilogo yethuluzi lezomnotho oluhlaza",
+  "nav": {
+    "about": "Mayelana nezomnotho oluhlaza",
+    "irm": "ISektri ye-IRM",
+    "opportunities": "Amathuba",
+    "knowledge": "Inqolobane yolwazi"
+  },
+  "buttons": {
+    "dashboard": "Ideshibhodi",
+    "getFunding": "Thola imali",
+    "opportunities": "Amathuba",
+    "rmcsHub": "I-Hub ye-RMCS",
+    "training": "Ukuqeqeshwa",
+    "findOutMore": "Thola okuningi",
+    "viewMore": "Buka okuningi",
+    "login": "Ngena kwi-Dashboard"
+  },
+  "hero": {
+    "title": "ITHULUZI LEZOMNOTHO OLUHLAZA",
+    "videoAlt": "Isingeniso sezomnotho oluhlaza",
+    "paragraph1": "INingizimu Afrika nomhlaba wonke sebegudla ukuya ezomnothweni oluhlaza, futhi lokhu kudala amathuba amaningi emabhizinisini emikhakheni yokuvuselela, ukulungisa nokwenza kabusha imikhiqizo.",
+    "paragraph2": "Sifuna ukwabelana ngala mathuba nawe, ngakho-ke sisiza abantu abangamabhizinisi ukuthi akhule isikhwama sawo somnotho ngokushesha okungu-10 x. Ithuluzi Lezomnotho Oluhlaza lisiza ohulumeni nezikhungo ukuthi zihlele ukuguquka kwazo kuzomnotho oluhlaza. Kusukela ekuqondeni, ebhange lebhizinisi eliluhlaza uzothola ulwazi oluluhlaza, ukusekelwa nokuthuthukiswa ukuze kuguqulwe amamodeli abo ebhizinisi ajwayelekile abe yizomnotho oluhlaza",
+    "paragraph3": "Sikusiza wena uhlaka lokuqondisisa ngezinyathelo zokuthola izinzuzo zomnotho oluhlaza nokubeka ibhizinisi lakho ukuthi lisebenze emhlabeni oluhlaza"
+  },
+  "focus": {
+    "title": "Izindawo eziyisishiyagalolunye eziqondiwe zomnotho oluhlaza eNingizimu Afrika",
+    "subtitle": "(Ingqungquthela Yezomnotho Oluhlaza, 2010)",
+    "agriculture": "Ezolimo",
+    "energy": "Amandla (ahlanzekile futhi asebenza kahle)",
+    "naturalResource": "Ukuvikelwa nokuphathwa kwemithombo yemvelo (kubandakanya izimayini)",
+    "transport": "Ezokuthutha ezisimeme kanye nengqalasizinda",
+    "environmental": "Ukusimama kwezemvelo, kubandakanya imfundo ezokuvakasha",
+    "buildings": "Izakhiwo eziluhlaza kanye nendawo eyakhiwe",
+    "waste": "Ukuphathwa kwemfucuza okusimeme nokuguqulwa kabusha",
+    "water": "Ukuphathwa kwamanzi",
+    "production": "Ukukhiqizwa nokusetshenziswa okusimeme"
+  },
+  "business": {
+    "title": "Ukulungiselela ibhizinisi lakho kumnoto oluhlaza",
+    "card1": {
+      "title": "Ngebhizinisi lakho",
+      "paragraph1": "Umhlaba usuhamba uya ezomnothweni oluhlaza, futhi iNingizimu Afrika kufanele yenze kanjalo uma izoqhubeka nokuhweba emhlabeni jikelele...",
+      "paragraph2": "Yilapho uza khona. Kodwa uzenza kanjani uqiniseke ukuthi ungathola enye yalolu msebenzi?"
+    },
+    "card2": {
+      "title": "Ngekusasa lakho",
+      "paragraph1": "Uhulumeni waseNingizimu Afrika ukhethe izindawo eziyisishiyagalolunye okufanele zigxile kuzo ekushintsheni kuzomnotho oluhlaza...",
+      "paragraph2": "Thola amathuba omnotho oluhlaza emkhakheni we-RM."
+    }
+  },
+  "info": {
+    "joinNetwork": {
+      "title": "Joyina Inethiwekhi ye-SAGE Yezomnotho Oluhlaza",
+      "description": "Thola amathuba obhizinisi ngaphakathi kochungechunge lwezomnotho oluhlaza..."
+    },
+    "opportunities": {
+      "title": "Amathuba",
+      "description": "Thola amathuba emisebenzi akamuva njengoba etholakala..."
+    },
+    "events": {
+      "title": "Ikhalenda Lemicimbi Ebuya",
+      "description": "Buka ikhalenda lethu lemicimbi ebuya futhi uxhumane nosomabhizinisi..."
+    }
+  },
+  "news": {
+    "title": "Izindaba nokubuyekezwa kwezomnotho oluhlaza",
+    "item1": {
+      "title": "I-Indalopreneur Climate-smart Cleantech Enterprise Support Programme",
+      "description": "Ukuthola ukwesekwa kwezimali kwamabhizinisi amancane nosomabhizinisi abasafufusayo..."
+    },
+    "item2": {
+      "title": "I-South African Pavilion e-COP29",
+      "description": "Ukuvuselelwa ngempenyulo yokulimala ngezifo emkhakheni wezomnotho oluhlaza..."
+    },
+    "item3": {
+      "title": "I-JET Funding Platform izovalela ifasitela lokufaka izicelo ngoDis 15",
+      "description": "Usuku olubalulekile lokuqedela izicelo zezimali zomnotho oluhlaza"
+    }
+  },
+  "events": {
+    "title": "Ikhalenda lemicimbi",
+    "description": "Buka ikhalenda lethu lemicimbi ebuya futhi uxhumane nosomabhizinisi...",
+    "upcoming": "Umcimbi ozayo",
+    "past": "Imicimbi edlule",
+    "event1": {
+      "title": "Ingqungquthela ye-ESG (Environmental Social Governance) Africa Conference & Expo 2025",
+      "details": "Imininingwane yomcimbi: 17 Okthoba - 17 Okthoba 2025\n08:00 kuya 16:00 (SAST)"
+    },
+    "event2": {
+      "title": "Ingqungquthela Yezakhiwo Eziluhlaza 2025",
+      "details": "Imininingwane yomcimbi: 11 Novemba-13 Novemba 2025\nIngqungquthela yosuku lonke (SAST)"
+    },
+    "event3": {
+      "title": "Ikusasa Lokusimama",
+      "details": "Imininingwane yomcimbi: 25 Matshi-27 Matshi 2025\n09:00 kuya 16:00 (SAST)"
+    },
+    "pastEvent1": {
+      "title": "Ingqungquthela Yezakhiwo Eziluhlaza 2025",
+      "details": "Imininingwane yomcimbi: 11 Novemba-13 Novemba 2025\nIngqungquthela yosuku lonke (SAST)"
+    }
+  },
+  "partners": {
+    "giz": "Ilogo ye-GIZ",
+    "seco": "Ilogo ye-SECO",
+    "gded": "Ilogo ye-GDED",
+    "lms": "Ilogo ye-LMS Platform",
+    "nbi": "Ilogo ye-NBI"
+  },
+  "login": {
+    "title": "Finyelela I-Dashboard Yakho Yezomnotho Oluhlaza",
+    "subtitle": "Ngena ukuze ulandelele inqubekelaphambili yakho, uthole amathuba ezimali athiselwe wena, futhi uxhumane nenethiwekhi yezomnotho oluhlaza."
+  },
+  "footer": {
+    "logoAlt": "Ilogo yeGreen Economy Network",
+    "about": "MAYELANA NATHI",
+    "aboutLink1": "Mayelana nezomnotho oluhlaza",
+    "aboutLink2": "Thina",
+    "aboutLink3": "Ithimba lethu",
+    "aboutLink4": "Ibhodu labaqondisi",
+    "services": "IZINSIZAKALO",
+    "servicesLink1": "Inethiwekhi yezomnotho oluhlaza",
+    "servicesLink2": "Ikhalenda lemicimbi ebuya",
+    "servicesLink3": "Amathuba oluhlaza",
+    "servicesLink4": "Izindaba nokubuyekezwa",
+    "links": "IZIXhumanisi EZISHISHA",
+    "linksLink1": "Izindaba nemicimbi",
+    "linksLink2": "Xhumana nathi",
+    "linksLink3": "Inqolobane yolwazi",
+    "linksLink4": "Imigomo yokubhekiselwa",
+    "copyright": "© 2025 Inethiwekhi Yezomnotho Oluhlaza. Wonke amalungelo agodliwe."
+  },
+  "languages": {
+    "english": "IsiNgisi",
+    "zulu": "IsiZulu",
+    "tswana": "IsiTswana"
+  }
+}
