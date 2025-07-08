@@ -6,6 +6,10 @@
     <title>Green Economy Opportunities</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+        <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
     <style>
       :root {
         --green-primary: #36aa51;
@@ -222,34 +226,8 @@
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-between py-2">
-          <div class="logo">
-            <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;">
-          </div>
-          
-          <ul class="nav d-none d-md-flex">
-            <li class="nav-item"><a href="index.html" class="nav-link">About the green economy</a></li>
-            <li class="nav-item"><a href="IRMSector.html" class="nav-link">IRM Sector</a></li>
-            <li class="nav-item"><a href="opportunities.html" class="nav-link active" style="color: var(--green-primary); font-weight: 600;">Opportunities</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Knowledge Hub</a></li>
-          </ul>
-          
-          <div class="header-actions d-flex align-items-center gap-3">
-            <select class="language-selector form-select form-select-sm">
-              <option>English</option>
-              <option>IsiZulu</option>
-              <option>Tswana</option>
-            </select>
-            <button class="dashboard-button btn btn-sm">Dashboard</button>
-            <button class="btn btn-link text-dark p-0">
-              <i class="bi bi-search" style="font-size: 1.25rem;"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
+        <green-economy-header></green-economy-header>
+
 
     <!-- Hero Section -->
     <section class="hero" style="background: url('Images/Knowledge-Hub_2023-10-04-145730_tkxt_a91a4f7cf12b2095b100c24cf6024d38.webp') center center/cover no-repeat; position: relative;">
@@ -309,60 +287,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-lg-3">
-            <div class="footer-section">
-              <div class="d-flex align-items-center mb-3">
-                <img src="Images/GET.png" alt="Green Economy Network Logo" style="height: 60px;">
-              </div>
-              <p class="text-muted">Empowering sustainable economic growth through green initiatives.</p>
-            </div>
-          </div>
-          
-          <div class="col-lg-3">
-            <div class="footer-section">
-              <h4>ABOUT US</h4>
-              <ul>
-                <li><a href="#">About the green economy</a></li>
-                <li><a href="#">Who we are</a></li>
-                <li><a href="#">Our team</a></li>
-                <li><a href="#">Board of directors</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="col-lg-3">
-            <div class="footer-section">
-              <h4>SERVICES</h4>
-              <ul>
-                <li><a href="#">Green economy network</a></li>
-                <li><a href="#">Live events calendar</a></li>
-                <li><a href="#">Green opportunities</a></li>
-                <li><a href="#">News and updates</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="col-lg-3">
-            <div class="footer-section">
-              <h4>QUICK LINKS</h4>
-              <ul>
-                <li><a href="#">News & events</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Knowledge hub</a></li>
-                <li><a href="#">Terms of reference</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="footer-bottom text-center pt-4">
-          <p class="text-muted mb-0">© 2025 Green Economy Network. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <green-economy-footer></green-economy-footer>
+
 
     <script>
       document.querySelectorAll('.business-card-button').forEach((button) => {
@@ -375,186 +301,8 @@
       });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Card data array
-      const opportunityCards = [
-        {
-          title: "Green Finance Database",
-          desc: "The database contains information on funding opportunities, the types of funding and institutions providing the funding and contact details. It is ideal for any entity seeking a broad range of funding...",
-          details: "#",
-          detailsText: "Click here to download"
-        },
-        {
-          title: "Call for Host Companies",
-          desc: "The NBI's Installation, Repair and Maintenance initiative in partnership with the Youth Employment Service invites SME'S who are interested and equipped to host unemployed graduates with green technic...",
-          details: "#",
-          detailsText: "View Details"
-        },
-        {
-          title: "Green Careers",
-          desc: "As South Africa transitions to a more inclusive green economy, making a green career choice can bring benefits for our country and ensure that a healthy environment supports our collective well-being.",
-          details: "#",
-          detailsText: "View Details"
-        },
-        {
-          title: "Green Finance Platform",
-          desc: "The Green Finance Platform (GFP) is a global network of organizations and experts that address major knowledge gaps in sustainable finance.",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Green Policy Platform",
-          desc: "The GGKP is a global community of organisations and experts committed to collaboratively generating, managing and sharing  green growth knowledge and data to mobilise a sustainable future.",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Green Industry Platform",
-          desc: "The Green Industry Platform (GIP) provides sector-and country-specific technical and practical knowledge to support a green industrial transformation.",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Calling Artisan SMMEs and Employers to host young people for Workspace Learning",
-          desc: "Calling on Artisan SMMEs and Employers: Host young people for Workplace learning with benefits including work-ready candidates, covered trainee stipends, and more.",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Department of Forestry, Fisheries and the Environment",
-          desc: "A South African government department responsible for protecting, conserving and improving the South African environment and natural resources.",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Centre for Scientific and Industrial Research",
-          desc: "A statutory research body that looks at how to make life in South Africa better. The CSIR has created a guide for South Africa's green economy",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Trade & Industrial Policy Strategies",
-          desc: "An independent research organisation that focuses on industrial policy, sustainability and inclusive growth",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "National Cleaner Production Centre",
-          desc: "A national support programme that drives the transition of South African industry towards a green economy through appropriate resource efficiency and cleaner production interventions",
-          details: "#",
-          detailsText: "View details"
-        },
-        {
-          title: "Sector education and training authorities",
-          desc: "Sector education and training authorities (seta) – your relevant seta can tell you about funding opportunities, especially for skills training",
-          details: "#",
-          detailsText: "View details"
-        }
-      ];
-      const cardsPerPage = 10;
-      let currentPage = 1;
-      let searchTerm = '';
-      let selectedCategory = '';
-      // Map category keywords to card content for demo (customize as needed)
-      const categoryKeywords = {
-        'procurement': ['procurement'],
-        'market-access': ['market access'],
-        'capacity-building': ['capacity building'],
-        'training': ['training', 'workshop'],
-        'enterprise-development': ['enterprise', 'sme', 'business']
-      };
-      function getFilteredCards() {
-        let filtered = opportunityCards;
-        if (selectedCategory) {
-          const keywords = categoryKeywords[selectedCategory] || [];
-          filtered = filtered.filter(card => {
-            const text = (card.title + ' ' + (card.desc || '')).toLowerCase();
-            return keywords.some(keyword => text.includes(keyword));
-          });
-        }
-        if (searchTerm) {
-          filtered = filtered.filter(card =>
-            card.title.toLowerCase().includes(searchTerm) ||
-            (card.desc && card.desc.toLowerCase().includes(searchTerm))
-          );
-        }
-        return filtered;
-      }
-      function renderCards(page) {
-        const filtered = getFilteredCards();
-        const start = (page - 1) * cardsPerPage;
-        const end = start + cardsPerPage;
-        const cards = filtered.slice(start, end);
-        const container = document.getElementById('opportunity-cards');
-        container.innerHTML = cards.map(card => `
-          <div class="col-md-6">
-            <div class="card h-100">
-              <div class="card-body position-relative pb-5">
-                <h5 class="card-title opportunity-title fw-semibold mb-3">${card.title}</h5>
-                ${card.desc ? `<p class="card-text text-muted mb-4">${card.desc}</p>` : ''}
-                <a href="${card.details}" class="subcard-link position-absolute bottom-0 start-0 ms-3 mb-3">${card.detailsText}</a>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
-      function renderPagination() {
-        const filtered = getFilteredCards();
-        const pageCount = Math.ceil(filtered.length / cardsPerPage);
-        const pagination = document.getElementById('pagination');
-        let html = '';
-        html += `<li class="page-item${currentPage === 1 ? ' disabled' : ''}"><a class="page-link" href="#" data-page="prev">Previous</a></li>`;
-        for (let i = 1; i <= pageCount; i++) {
-          html += `<li class="page-item${i === currentPage ? ' active' : ''}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
-        }
-        html += `<li class="page-item${currentPage === pageCount ? ' disabled' : ''}"><a class="page-link" href="#" data-page="next">Next</a></li>`;
-        pagination.innerHTML = html;
-        // Add event listeners
-        pagination.querySelectorAll('a.page-link').forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            let page = this.getAttribute('data-page');
-            const filtered = getFilteredCards();
-            const pageCount = Math.ceil(filtered.length / cardsPerPage);
-            if (page === 'prev' && currentPage > 1) {
-              currentPage--;
-            } else if (page === 'next' && currentPage < pageCount) {
-              currentPage++;
-            } else if (!isNaN(page)) {
-              currentPage = parseInt(page);
-            }
-            renderCards(currentPage);
-            renderPagination();
-            window.scrollTo({ top: document.getElementById('opportunity-cards').offsetTop - 100, behavior: 'smooth' });
-          });
-        });
-      }
-      // Search functionality
-      document.getElementById('searchInput').addEventListener('input', function(e) {
-        searchTerm = e.target.value.trim().toLowerCase();
-        currentPage = 1;
-        renderCards(currentPage);
-        renderPagination();
-      });
-      // Category filter functionality
-      document.getElementById('categoryFilter').addEventListener('change', function(e) {
-        selectedCategory = e.target.value;
-        currentPage = 1;
-        renderCards(currentPage);
-        renderPagination();
-      });
-      document.getElementById('resetSearch').addEventListener('click', function() {
-        document.getElementById('searchInput').value = '';
-        document.getElementById('categoryFilter').value = '';
-        searchTerm = '';
-        selectedCategory = '';
-        currentPage = 1;
-        renderCards(currentPage);
-        renderPagination();
-      });
-      // Initial render
-      renderCards(currentPage);
-      renderPagination();
+    <script src="../../scripts/opportunities.js">
+   
     </script>
   </body>
 </html>

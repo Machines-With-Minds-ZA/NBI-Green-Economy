@@ -1,53 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Green Economy Toolkit</title>
+    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
     <link rel="stylesheet" href="IRMSector.css">
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
-        </div>
-        <nav class="nav">
-          <a href="#">About the green economy</a>
-          <a href="IRMSector.html">IRM Sector</a>
-          <a href="opportunities.html">Opportunities</a>
-          <a href="#">Knowledge Hub</a>
-        </nav>
-        <div class="header-actions">
-          <select class="language-selector">
-            <option>English</option>
-            <option>IsiZulu</option>
-            <option>Tswana</option>
-          </select>
-          <button class="dashboard-button">Dashboard</button>
-          <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-        </div>
-      </div>
-    </header>
+    <green-economy-header></green-economy-header>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
         <div class="hero-image-section">
-          <img src="Images/IRMSector.png" alt="Hero Image" class="hero-img" />
+          <img src="../../Images/IRMSector.png" alt="Hero Image" class="hero-img" />
         </div>
         <div class="hero-text">
-          <h1>Installation, repair and maintenance sector</h1>
+          <h1>Installation, repair and maintenance sectorc</h1>
           <p>
            Since 2019, the National Business 
            Initiative has been spearheading 
@@ -109,7 +81,6 @@
     <!-- Natural Resource Conservation Section -->
     <section class="section3" style="background: #0891b2;">
             <h2>Natural resource conservation and management(including mining)</h2>
-
         <div class="section3-flex">
         <div class="news-rect-box">
           <div class="rect-heading" style="color: #0891b2;">Where do I fit in?</div>
@@ -147,8 +118,7 @@
 
     <!-- Environmental Sustainability Section -->
     <section class="section3" style="background: #0891b2;">
-      
-            <h2>Environmental sustainability, including tourism education</h2>
+      <h2>Environmental sustainability, including tourism education</h2>
   <div class="section3-flex">
         <div class="news-rect-box">
           <div class="rect-heading" style="color: #0891b2;">Where do I fit in?</div>
@@ -225,7 +195,6 @@
     <!-- Sustainable Production Section -->
     <section class="section3" style="background: #0891b2;">
             <h2>Sustainable production and consumption</h2>
-
         <div class="section3-flex">
         <div class="news-rect-box">
           <div class="rect-heading" style="color: #0891b2;">Where do I fit in?</div>
@@ -245,11 +214,11 @@
     <!-- Partner Logos -->
     <section class="partners">
       <div class="partners-content">
-        <img src="Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
-        <img src="Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
-        <img src="Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
-        <img src="Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
-        <img src="Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
+        <img src="../../Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
+        <img src="../../Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
+        <img src="../../Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
+        <img src="../../Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
+        <img src="../../Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
       </div>
     </section>
 
@@ -265,45 +234,6 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div style="display: flex; align-items: center; margin-bottom: 16px">
-            <img src="Images/GET.png" alt="Green Economy Network Logo" style="height: 60px; margin-right: 8px;">
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>ABOUT US</h4>
-          <ul>
-            <li><a href="#">About the green economy</a></li>
-            <li><a href="#">Who we are</a></li>
-            <li><a href="#">Our team</a></li>
-            <li><a href="#">Board of directors</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>SERVICES</h4>
-          <ul>
-            <li><a href="#">Green economy network</a></li>
-            <li><a href="#">Live events calendar</a></li>
-            <li><a href="#">Green opportunities</a></li>
-            <li><a href="#">News and updates</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>QUICK LINKS</h4>
-          <ul>
-            <li><a href="#">News & events</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Knowledge hub</a></li>
-            <li><a href="#">Terms of reference</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 Green Economy Network. All rights reserved.</p>
-      </div>
-    </footer>
+    <green-economy-footer></green-economy-footer>
   </body>
 </html>

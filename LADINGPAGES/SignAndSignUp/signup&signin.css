@@ -60,6 +60,7 @@
             background-color: #000000;
             color: #ffffff;
         }
+        
         .sign-up-btn:hover {
             background-color: #1a1a1a;
             transform: scale(1.05);

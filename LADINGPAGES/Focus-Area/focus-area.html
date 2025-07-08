@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../../Master Page(Header and Footer)/translation.js"></script>
+    <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
+
     <title>Focus Areas - Green Economy Toolkit</title>
     <style>
       * {
@@ -20,101 +25,6 @@
         background-color: white;
         overflow-x: hidden;
       }
-
-      /* Header Styles */
-      .header {
-        background: white;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        opacity: 1; /* Always visible */
-      }
-
-      .header-content {
-        width: 100%;
-        padding: 0 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      .logo {
-        display: flex;
-        align-items: center;
-      }
-
-      .logo img {
-        width: 160px;
-        height: 70px;
-        margin-right: 12px;
-        border-radius: 8px; /* Rounded corners for a nicer look */
-        object-fit: contain; /* Ensures the image fits without distortion */
-      }
-
-      .logo-text {
-        font-size: 18px;
-        font-weight: bold;
-        color: #1a8934;
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-      }
-
-      .nav a {
-        color: #6b7280;
-        text-decoration: none;
-        font-size: 14px;
-        transition: color 0.3s;
-      }
-
-      .nav a:hover {
-        color: #1a8934;
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .language-selector {
-        padding: 4px 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        background: white;
-        color: #374151;
-        font-size: 14px;
-      }
-
-      .dashboard-button {
-        background: #0891b2;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .dashboard-button:hover {
-        background: #0e7490;
-      }
-
-      .search-icon {
-        width: 20px;
-        height: 20px;
-        color: #6b7280;
-        margin-left: 16px;
-      }
-
       /* Hero Section */
       .hero {
         background: #dbeafe;
@@ -346,58 +256,7 @@
       .partner-text .title {
         font-weight: 500;
       }
-
-      /* Footer */
-      .footer {
-        background: #1a8934;
-        color: white;
-        padding: 48px 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .footer-content {
-        width: 100%;
-        padding: 0 24px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 32px;
-        margin-bottom: 32px;
-      }
-
-      .footer-section h4 {
-        font-weight: bold;
-        margin-bottom: 16px;
-      }
-
-      .footer-section ul {
-        list-style: none;
-      }
-
-      .footer-section li {
-        margin-bottom: 8px;
-      }
-
-      .footer-section a {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
-        transition: text-decoration 0.3s;
-      }
-
-      .footer-section a:hover {
-        text-decoration: underline;
-      }
-
-      .footer-bottom {
-        border-top: 1px solid #16a34a;
-        padding-top: 32px;
-        text-align: center;
-        width: 100%;
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-
+    
       /* Animations */
       @keyframes fadeIn {
         from { opacity: 0; }
@@ -426,9 +285,6 @@
 
       /* Responsive */
       @media (max-width: 768px) {
-        .nav {
-          display: none;
-        }
 
         .focus-item {
           flex-direction: column;
@@ -461,37 +317,7 @@
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-         <div class="logo">
-            <img src="Images/GET.png" alt="Green Economy Toolkit Logo" style="height: 50px;" />
-        </div>
-        <nav class="nav">
-          <a href="#">About the green economy</a>
-          <a href="#">IRM Sector</a>
-          <a href="#">Opportunities</a>
-          <a href="#">Knowledge Hub</a>
-        </nav>
-        <div class="header-actions">
-          <select class="language-selector">
-            <option>English</option>
-            <option>IsiZulu</option>
-            <option>Tswana</option>
-          </select>
-          <button class="dashboard-button">Dashboard</button>
-          <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-        </div>
-      </div>
-    </header>
+        <green-economy-header></green-economy-header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -722,7 +548,7 @@
     <!-- Back to home -->
     <section class="back-section">
       <div class="back-content">
-        <a href="index.html" class="back-link">
+        <a href="../../index.html" class="back-link">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -736,154 +562,12 @@
       </div>
     </section>
 
-    <!-- Partner Logos -->
-    <section class="partners">
-      <div class="partners-content">
-        <div class="partner-item">
-          <div class="partner-icon orange"></div>
-          <span class="partner-text"
-            >Department of<br /><span class="title"
-              >Trade & Industry</span
-            ></span
-          >
-        </div>
-        <div class="partner-item">
-          <div class="partner-icon red"></div>
-          <span class="partner-text title">GIZ</span>
-        </div>
-        <div class="partner-item">
-          <div class="partner-icon blue">Z</div>
-          <span class="partner-text title">ZA</span>
-        </div>
-        <div class="partner-badge green">IRM</div>
-        <div class="partner-badge blue">NBI</div>
-      </div>
-    </section>
-
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div style="display: flex; align-items: center; margin-bottom: 16px">
-            <div
-              style="
-                width: 24px;
-                height: 24px;
-                background: white;
-                border-radius: 4px;
-                margin-right: 8px;
-              "
-            ></div>
-            <span style="font-weight: bold">Green Economy Network</span>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>ABOUT US</h4>
-          <ul>
-            <li><a href="#">About the green economy</a></li>
-            <li><a href="#">Who we are</a></li>
-            <li><a href="#">Our team</a></li>
-            <li><a href="#">Board of directors</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>SERVICES</h4>
-          <ul>
-            <li><a href="#">Green economy network</a></li>
-            <li><a href="#">Live events calendar</a></li>
-            <li><a href="#">Green opportunities</a></li>
-            <li><a href="#">News and updates</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>QUICK LINKS</h4>
-          <ul>
-            <li><a href="#">News & events</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Knowledge hub</a></li>
-            <li><a href="#">Terms of reference</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2024 Green Economy Network. All rights reserved.</p>
-      </div>
-    </footer>
+    <green-economy-footer></green-economy-footer>
 
-    <script>
-      // Get URL parameters to show specific focus area if needed
-      function getUrlParameter(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-        var results = regex.exec(location.search);
-        return results === null
-          ? ""
-          : decodeURIComponent(results[1].replace(/\+/g, " "));
-      }
 
-      // You could use this to highlight a specific focus area based on URL parameter
-      const areaParam = getUrlParameter("area");
-      if (areaParam) {
-        console.log("Showing focus area:", areaParam);
-        // Add logic here to highlight or scroll to specific focus area
-      }
-
-      // Add click handlers for buttons
-      document
-        .querySelector(".dashboard-button")
-        .addEventListener("click", function () {
-          console.log("Dashboard button clicked");
-          // Add your dashboard functionality here
-        });
-
-      // Add smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-            });
-          }
-        });
-      });
-
-      // Parallax effect for hero
-      const hero = document.querySelector(".hero");
-      if (hero) {
-        window.addEventListener("scroll", function () {
-          const scrollPercentage = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
-          hero.style.backgroundPositionY = `${-50 + scrollPercentage * 50}px`;
-        });
-      }
-
-      // Add animation on scroll for focus and partner items
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            entry.target.style.transform = "translateX(0)";
-            entry.target.style.opacity = "1";
-            entry.target.style.animation = `slideInRight 0.6s ease ${index * 0.1}s forwards`;
-          }
-        });
-      }, observerOptions);
-
-      // Observe focus items and partner items
-      document.querySelectorAll(".focus-item").forEach((item, index) => {
-        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(item);
-      });
-
-      document.querySelectorAll(".partner-item").forEach((item, index) => {
-        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(item);
-      });
+    <script src="../../scripts/focus-area.js">
+     
     </script>
   </body>
 </html>
