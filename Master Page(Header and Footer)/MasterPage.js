@@ -6,14 +6,14 @@ class GreenEconomyHeader extends HTMLElement {
       <header class="header">
         <div class="logo">
           <a href="../index.html">
-            <img src="../Images/GET.png" data-i18n="[alt]logoAlt" alt="Green Economy Toolkit Logo" />
+            <img src="/Images/GET.png" data-i18n="[alt]logoAlt" alt="Green Economy Toolkit Logo" />
           </a>
         </div>
         <nav class="nav">
-          <a href="/index.html" data-i18n="header.funding">Funding</a>
-          <a href="/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
-          <a href="/jobs.html" data-i18n="header.find_a_job">Find a Job</a>
-          <a href="/training.html" data-i18n="header.training">Training</a>
+          <a href="/index.html" data-i18n="header.funding">About the Green Economy</a>
+          <a href="/opportunities.html" data-i18n="header.opportunities">IRM Sector</a>
+          <a href="/jobs.html" data-i18n="header.find_a_job">Opportunities/a>
+          <a href="/training.html" data-i18n="header.training">Knowledge Hub</a>
           <select class="language-selector" onchange="changeLanguage(this.value)">
             <option value="" disabled selected data-i18n="language.select">Select</option>
             <option value="en" data-i18n="language.english">English</option>
