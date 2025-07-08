@@ -2,18 +2,19 @@ class GreenEconomyHeader extends HTMLElement {
   connectedCallback() {
     const isDashboard = window.location.pathname.includes('dashboard.html');
 
+    // Use absolute path for logo to ensure it loads on all pages
     this.innerHTML = `
       <header class="header">
         <div class="logo">
-          <a href="../index.html">
-            <img src="../Images/GET.png" alt="Logo" />
+          <a href="/index.html"> <!-- Absolute path to ensure navigation works from any page -->
+            <img src="/Images/GET.png" alt="Logo" />
           </a>
         </div>
         <nav class="nav">
-          <a href="/index.html" data-i18n="header.funding">Funding</a>
-          <a href="/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
-          <a href="/jobs.html" data-i18n="header.find_a_job">Find a Job</a>
-          <a href="/training.html" data-i18n="header.training">Training</a>
+          <a href="/LADINGPAGES/About Page/about.html" data-i18n="header.funding">About the Green Economy</a>
+          <a href="/opportunities.html" data-i18n="header.opportunities">IRM Sector</a>
+          <a href="/jobs.html" data-i18n="header.find_a_job">Opportunities</a>
+          <a href="/training.html" data-i18n="header.training">Knowledge Hub</a>
           <select class="language-selector" onchange="changeLanguage(this.value)">
             <option value="" disabled selected>Select</option>
             <option value="en">English</option>
@@ -28,7 +29,7 @@ class GreenEconomyHeader extends HTMLElement {
   }
 }
 
-// GreenEconomyFooter remains unchanged as it already uses data-i18n attributes
+// GreenEconomyFooter remains unchanged
 class GreenEconomyFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -58,7 +59,7 @@ class GreenEconomyFooter extends HTMLElement {
               <h4 data-i18n="footer.quick_links">QUICK LINKS</h4>
               <ul>
                 <li><a href="#" data-i18n="footer.news_events">News & events</a></li>
-                <li><a href="#" data-i18n">Contact us</a></li>
+                <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li> <!-- Fixed data-i18n attribute -->
                 <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
                 <li><a href="#" data-i18n="footer.terms_reference">Terms of reference</a></li>
               </ul>
@@ -80,10 +81,10 @@ customElements.define('green-economy-footer', GreenEconomyFooter);
 // Global logout function
 window.logout = function() {
   console.log('Logging out...');
-  window.location.href = '../index.html';
+  window.location.href = '/index.html'; // Absolute path for consistency
 };
 
 // Global home function
 window.home = function() {
-  window.location.href = '../index.html';
+  window.location.href = '/index.html'; // Absolute path for consistency
 };
