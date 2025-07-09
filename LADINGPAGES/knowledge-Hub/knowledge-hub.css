@@ -37,6 +37,16 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
+  height: 500px; /* Set a shorter height for the hero image section */
+  min-height: 220px;
+  max-height: 1000px;
+  overflow: hidden;
+}
+.hero-image-section img,
+.hero-image-section video.hero-video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .hero-text {
   display: flex;
@@ -109,8 +119,9 @@ body {
 }
 .news-rect-box {
   background: #fff;
-  border-radius: 16px;
-  width: 600px;
+  border-radius: 0; /* Sharp corners */
+  width: 900px; /* Make the box wider */
+  max-width: 100%;
   height: 320px;
   display: flex;
   flex-direction: column;
@@ -190,8 +201,9 @@ body {
 .news-header6 .news-rect-box,
 .news-header8 .news-rect-box {
   background: #fff;
-  border-radius: 16px;
-  width: 600px;
+  border-radius: 0; /* Sharp corners */
+  width: 900px; /* Make the box wider */
+  max-width: 100%;
   height: 320px;
   display: flex;
   flex-direction: column;

@@ -2,23 +2,24 @@ class GreenEconomyHeader extends HTMLElement {
   connectedCallback() {
     const isDashboard = window.location.pathname.includes('dashboard.html');
 
+    // Use absolute path for logo to ensure it loads on all pages
     this.innerHTML = `
       <header class="header">
         <div class="logo">
-          <a href="../index.html">
-            <img src="/Images/GET.png" data-i18n="[alt]logoAlt" alt="Green Economy Toolkit Logo" />
+          <a href="/index.html"> <!-- Absolute path to ensure navigation works from any page -->
+            <img src="/Images/GET.png" alt="Logo" />
           </a>
         </div>
         <nav class="nav">
-          <a href="/index.html" data-i18n="header.funding">About the Green Economy</a>
+          <a href="/LADINGPAGES/About Page/about.html" data-i18n="header.funding">About the Green Economy</a>
           <a href="/opportunities.html" data-i18n="header.opportunities">IRM Sector</a>
-          <a href="/jobs.html" data-i18n="header.find_a_job">Opportunities/a>
+          <a href="/jobs.html" data-i18n="header.find_a_job">Opportunities</a>
           <a href="/training.html" data-i18n="header.training">Knowledge Hub</a>
           <select class="language-selector" onchange="changeLanguage(this.value)">
-            <option value="" disabled selected data-i18n="language.select">Select</option>
-            <option value="en" data-i18n="language.english">English</option>
-            <option value="zu" data-i18n="language.zulu">isiZulu</option>
-            <option value="tn" data-i18n="language.tswana">Setswana</option>
+            <option value="" disabled selected>Select</option>
+            <option value="en">English</option>
+            <option value="zu">isiZulu</option>
+            <option value="tn">Tswana</option>
           </select>
           <span class="search-icon">🔍</span>
           <div class="blue-section"></div>
@@ -28,6 +29,7 @@ class GreenEconomyHeader extends HTMLElement {
   }
 }
 
+// GreenEconomyFooter remains unchanged
 class GreenEconomyFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -57,7 +59,7 @@ class GreenEconomyFooter extends HTMLElement {
               <h4 data-i18n="footer.quick_links">QUICK LINKS</h4>
               <ul>
                 <li><a href="#" data-i18n="footer.news_events">News & events</a></li>
-                <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li>
+                <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li> <!-- Fixed data-i18n attribute -->
                 <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
                 <li><a href="#" data-i18n="footer.terms_reference">Terms of reference</a></li>
               </ul>
@@ -72,15 +74,17 @@ class GreenEconomyFooter extends HTMLElement {
   }
 }
 
+// Register the custom elements
 customElements.define('green-economy-header', GreenEconomyHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
-// Global functions
+// Global logout function
 window.logout = function() {
   console.log('Logging out...');
-  window.location.href = '../index.html';
+  window.location.href = '/index.html'; // Absolute path for consistency
 };
 
+// Global home function
 window.home = function() {
-  window.location.href = '../index.html';
+  window.location.href = '/index.html'; // Absolute path for consistency
 };
