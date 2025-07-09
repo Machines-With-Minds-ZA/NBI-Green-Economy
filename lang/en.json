@@ -1,49 +1,13 @@
 {
   "title": "Green Economy Toolkit",
-  "logoAlt": "Green Economy Toolkit Logo",
-
-    "header": {
-      "funding": "About the green economy",
-      "opportunities": "IRM Sector",
-      "find_a_job": "Opportunities",
-      "training": "Knowledge Hub"
-    },
-    "footer": {
-      "about_us": "ABOUT US",
-      "about_green_economy": "About the green economy",
-      "who_we_are": "Who we are",
-      "our_team": "Our team",
-      "board_directors": "Board of directors",
-      "services": "SERVICES",
-      "green_economy_network": "Green economy network",
-      "live_events_calendar": "Live events calendar",
-      "green_opportunities": "Green opportunities",
-      "news_updates": "News and updates",
-      "quick_links": "QUICK LINKS",
-      "news_events": "News & events",
-      "contact_us": "Contact us",
-      "knowledge_hub": "Knowledge hub",
-      "terms_reference": "Terms of reference",
-      "copyright": "© [year] Green Economy Network. All rights reserved."
-    },
-    "language": {
-      "select": "Select",
-      "english": "English",
-      "zulu": "isiZulu",
-      "tswana": "Setswana"
-    },
-
-
-
-
-  "nav": {
-    "about": "About the green economy",
-    "irm": "IRM Sector",
-    "opportunities": "Opportunities",
-    "knowledge": "Knowledge Hub"
+  "hero": {
+    "title": "A GREEN ECONOMY TOOLKIT",
+    "paragraph1": "South Africa and the world are switching to green economy, and that is creating a lot of opportunities for businesses in the renewable, repair and remanufacturing sectors.",
+    "paragraph2": "We want to share these opportunities with you, so we help people who are entrepreneurs grow their economy fund 10 x faster. The Green Economy Toolkit helps governments and institutions to plan their green economy transition. From insights, green business bank you will find green information, support and development to transition their conventional business models into green economy",
+    "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global",
+    "videoAlt": "Introduction to the Green Economy"
   },
   "buttons": {
-    "dashboard": "Dashboard",
     "getFunding": "Get Funding",
     "opportunities": "Opportunities",
     "rmcsHub": "RMCS Hub",
@@ -51,13 +15,6 @@
     "findOutMore": "Find out more",
     "viewMore": "View more",
     "login": "Login to Dashboard"
-  },
-  "hero": {
-    "title": "A GREEN ECONOMY TOOLKIT",
-    "videoAlt": "Introduction to the Green Economy",
-    "paragraph1": "South Africa and the world are switching to green economy, and that is creating a lot of opportunities for businesses in the renewable, repair and remanufacturing sectors.",
-    "paragraph2": "We want to share these opportunities with you, so we help people who are entrepreneurs grow their economy fund 10 x faster. The Green Economy Toolkit helps governments and institutions to plan their green economy transition. From insights, green business bank you will find green information, support and development to transition their conventional business models into green economy",
-    "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global"
   },
   "focus": {
     "title": "Nine priority focus areas for the green economy in South Africa",
@@ -97,7 +54,9 @@
     "events": {
       "title": "Live Events Calendar",
       "description": "View the live events calendar and network with entrepreneurs and experts within the green economy space via our events platform"
-    }
+    },
+    "title": "Find out about opportunities for procurement, market access, capacity building, training and enterprise development support in your area.",
+    "description": "This page is your go-to hub for all the information you need, right at your fingertips. Use the filter to select resources tailored to your specific category of interest."
   },
   "news": {
     "title": "Green economy news and updates",
@@ -147,28 +106,41 @@
     "title": "Access Your Green Economy Dashboard",
     "subtitle": "Login to track your progress, access personalized funding opportunities, and connect with the green economy network."
   },
-  "footer": {
-    "logoAlt": "Green Economy Network Logo",
-    "about": "ABOUT US",
-    "aboutLink1": "About the green economy",
-    "aboutLink2": "Who we are",
-    "aboutLink3": "Our team",
-    "aboutLink4": "Board of directors",
-    "services": "SERVICES",
-    "servicesLink1": "Green economy network",
-    "servicesLink2": "Live events calendar",
-    "servicesLink3": "Green opportunities",
-    "servicesLink4": "News and updates",
-    "links": "QUICK LINKS",
-    "linksLink1": "News & events",
-    "linksLink2": "Contact us",
-    "linksLink3": "Knowledge hub",
-    "linksLink4": "Terms of reference",
-    "copyright": "© 2025 Green Economy Network. All rights reserved."
+  "filter": {
+    "default": "Filter by Category",
+    "procurement": "Procurement",
+    "marketAccess": "Market Access",
+    "capacityBuilding": "Capacity Building",
+    "training": "Training",
+    "enterpriseDevelopment": "Enterprise Development",
+    "searchPlaceholder": "Search...",
+    "reset": "Reset"
   },
-  "languages": {
-    "english": "English",
-    "zulu": "IsiZulu",
-    "tswana": "Tswana"
+  "pagination": {
+    "label": "Opportunity pagination"
+  },
+  "header": {
+    "funding": "About the Green Economy",
+    "opportunities": "Opportunities",
+    "find_a_job": "Find a Job",
+    "training": "Knowledge Hub"
+  },
+  "footer": {
+    "about_us": "ABOUT US",
+    "about_green_economy": "About the green economy",
+    "who_we_are": "Who we are",
+    "our_team": "Our team",
+    "board_directors": "Board of directors",
+    "services": "SERVICES",
+    "green_economy_network": "Green economy network",
+    "live_events_calendar": "Live events calendar",
+    "green_opportunities": "Green opportunities",
+    "news_updates": "News and updates",
+    "quick_links": "QUICK LINKS",
+    "news_events": "News & events",
+    "contact_us": "Contact us",
+    "knowledge_hub": "Knowledge hub",
+    "terms_reference": "Terms of reference",
+    "copyright": "© ${new Date().getFullYear()} Green Economy Network. All rights reserved."
   }
 }

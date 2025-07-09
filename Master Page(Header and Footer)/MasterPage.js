@@ -11,10 +11,10 @@ class GreenEconomyHeader extends HTMLElement {
           </a>
         </div>
         <nav class="nav">
-          <a href="/LADINGPAGES/About Page/about.html" data-i18n="header.funding">About the Green Economy</a>
-          <a href="/opportunities.html" data-i18n="header.opportunities">IRM Sector</a>
-          <a href="/jobs.html" data-i18n="header.find_a_job">Opportunities</a>
-          <a href="/training.html" data-i18n="header.training">Knowledge Hub</a>
+          <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the Green Economy</a>
+          <a href="opportunities.html" data-i18n="header.opportunities">Opportunities</a>
+          <a href="/index.html" data-i18n="header.find_a_job">Find a Job</a>
+          <a href="/index.html" data-i18n="header.training">Knowledge Hub</a>
           <select class="language-selector" onchange="changeLanguage(this.value)">
             <option value="" disabled selected>Select</option>
             <option value="en">English</option>

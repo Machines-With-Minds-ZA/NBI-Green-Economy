@@ -1,4 +1,6 @@
-   // Card data array
+
+  
+  // Card data array
       const opportunityCards = [
         {
           title: "Green Finance Database",
@@ -177,3 +179,14 @@
       // Initial render
       renderCards(currentPage);
       renderPagination();
+
+      document.querySelectorAll('.business-card-button').forEach((button) => {
+        button.addEventListener('click', function () {
+          alert('Feature coming soon!');
+        });
+      });
+      document.querySelector('.dashboard-button').addEventListener('click', function () {
+        window.location.href = "questionnaire/questionnaire.html";
+      });
+
+      

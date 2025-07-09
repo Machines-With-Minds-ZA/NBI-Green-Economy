@@ -1,0 +1,199 @@
+:root {
+    --green-primary: #36aa51;
+    --green-dark: #28913e;
+    --green-light: #e0f7ea;
+  }
+  
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Header */
+  .header {
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .language-selector {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .dashboard-button {
+    background-color: var(--green-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .dashboard-button:hover {
+    background-color: var(--green-dark);
+  }
+  
+  /* Hero */
+  .hero {
+    background: var(--green-primary);
+    color: white;
+  }
+  
+  .hero h1 {
+    font-weight: 600;
+    font-size: 2.5rem;
+  }
+  
+  /* Cards */
+  .card {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    transition: none !important;
+  }
+  
+  .card-body {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  
+  .opportunity-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color:rgb(86, 86, 86) !important;
+    font-family: 'Segoe UI Black', 'Segoe UI', Arial, sans-serif;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  
+  .opportunity-title:hover {
+    color: var(--green-primary);
+  }
+  
+  .subcard-link {
+    display: inline-block;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--green-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid var(--green-primary);
+  }
+  
+  .subcard-link:hover {
+    background: var(--green-light);
+    color: var(--green-dark);
+    text-decoration: none;
+  }
+  
+  /* Buttons */
+  .btn-green {
+    background-color: var(--green-primary) !important;
+    color: #fff !important;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  .btn-green:hover, .btn-green:focus {
+    background-color: var(--green-dark) !important;
+    color: #fff !important;
+  }
+  
+  /* Footer */
+  .footer {
+    background: #f8f9fa;
+    padding: 3rem 0 1rem;
+  }
+  
+  .footer-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .footer-section li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .footer-section a:hover {
+    color: var(--green-primary);
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    color: #666;
+  }
+  
+  /* Form elements */
+  .form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ced4da;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: var(--green-primary);
+    box-shadow: 0 0 0 0.25rem rgba(54, 170, 81, 0.25);
+  }
+  
+  /* Pagination */
+  .page-link {
+    color: var(--green-primary);
+    border: 1px solid #dee2e6;
+  }
+  
+  .page-item.active .page-link {
+    background-color: var(--green-primary);
+    border-color: var(--green-primary);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .header-actions {
+      margin-top: 1rem;
+    }
+  }
+  
+  .card-text {
+    font-weight: normal;
+    color: #343a40 !important;
+  }
+  
+  .text-green {
+    color: var(--green-primary) !important;
+  }
+  .info-section-title {
+    font-size: 3rem;
+  }
