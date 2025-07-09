@@ -1,3 +1,4 @@
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -14,8 +15,6 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
 }
-
-/* Header Styles */
 
 /* Hero Section */
 .hero {
@@ -130,6 +129,7 @@ body {
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   padding: 48px 40px;
+  position: relative; /* Added to position buttons absolutely */
 }
 .news-rect-box .rect-heading {
   color: #2b9589;
@@ -141,6 +141,57 @@ body {
   color: #2b9589;
   font-size: 1.1rem;
   font-weight: 400;
+}
+.button-container {
+  position: absolute;
+  bottom: 0; /* Buttons touch the bottom of the white box */
+  right: 40px; /* Align with the padding of the box */
+  display: flex;
+  gap: 16px;
+}
+.rect-button {
+  background: #000; /* Black background */
+  color: #fff; /* White text */
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  border-radius: 4px;
+}
+.rect-button:hover {
+  background: #333; /* Slightly lighter black on hover */
+}
+.rect-button img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+
+.reg-button {
+
+  background: #36aa51; /* Black background */
+  color: #fff; /* White text */
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  border-radius: 4px;
+
+}
+
+.reg-button:hover {
+  background: #333; /* Slightly lighter black on hover */
 }
 
 /* Image Background Section Styles */
@@ -196,10 +247,7 @@ body {
   position: relative;
   z-index: 2;
 }
-.news-header .news-rect-box,
-.news-header4 .news-rect-box,
-.news-header6 .news-rect-box,
-.news-header8 .news-rect-box {
+.news-rect-box {
   background: #fff;
   border-radius: 0; /* Sharp corners */
   width: 900px; /* Make the box wider */
@@ -213,21 +261,25 @@ body {
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   padding: 48px 40px;
   margin: 0 16px 32px 16px;
+  position: relative; /* Added to position buttons absolutely */
 }
+
+/* Responsive adjustments for buttons */
 @media (max-width: 1100px) {
   .news-header-flex {
     flex-direction: column;
     align-items: center;
     gap: 24px;
   }
-  .news-header .news-rect-box,
-  .news-header4 .news-rect-box,
-  .news-header6 .news-rect-box,
-  .news-header8 .news-rect-box {
+  .news-rect-box {
     width: 100%;
     height: auto;
     padding: 24px;
     margin: 0 0 24px 0;
+  }
+  .button-container {
+    right: 24px; /* Adjust for smaller padding */
+    bottom: 0; /* Buttons touch the bottom */
   }
 }
 @media (max-width: 768px) {
@@ -246,7 +298,6 @@ body {
   .hero-text {
     padding: 24px;
   }
-
   .first-section-flex,
   .section3-flex,
   .news-header-flex {
@@ -257,6 +308,10 @@ body {
     width: 100%;
     height: auto;
     padding: 24px;
+  }
+  .button-container {
+    right: 24px;
+    bottom: 0; /* Buttons touch the bottom */
   }
 }
 
@@ -375,12 +430,9 @@ body {
   transform: translateY(-2px);
 }
 
-/* Footer */
-
 /* Responsive */
 @media (max-width: 768px) {
-
-.partners-content {
+  .partners-content {
     flex-direction: column;
     align-items: center;
     gap: 16px;
@@ -388,70 +440,56 @@ body {
   .partner-logo {
     max-width: 120px;
   }
-
   .hero-content {
     grid-template-columns: 1fr;
     padding: 0;
   }
-
   .hero-buttons {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .hero-text {
     padding: 24px;
   }
-
   .play-button {
     width: 48px;
     height: 48px;
   }
-
   .play-icon {
     width: 24px;
     height: 24px;
   }
-
   .focus-grid {
     grid-template-columns: 1fr;
   }
-
   .business-cards {
     grid-template-columns: 1fr;
   }
-
   .info-grid {
     grid-template-columns: 1fr;
   }
-
   .info-item {
     border-right: none;
     border-bottom: 1px solid #4ade80;
   }
-
   .info-item:last-child {
     border-bottom: none;
   }
-
   .news-grid {
     grid-template-columns: 1fr;
   }
-
   .news-item {
     border-right: none;
     border-bottom: 1px solid #4ade80;
   }
-
   .news-item:last-child {
     border-bottom: none;
   }
-
   .events-grid {
     grid-template-columns: 1fr;
   }
-
   .partners-content {
     flex-wrap: wrap;
     gap: 24px;
   }
 }
+
