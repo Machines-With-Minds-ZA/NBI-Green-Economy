@@ -8,13 +8,13 @@
     "videoAlt": "Introduction to the Green Economy"
   },
   "buttons": {
-    "getFunding": "Get Funding",
+    "getFunding": "Access Funding",
     "opportunities": "Opportunities",
-    "rmcsHub": "RMCS Hub",
+    "rmcsHub": "IRM Sector",
     "training": "Training",
-    "findOutMore": "Find out more",
+    "findOutMore": "Discover More",
     "viewMore": "View more",
-    "login": "Login to Dashboard"
+    "login": "Sign in to Dashboard"
   },
   "focus": {
     "title": "Nine priority focus areas for the green economy in South Africa",
@@ -39,7 +39,7 @@
     "card2": {
       "title": "For your future",
       "paragraph1": "The South African government has chosen nine areas to focus on in the switch to a green economy: agriculture, energy (clean and efficient), natural resource conservation and management (including mining), sustainable transport and infrastructure, environmental sustainability (including tourism education), green buildings and the built environment, sustainable waste management and recycling, water management, and sustainable production and consumption.",
-      "paragraph2": "Find out about green economy opportunities in the RM sector."
+      "paragraph2": "Find out about green economy opportunities in the IRM sector."
     }
   },
   "info": {
@@ -120,17 +120,18 @@
     "label": "Opportunity pagination"
   },
   "header": {
-    "funding": "About the Green Economy",
+    "funding": "About the green economy",
     "opportunities": "Opportunities",
-    "find_a_job": "Find a Job",
-    "training": "Knowledge Hub"
+    "find_a_job": "IRM sector",
+    "training": "Knowledge hub",
+    "select": "Select"
   },
   "footer": {
     "about_us": "ABOUT US",
     "about_green_economy": "About the green economy",
-    "who_we_are": "Who we are",
-    "our_team": "Our team",
-    "board_directors": "Board of directors",
+    "irm_sector": "IRM sector",
+    "opportunities": "Opportunities",
+    "knowledge_hub": "Knowledge hub",
     "services": "SERVICES",
     "green_economy_network": "Green economy network",
     "live_events_calendar": "Live events calendar",
@@ -139,7 +140,6 @@
     "quick_links": "QUICK LINKS",
     "news_events": "News & events",
     "contact_us": "Contact us",
-    "knowledge_hub": "Knowledge hub",
     "terms_reference": "Terms of reference",
     "copyright": "© ${new Date().getFullYear()} Green Economy Network. All rights reserved."
   }

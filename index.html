@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-i18n="title">Green Economy Toolkit</title>
     <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
-    <script src="../Master Page(Header and Footer)/translation.js"></script>
     <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
     <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
     <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
@@ -39,9 +38,9 @@
             </button>
           </div>
           <div class="hero-buttons">
-            <button class="hero-button" data-i18n="buttons.getFunding">Get Funding</button>
+            <button class="hero-button" data-i18n="buttons.getFunding">Access Funding</button>
             <button class="hero-button" data-i18n="buttons.opportunities">Opportunities</button>
-            <button class="hero-button" data-i18n="buttons.rmcsHub">RMCS Hub</button>
+            <button class="hero-button" data-i18n="buttons.rmcsHub">IRM Sector</button>
             <button class="hero-button" data-i18n="buttons.training">Training</button>
           </div>
         </div>
@@ -187,7 +186,7 @@
               some of this work?
             </p>
           </div>
-          <button class="business-card-button blue-button" data-i18n="buttons.findOutMore">Find out more</button>
+          <button class="business-card-button blue-button" data-i18n="buttons.findOutMore">Discover More</button>
         </div>
         <div class="business-card blue-card">
           <div
@@ -206,9 +205,9 @@
               and recycling, water management, and sustainable production and
               consumption.
             </p>
-            <p data-i18n="business.card2.paragraph2">Find out about green economy opportunities in the RM sector.</p>
+            <p data-i18n="business.card2.paragraph2">Find out about green economy opportunities in the IRM sector.</p>
           </div>
-          <button class="business-card-button green-button" data-i18n="buttons.findOutMore">Find out more</button>
+          <button class="business-card-button green-button" data-i18n="buttons.findOutMore">Discover More</button>
         </div>
       </div>
     </section>
@@ -393,7 +392,7 @@
           Login to track your progress, access personalized funding
           opportunities, and connect with the green economy network.
         </p>
-        <button class="login-button" data-i18n="buttons.login">Login to Dashboard</button>
+        <button class="login-button" data-i18n="buttons.login">Sign in to Dashboard</button>
       </div>
     </section>
 
@@ -407,60 +406,5 @@
     })(window, document, "clarity", "script", "s9a5dtbonc");
     </script>
 
-    <script>
-      function navigateToFocusArea(areaId) {
-        window.location.href = `LADINGPAGES/Focus-Area/focus-area.html?area=${areaId}`;
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-            });
-          }
-        });
-      });
-
-      document.querySelectorAll(".hero-button").forEach((button) => {
-        button.addEventListener("click", function () {
-          console.log("Button clicked:", this.textContent);
-        });
-      });
-
-      document.querySelectorAll(".business-card-button").forEach((button) => {
-        button.addEventListener("click", function () {
-          console.log("Business card button clicked");
-        });
-      });
-
-      document.querySelectorAll(".event-button").forEach((button) => {
-        button.addEventListener("click", function () {
-          console.log("Event button clicked");
-        });
-      });
-
-      document.querySelector(".login-button").addEventListener("click", function () {
-        console.log("Login button clicked");
-      });
-
-      // Fix: Only hide play button and play video if video is paused
-      const playBtn = document.querySelector(".play-button");
-      const heroVideo = document.querySelector(".hero-video");
-      if (playBtn && heroVideo) {
-        playBtn.addEventListener("click", function () {
-          if (heroVideo.paused) {
-            heroVideo.play();
-            playBtn.classList.add("hidden");
-          }
-        });
-        // Show play button again if video is paused (optional UX improvement)
-        heroVideo.addEventListener("pause", function () {
-          playBtn.classList.remove("hidden");
-        });
-      }
-    </script>
   </body>
 </html>
