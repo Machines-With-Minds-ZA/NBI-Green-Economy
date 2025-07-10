@@ -639,7 +639,7 @@
 
 /* Login Section */
 .login-section {
-  background: #0891b2;
+  background: #2b9589;
   color: white;
   padding: 16px 0;
   text-align: center;
@@ -653,7 +653,7 @@
 
 .login-button {
   background: white;
-  color: #0891b2;
+  color: #2b9589;
   border: none;
   padding: 12px 24px;
   border-radius: 6px;
@@ -668,57 +668,6 @@
   transform: translateY(-2px);
 }
 
-/* Footer */
-.footer {
-  background: #36aa51;
-  color: white;
-  padding: 48px 0;
-}
-
-.footer-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 32px;
-  margin-bottom: 32px;
-}
-
-.footer-section h4 {
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.footer-section ul {
-  list-style: none;
-}
-
-.footer-section li {
-  margin-bottom: 8px;
-}
-
-.footer-section a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  transition: text-decoration 0.3s;
-}
-
-.footer-section a:hover {
-  text-decoration: underline;
-}
-
-.footer-bottom {
-  border-top: 1px solid #4ade80;
-  padding-top: 32px;
-  text-align: center;
-  font-size: 14px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -753,10 +702,6 @@
   .play-icon {
     width: 24px;
     height: 24px;
-  }
-
-  .nav {
-    display: none;
   }
 
   .focus-grid {
