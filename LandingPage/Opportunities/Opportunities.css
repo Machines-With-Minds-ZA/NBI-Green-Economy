@@ -8,36 +8,7 @@
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   }
   
-  /* Header */
-  .header {
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-  
-  .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .language-selector {
-    border: 1px solid #dee2e6;
-    border-radius: 6px;
-    padding: 0.375rem 0.75rem;
-  }
-  
-  .dashboard-button {
-    background-color: var(--green-primary);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-  
-  .dashboard-button:hover {
-    background-color: var(--green-dark);
-  }
+
   
   /* Hero */
   .hero {
@@ -113,45 +84,7 @@
     color: #fff !important;
   }
   
-  /* Footer */
-  .footer {
-    background: #f8f9fa;
-    padding: 3rem 0 1rem;
-  }
-  
-  .footer-section h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .footer-section li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .footer-section a {
-    color: #666;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  
-  .footer-section a:hover {
-    color: var(--green-primary);
-  }
-  
-  .footer-bottom {
-    border-top: 1px solid #e9ecef;
-    padding-top: 1.5rem;
-    margin-top: 2rem;
-    color: #666;
-  }
-  
+
   /* Form elements */
   .form-control, .form-select {
     border-radius: 8px;
@@ -174,12 +107,143 @@
     background-color: var(--green-primary);
     border-color: var(--green-primary);
   }
+
+.login-section {
+  background: #2b9589;
+  color: white;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.login-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.login-button {
+  background: white;
+  color: #2b9589;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 16px;
+}
+
+.login-button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+
+/* Partners */
+.partners {
+  padding: 48px 0;
+  background: white;
+  border-top: 2px solid #36aa51;
+}
+.partners-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.partner-logo {
+  height: 50px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.partner-item {
+  display: flex;
+  align-items: center;
+}
+
+.partner-icon {
+  margin-right: 8px;
+}
+
+.partner-icon.orange {
+  width: 64px;
+  height: 32px;
+  background: #f97316;
+  border-radius: 4px;
+}
+
+.partner-icon.red {
+  width: 32px;
+  height: 32px;
+  background: #ef4444;
+  border-radius: 50%;
+}
+
+.partner-icon.blue {
+  width: 12px;
+  height: 12px;
+  background: #0891b2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 8px;
+}
+
+.partner-badge {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.partner-badge.green {
+  background: #36aa51;
+}
+
+.partner-badge.blue {
+  background: #0891b2;
+}
+
+.partner-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.partner-text .title {
+  font-weight: 500;
+}
+
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 2rem;
     }
+    
+      .partners-content {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+
+    .partners-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .partner-logo {
+    max-width: 120px;
+  }
     
     .header-actions {
       margin-top: 1rem;
