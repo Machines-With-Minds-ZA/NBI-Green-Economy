@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Economy Toolkit - About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+</head>
+<body>
+    <div id="root">
+        <green-economy-header></green-economy-header>
+        <main>
+            <!-- About Hero Section -->
+            <section class="relative min-h-[600px] flex items-center">
+                <div class="absolute inset-0">
+                    <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" alt="Professional woman in safety vest" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                </div>
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="text-white"></div>
+                        <div class="green-gradient p-8 lg:p-12 rounded-lg text-white animate-fade-in">
+                            <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">ABOUT THE GREEN ECONOMY</h1>
+                            <p class="text-lg lg:text-xl leading-relaxed opacity-95">
+                                A green economy is one which is socially inclusive and environmentally sustainable. It improves human well-being and builds social equity while reducing environmental risks and ecological scarcities. In simple terms, we can think of a green economy as one which is low carbon, resource efficient and socially inclusive.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Priority Areas Section -->
+            <section class="py-16 light-section">
+                <div class="px-4 sm:px-6 lg:px-8 text-left">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Nine priority focus areas for the green economy in South Africa</h2>
+                    <p class="text-lg text-gray-600 mb-12">(Green Economy Summit, 2010)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="about-priority-areas">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Climate Risks Section -->
+            <section class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">Climate risks</h2>
+                    <p class="text-lg text-gray-600 mb-12">How will climate change affect your business?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="climate-risks">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Climate Response Section -->
+            <section class="py-16 light-section">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-gray-900">How we can respond to climate change</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="climate-responses">
+                    </div>
+                </div>
+            </section>
+        </main>
+        <green-economy-footer></green-economy-footer>
+    </div>
+
+    <script src="../../scripts/about.js"> </script>
+</body>
+</html>
