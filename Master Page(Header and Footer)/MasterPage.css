@@ -20,12 +20,23 @@ body {
 }
 
 /* Header Styles */
+.header-outer {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: linear-gradient(to right, #ffffff, #ffffff); /* White gradient */
+  z-index: 100;
+}
+
 .header {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background: linear-gradient(to right, #ffffff, #ffffff); /* White gradient */
-    height: 70px; /* Fixed navbar height */
+  display: flex;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  background: none;
 }
 
 .logo {
@@ -37,7 +48,7 @@ body {
 }
 
 .logo img {
-    height: 70px;
+    height: 50px;
     width: 190px;
 }
 

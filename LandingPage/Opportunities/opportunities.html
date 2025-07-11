@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="title">Green Economy Opportunities</title>
+    <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
+    <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <link rel="stylesheet" href="Opportunities.css">
+    <script src="Trans.js"></script>
+
+  </head>
+  <body>
+    <!-- Header -->
+    <green-economy-header></green-economy-header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: url('../../Images/Knowledge-Hub_2023-10-04-145730_tkxt_a91a4f7cf12b2095b100c24cf6024d38.webp') center center/cover no-repeat; position: relative;">
+      <div class="container py-5" style="position: relative; z-index: 2;">
+        <div class="row justify-content-center align-items-center text-center" style="height: 400px;">
+          <div class="col-12">
+            <h1 class="display-5 fw-bold" style="text-shadow: 0 2px 8px rgba(0,0,0,0.7); font-family: 'Poppins'; font-weight: 1200;">
+              <i class="bi bi-leaf me-2" style="vertical-align: middle; color: #fff !important; font-size: 2.5rem;"></i>
+              <span data-i18n="hero.title">Opportunities</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opportunities Info and Filter Section -->
+    <section class="py-5 bg-light">
+      <div class="mx-auto" style="max-width: 1600px; width: 90%;">
+        <div class="text-center mb-5">
+          <h2 class="h3 fw-normal text-green mb-3 info-section-title" data-i18n="info.title">
+            Find out about opportunities for procurement, market access, capacity building, training and enterprise development support in your area.
+          </h2>
+          <p class="lead text-muted" data-i18n="info.description">
+            This page is your go-to hub for all the information you need, right at your fingertips. Use the filter to select resources tailored to your specific category of interest.
+          </p>
+        </div>
+        
+        <div class="row mb-4 align-items-center g-3">
+          <div class="col-md-3">
+            <select class="form-select" id="categoryFilter">
+              <option value="" data-i18n="filter.default">Filter by Category</option>
+              <option value="procurement" data-i18n="filter.procurement">Procurement</option>
+              <option value="market-access" data-i18n="filter.marketAccess">Market Access</option>
+              <option value="capacity-building" data-i18n="filter.capacityBuilding">Capacity Building</option>
+              <option value="training" data-i18n="filter.training">Training</option>
+              <option value="enterprise-development" data-i18n="filter.enterpriseDevelopment">Enterprise Development</option>
+            </select>
+          </div>
+          <div class="col-md-3 offset-md-6 d-flex justify-content-end align-items-center">
+            <div class="input-group">
+              <input type="text" class="form-control" id="searchInput" placeholder="Search..." data-i18n="[placeholder]filter.searchPlaceholder">
+              <button type="button" class="btn btn-green" id="resetSearch" data-i18n="filter.reset">Reset</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Opportunity Cards Grid -->
+        <div id="opportunity-cards" class="row gx-4 gy-4 w-100 mx-0"></div>
+        
+        <!-- Pagination -->
+        <nav aria-label="Opportunity pagination" class="d-flex justify-content-center mt-5">
+          <ul class="pagination" id="pagination">
+            <!-- Pagination buttons will be rendered here by JS -->
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+<!-- Logos Section -->
+    <section class="partners">
+      <div class="partners-content">
+        <img src="../../Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
+        <img src="../../Images/SECO-Logo.jpg" alt="Partner Logo 2" class="partner-logo">
+        <img src="../../Images/GDED-Logo.jpg" alt="Partner Logo 3" class="partner-logo">
+        <img src="../../Images/LMS-Platform-Logo.png" alt="Partner Logo 4" class="partner-logo">
+        <img src="../../Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
+      </div>
+    </section>
+<!-- Newsletter Subscription Section -->
+
+<section class="login-section">
+  <div style="position: relative; max-width: 700px; margin: 0 auto;">
+    <h2 style="color: white; font-size: 20px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Subscribe to our newsletter to get the latest information
+    </h2>
+
+    <form style="position: relative;">
+      <input 
+        type="email" 
+        placeholder="Your email" 
+        style="width: 100%; padding: 18px 50px 18px 25px; border: none; border-radius: 4px; font-size: 16px; color: #333; background: white;"
+      >
+      <button 
+        type="submit" 
+        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 22px; color: #009381; cursor: pointer;"
+      >
+        →
+      </button>
+    </form>
+  </div>
+
+  <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 15px; max-width: 700px; margin-left: auto; margin-right: auto;">
+    *Only relevant information, no spam
+  </p>
+</section>
+
+
+
+    <!-- Footer -->
+    <green-economy-footer></green-economy-footer>
+
+    <script>
+      document.querySelectorAll('.business-card-button').forEach((button) => {
+        button.addEventListener('click', function () {
+          alert('Feature coming soon!');
+        });
+      });
+      document.querySelector('.dashboard-button').addEventListener('click', function () {
+        window.location.href = "questionnaire/questionnaire.html";
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../scripts/opportunities.js"></script>
+  </body>
+</html>
