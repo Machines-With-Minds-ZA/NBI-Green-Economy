@@ -3,27 +3,29 @@
           const isDashboard = window.location.pathname.includes('dashboard.html');
 
           this.innerHTML = `
-            <header class="header">
-              <div class="logo">
-                <a href="/index.html">
-                  <img src="/Images/GET.png" alt="Logo" />
-                </a>
-              </div>
-              <nav class="nav">
-                <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the green economy</a>
-                <a href="/LandingPage/Opportunities/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
-                <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM sector</a>
-                <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge hub</a>
-                <select class="language-selector" onchange="changeLanguage(this.value)">
-                  <option value="" disabled selected data-i18n="header.select">Select</option>
-                  <option value="en">English</option>
-                  <option value="zu">isiZulu</option>
-                  <option value="tn">Tswana</option>
-                </select>
-                <span class="search-icon">🔍</span>
-                <div class="blue-section"></div>
-              </nav>
-            </header>
+            <div class="header-outer">
+              <header class="header">
+                <div class="logo">
+                  <a href="/index.html">
+                    <img src="/Images/GET.png" alt="Logo" />
+                  </a>
+                </div>
+                <nav class="nav">
+                  <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the green economy</a>
+                  <a href="/LandingPage/Opportunities/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
+                  <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM sector</a>
+                  <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge hub</a>
+                  <select class="language-selector" onchange="changeLanguage(this.value)">
+                    <option value="" disabled selected data-i18n="header.select">Select</option>
+                    <option value="en">English</option>
+                    <option value="zu">isiZulu</option>
+                    <option value="tn">Tswana</option>
+                  </select>
+                  <span class="search-icon">🔍</span>
+                  <div class="blue-section"></div>
+                </nav>
+              </header>
+            </div>
           `;
         }
       }
