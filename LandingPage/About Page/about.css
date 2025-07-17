@@ -24,14 +24,20 @@ body {
 
 .hero-image {
     width: 55%;
-    height: 100%;
+    height: 600px; /* Match the hero section height */
+    position: relative;
+    overflow: hidden;
 }
 
 .image-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 
 .hero-text-container {
     width: 45%;
@@ -70,6 +76,97 @@ body {
     opacity: 0.95;
     max-width: 90%;
 }
+
+
+
+
+/* Images In Footer */
+
+/* Partners */
+.partners {
+  padding: 48px 0;
+  background: white;
+  border-top: 2px solid #36aa51;
+}
+.partners-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.partner-logo {
+  height: 50px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.partner-item {
+  display: flex;
+  align-items: center;
+}
+
+.partner-icon {
+  margin-right: 8px;
+}
+
+.partner-icon.orange {
+  width: 64px;
+  height: 32px;
+  background: #f97316;
+  border-radius: 4px;
+}
+
+.partner-icon.red {
+  width: 32px;
+  height: 32px;
+  background: #ef4444;
+  border-radius: 50%;
+}
+
+.partner-icon.blue {
+  width: 12px;
+  height: 12px;
+  background: #0891b2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 8px;
+}
+
+.partner-badge {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.partner-badge.green {
+  background: #36aa51;
+}
+
+.partner-badge.blue {
+  background: #0891b2;
+}
+
+.partner-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.partner-text .title {
+  font-weight: 500;
+}
+
+
 
 /* Priority Areas Section */
 .light-section {
@@ -290,6 +387,38 @@ body {
     object-fit: contain;
 }
 
+
+/* Login Section */
+.login-section {
+  background: #0891b2;
+  color: white;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.login-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.login-button {
+  background: white;
+  color: #2b9589;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 16px;
+}
+
+.login-button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
 /* Newsletter Section */
 .newsletter-section {
     width: 100%;
@@ -405,7 +534,22 @@ body {
         font-size: 2.2rem;
         margin-bottom: 30px;
     }
-    
+
+      .partners-content {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+
+    .partners-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .partner-logo {
+    max-width: 120px;
+  }
+
     .focus-grid {
         grid-template-columns: 1fr;
     }
@@ -448,4 +592,4 @@ body {
     .logos-section img {
         height: 50px;
     }
-}
+} 

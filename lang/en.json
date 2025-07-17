@@ -1,28 +1,20 @@
 {
   "title": "Green Economy Toolkit",
-  "logoAlt": "Green Economy Toolkit Logo",
-  "nav": {
-    "about": "About the green economy",
-    "irm": "IRM Sector",
-    "opportunities": "Opportunities",
-    "knowledge": "Knowledge Hub"
-  },
-  "buttons": {
-    "dashboard": "Dashboard",
-    "getFunding": "Get Funding",
-    "opportunities": "Opportunities",
-    "rmcsHub": "RMCS Hub",
-    "training": "Training",
-    "findOutMore": "Find out more",
-    "viewMore": "View more",
-    "login": "Login to Dashboard"
-  },
   "hero": {
     "title": "A GREEN ECONOMY TOOLKIT",
-    "videoAlt": "Introduction to the Green Economy",
     "paragraph1": "South Africa and the world are switching to green economy, and that is creating a lot of opportunities for businesses in the renewable, repair and remanufacturing sectors.",
     "paragraph2": "We want to share these opportunities with you, so we help people who are entrepreneurs grow their economy fund 10 x faster. The Green Economy Toolkit helps governments and institutions to plan their green economy transition. From insights, green business bank you will find green information, support and development to transition their conventional business models into green economy",
-    "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global"
+    "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global",
+    "videoAlt": "Introduction to the Green Economy"
+  },
+  "buttons": {
+    "getFunding": "Access Funding",
+    "opportunities": "Opportunities",
+    "rmcsHub": "IRM Sector",
+    "training": "Training",
+    "findOutMore": "Discover More",
+    "viewMore": "View more",
+    "login": "Sign in to Dashboard"
   },
   "focus": {
     "title": "Nine priority focus areas for the green economy in South Africa",
@@ -47,7 +39,7 @@
     "card2": {
       "title": "For your future",
       "paragraph1": "The South African government has chosen nine areas to focus on in the switch to a green economy: agriculture, energy (clean and efficient), natural resource conservation and management (including mining), sustainable transport and infrastructure, environmental sustainability (including tourism education), green buildings and the built environment, sustainable waste management and recycling, water management, and sustainable production and consumption.",
-      "paragraph2": "Find out about green economy opportunities in the RM sector."
+      "paragraph2": "Find out about green economy opportunities in the IRM sector."
     }
   },
   "info": {
@@ -62,7 +54,9 @@
     "events": {
       "title": "Live Events Calendar",
       "description": "View the live events calendar and network with entrepreneurs and experts within the green economy space via our events platform"
-    }
+    },
+    "title": "Find out about opportunities for procurement, market access, capacity building, training and enterprise development support in your area.",
+    "description": "This page is your go-to hub for all the information you need, right at your fingertips. Use the filter to select resources tailored to your specific category of interest."
   },
   "news": {
     "title": "Green economy news and updates",
@@ -112,28 +106,41 @@
     "title": "Access Your Green Economy Dashboard",
     "subtitle": "Login to track your progress, access personalized funding opportunities, and connect with the green economy network."
   },
-  "footer": {
-    "logoAlt": "Green Economy Network Logo",
-    "about": "ABOUT US",
-    "aboutLink1": "About the green economy",
-    "aboutLink2": "Who we are",
-    "aboutLink3": "Our team",
-    "aboutLink4": "Board of directors",
-    "services": "SERVICES",
-    "servicesLink1": "Green economy network",
-    "servicesLink2": "Live events calendar",
-    "servicesLink3": "Green opportunities",
-    "servicesLink4": "News and updates",
-    "links": "QUICK LINKS",
-    "linksLink1": "News & events",
-    "linksLink2": "Contact us",
-    "linksLink3": "Knowledge hub",
-    "linksLink4": "Terms of reference",
-    "copyright": "© 2025 Green Economy Network. All rights reserved."
+  "filter": {
+    "default": "Filter by Category",
+    "procurement": "Procurement",
+    "marketAccess": "Market Access",
+    "capacityBuilding": "Capacity Building",
+    "training": "Training",
+    "enterpriseDevelopment": "Enterprise Development",
+    "searchPlaceholder": "Search...",
+    "reset": "Reset"
   },
-  "languages": {
-    "english": "English",
-    "zulu": "IsiZulu",
-    "tswana": "Tswana"
+  "pagination": {
+    "label": "Opportunity pagination"
+  },
+  "header": {
+    "funding": "About the green economy",
+    "opportunities": "Opportunities",
+    "find_a_job": "IRM sector",
+    "training": "Knowledge hub",
+    "select": "Select"
+  },
+  "footer": {
+    "about_us": "ABOUT US",
+    "about_green_economy": "About the green economy",
+    "irm_sector": "IRM sector",
+    "opportunities": "Opportunities",
+    "knowledge_hub": "Knowledge hub",
+    "services": "SERVICES",
+    "green_economy_network": "Green economy network",
+    "live_events_calendar": "Live events calendar",
+    "green_opportunities": "Green opportunities",
+    "news_updates": "News and updates",
+    "quick_links": "QUICK LINKS",
+    "news_events": "News & events",
+    "contact_us": "Contact us",
+    "terms_reference": "Terms of reference",
+    "copyright": "© ${new Date().getFullYear()} Green Economy Network. All rights reserved."
   }
 }

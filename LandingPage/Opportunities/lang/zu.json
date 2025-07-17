@@ -10,7 +10,7 @@
   "buttons": {
     "getFunding": "Thola Uxhaso",
     "opportunities": "Amathuba",
-    "rmcsHub": "Isizinda se-RMCS",
+    "rmcsHub": "Umkhakha we-IRM",
     "training": "Ukuqeqeshwa",
     "findOutMore": "Thola Ulwazi Olwengeziwe",
     "viewMore": "Buka Okwengeziwe",
@@ -39,7 +39,7 @@
     "card2": {
       "title": "Ngekusasa lakho",
       "paragraph1": "Uhulumeni waseNingizimu Afrika ukhethe izindawo eziyisishiyagalolunye okumele zigxile kuzo ekushintsheni kumnotho oluhlaza: ezolimo, amandla (ahlanzekile futhi asebenzayo), ukugcinwa kwezinsiza zemvelo nokuphathwa (okuhlanganisa nezimayini), ukuthutha okusimeme kanye nengqalasizinda, ukusimama kwemvelo (okuhlanganisa imfundo yezokuvakasha), izakhiwo eziluhlaza kanye nendawo eyakhiwe, ukuphathwa kwemfucuza okusimeme kanye nokugaywa kabusha, ukuphathwa kwamanzi, kanye nokukhiqiza nokusetshenziswa okusimeme.",
-      "paragraph2": "Thola ngamathuba omnotho oluhlaza emkhakheni we-RM."
+      "paragraph2": "Thola ngamathuba omnotho oluhlaza emkhakheni we-IRM."
     }
   },
   "info": {
@@ -122,15 +122,16 @@
   "header": {
     "funding": "Mayelana Nomnotho Oluhlaza",
     "opportunities": "Amathuba",
-    "find_a_job": "Thola Umsebenzi",
-    "training": "Isizinda Solwazi"
+    "find_a_job": "Umkhakha we-IRM",
+    "training": "Isizinda Solwazi",
+    "select": "Khetha"
   },
   "footer": {
     "about_us": "MAYELANA NATHI",
     "about_green_economy": "Mayelana nomnotho oluhlaza",
-    "who_we_are": "Siyini",
-    "our_team": "Iqembu lethu",
-    "board_directors": "Ibhodi yabaqondisi",
+    "irm_sector": "Umkhakha we-IRM",
+    "opportunities": "Amathuba",
+    "knowledge_hub": "Isizinda solwazi",
     "services": "IZINSIZA",
     "green_economy_network": "Inethiwekhi yomnotho oluhlaza",
     "live_events_calendar": "Ikhalenda yemicimbi ephilayo",
@@ -139,7 +140,6 @@
     "quick_links": "IZIXHUMANISI EZISHEHAYO",
     "news_events": "Izindaba nemicimbi",
     "contact_us": "Xhumana nathi",
-    "knowledge_hub": "Isizinda solwazi",
     "terms_reference": "Imigomo yokubhekisela",
     "copyright": "© ${new Date().getFullYear()} Inethiwekhi Yomnotho Oluhlaza. Wonke amalungelo agodliwe."
   }
