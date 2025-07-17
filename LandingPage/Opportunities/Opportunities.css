@@ -261,3 +261,31 @@
   .info-section-title {
     font-size: 3rem;
   }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .opportunities-grid, .opportunities-list, .opportunity-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .opportunity-card, .opportunity-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .opportunity-header, .opportunity-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .opportunity-card, .opportunity-section {
+    padding: 0.5rem;
+  }
+  .opportunity-header, .opportunity-title {
+    font-size: 1rem;
+  }
+  .opportunity-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}

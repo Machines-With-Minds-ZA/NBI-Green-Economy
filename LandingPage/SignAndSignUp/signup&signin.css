@@ -73,3 +73,34 @@
     margin-top: 0.5rem;
     text-align: center;
 }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .signup-form, .signin-form {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .signup-card, .signin-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  .signup-header, .signin-header {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .signup-form, .signin-form {
+    padding: 0.5rem;
+  }
+  .signup-card, .signin-card {
+    padding: 0.5rem;
+  }
+  .signup-header, .signin-header {
+    font-size: 1rem;
+  }
+  .signup-btn, .signin-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}

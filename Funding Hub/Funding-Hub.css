@@ -112,3 +112,35 @@
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out;
         }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .funding-hub-form {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .funding-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  .newsletter-section {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .newsletter-input, .newsletter-btn {
+    width: 100%;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .funding-hub-form {
+    padding: 0.5rem;
+  }
+  .funding-card {
+    padding: 0.5rem;
+  }
+  h1, h2, h3, h4 {
+    font-size: 1rem !important;
+  }
+}
