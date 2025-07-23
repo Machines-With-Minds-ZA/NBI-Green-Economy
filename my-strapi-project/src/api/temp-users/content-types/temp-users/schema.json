@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "temp_user",
+  "info": {
+    "singularName": "temp-users",
+    "pluralName": "temp-user",
+    "displayName": "temp-users"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "userId": {
+      "type": "string"
+    },
+    "isAdmin": {
+      "type": "boolean",
+      "default": true
+    },
+    "language": {
+      "type": "string",
+      "default": "en"
+    }
+  }
+}

@@ -165,7 +165,7 @@
                             resolve(user);
                         } else {
                             console.log("No authenticated user, redirecting to sign-in...");
-                            window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
+                            //window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
                             reject(new Error("No authenticated user"));
                         }
                     }, reject);
@@ -177,7 +177,7 @@
                     console.log("User document not found, redirecting to sign-in...");
                     displayErrorMessage("User not found. Please sign in again.");
                     setTimeout(() => {
-                        window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
+                        //window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
                     }, 3000);
                     return;
                 }
@@ -185,7 +185,7 @@
                     console.log("Access denied: Admin privileges required.");
                     displayErrorMessage("Access denied: Admin privileges required.");
                     setTimeout(() => {
-                        window.location.href = '../Dashboard/dashboard.html?tempUserId=' + tempUserId;
+                        //window.location.href = '../Dashboard/dashboard.html?tempUserId=' + tempUserId;
                     }, 3000);
                     return;
                 }
@@ -276,7 +276,7 @@
                 console.error("Error initializing API management:", error);
                 displayErrorMessage("Initialization failed: " + error.message);
                 setTimeout(() => {
-                    window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
+                    //window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
                 }, 3000);
             } finally {
                 hideLoader();
@@ -299,7 +299,7 @@
             if (!tempUserId) {
                 console.log("No temp user ID, redirecting to sign-in...");
                 showLoader();
-                window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
+                //window.location.href = '../LADINGPAGES/SignAndSignUp/SignIn.html';
                 return;
             }
             initializeApiManagement();
