@@ -1,13 +1,13 @@
         // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
+const firebaseConfig = {
+  apiKey: "AIzaSyCfa827mvCLf1ETts6B_DmCfb7owTohBxk",
+  authDomain: "nbi-green-economy.firebaseapp.com",
+  projectId: "nbi-green-economy",
+  storageBucket: "nbi-green-economy.firebasestorage.app",
+  messagingSenderId: "53732340059",
+  appId: "1:53732340059:web:3fb3f086c6662e1e9baa7e",
+  measurementId: "G-37VRZ5CGE4"
+};
 
         // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
