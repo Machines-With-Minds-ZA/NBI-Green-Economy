@@ -140,7 +140,7 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: false,
-              questionnaireCompleted: false, // Initialize questionnaire flag
+              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
@@ -153,7 +153,7 @@ try {
             setTimeout(() => {
               errorMessage.classList.add('hidden');
               auth.signOut().then(() => {
-                window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
+                window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
               });
             }, 5000);
           } catch (error) {
@@ -181,7 +181,7 @@ try {
             userId: user.uid,
             email: user.email,
             isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-            questionnaireCompleted: false, // Initialize questionnaire flag
+            questionnaireCompleted: false,
             language: document.documentElement.lang || 'en',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
@@ -189,7 +189,7 @@ try {
           console.log("users doc written successfully");
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
-          window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
+          window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -217,14 +217,14 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-              questionnaireCompleted: false, // Initialize questionnaire flag
+              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
             console.log("users doc written successfully");
             trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
             hideLoader();
-            window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
+            window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
           })
           .catch(error => {
             hideLoader();

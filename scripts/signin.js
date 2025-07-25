@@ -150,7 +150,7 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: false,
-              questionnaireCompleted: false, // Initialize if not exists
+              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
@@ -191,7 +191,7 @@ try {
             userId: user.uid,
             email: user.email,
             isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-            questionnaireCompleted: false, // Initialize if not exists
+            questionnaireCompleted: false,
             language: document.documentElement.lang || 'en',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
@@ -234,7 +234,7 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-              questionnaireCompleted: false, // Initialize if not exists
+              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
