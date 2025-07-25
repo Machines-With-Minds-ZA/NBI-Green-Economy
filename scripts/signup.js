@@ -51,6 +51,20 @@ try {
     });
   }
 
+  async function checkQuestionnaireCompletion(user) {
+    try {
+      const userDoc = await db.collection('users').doc(user.uid).get();
+      if (userDoc.exists) {
+        const data = userDoc.data();
+        return data.questionnaireCompleted || false;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error checking questionnaire completion:", error);
+      return false;
+    }
+  }
+
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
       console.log("Persistence set to LOCAL");
@@ -67,55 +81,46 @@ try {
     });
 
   document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM fully loaded for SignUp page");
+    console.log("DOM fully loaded for SignIn page");
 
-    const signUpBtn = document.getElementById('sign-up-btn');
-    const googleSignUpBtn = document.getElementById('google-sign-up-btn');
-    if (!signUpBtn) console.error("Sign-up button not found");
-    if (!googleSignUpBtn) console.error("Google sign-up button not found");
+    const signInBtn = document.getElementById('sign-in-btn');
+    const googleSignInBtn = document.getElementById('google-sign-in-btn');
+    if (!signInBtn) console.error("Sign-in button not found");
+    if (!googleSignInBtn) console.error("Google sign-in button not found");
 
-    if (signUpBtn) {
-      signUpBtn.addEventListener('click', async (e) => {
-        console.log("Sign-up button clicked");
+    if (signInBtn) {
+      signInBtn.addEventListener('click', async (e) => {
+        console.log("Sign-in button clicked");
         e.preventDefault();
         const email = document.getElementById('email')?.value;
         const password = document.getElementById('password')?.value;
-        const confirmPassword = document.getElementById('confirm-password')?.value;
         const errorMessage = document.getElementById('error-message');
         if (!email || !errorMessage) {
           console.error("Email or error-message element not found");
           return;
         }
 
-        if (password !== confirmPassword) {
-          errorMessage.textContent = "Passwords do not match.";
-          errorMessage.classList.remove('hidden');
-          trackInteraction(null, 'signup', 'failure', 'Passwords do not match');
-          setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-          return;
-        }
-
-        trackInteraction(null, 'signup', 'attempt', `Email: ${email}`);
+        trackInteraction(null, 'login', 'attempt', `Email: ${email}`);
         showLoader();
 
         if (email === 'nbigreeneconomy@gmail.com') {
           const actionCodeSettings = {
-            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signup.html',
+            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signin.html',
             handleCodeInApp: true
           };
           try {
-            console.log("Sending sign-up link to:", email);
+            console.log("Sending sign-in link to:", email);
             await auth.sendSignInLinkToEmail(email, actionCodeSettings);
             window.localStorage.setItem('emailForSignIn', email);
             hideLoader();
-            errorMessage.textContent = "A sign-in link has been sent to your email to complete sign-up.";
+            errorMessage.textContent = "A sign-in link has been sent to your email.";
             errorMessage.classList.remove('hidden');
             setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-            trackInteraction(null, 'signup', 'email_link_sent', `Email: ${email}`);
+            trackInteraction(null, 'login', 'email_link_sent', `Email: ${email}`);
           } catch (error) {
             hideLoader();
-            console.error("Passwordless sign-up error:", error);
-            trackInteraction(null, 'signup', 'failure', error.message);
+            console.error("Passwordless sign-in error:", error);
+            trackInteraction(null, 'login', 'failure', error.message);
             errorMessage.textContent = error.message;
             errorMessage.classList.remove('hidden');
             setTimeout(() => errorMessage.classList.add('hidden'), 5000);
@@ -129,44 +134,42 @@ try {
             return;
           }
           try {
-            console.log("Attempting email/password sign-up for:", email);
-            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            console.log("Attempting email/password sign-in for:", email);
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
             const user = userCredential.user;
-
-            await user.sendEmailVerification();
-            console.log("Email verification sent to:", user.email);
-
+            if (!user.emailVerified) {
+              await auth.signOut();
+              hideLoader();
+              errorMessage.textContent = "Please verify your email before logging in.";
+              errorMessage.classList.remove('hidden');
+              setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+              trackInteraction(null, 'login', 'failure', 'Email not verified');
+              return;
+            }
             await db.collection('users').doc(user.uid).set({
               userId: user.uid,
               email: user.email,
               isAdmin: false,
-              questionnaireCompleted: false,
+              questionnaireCompleted: (await checkQuestionnaireCompletion(user)) || false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
 
             console.log("users doc written successfully");
-            trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
+            trackInteraction(user.uid, 'login', 'success', `Email: ${email}`);
             hideLoader();
-            errorMessage.textContent = "Account created! Please check your email to verify your account.";
-            errorMessage.classList.remove('hidden');
-            setTimeout(() => {
-              errorMessage.classList.add('hidden');
-              auth.signOut().then(async () => {
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
-                const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-                  ? '/interactions/interactions.html?userId=' + user.uid
-                  : questionnaireCompleted
-                    ? '/Dashboard/dashboard.html?userId=' + user.uid
-                    : '/questionnaire/questionnaire.html?userId=' + user.uid;
-                window.location.href = redirectUrl;
-              });
-            }, 5000);
+
+            const questionnaireCompleted = await checkQuestionnaireCompletion(user);
+            const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+              ? '/interactions/interactions.html?userId=' + user.uid
+              : questionnaireCompleted
+                ? '/Dashboard/dashboard.html?userId=' + user.uid
+                : '/questionnaire/questionnaire.html?userId=' + user.uid;
+            window.location.href = redirectUrl;
           } catch (error) {
             hideLoader();
-            console.error("Sign-up error:", error);
-            trackInteraction(null, 'signup', 'failure', error.message);
+            console.error("Sign-in error:", error);
+            trackInteraction(null, 'login', 'failure', error.message);
             errorMessage.textContent = error.message;
             errorMessage.classList.remove('hidden');
             setTimeout(() => errorMessage.classList.add('hidden'), 5000);
@@ -175,11 +178,11 @@ try {
       });
     }
 
-    if (googleSignUpBtn) {
-      googleSignUpBtn.addEventListener('click', async (e) => {
-        console.log("Google sign-up button clicked");
+    if (googleSignInBtn) {
+      googleSignInBtn.addEventListener('click', async (e) => {
+        console.log("Google sign-in button clicked");
         e.preventDefault();
-        trackInteraction(null, 'signup', 'attempt', 'Google');
+        trackInteraction(null, 'login', 'attempt', 'Google');
         showLoader();
         try {
           const userCredential = await auth.signInWithPopup(googleProvider);
@@ -188,16 +191,16 @@ try {
             userId: user.uid,
             email: user.email,
             isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-            questionnaireCompleted: false,
+            questionnaireCompleted: (await checkQuestionnaireCompletion(user)) || false,
             language: document.documentElement.lang || 'en',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
 
           console.log("users doc written successfully");
-          trackInteraction(user.uid, 'signup', 'success', 'Google');
+          trackInteraction(user.uid, 'login', 'success', 'Google');
           hideLoader();
-          const userDoc = await db.collection('users').doc(user.uid).get();
-          const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
+
+          const questionnaireCompleted = await checkQuestionnaireCompletion(user);
           const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
             ? '/interactions/interactions.html?userId=' + user.uid
             : questionnaireCompleted
@@ -206,8 +209,8 @@ try {
           window.location.href = redirectUrl;
         } catch (error) {
           hideLoader();
-          console.error("Google sign-up error:", error);
-          trackInteraction(null, 'signup', 'failure', error.message);
+          console.error("Google sign-in error:", error);
+          trackInteraction(null, 'login', 'failure', error.message);
           const errorMessage = document.getElementById('error-message');
           if (errorMessage) {
             errorMessage.textContent = error.message;
@@ -221,7 +224,7 @@ try {
     if (auth.isSignInWithEmailLink(window.location.href)) {
       const email = window.localStorage.getItem('emailForSignIn');
       if (email) {
-        console.log("Handling email link sign-up for:", email);
+        console.log("Handling email link sign-in for:", email);
         showLoader();
         auth.signInWithEmailLink(email, window.location.href)
           .then(async (userCredential) => {
@@ -231,15 +234,15 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-              questionnaireCompleted: false,
+              questionnaireCompleted: (await checkQuestionnaireCompletion(user)) || false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
             console.log("users doc written successfully");
-            trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
+            trackInteraction(user.uid, 'login', 'success', `Email: ${email}`);
             hideLoader();
-            const userDoc = await db.collection('users').doc(user.uid).get();
-            const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
+
+            const questionnaireCompleted = await checkQuestionnaireCompletion(user);
             const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
               ? '/interactions/interactions.html?userId=' + user.uid
               : questionnaireCompleted
@@ -249,8 +252,8 @@ try {
           })
           .catch(error => {
             hideLoader();
-            console.error("Error completing passwordless sign-up:", error);
-            trackInteraction(null, 'signup', 'failure', error.message);
+            console.error("Error completing passwordless sign-in:", error);
+            trackInteraction(null, 'login', 'failure', error.message);
             const errorMessage = document.getElementById('error-message');
             if (errorMessage) {
               errorMessage.textContent = error.message;
@@ -259,10 +262,10 @@ try {
             }
           });
       } else {
-        console.error("No email found in localStorage for email link sign-up");
+        console.error("No email found in localStorage for email link sign-in");
         const errorMessage = document.getElementById('error-message');
         if (errorMessage) {
-          errorMessage.textContent = "No email found for sign-up. Please try again.";
+          errorMessage.textContent = "No email found for sign-in. Please try again.";
           errorMessage.classList.remove('hidden');
           setTimeout(() => errorMessage.classList.add('hidden'), 5000);
         }
@@ -273,7 +276,7 @@ try {
     if (typeof updateLanguage === 'function') {
       updateLanguage(document.documentElement.lang || 'en');
     }
-    trackInteraction(null, 'page', 'loaded', 'SignUp page');
+    trackInteraction(null, 'page', 'loaded', 'SignIn page');
   });
 } catch (error) {
   console.error("Firebase initialization failed:", error);

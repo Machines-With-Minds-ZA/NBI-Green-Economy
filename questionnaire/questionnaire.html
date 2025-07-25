@@ -10,7 +10,6 @@
     <script src="../Master Page(Header and Footer)/translation.js"></script>
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
     <link rel="stylesheet" href="questionnaire.css">
-    <!-- Update Firebase SDK imports -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -43,23 +42,17 @@
         </div>
         <div class="questionnaire-container">
             <div class="question-nav">
-                <div class="nav-item" data-question="1"><span class="step-number">1</span> Enter Your Email</div>
-                <div class="nav-item" data-question="2"><span class="step-number">2</span> Who are you?</div>
-                <div class="nav-item" data-question="3"><span class="step-number">3</span> Your Interests</div>
-                <div class="nav-item" data-question="4"><span class="step-number">4</span> Funding Types</div>
-                <div class="nav-item" data-question="5"><span class="step-number">5</span> Business Sectors</div>
-                <div class="nav-item" data-question="6"><span class="step-number">6</span> Experience Level</div>
-                <div class="nav-item" data-question="7"><span class="step-number">7</span> Green Tools</div>
-                <div class="nav-item" data-question="8"><span class="step-number">8</span> Preferred Language</div>
+                <div class="nav-item" data-question="1"><span class="step-number">1</span> Who are you?</div>
+                <div class="nav-item" data-question="2"><span class="step-number">2</span> Your Interests</div>
+                <div class="nav-item" data-question="3"><span class="step-number">3</span> Funding Types</div>
+                <div class="nav-item" data-question="4"><span class="step-number">4</span> Business Sectors</div>
+                <div class="nav-item" data-question="5"><span class="step-number">5</span> Experience Level</div>
+                <div class="nav-item" data-question="6"><span class="step-number">6</span> Green Tools</div>
+                <div class="nav-item" data-question="7"><span class="step-number">7</span> Preferred Language</div>
             </div>
             <div class="question-panel">
                 <form id="questionnaireForm">
                     <div class="question-content" data-question="1">
-                        <label for="email" class="form-label">Enter Your Email</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required />
-                        <button type="button" class="submit-btn" id="nextBtn" style="display: none;">Next</button>
-                    </div>
-                    <div class="question-content" data-question="2">
                         <label class="form-label">Who are you? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="township-irm">Township IRM</button>
@@ -70,7 +63,7 @@
                             <button type="button" class="option-button" data-value="entrepreneurial-hub">Entrepreneurial Hub</button>
                         </div>
                     </div>
-                    <div class="question-content" data-question="3">
+                    <div class="question-content" data-question="2">
                         <label class="form-label">What are your interests? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="green-funding">Green Funding</button>
@@ -80,7 +73,7 @@
                             <button type="button" class="option-button" data-value="networking">Networking</button>
                         </div>
                     </div>
-                    <div class="question-content" data-question="4">
+                    <div class="question-content" data-question="3">
                         <label class="form-label">What funding types? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="grants">Grants</button>
@@ -90,7 +83,7 @@
                             <button type="button" class="option-button" data-value="not-seeking">Not Seeking</button>
                         </div>
                     </div>
-                    <div class="question-content" data-question="5">
+                    <div class="question-content" data-question="4">
                         <label class="form-label">What are your sectors? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="renewable-energy">Renewable Energy</button>
@@ -102,7 +95,7 @@
                             <button type="button" class="option-button" data-value="other">Other</button>
                         </div>
                     </div>
-                    <div class="question-content" data-question="6">
+                    <div class="question-content" data-question="5">
                         <label for="experienceLevel" class="form-label">Your experience level?</label>
                         <select id="experienceLevel" name="experienceLevel" class="form-select" required>
                             <option value="">Select experience</option>
@@ -112,7 +105,7 @@
                         </select>
                         <button type="button" class="submit-btn" id="nextBtn" style="display: none;">Next</button>
                     </div>
-                    <div class="question-content" data-question="7">
+                    <div class="question-content" data-question="6">
                         <label class="form-label">Which green tools? (Select at least one)</label>
                         <div class="button-group">
                             <button type="button" class="option-button" data-value="carbon-calculator">Carbon Calculator</button>
@@ -122,7 +115,7 @@
                             <button type="button" class="option-button" data-value="none">None</button>
                         </div>
                     </div>
-                    <div class="question-content" data-question="8">
+                    <div class="question-content" data-question="7">
                         <label for="preferredLanguage" class="form-label">Preferred Language</label>
                         <select id="preferredLanguage" name="preferredLanguage" class="form-select" required>
                             <option value="English">English</option>
@@ -214,21 +207,28 @@
     const finishBtn = document.getElementById('finishBtn');
     const finishText = document.getElementById('finishText');
 
-    // Initial Check for Questionnaire Completion
-    if (userId) {
-      showLoader();
-      try {
-        const userDoc = await db.collection('users').doc(userId).get();
-        if (userDoc.exists && userDoc.data().questionnaireCompleted) {
-          hideLoader();
-          window.location.href = `/Dashboard/dashboard.html?userId=${userId}`;
-          return; // Exit initialization if redirecting
+    // Check for authenticated user and questionnaire completion
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        userId = user.uid;
+        showLoader();
+        try {
+          const userDoc = await db.collection('users').doc(userId).get();
+          if (userDoc.exists && userDoc.data().questionnaireCompleted) {
+            hideLoader();
+            window.location.href = `/Dashboard/dashboard.html?userId=${userId}`;
+            return;
+          }
+        } catch (error) {
+          console.error("Error checking questionnaire completion:", error);
         }
-      } catch (error) {
-        console.error("Error checking questionnaire completion:", error);
+        hideLoader();
+      } else {
+        // Redirect to sign-in if not authenticated
+        window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
+        return;
       }
-      hideLoader();
-    }
+    });
 
     // Show question with pop-up animation and manage finish button
     function showQuestion(index) {
@@ -249,21 +249,20 @@
           activeContent.style.transform = 'scale(1)';
         }
 
-        nextBtn.style.display = index === 1 || index === 6 ? 'block' : 'none';
-        finishBtn.style.display = index === 8 && isFormComplete() ? 'block' : 'none';
+        nextBtn.style.display = index === 5 ? 'block' : 'none';
+        finishBtn.style.display = index === 7 && isFormComplete() ? 'block' : 'none';
       }, 400);
     }
 
     function isFormComplete() {
       const selections = {
+        1: document.querySelectorAll('.question-content[data-question="1"] .option-button.selected').length > 0,
         2: document.querySelectorAll('.question-content[data-question="2"] .option-button.selected').length > 0,
         3: document.querySelectorAll('.question-content[data-question="3"] .option-button.selected').length > 0,
         4: document.querySelectorAll('.question-content[data-question="4"] .option-button.selected').length > 0,
-        5: document.querySelectorAll('.question-content[data-question="5"] .option-button.selected').length > 0,
-        7: document.querySelectorAll('.question-content[data-question="7"] .option-button.selected').length > 0,
-        1: document.getElementById('email')?.value.trim() !== '',
-        6: document.getElementById('experienceLevel')?.value !== '',
-        8: document.getElementById('preferredLanguage')?.value !== ''
+        6: document.querySelectorAll('.question-content[data-question="6"] .option-button.selected').length > 0,
+        5: document.getElementById('experienceLevel')?.value !== '',
+        7: document.getElementById('preferredLanguage')?.value !== ''
       };
       return Object.values(selections).every(Boolean);
     }
@@ -281,11 +280,8 @@
     });
 
     nextBtn.addEventListener('click', () => {
-      if (currentQuestion === 1 && document.getElementById('email').value.trim() !== '') {
-        currentQuestion = 2;
-        showQuestion(currentQuestion);
-      } else if (currentQuestion === 6 && document.getElementById('experienceLevel').value !== '') {
-        currentQuestion = 7;
+      if (currentQuestion === 5 && document.getElementById('experienceLevel').value !== '') {
+        currentQuestion = 6;
         showQuestion(currentQuestion);
       }
     });
@@ -299,7 +295,7 @@
         }
         resetInactivityTimer(userId);
 
-        if ([2, 3, 4, 5, 7].includes(questionIndex) && button.classList.contains('selected')) {
+        if ([1, 2, 3, 4, 6].includes(questionIndex) && button.classList.contains('selected')) {
           if (document.querySelectorAll(`.question-content[data-question="${questionIndex}"] .option-button.selected`).length === 1) {
             currentQuestion = Math.min(questionIndex + 1, totalQuestions);
             showQuestion(currentQuestion);
@@ -316,15 +312,14 @@
       showLoader();
 
       const selectedButtons = {
-        role: Array.from(document.querySelectorAll('.question-content[data-question="2"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        primaryInterest: Array.from(document.querySelectorAll('.question-content[data-question="3"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        fundingType: Array.from(document.querySelectorAll('.question-content[data-question="4"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        businessSector: Array.from(document.querySelectorAll('.question-content[data-question="5"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        greenTools: Array.from(document.querySelectorAll('.question-content[data-question="7"] .option-button.selected')).map(btn => btn.getAttribute('data-value'))
+        role: Array.from(document.querySelectorAll('.question-content[data-question="1"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+        primaryInterest: Array.from(document.querySelectorAll('.question-content[data-question="2"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+        fundingType: Array.from(document.querySelectorAll('.question-content[data-question="3"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+        businessSector: Array.from(document.querySelectorAll('.question-content[data-question="4"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+        greenTools: Array.from(document.querySelectorAll('.question-content[data-question="6"] .option-button.selected')).map(btn => btn.getAttribute('data-value'))
       };
 
       const data = {
-        email: document.getElementById('email').value,
         experienceLevel: document.getElementById('experienceLevel').value,
         preferredLanguage: document.getElementById('preferredLanguage').value,
         role: selectedButtons.role,
@@ -337,11 +332,11 @@
       };
 
       try {
-        await db.collection('questionnaire_responses').add(data); // Store questionnaire data
+        await db.collection('questionnaire_responses').add(data);
         if (userId) {
           await db.collection('users').doc(userId).set({
             questionnaireCompleted: true
-          }, { merge: true }); // Ensure questionnaireCompleted is true
+          }, { merge: true });
           await trackUserInteraction(userId, 'form', 'submitted', JSON.stringify(data));
         }
         form.reset();
