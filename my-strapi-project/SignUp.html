@@ -89,5 +89,22 @@
     <script src="scripts/signup.js"></script>
      
     </script>
+
+<script>
+  const emailInput = document.getElementById('email');
+  if (emailInput) {
+    emailInput.addEventListener('input', (e) => {
+      const passwordField = document.getElementById('password')?.parentElement;
+      const confirmPasswordField = document.getElementById('confirm-password')?.parentElement;
+      if (e.target.value === 'nbigreeneconomy@gmail.com') {
+        if (passwordField) passwordField.style.display = 'none';
+        if (confirmPasswordField) confirmPasswordField.style.display = 'none';
+      } else {
+        if (passwordField) passwordField.style.display = 'block';
+        if (confirmPasswordField) confirmPasswordField.style.display = 'block';
+      }
+    });
+  }
+</script>
 </body>
 </html>
