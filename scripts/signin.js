@@ -105,7 +105,7 @@ try {
 
         if (email === 'nbigreeneconomy@gmail.com') {
           const actionCodeSettings = {
-            url: 'https://nbi-green-economy.firebaseapp.com/SignIn.html',
+            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signin.html',
             handleCodeInApp: true
           };
           try {
@@ -161,10 +161,10 @@ try {
 
             const questionnaireCompleted = await checkQuestionnaireCompletion(user);
             const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-              ? `../interactions/interactions.html?userId=${user.uid}`
+              ? '/interactions/interactions.html?userId=' + user.uid
               : questionnaireCompleted
-                ? `../Dashboard/dashboard.html?userId=${user.uid}`
-                : `../questionnaire/questionnaire.html?userId=${user.uid}`;
+                ? '/Dashboard/dashboard.html?userId=' + user.uid
+                : '/questionnaire/questionnaire.html?userId=' + user.uid;
             window.location.href = redirectUrl;
           } catch (error) {
             hideLoader();
@@ -202,10 +202,10 @@ try {
 
           const questionnaireCompleted = await checkQuestionnaireCompletion(user);
           const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-            ? `../interactions/interactions.html?userId=${user.uid}`
+            ? '/interactions/interactions.html?userId=' + user.uid
             : questionnaireCompleted
-              ? `../Dashboard/dashboard.html?userId=${user.uid}`
-              : `../questionnaire/questionnaire.html?userId=${user.uid}`;
+              ? '/Dashboard/dashboard.html?userId=' + user.uid
+              : '/questionnaire/questionnaire.html?userId=' + user.uid;
           window.location.href = redirectUrl;
         } catch (error) {
           hideLoader();
@@ -244,10 +244,10 @@ try {
 
             const questionnaireCompleted = await checkQuestionnaireCompletion(user);
             const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-              ? `../interactions/interactions.html?userId=${user.uid}`
+              ? '/interactions/interactions.html?userId=' + user.uid
               : questionnaireCompleted
-                ? `../Dashboard/dashboard.html?userId=${user.uid}`
-                : `../questionnaire/questionnaire.html?userId=${user.uid}`;
+                ? '/Dashboard/dashboard.html?userId=' + user.uid
+                : '/questionnaire/questionnaire.html?userId=' + user.uid;
             window.location.href = redirectUrl;
           })
           .catch(error => {

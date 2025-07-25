@@ -100,7 +100,7 @@ try {
 
         if (email === 'nbigreeneconomy@gmail.com') {
           const actionCodeSettings = {
-            url: 'https://nbi-green-economy.firebaseapp.com/SignUp.html',
+            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signup.html',
             handleCodeInApp: true
           };
           try {
@@ -153,7 +153,7 @@ try {
             setTimeout(() => {
               errorMessage.classList.add('hidden');
               auth.signOut().then(() => {
-                window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
+                window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
               });
             }, 5000);
           } catch (error) {
@@ -172,9 +172,9 @@ try {
       googleSignUpBtn.addEventListener('click', async (e) => {
         console.log("Google sign-up button clicked");
         e.preventDefault();
+        trackInteraction(null, 'signup', 'attempt', 'Google');
+        showLoader();
         try {
-          trackInteraction(null, 'signup', 'attempt', 'Google');
-          showLoader();
           const userCredential = await auth.signInWithPopup(googleProvider);
           const user = userCredential.user;
           await db.collection('users').doc(user.uid).set({
@@ -189,7 +189,7 @@ try {
           console.log("users doc written successfully");
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
-          window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
+          window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -224,7 +224,7 @@ try {
             console.log("users doc written successfully");
             trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
             hideLoader();
-            window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid;
+            window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
           })
           .catch(error => {
             hideLoader();
