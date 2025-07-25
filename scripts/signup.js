@@ -152,8 +152,15 @@ try {
             errorMessage.classList.remove('hidden');
             setTimeout(() => {
               errorMessage.classList.add('hidden');
-              auth.signOut().then(() => {
-                window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
+              auth.signOut().then(async () => {
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
+                const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+                  ? '/interactions/interactions.html?userId=' + user.uid
+                  : questionnaireCompleted
+                    ? '/Dashboard/dashboard.html?userId=' + user.uid
+                    : '/questionnaire/questionnaire.html?userId=' + user.uid;
+                window.location.href = redirectUrl;
               });
             }, 5000);
           } catch (error) {
@@ -189,7 +196,14 @@ try {
           console.log("users doc written successfully");
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
-          window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
+          const userDoc = await db.collection('users').doc(user.uid).get();
+          const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
+          const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+            ? '/interactions/interactions.html?userId=' + user.uid
+            : questionnaireCompleted
+              ? '/Dashboard/dashboard.html?userId=' + user.uid
+              : '/questionnaire/questionnaire.html?userId=' + user.uid;
+          window.location.href = redirectUrl;
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -224,7 +238,14 @@ try {
             console.log("users doc written successfully");
             trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
             hideLoader();
-            window.location.href = '/questionnaire/questionnaire.html?userId=' + user.uid;
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            const questionnaireCompleted = userDoc.data()?.questionnaireCompleted || false;
+            const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+              ? '/interactions/interactions.html?userId=' + user.uid
+              : questionnaireCompleted
+                ? '/Dashboard/dashboard.html?userId=' + user.uid
+                : '/questionnaire/questionnaire.html?userId=' + user.uid;
+            window.location.href = redirectUrl;
           })
           .catch(error => {
             hideLoader();

@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
     <link rel="stylesheet" href="questionnaire.css">
     <!-- Update Firebase SDK imports -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
 <body>
     <div class="loader-overlay" id="loader-overlay"></div>
@@ -214,6 +213,22 @@
     const nextBtn = document.getElementById('nextBtn');
     const finishBtn = document.getElementById('finishBtn');
     const finishText = document.getElementById('finishText');
+
+    // Initial Check for Questionnaire Completion
+    if (userId) {
+      showLoader();
+      try {
+        const userDoc = await db.collection('users').doc(userId).get();
+        if (userDoc.exists && userDoc.data().questionnaireCompleted) {
+          hideLoader();
+          window.location.href = `/Dashboard/dashboard.html?userId=${userId}`;
+          return; // Exit initialization if redirecting
+        }
+      } catch (error) {
+        console.error("Error checking questionnaire completion:", error);
+      }
+      hideLoader();
+    }
 
     // Show question with pop-up animation and manage finish button
     function showQuestion(index) {
@@ -419,7 +434,5 @@
     }
   });
 </script>
-
-
 </body>
 </html>
