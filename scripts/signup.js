@@ -172,9 +172,9 @@ try {
       googleSignUpBtn.addEventListener('click', async (e) => {
         console.log("Google sign-up button clicked");
         e.preventDefault();
-        trackInteraction(null, 'signup', 'attempt', 'Google');
-        showLoader();
         try {
+          trackInteraction(null, 'signup', 'attempt', 'Google');
+          showLoader();
           const userCredential = await auth.signInWithPopup(googleProvider);
           const user = userCredential.user;
           await db.collection('users').doc(user.uid).set({

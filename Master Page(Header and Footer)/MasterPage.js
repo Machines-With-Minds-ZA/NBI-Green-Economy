@@ -38,10 +38,10 @@ class GreenEconomyFooter extends HTMLElement {
             <div class="footer-section">
               <h4 data-i18n="footer.about_us">ABOUT US</h4>
               <ul>
-                <li><a href="#" data-i18n="footer.about_green_economy">About the green economy</a></li>
-                <li><a href="#" data-i18n="footer.irm_sector">IRM sector</a></li>
-                <li><a href="#" data-i18n="footer.opportunities">Opportunities</a></li>
-                <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
+                <li><a href="/LandingPage/About Page/about.html" data-i18n="footer.about_green_economy">About the green economy</a></li>
+                <li><a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="footer.irm_sector">IRM sector</a></li>
+                <li><a href="/LandingPage/Opportunities/opportunities.html" data-i18n="footer.opportunities">Opportunities</a></li>
+                <li><a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
               </ul>
             </div>
             <div class="footer-section">
@@ -58,7 +58,7 @@ class GreenEconomyFooter extends HTMLElement {
               <ul>
                 <li><a href="#" data-i18n="footer.news_events">News & events</a></li>
                 <li><a href="#" data-i18n="footer.contact_us">Contact us</a></li>
-                <li><a href="#" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
+                <li><a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="footer.knowledge_hub">Knowledge hub</a></li>
                 <li><a href="#" data-i18n="footer.terms_reference">Terms of reference</a></li>
               </ul>
             </div>
@@ -76,7 +76,7 @@ customElements.define('green-economy-header', GreenEconomyHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
 function navigateToFocusArea(areaId) {
-  window.location.href = `LADINGPAGES/Focus-Area/focus-area.html?area=${areaId}`;
+  window.location.href = `/LADINGPAGES/Focus-Area/focus-area.html?area=${areaId}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
