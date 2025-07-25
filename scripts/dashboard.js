@@ -1,15 +1,3 @@
-<<<<<<< Updated upstream
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
-=======
 // Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyCfa827mvCLf1ETts6B_DmCfb7owTohBxk",
@@ -20,7 +8,6 @@ const firebaseConfig = {
   appId: "1:53732340059:web:3fb3f086c6662e1e9baa7e",
   measurementId: "G-37VRZ5CGE4"
 };
->>>>>>> Stashed changes
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -47,9 +34,9 @@ function hideLoader() {
 }
 
 // Interaction Tracking Function
-function trackUserInteraction(userId, category, action, label = "") {
+function trackUserInteraction(tempUserId, category, action, label = "") {
   db.collection('interactions').add({
-    userId: userId,
+    tempUserId: tempUserId,
     category: category,
     action: action,
     label: label,
@@ -63,63 +50,63 @@ function trackUserInteraction(userId, category, action, label = "") {
 
 // Inactivity Timeout
 let inactivityTimeout;
-function resetInactivityTimer(userId) {
+function resetInactivityTimer(tempUserId) {
   clearTimeout(inactivityTimeout);
   inactivityTimeout = setTimeout(async () => {
     try {
-      trackUserInteraction(userId, 'session', 'timeout', 'Redirected to sign-in due to inactivity');
+      await db.collection('temp_users').doc(tempUserId).delete();
+      trackUserInteraction(tempUserId, 'session', 'timeout', 'Redirected to sign-in due to inactivity');
       await auth.signOut();
       window.location.href = '../SignIn.html';
     } catch (error) {
-      console.error("Error during inactivity timeout:", error);
+      console.error("Error deleting temp user:", error);
     }
   }, 4 * 60 * 1000); // 4 minutes
 }
 
-// Get User ID from URL
+// Get Temporary User ID from URL
 const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId');
+const tempUserId = urlParams.get('tempUserId');
 
 // Initialize Dashboard
 document.addEventListener("DOMContentLoaded", async () => {
   showLoader();
   // Check if user is authenticated
   const user = auth.currentUser;
-  if (!user || !userId || user.uid !== userId) {
-    console.log("No user or invalid user ID, redirecting to sign-in...");
-    await auth.signOut();
+  if (!user || !tempUserId) {
+    console.log("No user or temp user ID, redirecting to sign-in...");
     window.location.href = '../SignIn.html';
     hideLoader();
     return;
   }
 
   try {
-    const userDoc = await db.collection('users').doc(userId).get();
+    const userDoc = await db.collection('temp_users').doc(tempUserId).get();
     if (!userDoc.exists || userDoc.data().userId !== user.uid) {
-      console.log("Invalid user ID or user mismatch, redirecting to sign-in...");
+      console.log("Invalid temp user ID or user mismatch, redirecting to sign-in...");
       await auth.signOut();
       window.location.href = '../SignIn.html';
       hideLoader();
       return;
     }
 
-    trackUserInteraction(userId, 'page', 'loaded', 'Dashboard page');
-    resetInactivityTimer(userId);
+    trackUserInteraction(tempUserId, 'page', 'loaded', 'Dashboard page');
+    resetInactivityTimer(tempUserId);
 
     // Track all user interactions
     document.addEventListener('click', (e) => {
       const target = e.target.closest('button, select, input, a, .dashboard-card, .news-item, .news-category-btn, .btn');
       if (target) {
-        trackUserInteraction(userId, 'interaction', 'click', target.id || target.className || target.tagName);
+        trackUserInteraction(tempUserId, 'interaction', 'click', target.id || target.className || target.tagName);
       }
-      resetInactivityTimer(userId);
+      resetInactivityTimer(tempUserId);
     });
 
     document.addEventListener('input', (e) => {
       if (e.target.matches('input, select')) {
-        trackUserInteraction(userId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
+        trackUserInteraction(tempUserId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
       }
-      resetInactivityTimer(userId);
+      resetInactivityTimer(tempUserId);
     });
 
     initializeSearch();
@@ -127,14 +114,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     initializeNews();
     updateLanguage(currentLanguage);
   } catch (error) {
-    console.error("Error validating user:", error);
+    console.error("Error validating temp user:", error);
     await auth.signOut();
     window.location.href = '../SignIn.html';
     hideLoader();
   }
 });
 
-// Translations (same as previous version)
+// Translations
 const translations = {
   en: {
     "dashboard-title": "Dashboard Overview",
@@ -265,7 +252,7 @@ const fallbackNewsData = [
 function changeLanguage(lang) {
   currentLanguage = lang;
   updateLanguage(lang);
-  trackUserInteraction(userId, "language", "changed", lang);
+  trackUserInteraction(tempUserId, "language", "changed", lang);
 }
 
 function updateLanguage(lang) {
@@ -307,7 +294,7 @@ function initializeSearch() {
 
 function performSearch(query) {
   if (query.length < 2) return;
-  trackUserInteraction(userId, "search", "query", query);
+  trackUserInteraction(tempUserId, "search", "query", query);
 }
 
 function initializeDashboard() {
@@ -326,7 +313,7 @@ function handleCardClick(event) {
 }
 
 function navigateToSection(section) {
-  trackUserInteraction(userId, "navigation", `click_${section}`);
+  trackUserInteraction(tempUserId, "navigation", `click_${section}`);
   const paths = {
     funding: "../Funding Hub/Funding-Hub.html",
     smme: "../SMME/smme.html",
@@ -338,7 +325,7 @@ function navigateToSection(section) {
     fetch(paths[section], { method: 'HEAD' })
       .then(response => {
         if (response.ok) {
-          window.location.href = `${paths[section]}?userId=${userId}`;
+          window.location.href = `${paths[section]}?tempUserId=${tempUserId}`;
         } else {
           console.error(`Navigation failed: ${paths[section]} not found`);
           displayErrorMessage(`Cannot navigate to ${section}: Page not found.`);
@@ -521,19 +508,19 @@ function handleCategoryClick() {
   currentNewsCategory = this.getAttribute("data-category");
   displayedNewsCount = 4;
   renderNews();
-  trackUserInteraction(userId, "news", "category_filter", currentNewsCategory);
+  trackUserInteraction(tempUserId, "news", "category_filter", currentNewsCategory);
 }
 
 function handleLoadMoreClick() {
   displayedNewsCount += 2;
   renderNews();
-  trackUserInteraction(userId, "news", "load_more");
+  trackUserInteraction(tempUserId, "news", "load_more");
 }
 
 function handleRefreshClick() {
   fetchNews().then(() => {
     renderNews();
-    trackUserInteraction(userId, "news", "refresh");
+    trackUserInteraction(tempUserId, "news", "refresh");
   });
 }
 
@@ -547,13 +534,13 @@ async function updateNews() {
   }
   await fetchNews();
   renderNews();
-  trackUserInteraction(userId, "news", "auto_update");
+  trackUserInteraction(tempUserId, "news", "auto_update");
 }
 
 function openNewsArticle(newsId) {
   const news = newsData.find((n) => n.id === newsId);
   if (news && news.url) {
-    trackUserInteraction(userId, "news", "article_click", news.title);
+    trackUserInteraction(tempUserId, "news", "article_click", news.title);
     window.open(news.url, "_blank");
   } else {
     displayErrorMessage("Unable to open article.");
@@ -564,7 +551,7 @@ function openAIAssistant() {
   const modal = document.getElementById("aiModal");
   if (modal) {
     modal.style.display = "flex";
-    trackUserInteraction(userId, "ai_assistant", "opened");
+    trackUserInteraction(tempUserId, "ai_assistant", "opened");
   }
 }
 
@@ -572,7 +559,7 @@ function closeAIAssistant() {
   const modal = document.getElementById("aiModal");
   if (modal) {
     modal.style.display = "none";
-    trackUserInteraction(userId, "ai_assistant", "closed");
+    trackUserInteraction(tempUserId, "ai_assistant", "closed");
   }
 }
 
@@ -584,7 +571,7 @@ function sendMessage() {
 
   addMessage(message, "user");
   input.value = "";
-  trackUserInteraction(userId, "ai_chat", "message_sent");
+  trackUserInteraction(tempUserId, "ai_chat", "message_sent");
 
   setTimeout(() => {
     const aiResponse = generateAIResponse(message);
