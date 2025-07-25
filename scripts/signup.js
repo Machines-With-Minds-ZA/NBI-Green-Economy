@@ -1,16 +1,3 @@
-<<<<<<< Updated upstream
-   // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAIlr8Y249Yu_1JPbUjNX7cQtJYlkbV3eY",
-            authDomain: "nbi-database.firebaseapp.com",
-            projectId: "nbi-database",
-            storageBucket: "nbi-database.appspot.com",
-            messagingSenderId: "497517200595",
-            appId: "1:497517200595:web:c862996d49fba97baf8026",
-            measurementId: "G-NHZB2WJF9L"
-        };
-=======
-// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyCfa827mvCLf1ETts6B_DmCfb7owTohBxk",
   authDomain: "nbi-green-economy.firebaseapp.com",
@@ -20,9 +7,7 @@ const firebaseConfig = {
   appId: "1:53732340059:web:3fb3f086c6662e1e9baa7e",
   measurementId: "G-37VRZ5CGE4"
 };
->>>>>>> Stashed changes
 
-// Initialize Firebase
 console.log("Initializing Firebase...");
 try {
   const app = firebase.initializeApp(firebaseConfig);
@@ -31,7 +16,6 @@ try {
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   console.log("Firebase initialized successfully");
 
-  // Loader Functions
   const loader = document.getElementById('loader');
   const loaderOverlay = document.getElementById('loader-overlay');
 
@@ -53,7 +37,6 @@ try {
     }
   }
 
-  // Interaction Tracking
   function trackInteraction(userId, category, action, label = "") {
     db.collection('interactions').add({
       userId: userId || `anonymous_${Date.now()}`,
@@ -68,7 +51,6 @@ try {
     });
   }
 
-  // Set session persistence
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
       console.log("Persistence set to LOCAL");
@@ -84,17 +66,14 @@ try {
       hideLoader();
     });
 
-  // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded for SignUp page");
 
-    // Verify button existence
     const signUpBtn = document.getElementById('sign-up-btn');
     const googleSignUpBtn = document.getElementById('google-sign-up-btn');
     if (!signUpBtn) console.error("Sign-up button not found");
     if (!googleSignUpBtn) console.error("Google sign-up button not found");
 
-    // Email Sign Up
     if (signUpBtn) {
       signUpBtn.addEventListener('click', async (e) => {
         console.log("Sign-up button clicked");
@@ -118,30 +97,30 @@ try {
 
         trackInteraction(null, 'signup', 'attempt', `Email: ${email}`);
         showLoader();
-if (email === 'nbigreeneconomy@gmail.com') {
-  const actionCodeSettings = {
-    url: 'https://nbi-green-economy.firebaseapp.com/SignUp.html', // Ensure this matches your authorized domain
-    handleCodeInApp: true
-  };
-  try {
-    console.log("Sending sign-up link to:", email);
-    await auth.sendSignInLinkToEmail(email, actionCodeSettings);
-    window.localStorage.setItem('emailForSignIn', email);
-    hideLoader();
-    errorMessage.textContent = "A sign-in link has been sent to your email to complete sign-up.";
-    errorMessage.classList.remove('hidden');
-    setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-    trackInteraction(null, 'signup', 'email_link_sent', `Email: ${email}`);
-  } catch (error) {
-    hideLoader();
-    console.error("Passwordless sign-up error:", error);
-    trackInteraction(null, 'signup', 'failure', error.message);
-    errorMessage.textContent = error.message;
-    errorMessage.classList.remove('hidden');
-    setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-  }
-} else {
-          // Standard email/password sign-up
+
+        if (email === 'nbigreeneconomy@gmail.com') {
+          const actionCodeSettings = {
+            url: 'https://nbi-green-economy.firebaseapp.com/SignUp.html',
+            handleCodeInApp: true
+          };
+          try {
+            console.log("Sending sign-up link to:", email);
+            await auth.sendSignInLinkToEmail(email, actionCodeSettings);
+            window.localStorage.setItem('emailForSignIn', email);
+            hideLoader();
+            errorMessage.textContent = "A sign-in link has been sent to your email to complete sign-up.";
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+            trackInteraction(null, 'signup', 'email_link_sent', `Email: ${email}`);
+          } catch (error) {
+            hideLoader();
+            console.error("Passwordless sign-up error:", error);
+            trackInteraction(null, 'signup', 'failure', error.message);
+            errorMessage.textContent = error.message;
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+          }
+        } else {
           if (!password) {
             hideLoader();
             errorMessage.textContent = "Password is required.";
@@ -154,7 +133,6 @@ if (email === 'nbigreeneconomy@gmail.com') {
             const userCredential = await auth.createUserWithEmailAndPassword(email, password);
             const user = userCredential.user;
 
-            // Send email verification
             await user.sendEmailVerification();
             console.log("Email verification sent to:", user.email);
 
@@ -162,6 +140,7 @@ if (email === 'nbigreeneconomy@gmail.com') {
               userId: user.uid,
               email: user.email,
               isAdmin: false,
+              questionnaireCompleted: false, // Initialize questionnaire flag
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
@@ -174,7 +153,7 @@ if (email === 'nbigreeneconomy@gmail.com') {
             setTimeout(() => {
               errorMessage.classList.add('hidden');
               auth.signOut().then(() => {
-                window.location.href = '../LandingPage/SignAndSignUp/SignIn.html';
+                window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
               });
             }, 5000);
           } catch (error) {
@@ -189,7 +168,6 @@ if (email === 'nbigreeneconomy@gmail.com') {
       });
     }
 
-    // Google Sign Up
     if (googleSignUpBtn) {
       googleSignUpBtn.addEventListener('click', async (e) => {
         console.log("Google sign-up button clicked");
@@ -203,6 +181,7 @@ if (email === 'nbigreeneconomy@gmail.com') {
             userId: user.uid,
             email: user.email,
             isAdmin: user.email === 'nbigreeneconomy@gmail.com',
+            questionnaireCompleted: false, // Initialize questionnaire flag
             language: document.documentElement.lang || 'en',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
@@ -210,10 +189,7 @@ if (email === 'nbigreeneconomy@gmail.com') {
           console.log("users doc written successfully");
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
-          const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-            ? `../interactions/interactions.html?userId=${user.uid}`
-            : `../Dashboard/dashboard.html?userId=${user.uid}`;
-          window.location.href = redirectUrl;
+          window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -228,67 +204,55 @@ if (email === 'nbigreeneconomy@gmail.com') {
       });
     }
 
-if (auth.isSignInWithEmailLink(window.location.href)) {
-  const email = window.localStorage.getItem('emailForSignIn');
-  if (email) {
-    console.log("Handling email link sign-up for:", email);
-    showLoader();
-    auth.signInWithEmailLink(email, window.location.href)
-      .then(async (userCredential) => {
-        window.localStorage.removeItem('emailForSignIn');
-        const user = userCredential.user;
-        await db.collection('users').doc(user.uid).set({
-          userId: user.uid,
-          email: user.email,
-          isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-          language: document.documentElement.lang || 'en',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-        console.log("users doc written successfully");
-        trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
-        hideLoader();
-        const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-          ? `../interactions/interactions.html?userId=${user.uid}`
-          : `../Dashboard/dashboard.html?userId=${user.uid}`;
-        window.location.href = redirectUrl;
-      })
-      .catch(error => {
-        hideLoader();
-        console.error("Error completing passwordless sign-up:", error);
-        trackInteraction(null, 'signup', 'failure', error.message);
+    if (auth.isSignInWithEmailLink(window.location.href)) {
+      const email = window.localStorage.getItem('emailForSignIn');
+      if (email) {
+        console.log("Handling email link sign-up for:", email);
+        showLoader();
+        auth.signInWithEmailLink(email, window.location.href)
+          .then(async (userCredential) => {
+            window.localStorage.removeItem('emailForSignIn');
+            const user = userCredential.user;
+            await db.collection('users').doc(user.uid).set({
+              userId: user.uid,
+              email: user.email,
+              isAdmin: user.email === 'nbigreeneconomy@gmail.com',
+              questionnaireCompleted: false, // Initialize questionnaire flag
+              language: document.documentElement.lang || 'en',
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+            console.log("users doc written successfully");
+            trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
+            hideLoader();
+            window.location.href = '../questionnaire/questionnaire.html?userId=' + user.uid; // Redirect to questionnaire
+          })
+          .catch(error => {
+            hideLoader();
+            console.error("Error completing passwordless sign-up:", error);
+            trackInteraction(null, 'signup', 'failure', error.message);
+            const errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+              errorMessage.textContent = error.message;
+              errorMessage.classList.remove('hidden');
+              setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+            }
+          });
+      } else {
+        console.error("No email found in localStorage for email link sign-up");
         const errorMessage = document.getElementById('error-message');
         if (errorMessage) {
-          errorMessage.textContent = error.message;
+          errorMessage.textContent = "No email found for sign-up. Please try again.";
           errorMessage.classList.remove('hidden');
           setTimeout(() => errorMessage.classList.add('hidden'), 5000);
         }
-      });
-  }
-}
+        hideLoader();
+      }
+    }
 
-    // Initialize translations and password field visibility
     if (typeof updateLanguage === 'function') {
       updateLanguage(document.documentElement.lang || 'en');
     }
     trackInteraction(null, 'page', 'loaded', 'SignUp page');
-
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-      emailInput.addEventListener('input', (e) => {
-        console.log("Email input changed:", e.target.value);
-        const passwordField = document.getElementById('password')?.parentElement;
-        const confirmPasswordField = document.getElementById('confirm-password')?.parentElement;
-        if (e.target.value === 'nbigreeneconomy@gmail.com') {
-          if (passwordField) passwordField.style.display = 'none';
-          if (confirmPasswordField) confirmPasswordField.style.display = 'none';
-        } else {
-          if (passwordField) passwordField.style.display = 'block';
-          if (confirmPasswordField) confirmPasswordField.style.display = 'block';
-        }
-      });
-    } else {
-      console.error("Email input not found");
-    }
   });
 } catch (error) {
   console.error("Firebase initialization failed:", error);
