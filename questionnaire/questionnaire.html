@@ -337,11 +337,11 @@
       };
 
       try {
-        await db.collection('questionnaire_responses').add(data);
+        await db.collection('questionnaire_responses').add(data); // Store questionnaire data
         if (userId) {
-          await db.collection('users').doc(userId).update({
+          await db.collection('users').doc(userId).set({
             questionnaireCompleted: true
-          });
+          }, { merge: true }); // Ensure questionnaireCompleted is true
           await trackUserInteraction(userId, 'form', 'submitted', JSON.stringify(data));
         }
         form.reset();
