@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Management | NBI Green Economy</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Master%20Page(Header%20and%20Footer)/MasterPage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Header and Footer Styles (copied exactly from reference) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #000;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    header {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding: 20px 0;
+      z-index: 1000;
+      background-color: #fff;
+    }
+
+    .logo {
+      color: #000;
+      font-weight: 700;
+      font-size: 24px;
+      float: left;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo-container {
+      z-index: 2;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin-left: 25px;
+    }
+
+    nav ul li a {
+      color: #000;
+      font-weight: 500;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a.active {
+      color: darkgoldenrod;
+    }
+
+    nav ul li a:hover {
+      color: #2b9589;
+    }
+
+    .cta-btn {
+      background-color: #2b9589;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cta-btn:hover {
+      background-color: #4ec3b0;
+      color: white;
+    }
+
+    .mobile-toggle {
+      background: transparent;
+      border: none;
+      color: #000 !important;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      display: none;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    footer {
+      background-color: #111;
+      color: #000;
+      padding: 60px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-social h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+      color: #ffffff;
+      transition: color 0.3s;
+    }
+
+    .footer-links ul li a:hover {
+      color: #2b9589;
+    }
+
+    .footer-contact p {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: #ffffff;
+      background-color: #333;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .social-icons a:hover {
+      background-color: #2b9589;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      color: #ffffff;
+      font-size: 0.9rem;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #000   #000 !important;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+    }
+
+    .app-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: black;
+      text-decoration: underline;
+      text-decoration-color: #2b9589;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        position: relative;
+        background-color: #fff;
+        padding: 15px 0;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        left: auto;
+        right: -250px;
+        width: 250px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        transform: none;
+        transition: transform 0.3s ease;
+        padding: 80px 30px 30px;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+
+      nav.active {
+        display: block;
+      }
+
+      nav.active ul {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 80px 30px 30px;
+        align-items: flex-start;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s forwards;
+      }
+
+      nav ul li {
+        margin: 15px 0;
+      }
+
+      nav ul li a {
+        font-size: 16px;
+      }
+      nav.active {
+        transform: translateX(-100%);
+      }
+    
+      nav ul {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    /* Dashboard Specific Styles */
+    .dashboard {
+      padding: 120px 0 60px;
+      background-color: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    .dashboard-header {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .dashboard-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000;
+      margin: 0;
+    }
+
+    /* Course Tabs Styles */
+    .course-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      border: none;
+      background: #f8f9fa;
+      color: #666;
+      border-radius: 8px 8px 0 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn:hover {
+      background: #e9ecef;
+      color: #333;
+    }
+
+    .tab-btn.active {
+      background: #2b9589;
+      color: white;
+      border-bottom-color: #2b9589;
+    }
+
+    .tab-btn i {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .course-tabs {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .tab-btn {
+        border-radius: 8px;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+      }
+      
+      .tab-btn.active {
+        border-left-color: #2b9589;
+        border-bottom-color: transparent;
+      }
+    }
+
+    .filter-section {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .filter-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .filter-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .filter-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .filter-summary {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .filter-summary span {
+      padding: 5px 10px;
+      background: #f8f6f0;
+      border-radius: 4px;
+      border: 1px solid rgba(184, 134, 11, 0.2);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn.reset {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .filter-btn.apply {
+      background-color: #2b9589;
+      color: white;
+    }
+
+    .filter-btn.reset:hover {
+      background-color: #5a6268;
+    }
+
+    .filter-btn.apply:hover {
+      background-color: #4ec3b0;
+    }
+
+   .applications-table {
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow-x: auto;
+      border: 1px solid #2b9589;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1400px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(184, 134, 11, 0.3);
+      border-right: 1px solid rgba(184, 134, 11, 0.1);
+    }
+
+    th {
+      background-color: #f8f6f0;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      color: #333;
+      border-bottom: 2px solid #2b9589;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+
+    th:hover {
+      background-color: #e6d7b8;
+    }
+
+    th.sortable {
+      position: relative;
+      padding-right: 25px;
+      cursor: pointer;
+    }
+
+    th.sortable:hover::before {
+      content: 'Click to sort';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+
+    th.sortable::after {
+      content: '↕';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: #999;
+    }
+
+    th.sortable.asc::after {
+      content: '↑';
+      color: #2b9589;
+    }
+
+    th.sortable.desc::after {
+      content: '↓';
+      color: #2b9589;
+    }
+
+    th:last-child, td:last-child {
+      border-right: none;
+    }
+
+    tr:hover {
+      background-color: rgba(184, 134, 11, 0.05);
+    }
+
+
+    .action-btn {
+      padding: 6px 12px;
+      background-color: #2b9589;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-right: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background-color: #4ec3b0;
+      transform: translateY(-1px);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .loading-indicator {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #2b9589;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 5px;
+    }
+
+    .page-btn {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .page-btn.active {
+      background-color: #2b9589;
+      color: white;
+      border-color: #2b9589;
+    }
+
+    .page-btn:hover:not(.active) {
+      background-color: #f1f1f1;
+    }
+
+    /* Modal styles */
+     .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 95%;
+      height: 90vh;
+      max-width: 1200px;
+      padding: 20px;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #2b9589;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+  
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #000;
+      margin: 0;
+    }
+
+    .modal-close:hover {
+      color: #2b9589;
+    }
+
+    .transcript-container {
+      flex: 1;
+      width: 100%;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: #f9f9f9;
+    }
+
+    .transcript-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .transcript-unavailable {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background-color: #f9f9f9;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+      .applications-table {
+        overflow-x: auto;
+        scrollbar-width: thin;
+        scrollbar-color: darkgoldenrod #f0f0f0;
+      }
+      
+      .applications-table::-webkit-scrollbar {
+        height: 8px;
+      }
+      
+      .applications-table::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 4px;
+      }
+      
+      .applications-table::-webkit-scrollbar-thumb {
+        background: darkgoldenrod;
+        border-radius: 4px;
+      }
+      
+      .applications-table::-webkit-scrollbar-thumb:hover {
+        background: #b8860b;
+      }
+      
+      table {
+        min-width: 1400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        padding: 90px 0 40px;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .filter-section {
+        padding: 15px;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .filter-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        width: 100%;
+        padding: 12px;
+      }
+
+      th, td {
+        padding: 6px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .action-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      .modal-content {
+        width: 95%;
+        height: 80vh;
+        padding: 15px;
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 95%;
+        padding: 0 10px;
+      }
+
+      .dashboard-title {
+        font-size: 1.5rem;
+      }
+
+      th, td {
+        padding: 4px 6px;
+        font-size: 11px;
+      }
+
+      .action-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+    }
+
+      .action-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+    
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        height: 85vh;
+        padding: 15px;
+      }
+      
+      th, td {
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .action-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      
+      .modal-content {
+        width: 98%;
+        height: 80vh;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .filter-group {
+        min-width: 100%;
+      }
+
+      .applications-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .modal-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Component -->
+  <script src="Master Page(Header and Footer)/MasterPage.js"></script>
+  <green-economy-header></green-economy-header>
+
+  <section class="dashboard">
+    <div class="container">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Database Management</h1>
+        <div>
+          <button id="exportBtn" class="cta-btn">
+            <i class="fas fa-download"></i> Export Data
+          </button>
+        </div>
+      </div>
+
+      <!-- Course Tabs -->
+      <div class="course-tabs">
+        <button class="tab-btn active" data-course="all">
+          <i class="fas fa-list"></i> All Entries
+        </button>
+        <button class="tab-btn" data-course="course1">
+          <i class="fas fa-code"></i> Course 1
+        </button>
+        <button class="tab-btn" data-course="course2">
+          <i class="fas fa-brain"></i> Course 2
+        </button>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="filterCountry" class="filter-label">Country</label>
+            <select id="filterCountry" class="filter-input">
+              <option value="">All Countries</option>
+              <!-- Countries will be populated by JavaScript -->
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterCourse" class="filter-label">Course</label>
+            <select id="filterCourse" class="filter-input">
+              <option value="">All Courses</option>
+              <!-- Courses will be populated by JavaScript -->
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterFaculty" class="filter-label">Faculty</label>
+            <select id="filterFaculty" class="filter-input">
+              <option value="">All Faculties</option>
+              <!-- Faculties will be populated by JavaScript -->
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterGender" class="filter-label">Gender</label>
+            <select id="filterGender" class="filter-input">
+              <option value="">All Genders</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filterAverage" class="filter-label">Mark Average</label>
+            <select id="filterAverage" class="filter-input">
+              <option value="">All Scores</option>
+              <option value="90">90+</option>
+              <option value="80">80+</option>
+              <option value="70">70+</option>
+              <option value="60">60+</option>
+              <option value="50">50+</option>
+              <option value="40">Below 50</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <div class="filter-summary">
+            <span id="totalCount">Total: 0</span>
+            <span id="filteredCount">Showing: 0</span>
+          </div>
+          <div class="filter-buttons">
+            <button id="resetFilters" class="filter-btn reset">Reset Filters</button>
+            <button id="applyFilters" class="filter-btn apply">Apply Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Applications Table -->
+      <div class="applications-table" id="allApplicationsTable">
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+          <div class="spinner"></div>
+          <p>Loading data...</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="sortable" data-sort="gl_code">GL Code</th>
+              <th class="sortable" data-sort="first_name">First Name</th>
+              <th class="sortable" data-sort="last_name">Last Name</th>
+              <th class="sortable" data-sort="email_address">Email</th>
+              <th class="sortable" data-sort="phone_number">Phone</th>
+              <th class="sortable" data-sort="gender">Gender</th>
+              <th class="sortable" data-sort="country">Country</th>
+              <th class="sortable" data-sort="faculty">Faculty</th>
+              <th class="sortable" data-sort="course">Course</th>
+              <th class="sortable" data-sort="year_of_study">Year</th>
+              <th class="sortable" data-sort="age">Age</th>
+              <th class="sortable" data-sort="mark_average">Mark Average</th>
+              <th class="sortable" data-sort="weekly_hours">Weekly Hours</th>
+              <th class="sortable" data-sort="timestamp">Date Applied</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="allApplicationsTableBody">
+            <!-- Table rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <div id="allNoResults" class="no-results" style="display: none;">
+          No records found matching your criteria.
+        </div>
+      </div>
+
+      <!-- Python Programming Applications Table -->
+      <div class="applications-table" id="pythonProgrammingTable" style="display: none;">
+        <div id="pythonLoadingIndicator" class="loading-indicator" style="display: none;">
+          <div class="spinner"></div>
+          <p>Loading course data...</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="sortable" data-sort="gl_code">GL Code</th>
+              <th class="sortable" data-sort="first_name">First Name</th>
+              <th class="sortable" data-sort="last_name">Last Name</th>
+              <th class="sortable" data-sort="email_address">Email</th>
+              <th class="sortable" data-sort="phone_number">Phone</th>
+              <th class="sortable" data-sort="gender">Gender</th>
+              <th class="sortable" data-sort="country">Country</th>
+              <th class="sortable" data-sort="faculty">Faculty</th>
+              <th class="sortable" data-sort="year_of_study">Year</th>
+              <th class="sortable" data-sort="age">Age</th>
+              <th class="sortable" data-sort="mark_average">Mark Average</th>
+              <th class="sortable" data-sort="weekly_hours">Weekly Hours</th>
+              <th class="sortable" data-sort="timestamp">Date Applied</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="pythonProgrammingTableBody">
+            <!-- Table rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <div id="pythonNoResults" class="no-results" style="display: none;">
+          No course data found matching your criteria.
+        </div>
+      </div>
+
+      <!-- AI Applications Table -->
+      <div class="applications-table" id="aiApplicationsTable" style="display: none;">
+        <div id="aiLoadingIndicator" class="loading-indicator" style="display: none;">
+          <div class="spinner"></div>
+          <p>Loading course data...</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="sortable" data-sort="gl_code">GL Code</th>
+              <th class="sortable" data-sort="first_name">First Name</th>
+              <th class="sortable" data-sort="last_name">Last Name</th>
+              <th class="sortable" data-sort="email_address">Email</th>
+              <th class="sortable" data-sort="phone_number">Phone</th>
+              <th class="sortable" data-sort="gender">Gender</th>
+              <th class="sortable" data-sort="country">Country</th>
+              <th class="sortable" data-sort="faculty">Faculty</th>
+              <th class="sortable" data-sort="year_of_study">Year</th>
+              <th class="sortable" data-sort="age">Age</th>
+              <th class="sortable" data-sort="mark_average">Mark Average</th>
+              <th class="sortable" data-sort="weekly_hours">Weekly Hours</th>
+              <th class="sortable" data-sort="timestamp">Date Applied</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="aiApplicationsTableBody">
+            <!-- Table rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <div id="aiNoResults" class="no-results" style="display: none;">
+          No course data found matching your criteria.
+        </div>
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Pagination will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Transcript Modal -->
+ <div class="modal-overlay" id="transcriptModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Application Details</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div id="transcriptContainer" class="transcript-container">
+        <div id="transcriptContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <img src="assets/images/logo.png" alt="ECOWAS Logo" class="logo-img" style="max-height: 50px;">
+        <div class="footer-links">
+          <h4>Links</h4>
+          <ul>
+           <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="Apply.html">Apply</a></li>
+           
+          </ul>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>Email: info@gritlab.org</p>
+          <p>Phone: +27 63 155 2047</p>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/kingsman_academic_official/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/grit-lab-africa/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/@GRITLabAfrica" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 GRITLab Africa Bootcamp. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase and Dashboard Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Supabase configuration
+    const SUPABASE_URL = 'https://oyfwswrblulmntxtodjh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95Zndzd3JibHVsbW50eHRvZGpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjg1NDgsImV4cCI6MjA2NzkwNDU0OH0.5yL99HsJoNYfRrDHtPEneoOrTItlKkSApcCbHAL3yWg';
+
+    // Initialize Supabase client
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // DOM Elements
+    const applicationsTableBody = document.getElementById('applicationsTableBody');
+    const noResults = document.getElementById('noResults');
+    const filterCountry = document.getElementById('filterCountry');
+    const filterCourse = document.getElementById('filterCourse');
+    const filterFaculty = document.getElementById('filterFaculty');
+    const filterGender = document.getElementById('filterGender');
+    const filterAverage = document.getElementById('filterAverage');
+    const applyFilters = document.getElementById('applyFilters');
+    const resetFilters = document.getElementById('resetFilters');
+    const exportBtn = document.getElementById('exportBtn');
+    const transcriptModal = document.getElementById('transcriptModal');
+    const closeModal = document.getElementById('closeModal');
+    const transcriptContent = document.getElementById('transcriptContent');
+    const studentName = document.getElementById('studentName');
+    const studentEmail = document.getElementById('studentEmail');
+    const studentCourse = document.getElementById('studentCourse');
+    const studentAverage = document.getElementById('studentAverage');
+    const pagination = document.getElementById('pagination');
+
+    // Global variables
+    let allApplications = [];
+    let filteredApplications = [];
+    let currentPage = 1;
+    const applicationsPerPage = 10;
+    let countries = [];
+    let courses = [];
+    let faculties = [];
+    let currentSort = { field: null, direction: 'asc' };
+
+    // List of African countries for the filter dropdown
+    const africanCountries = [
+      "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", 
+      "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Comoros", 
+      "Congo", "Côte d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea", 
+      "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", 
+      "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", 
+      "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", 
+      "Namibia", "Niger", "Nigeria", "Rwanda", "Sao Tome and Principe", 
+      "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", 
+      "South Sudan", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", 
+      "Zambia", "Zimbabwe"
+    ];
+
+    // Initialize the dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize mobile menu toggle
+      initMobileMenu();
+      
+      // Set up event listeners
+      if (applyFilters) applyFilters.addEventListener('click', applyFiltersHandler);
+      if (resetFilters) resetFilters.addEventListener('click', resetFiltersHandler);
+      if (exportBtn) exportBtn.addEventListener('click', exportData);
+      if (closeModal) closeModal.addEventListener('click', () => {
+        transcriptModal.classList.remove('active');
+      });
+      
+      // Set up tab functionality
+      setupTabs();
+      
+      // Set up sorting
+      setupSorting();
+      
+      // Load applications from Supabase
+      loadApplications();
+    });
+
+    // Set up tab functionality
+    function setupTabs() {
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const selectedCourse = this.getAttribute('data-course');
+          
+          // Remove active class from all tabs
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Show/hide appropriate tables
+          showTableForCourse(selectedCourse);
+          
+          // Update filters and display
+          updateFiltersForCourse(selectedCourse);
+        });
+      });
+    }
+
+    // Show table for selected course
+    function showTableForCourse(course) {
+      // Hide all tables
+      document.getElementById('allApplicationsTable').style.display = 'none';
+      document.getElementById('pythonProgrammingTable').style.display = 'none';
+      document.getElementById('aiApplicationsTable').style.display = 'none';
+      
+      // Show appropriate table
+      if (course === 'all') {
+        document.getElementById('allApplicationsTable').style.display = 'block';
+      } else if (course === 'Introduction to Python Programming and Algorithms') {
+        document.getElementById('pythonProgrammingTable').style.display = 'block';
+      } else if (course === 'Artificial Intelligence and Practical Applications in Africa') {
+        document.getElementById('aiApplicationsTable').style.display = 'block';
+      }
+    }
+
+    // Update filters and display for selected course
+    function updateFiltersForCourse(course) {
+      if (course === 'all') {
+        // Show all applications
+        filteredApplications = [...allApplications];
+      } else {
+        // Filter by course
+        filteredApplications = allApplications.filter(app => app.course === course);
+      }
+      
+      // Apply current sort
+      if (currentSort.field) {
+        sortApplications();
+      }
+      
+      // Reset to first page
+      currentPage = 1;
+      
+      // Display applications
+      displayApplications();
+    }
+
+    // Set up sorting functionality
+    function setupSorting() {
+      // Set up sorting for all tables
+      const allTables = [
+        document.getElementById('allApplicationsTable'),
+        document.getElementById('pythonProgrammingTable'),
+        document.getElementById('aiApplicationsTable')
+      ];
+      
+      allTables.forEach(table => {
+        if (table) {
+          const sortableHeaders = table.querySelectorAll('th.sortable');
+          sortableHeaders.forEach(th => {
+            th.addEventListener('click', function() {
+              const sortField = this.getAttribute('data-sort');
+              handleSort(sortField);
+            });
+          });
+        }
+      });
+    }
+
+    // Handle column sorting
+    function handleSort(field) {
+      console.log('Sorting by:', field);
+      
+      // Update sort direction
+      if (currentSort.field === field) {
+        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort.field = field;
+        currentSort.direction = 'asc';
+      }
+      
+      // Update visual indicators
+      updateSortIndicators();
+      
+      // Sort the filtered applications
+      sortApplications();
+      
+      // Redisplay with new sort
+      currentPage = 1;
+      displayApplications();
+    }
+
+    // Update sort visual indicators
+    function updateSortIndicators() {
+      // Remove all sort classes from all tables
+      const allTables = [
+        document.getElementById('allApplicationsTable'),
+        document.getElementById('pythonProgrammingTable'),
+        document.getElementById('aiApplicationsTable')
+      ];
+      
+      allTables.forEach(table => {
+        if (table) {
+          const sortableHeaders = table.querySelectorAll('th.sortable');
+          sortableHeaders.forEach(th => {
+            th.classList.remove('asc', 'desc');
+          });
+        }
+      });
+      
+              // Add sort class to current column in all tables
+        if (currentSort.field) {
+          const allTables = [
+            document.getElementById('allApplicationsTable'),
+            document.getElementById('pythonProgrammingTable'),
+            document.getElementById('aiApplicationsTable')
+          ];
+        
+        allTables.forEach(table => {
+          if (table) {
+            const currentTh = table.querySelector(`th[data-sort="${currentSort.field}"]`);
+            if (currentTh) {
+              currentTh.classList.add(currentSort.direction);
+            }
+          }
+        });
+      }
+    }
+
+    // Sort applications based on current sort settings
+    function sortApplications() {
+      if (!currentSort.field) return;
+      
+      filteredApplications.sort((a, b) => {
+        let aValue = a[currentSort.field];
+        let bValue = b[currentSort.field];
+        
+        // Handle different data types
+        if (currentSort.field === 'timestamp') {
+          aValue = new Date(aValue);
+          bValue = new Date(bValue);
+        } else if (currentSort.field === 'age' || currentSort.field === 'year_of_study' || 
+                   currentSort.field === 'mark_average' || currentSort.field === 'weekly_hours') {
+          aValue = parseFloat(aValue) || 0;
+          bValue = parseFloat(bValue) || 0;
+        } else {
+          // String comparison
+          aValue = (aValue || '').toString().toLowerCase();
+          bValue = (bValue || '').toString().toLowerCase();
+        }
+        
+        // Compare values
+        if (aValue < bValue) {
+          return currentSort.direction === 'asc' ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return currentSort.direction === 'asc' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    // Initialize mobile menu toggle
+    function initMobileMenu() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const nav = document.querySelector('nav');
+      
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          nav.classList.toggle('active');
+          
+          const icon = this.querySelector('i');
+          if (nav.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!nav.contains(e.target) && e.target !== mobileToggle && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            const icon = mobileToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('nav a').forEach(link => {
+          link.addEventListener('click', function() {
+            if (nav.classList.contains('active')) {
+              nav.classList.remove('active');
+              const icon = mobileToggle.querySelector('i');
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+            }
+          });
+        });
+      }
+    }
+
+    // Load applications from Supabase
+    async function loadApplications() {
+      try {
+        console.log('Loading applications from Supabase...');
+        
+        // Show loading indicator
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const applicationsTable = document.querySelector('.applications-table table');
+        if (loadingIndicator) loadingIndicator.style.display = 'block';
+        if (applicationsTable) applicationsTable.style.display = 'none';
+        
+        const { data, error } = await supabase
+          .from('bootcamp_applications')
+          .select('*')
+          .order('timestamp', { ascending: false });
+        
+        if (error) {
+          console.error('Supabase error:', error);
+          throw error;
+        }
+        
+        console.log('Data received:', data);
+        
+        allApplications = [];
+        countries = [];
+        courses = [];
+        faculties = [];
+        
+        if (data && data.length > 0) {
+          data.forEach((app) => {
+            allApplications.push({
+              id: app.id,
+              gl_code: app.gl_code || 'N/A',
+              first_name: app.first_name || 'N/A',
+              last_name: app.last_name || 'N/A',
+              email_address: app.email_address || 'N/A',
+              phone_number: app.phone_number || 'N/A',
+              gender: app.gender || 'N/A',
+              country: app.country || 'N/A',
+              faculty: app.faculty || 'N/A',
+              course: app.course || 'N/A',
+              year_of_study: app.year_of_study || 'N/A',
+              age: app.age || 'N/A',
+              mark_average: app.mark_average || 'N/A',
+              weekly_hours: app.weekly_hours || 'N/A',
+              timestamp: app.timestamp ? new Date(app.timestamp) : new Date()
+            });
+            
+            // Collect unique countries
+            if (app.country && !countries.includes(app.country)) {
+              countries.push(app.country);
+            }
+            
+            // Collect unique courses
+            if (app.course && !courses.includes(app.course)) {
+              courses.push(app.course);
+            }
+            
+            // Collect unique faculties
+            if (app.faculty && !faculties.includes(app.faculty)) {
+              faculties.push(app.faculty);
+            }
+          });
+        } else {
+          console.log('No data received from Supabase');
+        }
+        
+        console.log('Processed applications:', allApplications.length);
+        console.log('Countries:', countries);
+        console.log('Courses:', courses);
+        console.log('Faculties:', faculties);
+        
+        // Sort arrays
+        countries.sort();
+        courses.sort();
+        faculties.sort();
+        
+        // Populate filter dropdowns
+        populateFilterDropdowns();
+        
+        // Display all applications initially
+        filteredApplications = [...allApplications];
+        
+        // Apply initial sort if set
+        if (currentSort.field) {
+          sortApplications();
+        }
+        
+        displayApplications();
+        
+        // Hide loading indicator
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        if (applicationsTable) applicationsTable.style.display = 'table';
+        
+      } catch (error) {
+        console.error("Error loading applications:", error);
+        alert("Failed to load applications. Please check console for details.");
+        
+        // Hide loading indicator on error
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        if (applicationsTable) applicationsTable.style.display = 'table';
+      }
+    }
+
+    // Populate filter dropdowns with unique values
+    function populateFilterDropdowns() {
+      console.log('Populating filter dropdowns...');
+      
+      try {
+        // Country filter
+        if (filterCountry) {
+          filterCountry.innerHTML = '<option value="">All Countries</option>';
+          countries.forEach(country => {
+            filterCountry.innerHTML += `<option value="${country}">${country}</option>`;
+          });
+          
+          // Add any African countries not in the data yet
+          africanCountries.forEach(country => {
+            if (!countries.includes(country)) {
+              filterCountry.innerHTML += `<option value="${country}">${country}</option>`;
+            }
+          });
+          console.log('Country filter populated with', countries.length, 'countries');
+        }
+        
+        // Course filter
+        if (filterCourse) {
+          filterCourse.innerHTML = '<option value="">All Courses</option>';
+          courses.forEach(course => {
+            filterCourse.innerHTML += `<option value="${course}">${course}</option>`;
+          });
+          console.log('Course filter populated with', courses.length, 'courses');
+        }
+
+        // Faculty filter
+        if (filterFaculty) {
+          filterFaculty.innerHTML = '<option value="">All Faculties</option>';
+          faculties.forEach(faculty => {
+            filterFaculty.innerHTML += `<option value="${faculty}">${faculty}</option>`;
+          });
+          console.log('Faculty filter populated with', faculties.length, 'faculties');
+        }
+      } catch (error) {
+        console.error('Error populating filter dropdowns:', error);
+      }
+    }
+
+    // Apply filters based on user selection
+    function applyFiltersHandler() {
+      console.log('Applying filters...');
+      
+      const countryFilter = filterCountry ? filterCountry.value : '';
+      const courseFilter = filterCourse ? filterCourse.value : '';
+      const facultyFilter = filterFaculty ? filterFaculty.value : '';
+      const genderFilter = filterGender ? filterGender.value : '';
+      const averageFilter = filterAverage ? filterAverage.value : '';
+      
+      console.log('Filter values:', {
+        country: countryFilter,
+        course: courseFilter,
+        faculty: facultyFilter,
+        gender: genderFilter,
+        average: averageFilter
+      });
+      
+      // Get the currently active tab
+      const activeTab = document.querySelector('.tab-btn.active');
+      const selectedCourse = activeTab ? activeTab.getAttribute('data-course') : 'all';
+      
+      // Start with applications based on selected tab
+      let baseApplications = selectedCourse === 'all' ? [...allApplications] : allApplications.filter(app => app.course === selectedCourse);
+      
+      filteredApplications = baseApplications.filter(app => {
+        // Country filter
+        if (countryFilter && app.country !== countryFilter) {
+          console.log(`Filtered out: ${app.first_name} ${app.last_name} - Country mismatch (${app.country} vs ${countryFilter})`);
+          return false;
+        }
+        
+        // Course filter (only apply if not on a specific course tab)
+        if (selectedCourse === 'all' && courseFilter && app.course !== courseFilter) {
+          console.log(`Filtered out: ${app.first_name} ${app.last_name} - Course mismatch (${app.course} vs ${courseFilter})`);
+          return false;
+        }
+        
+        // Faculty filter
+        if (facultyFilter && app.faculty !== facultyFilter) {
+          console.log(`Filtered out: ${app.first_name} ${app.last_name} - Faculty mismatch (${app.faculty} vs ${facultyFilter})`);
+          return false;
+        }
+        
+        // Gender filter
+        if (genderFilter && app.gender !== genderFilter) {
+          console.log(`Filtered out: ${app.first_name} ${app.last_name} - Gender mismatch (${app.gender} vs ${genderFilter})`);
+          return false;
+        }
+        
+        // Average filter
+        if (averageFilter) {
+          const averageNum = parseFloat(app.mark_average);
+          if (isNaN(averageNum)) {
+            console.log(`Filtered out: ${app.first_name} ${app.last_name} - Invalid average (${app.mark_average})`);
+            return false;
+          }
+          
+          if (averageFilter === "40" && averageNum >= 40) {
+            console.log(`Filtered out: ${app.first_name} ${app.last_name} - Average too high (${averageNum} >= 40)`);
+            return false;
+          }
+          if (averageFilter !== "40" && averageNum < parseFloat(averageFilter)) {
+            console.log(`Filtered out: ${app.first_name} ${app.last_name} - Average too low (${averageNum} < ${averageFilter})`);
+            return false;
+          }
+        }
+        
+        return true;
+      });
+      
+      console.log(`Filtered applications: ${filteredApplications.length} out of ${baseApplications.length}`);
+      
+      // Apply current sort to filtered results
+      if (currentSort.field) {
+        sortApplications();
+      }
+      
+      currentPage = 1;
+      displayApplications();
+    }
+
+    // Reset all filters
+    function resetFiltersHandler() {
+      filterCountry.value = "";
+      filterCourse.value = "";
+      filterFaculty.value = "";
+      filterGender.value = "";
+      filterAverage.value = "";
+      
+      // Get the currently active tab
+      const activeTab = document.querySelector('.tab-btn.active');
+      const selectedCourse = activeTab ? activeTab.getAttribute('data-course') : 'all';
+      
+      // Reset to applications based on selected tab
+      filteredApplications = selectedCourse === 'all' ? [...allApplications] : allApplications.filter(app => app.course === selectedCourse);
+      
+      // Apply current sort to reset results
+      if (currentSort.field) {
+        sortApplications();
+      }
+      
+      currentPage = 1;
+      displayApplications();
+    }
+
+    // Display applications in the table with pagination
+    function displayApplications() {
+      // Update counts
+      const totalCount = document.getElementById('totalCount');
+      const filteredCount = document.getElementById('filteredCount');
+      
+      if (totalCount) totalCount.textContent = `Total: ${allApplications.length}`;
+      if (filteredCount) filteredCount.textContent = `Showing: ${filteredApplications.length}`;
+      
+      if (filteredApplications.length === 0) {
+        // Clear all table bodies
+        document.getElementById('allApplicationsTableBody').innerHTML = '';
+        document.getElementById('pythonProgrammingTableBody').innerHTML = '';
+        document.getElementById('aiApplicationsTableBody').innerHTML = '';
+        
+        // Show appropriate no results message
+        const activeTab = document.querySelector('.tab-btn.active');
+        const selectedCourse = activeTab ? activeTab.getAttribute('data-course') : 'all';
+        
+        if (selectedCourse === 'all') {
+          document.getElementById('allNoResults').style.display = 'block';
+        } else if (selectedCourse === 'Introduction to Python Programming and Algorithms') {
+          document.getElementById('pythonNoResults').style.display = 'block';
+        } else if (selectedCourse === 'Artificial Intelligence and Practical Applications in Africa') {
+          document.getElementById('aiNoResults').style.display = 'block';
+        }
+        
+        pagination.innerHTML = '';
+        return;
+      }
+      
+      // Hide all no results messages
+      document.getElementById('allNoResults').style.display = 'none';
+      document.getElementById('pythonNoResults').style.display = 'none';
+      document.getElementById('aiNoResults').style.display = 'none';
+      
+      // Calculate pagination
+      const totalPages = Math.ceil(filteredApplications.length / applicationsPerPage);
+      const startIndex = (currentPage - 1) * applicationsPerPage;
+      const endIndex = Math.min(startIndex + applicationsPerPage, filteredApplications.length);
+      const paginatedApplications = filteredApplications.slice(startIndex, endIndex);
+      
+      // Get the active tab to determine which table to populate
+      const activeTab = document.querySelector('.tab-btn.active');
+      const selectedCourse = activeTab ? activeTab.getAttribute('data-course') : 'all';
+      
+      // Clear all table bodies
+      document.getElementById('allApplicationsTableBody').innerHTML = '';
+      document.getElementById('pythonProgrammingTableBody').innerHTML = '';
+      document.getElementById('aiApplicationsTableBody').innerHTML = '';
+      
+      // Populate appropriate table based on selected course
+      let targetTableBody;
+      if (selectedCourse === 'all') {
+        targetTableBody = document.getElementById('allApplicationsTableBody');
+      } else if (selectedCourse === 'Introduction to Python Programming and Algorithms') {
+        targetTableBody = document.getElementById('pythonProgrammingTableBody');
+      } else if (selectedCourse === 'Artificial Intelligence and Practical Applications in Africa') {
+        targetTableBody = document.getElementById('aiApplicationsTableBody');
+      }
+      
+      // Populate table
+      paginatedApplications.forEach(app => {
+        const row = document.createElement('tr');
+        
+        // Format date
+        const formattedDate = app.timestamp.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        // Create row content - include course column only for "all" tab
+        let rowContent = `
+          <td>${app.gl_code}</td>
+          <td>${app.first_name}</td>
+          <td>${app.last_name}</td>
+          <td>${app.email_address}</td>
+          <td>${app.phone_number}</td>
+          <td>${app.gender}</td>
+          <td>${app.country}</td>
+          <td>${app.faculty}</td>
+        `;
+        
+        // Add course column only for "all" tab
+        if (selectedCourse === 'all') {
+          rowContent += `<td>${app.course}</td>`;
+        }
+        
+        rowContent += `
+          <td>${app.year_of_study}</td>
+          <td>${app.age}</td>
+          <td>${app.mark_average}%</td>
+          <td>${app.weekly_hours}h</td>
+          <td>${formattedDate}</td>
+          <td>
+            <button class="action-btn view" data-id="${app.id}">
+              <i class="fas fa-eye"></i> View Details
+            </button>
+          </td>
+        `;
+        
+        row.innerHTML = rowContent;
+        targetTableBody.appendChild(row);
+      });
+      
+      // Set up event listeners for view/download buttons
+      setupActionButtons();
+      
+      // Generate pagination
+      generatePagination(totalPages);
+    }
+
+    // Set up event listeners for view buttons
+    function setupActionButtons() {
+      // Set up action buttons for all tables
+      const allTables = [
+        document.getElementById('allApplicationsTable'),
+        document.getElementById('pythonProgrammingTable'),
+        document.getElementById('aiApplicationsTable')
+      ];
+      
+      allTables.forEach(table => {
+        if (table) {
+          const viewButtons = table.querySelectorAll('.action-btn.view');
+          viewButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+              const appId = this.getAttribute('data-id');
+              viewApplicationDetails(appId);
+            });
+          });
+        }
+      });
+    }
+
+    // View application details in modal
+    function viewApplicationDetails(appId) {
+      const application = filteredApplications.find(app => app.id === appId);
+      
+      if (!application) return;
+      
+      // Display application details
+      transcriptContent.innerHTML = `
+        <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+          <h3 style="color: darkgoldenrod; margin-bottom: 20px;">Application Details</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+              <h4>Personal Information</h4>
+              <p><strong>GL Code:</strong> ${application.gl_code}</p>
+              <p><strong>Name:</strong> ${application.first_name} ${application.last_name}</p>
+              <p><strong>Email:</strong> ${application.email_address}</p>
+              <p><strong>Phone:</strong> ${application.phone_number}</p>
+              <p><strong>Gender:</strong> ${application.gender}</p>
+              <p><strong>Age:</strong> ${application.age}</p>
+              <p><strong>Country:</strong> ${application.country}</p>
+            </div>
+            <div>
+              <h4>Academic Information</h4>
+              <p><strong>Faculty:</strong> ${application.faculty}</p>
+              <p><strong>Course:</strong> ${application.course}</p>
+              <p><strong>Year of Study:</strong> ${application.year_of_study}</p>
+              <p><strong>Mark Average:</strong> ${application.mark_average}%</p>
+              <p><strong>Weekly Hours Available:</strong> ${application.weekly_hours}h</p>
+              <p><strong>Date Applied:</strong> ${application.timestamp.toLocaleDateString()}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Show modal
+      transcriptModal.classList.add('active');
+      
+      // Add escape key listener
+      document.addEventListener('keydown', function escClose(e) {
+        if (e.key === 'Escape') {
+          transcriptModal.classList.remove('active');
+          document.removeEventListener('keydown', escClose);
+        }
+      });
+    }
+
+    const introOverlay = document.querySelector('.intro-overlay');
+  if (introOverlay) {
+    setTimeout(() => {
+      introOverlay.classList.add('hide');
+      setTimeout(() => {
+        introOverlay.remove(); // Remove from DOM after fade-out
+      }, 500); // Match transition duration
+    }, 1000); // Display for 3 seconds
+  }
+
+
+
+    // Generate pagination controls
+    function generatePagination(totalPages) {
+      pagination.innerHTML = '';
+      
+      if (totalPages <= 1) return;
+      
+      // Previous button
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'page-btn';
+      prevBtn.innerHTML = '&laquo;';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          displayApplications();
+        }
+      });
+      pagination.appendChild(prevBtn);
+      
+      // Page buttons
+      const maxVisiblePages = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+      
+      // Adjust if we're at the end
+      if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+      
+      // Always show first page
+      if (startPage > 1) {
+        const firstPageBtn = document.createElement('button');
+        firstPageBtn.className = 'page-btn';
+        firstPageBtn.textContent = '1';
+        firstPageBtn.addEventListener('click', () => {
+          currentPage = 1;
+          displayApplications();
+        });
+        pagination.appendChild(firstPageBtn);
+        
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.padding = '8px 12px';
+          pagination.appendChild(ellipsis);
+        }
+      }
+      
+      // Visible page buttons
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        pageBtn.textContent = i;
+        pageBtn.addEventListener('click', () => {
+          currentPage = i;
+          displayApplications();
+        });
+        pagination.appendChild(pageBtn);
+      }
+      
+      // Always show last page
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.padding = '8px 12px';
+          pagination.appendChild(ellipsis);
+        }
+        
+        const lastPageBtn = document.createElement('button');
+        lastPageBtn.className = 'page-btn';
+        lastPageBtn.textContent = totalPages;
+        lastPageBtn.addEventListener('click', () => {
+          currentPage = totalPages;
+          displayApplications();
+        });
+        pagination.appendChild(lastPageBtn);
+      }
+      
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'page-btn';
+      nextBtn.innerHTML = '&raquo;';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayApplications();
+        }
+      });
+      pagination.appendChild(nextBtn);
+    }
+
+    // Export data to CSV
+    function exportData() {
+      if (filteredApplications.length === 0) {
+        alert('No data to export');
+        return;
+      }
+      
+      // Prepare CSV content
+      let csvContent = "GL Code,First Name,Last Name,Email,Phone,Gender,Country,Faculty,Course,Year of Study,Age,Mark Average,Weekly Hours,Date Applied\n";
+      
+      filteredApplications.forEach(app => {
+        const formattedDate = app.timestamp.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        csvContent += `"${app.gl_code}","${app.first_name}","${app.last_name}","${app.email_address}","${app.phone_number}","${app.gender}","${app.country}","${app.faculty}","${app.course}","${app.year_of_study}","${app.age}","${app.mark_average}","${app.weekly_hours}","${formattedDate}"\n`;
+      });
+      
+      // Create download link
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `gritlab_applications_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+  
+  <!-- Footer Component -->
+  <green-economy-footer></green-economy-footer>
+</body>
+</html>
