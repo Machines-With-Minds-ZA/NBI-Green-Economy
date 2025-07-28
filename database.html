@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Management | NBI Green Economy</title>
+
+
+    <title data-i18n="title">Green Economy Opportunities</title>
+    <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="../Master Page(Header and Footer)/translation.js"></script>
+    <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="Trans.js"></script>
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .dashboard {
+      padding: 30px 0;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .dashboard-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2b9589;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: #2b9589;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #4ec3b0;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .category-selector {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .category-tab {
+      padding: 10px 20px;
+      background: #f1f1f1;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .category-tab:hover {
+      background: #e0e0e0;
+    }
+
+    .category-tab.active {
+      background: #2b9589;
+      color: white;
+    }
+
+    .data-table-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow-x: auto;
+      border: 1px solid #2b9589;
+    }
+
+    .data-table {
+      width: 100%;
+      min-width: 2000px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .data-table th, 
+    .data-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
+    }
+
+    .data-table th {
+      background-color: #f8f6f0;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      color: #333;
+      border-bottom: 2px solid #2b9589;
+    }
+
+    .data-table th:last-child, 
+    .data-table td:last-child {
+      border-right: none;
+    }
+
+    .data-table tr:hover {
+      background-color: rgba(43, 149, 137, 0.05);
+    }
+
+    .loading-indicator {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #2b9589;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 5px;
+    }
+
+    .page-btn {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .page-btn.active {
+      background-color: #2b9589;
+      color: white;
+      border-color: #2b9589;
+    }
+
+    .page-btn:hover:not(.active) {
+      background-color: #f1f1f1;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 95%;
+      max-width: 1200px;
+      max-height: 90vh;
+      padding: 20px;
+      position: relative;
+      transform: translateY(-20px);
+      transition: transform 0.3s;
+      overflow-y: auto;
+      border: 2px solid #2b9589;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 1;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: #000;
+      margin: 0;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #2b9589;
+    }
+
+    .modal-body {
+      padding: 10px 0;
+    }
+
+    .detail-section {
+      margin-bottom: 20px;
+    }
+
+    .detail-section h3 {
+      color: #2b9589;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+
+    .detail-item {
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 3px;
+    }
+
+    .detail-value {
+      padding: 5px;
+      background: #f8f8f8;
+      border-radius: 4px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+      .data-table-container {
+        overflow-x: auto;
+      }
+      
+      .data-table {
+        min-width: 2000px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .action-buttons {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      
+      .category-tabs {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        flex-wrap: nowrap;
+      }
+      
+      .modal-content {
+        width: 98%;
+        max-height: 85vh;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      
+      .modal-content {
+        width: 100%;
+        max-height: 80vh;
+        padding: 15px;
+      }
+      
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+    <green-economy-header></green-economy-header>
+
+
+  <section class="dashboard">
+    <div class="container">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Project Database Management</h1>
+        <div class="action-buttons">
+          <button id="exportBtn" class="btn btn-primary">
+            <i class="fas fa-download"></i> Export Data
+          </button>
+          <button id="refreshBtn" class="btn btn-secondary">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Selector -->
+      <div class="category-selector">
+        <h3>Select Data Categories to Display</h3>
+        <div class="category-tabs" id="categoryTabs">
+          <!-- Categories will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="data-table-container">
+        <div id="loadingIndicator" class="loading-indicator">
+          <div class="spinner"></div>
+          <p>Loading project data...</p>
+        </div>
+        
+        <table class="data-table">
+          <thead id="tableHeader">
+            <!-- Table headers will be populated by JavaScript -->
+          </thead>
+          <tbody id="tableBody">
+            <!-- Table rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        
+        <div id="noResults" class="no-results" style="display: none;">
+          No projects found matching your criteria.
+        </div>
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Pagination will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Details Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Project Details</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body" id="projectDetails">
+        <!-- Project details will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data structure - in a real app, this would come from an API
+    const projects = [
+      {
+        "Project Code": "GE-2023-001",
+        "Project Name": "Solar Farm Installation",
+        "Programme Start": "2023-01-15",
+        "Programme End": "2023-12-31",
+        "TVET College": "Coastal TVET College",
+        "Project Status": "Active",
+        "GIZ Enrollment Number": "GIZ-12345",
+        "GIZ Enrollment Date": "2023-01-10",
+        "Type of support / programme": "Technical Assistance",
+        "Identity / Passport Number": "ID-78901234",
+        "First Name/s": "John",
+        "Surname": "Doe",
+        "Date of Birth": "1985-05-15",
+        "Age": 38,
+        "Gender": "Male",
+        "Ethnicity": "African",
+        "Nationality": "South African",
+        "Disability": "No",
+        "Disability Type": "",
+        "Residential Address": "123 Main Street",
+        "Township/Rural Location": "Urban",
+        "Province": "Western Cape",
+        "Local Municipality": "Cape Town",
+        "District Municipality": "City of Cape Town",
+        "Postal code": "8000",
+        "Cell Number": "0821234567",
+        "WhatsApp Number (if applicable)": "0821234567",
+        "Email Address": "john.doe@example.com",
+        "Preferred contact method": "WhatsApp",
+        "IRM Platform Notifications": "Yes",
+        "Education Level": "Diploma",
+        "Highest educational qualification attained": "N6 Electrical Engineering",
+        "Name of Highest educational qualification attained": "Electrical Engineering N6",
+        "Year Obtained": "2010",
+        "Employment Status": "Employed",
+        "Position in Company/ Job Title": "Project Manager",
+        "Business Ownership Interest": "Yes",
+        "Number of Other Business Owners": 2,
+        "Secondary Business Contact First Name/s": "Jane",
+        "Secondary Business Contact Surname": "Smith",
+        "Secondary Business Contact Cell Number": "0839876543",
+        "Business Name": "Green Energy Solutions",
+        "Business Operating Start Date": "2018-06-01",
+        "Years in Business": 5,
+        "Legal Type of business entity": "Pty Ltd",
+        "Business Core Products and Services": "Solar panel installation and maintenance",
+        "Business Registration status": "Registered",
+        "Business Registration number": "2020/123456/07",
+        "Business date of registration": "2020-03-15",
+        "Business Financial Year-End": "February",
+        "Copy of CIPC registration certificate": "Yes",
+        "Business Tax Registration Status": "Registered",
+        "Business Income Tax reference number": "IT1234567890",
+        "Tax compliance PIN expiry date": "2024-12-31",
+        "Copy of Tax clearance certificate": "Yes",
+        "Business Website Address": "www.greenenergysolutions.co.za",
+        "Business Address": "456 Industrial Park",
+        "Type of Business Premises": "Owned",
+        "Township/Rural Location": "Urban",
+        "Province": "Western Cape",
+        "Local Municipality": "Cape Town",
+        "Ward Number": "15",
+        "District Municipality": "City of Cape Town",
+        "Postal code": "8001",
+        "TVET College nearest to the business location": "Coastal TVET College",
+        "Business Annual Revenue (Last Financial Year-End)": "R2,500,000",
+        "BBBEE Classification": "Level 4",
+        "BBBEE Level of Contribution": "Good",
+        "Copy of BBBEE certificate / Affidavit": "Yes",
+        "BBBEE certificate / Affidavit expiry date": "2024-06-30",
+        "Black Ownership and Management Control": "Yes",
+        "Black Female Ownership": "No",
+        "Black Youth Ownership": "Yes",
+        "Disabled Ownership": "No",
+        "Main Market/Revenue Source": "Commercial",
+        "Type of Main Market/Revenue Source": "Private Sector",
+        "Market Geographic Reach": "Provincial",
+        "Total Number of Employees": 12,
+        "Total Number of Female Employees": 4,
+        "Total Number of Youth Employees": 6,
+        "Total Number of Black Employees": 8,
+        "Does the business have a history of Hosting Learners/Apprentices": "Yes",
+        "Name of the last Organization that provided the Learners/Apprentices": "Coastal TVET College",
+        "Total number of Learners/Apprentices hosted": 3,
+        "Hosting period": "6 months",
+        "Does the business have an interest and capacity to Host Learners/Apprentices": "Yes",
+        "Total number of Learners/Apprentices the business wants to host": 2,
+        "Hosting period": "12 months",
+        "Does the business have a history of Enterprise Development": "No",
+        "Name of the last Organization that provided Enterprise Development": "",
+        "Enterprise Development period": "",
+        "Received Enterprise Development Support": "No",
+        "Type of Access to Finance Received": "",
+        "Name of the Organization that Provided the Finance": "",
+        "Value of Finance Received": ""
+      },
+      // Add more sample projects as needed
+    ];
+
+    // Group columns into categories
+    const columnCategories = {
+      "Project Information": [
+        "Project Code", "Project Name", "Programme Start", "Programme End", 
+        "TVET College", "Project Status", "GIZ Enrollment Number", 
+        "GIZ Enrollment Date", "Type of support / programme"
+      ],
+      "Beneficiary Details": [
+        "Identity / Passport Number", "First Name/s", "Surname", "Date of Birth", 
+        "Age", "Gender", "Ethnicity", "Nationality", "Disability", "Disability Type"
+      ],
+      "Contact Information": [
+        "Residential Address", "Township/Rural Location", "Province", 
+        "Local Municipality", "District Municipality", "Postal code", 
+        "Cell Number", "WhatsApp Number (if applicable)", "Email Address", 
+        "Preferred contact method", "IRM Platform Notifications"
+      ],
+      "Education & Employment": [
+        "Education Level", "Highest educational qualification attained", 
+        "Name of Highest educational qualification attained", "Year Obtained", 
+        "Employment Status", "Position in Company/ Job Title"
+      ],
+      "Business Ownership": [
+        "Business Ownership Interest", "Number of Other Business Owners", 
+        "Secondary Business Contact First Name/s", "Secondary Business Contact Surname", 
+        "Secondary Business Contact Cell Number"
+      ],
+      "Business Details": [
+        "Business Name", "Business Operating Start Date", "Years in Business", 
+        "Legal Type of business entity", "Business Core Products and Services", 
+        "Business Registration status", "Business Registration number", 
+        "Business date of registration", "Business Financial Year-End", 
+        "Copy of CIPC registration certificate"
+      ],
+      "Tax & Compliance": [
+        "Business Tax Registration Status", "Business Income Tax reference number", 
+        "Tax compliance PIN expiry date", "Copy of Tax clearance certificate", 
+        "Business Website Address"
+      ],
+      "Business Location": [
+        "Business Address", "Type of Business Premises", "Township/Rural Location", 
+        "Province", "Local Municipality", "Ward Number", "District Municipality", 
+        "Postal code", "TVET College nearest to the business location"
+      ],
+      "Financial & BBBEE": [
+        "Business Annual Revenue (Last Financial Year-End)", "BBBEE Classification", 
+        "BBBEE Level of Contribution", "Copy of BBBEE certificate / Affidavit", 
+        "BBBEE certificate / Affidavit expiry date", "Black Ownership and Management Control", 
+        "Black Female Ownership", "Black Youth Ownership", "Disabled Ownership"
+      ],
+      "Market & Workforce": [
+        "Main Market/Revenue Source", "Type of Main Market/Revenue Source", 
+        "Market Geographic Reach", "Total Number of Employees", 
+        "Total Number of Female Employees", "Total Number of Youth Employees", 
+        "Total Number of Black Employees"
+      ],
+      "Training & Development": [
+        "Does the business have a history of Hosting Learners/Apprentices", 
+        "Name of the last Organization that provided the Learners/Apprentices", 
+        "Total number of Learners/Apprentices hosted", "Hosting period", 
+        "Does the business have an interest and capacity to Host Learners/Apprentices", 
+        "Total number of Learners/Apprentices the business wants to host", 
+        "Hosting period"
+      ],
+      "Enterprise Development": [
+        "Does the business have a history of Enterprise Development", 
+        "Name of the last Organization that provided Enterprise Development", 
+        "Enterprise Development period", "Received Enterprise Development Support", 
+        "Type of Access to Finance Received", "Name of the Organization that Provided the Finance", 
+        "Value of Finance Received"
+      ]
+    };
+
+    // DOM Elements
+    const categoryTabs = document.getElementById('categoryTabs');
+    const tableHeader = document.getElementById('tableHeader');
+    const tableBody = document.getElementById('tableBody');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const noResults = document.getElementById('noResults');
+    const pagination = document.getElementById('pagination');
+    const projectModal = document.getElementById('projectModal');
+    const closeModal = document.getElementById('closeModal');
+    const projectDetails = document.getElementById('projectDetails');
+    const exportBtn = document.getElementById('exportBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Global variables
+    let currentColumns = ["Project Code", "Project Name", "TVET College", "Project Status"];
+    let currentPage = 1;
+    const projectsPerPage = 10;
+    let filteredProjects = [...projects];
+
+    // Initialize the dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize category tabs
+      initCategoryTabs();
+      
+      // Load initial data
+      loadProjects();
+      
+      // Set up event listeners
+      closeModal.addEventListener('click', () => {
+        projectModal.classList.remove('active');
+      });
+      
+      exportBtn.addEventListener('click', exportData);
+      refreshBtn.addEventListener('click', refreshData);
+      logoutBtn.addEventListener('click', logout);
+      
+      // Close modal when clicking outside
+      projectModal.addEventListener('click', (e) => {
+        if (e.target === projectModal) {
+          projectModal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+          projectModal.classList.remove('active');
+        }
+      });
+    });
+
+    // Initialize category tabs
+    function initCategoryTabs() {
+      // Create tabs for each category
+      for (const category in columnCategories) {
+        const tab = document.createElement('div');
+        tab.className = 'category-tab';
+        if (category === "Project Information") {
+          tab.classList.add('active');
+        }
+        tab.textContent = category;
+        tab.dataset.category = category;
+        tab.addEventListener('click', toggleCategory);
+        categoryTabs.appendChild(tab);
+      }
+    }
+
+    // Toggle category visibility
+    function toggleCategory(e) {
+      const category = e.target.dataset.category;
+      e.target.classList.toggle('active');
+      
+      // Update current columns
+      if (e.target.classList.contains('active')) {
+        // Add category columns (avoid duplicates)
+        columnCategories[category].forEach(col => {
+          if (!currentColumns.includes(col)) {
+            currentColumns.push(col);
+          }
+        });
+      } else {
+        // Remove category columns
+        currentColumns = currentColumns.filter(col => !columnCategories[category].includes(col));
+      }
+      
+      // Ensure Project Code is always included
+      if (!currentColumns.includes("Project Code")) {
+        currentColumns.unshift("Project Code");
+      }
+      
+      // Refresh table display
+      displayProjects();
+    }
+
+    // Load projects (simulating API call)
+    function loadProjects() {
+      setTimeout(() => {
+        // In a real app, this would be an API call
+        filteredProjects = [...projects];
+        displayProjects();
+        loadingIndicator.style.display = 'none';
+      }, 1000);
+    }
+
+    // Refresh data
+    function refreshData() {
+      loadingIndicator.style.display = 'block';
+      tableBody.innerHTML = '';
+      loadProjects();
+    }
+
+    // Display projects in the table
+    function displayProjects() {
+      // Update table header
+      updateTableHeader();
+      
+      // Clear table body
+      tableBody.innerHTML = '';
+      
+      if (filteredProjects.length === 0) {
+        noResults.style.display = 'block';
+        pagination.innerHTML = '';
+        return;
+      }
+      
+      noResults.style.display = 'none';
+      
+      // Calculate pagination
+      const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+      const startIndex = (currentPage - 1) * projectsPerPage;
+      const endIndex = Math.min(startIndex + projectsPerPage, filteredProjects.length);
+      const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+      
+      // Populate table rows
+      paginatedProjects.forEach(project => {
+        const row = document.createElement('tr');
+        
+        // Add cells for each visible column
+        currentColumns.forEach(column => {
+          const cell = document.createElement('td');
+          cell.textContent = project[column] || '-';
+          row.appendChild(cell);
+        });
+        
+        // Add action button
+        const actionCell = document.createElement('td');
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'btn btn-primary';
+        viewBtn.style.padding = '5px 10px';
+        viewBtn.innerHTML = '<i class="fas fa-eye"></i> View';
+        viewBtn.addEventListener('click', () => viewProjectDetails(project["Project Code"]));
+        actionCell.appendChild(viewBtn);
+        row.appendChild(actionCell);
+        
+        tableBody.appendChild(row);
+      });
+      
+      // Generate pagination
+      generatePagination(totalPages);
+    }
+
+    // Update table header based on visible columns
+    function updateTableHeader() {
+      tableHeader.innerHTML = '';
+      const headerRow = document.createElement('tr');
+      
+      // Add headers for each visible column
+      currentColumns.forEach(column => {
+        const th = document.createElement('th');
+        th.textContent = column;
+        headerRow.appendChild(th);
+      });
+      
+      // Add action column header
+      const actionTh = document.createElement('th');
+      actionTh.textContent = 'Actions';
+      headerRow.appendChild(actionTh);
+      
+      tableHeader.appendChild(headerRow);
+    }
+
+    // View project details in modal
+    function viewProjectDetails(projectCode) {
+      const project = projects.find(p => p["Project Code"] === projectCode);
+      if (!project) return;
+      
+      // Organize project details by category
+      let detailsHTML = '';
+      
+      for (const category in columnCategories) {
+        const categoryColumns = columnCategories[category];
+        let hasData = false;
+        
+        // Check if any column in this category has data
+        for (const col of categoryColumns) {
+          if (project[col]) {
+            hasData = true;
+            break;
+          }
+        }
+        
+        if (!hasData) continue;
+        
+        detailsHTML += `
+          <div class="detail-section">
+            <h3>${category}</h3>
+            <div class="detail-grid">
+        `;
+        
+        categoryColumns.forEach(col => {
+          if (project[col]) {
+            detailsHTML += `
+              <div class="detail-item">
+                <div class="detail-label">${col}</div>
+                <div class="detail-value">${project[col]}</div>
+              </div>
+            `;
+          }
+        });
+        
+        detailsHTML += `
+            </div>
+          </div>
+        `;
+      }
+      
+      projectDetails.innerHTML = detailsHTML;
+      projectModal.classList.add('active');
+    }
+
+    // Generate pagination controls
+    function generatePagination(totalPages) {
+      pagination.innerHTML = '';
+      
+      if (totalPages <= 1) return;
+      
+      // Previous button
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'page-btn';
+      prevBtn.innerHTML = '&laquo;';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          displayProjects();
+        }
+      });
+      pagination.appendChild(prevBtn);
+      
+      // Page buttons
+      const maxVisiblePages = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+      
+      // Adjust if we're at the end
+      if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+      
+      // Always show first page
+      if (startPage > 1) {
+        const firstPageBtn = document.createElement('button');
+        firstPageBtn.className = 'page-btn';
+        firstPageBtn.textContent = '1';
+        firstPageBtn.addEventListener('click', () => {
+          currentPage = 1;
+          displayProjects();
+        });
+        pagination.appendChild(firstPageBtn);
+        
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.padding = '8px 12px';
+          pagination.appendChild(ellipsis);
+        }
+      }
+      
+      // Visible page buttons
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+        pageBtn.textContent = i;
+        pageBtn.addEventListener('click', () => {
+          currentPage = i;
+          displayProjects();
+        });
+        pagination.appendChild(pageBtn);
+      }
+      
+      // Always show last page
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.padding = '8px 12px';
+          pagination.appendChild(ellipsis);
+        }
+        
+        const lastPageBtn = document.createElement('button');
+        lastPageBtn.className = 'page-btn';
+        lastPageBtn.textContent = totalPages;
+        lastPageBtn.addEventListener('click', () => {
+          currentPage = totalPages;
+          displayProjects();
+        });
+        pagination.appendChild(lastPageBtn);
+      }
+      
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'page-btn';
+      nextBtn.innerHTML = '&raquo;';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayProjects();
+        }
+      });
+      pagination.appendChild(nextBtn);
+    }
+
+    // Export data to CSV
+    function exportData() {
+      if (filteredProjects.length === 0) {
+        alert('No data to export');
+        return;
+      }
+      
+      // Prepare CSV content
+      let csvContent = currentColumns.join(',') + '\n';
+      
+      filteredProjects.forEach(project => {
+        const row = currentColumns.map(col => {
+          // Escape quotes and wrap in quotes if contains comma
+          let value = project[col] || '';
+          if (typeof value === 'string' && value.includes(',')) {
+            return `"${value.replace(/"/g, '""')}"`;
+          }
+          return value;
+        });
+        csvContent += row.join(',') + '\n';
+      });
+      
+      // Create download link
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `nbi_projects_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Logout function
+    function logout() {
+      // In a real app, this would clear session and redirect
+      alert('Logging out...');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

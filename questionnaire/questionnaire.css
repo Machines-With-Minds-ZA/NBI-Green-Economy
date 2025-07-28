@@ -663,3 +663,31 @@ body {
         filter: blur(32px);
     }
 }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .questionnaire-grid, .questionnaire-list, .questionnaire-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .questionnaire-card, .questionnaire-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .questionnaire-header, .questionnaire-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .questionnaire-card, .questionnaire-section {
+    padding: 0.5rem;
+  }
+  .questionnaire-header, .questionnaire-title {
+    font-size: 1rem;
+  }
+  .questionnaire-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}

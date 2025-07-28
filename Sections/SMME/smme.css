@@ -697,3 +697,31 @@
       .text-center {
         text-align: center;
       }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .smme-grid, .smme-list, .smme-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .smme-card, .smme-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .smme-header, .smme-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .smme-card, .smme-section {
+    padding: 0.5rem;
+  }
+  .smme-header, .smme-title {
+    font-size: 1rem;
+  }
+  .smme-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}

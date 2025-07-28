@@ -493,3 +493,31 @@ body {
   }
 }
 
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .knowledge-grid, .knowledge-list, .knowledge-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .knowledge-card, .knowledge-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .knowledge-header, .knowledge-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .knowledge-card, .knowledge-section {
+    padding: 0.5rem;
+  }
+  .knowledge-header, .knowledge-title {
+    font-size: 1rem;
+  }
+  .knowledge-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}
+

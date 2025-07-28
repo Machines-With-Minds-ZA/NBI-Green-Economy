@@ -443,3 +443,31 @@ body {
     gap: 24px;
   }
 }
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .irm-grid, .irm-list, .irm-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .irm-card, .irm-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .irm-header, .irm-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .irm-card, .irm-section {
+    padding: 0.5rem;
+  }
+  .irm-header, .irm-title {
+    font-size: 1rem;
+  }
+  .irm-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+}

@@ -593,3 +593,31 @@ body {
         height: 50px;
     }
 } 
+
+/* --- Mobile responsiveness improvements --- */
+@media (max-width: 768px) {
+  .about-grid, .about-list, .about-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .about-card, .about-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .about-header, .about-title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .about-card, .about-section {
+    padding: 0.5rem;
+  }
+  .about-header, .about-title {
+    font-size: 1rem;
+  }
+  .about-btn, .apply-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+} 
