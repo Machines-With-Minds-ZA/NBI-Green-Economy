@@ -7,20 +7,10 @@
   <link rel="stylesheet" href="../../Master Page(Header and Footer)/MasterPage.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <!-- Firebase SDKs with type="module" -->
   <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
   <script type="module" src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
-  <!-- XLSX library for parsing Excel files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="../../Master Page(Header and Footer)/MasterPage.js"></script>
-  <!-- Comment out translation scripts to avoid 404 errors -->
-  <!--
-  <script src="../Master Page(Header and Footer)/translation.js"></script>
-  <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
-  <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
-  <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
-  <script src="Trans.js"></script>
-  -->
 
   <style>
     * {
@@ -94,27 +84,6 @@
     .action-buttons {
       display: flex;
       gap: 15px;
-      align-items: center;
-    }
-
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .search-input {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      width: 200px;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #2b9589;
-      box-shadow: 0 0 5px rgba(43, 149, 137, 0.3);
     }
 
     .btn {
@@ -145,6 +114,26 @@
 
     .btn-secondary:hover {
       background-color: #5a6268;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-input {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #2b9589;
+      box-shadow: 0 0 5px rgba(43, 149, 137, 0.3);
     }
 
     .category-selector {
@@ -381,10 +370,6 @@
       border-radius: 4px;
     }
 
-    .upload-section {
-      margin-bottom: 20px;
-    }
-
     @media (max-width: 1200px) {
       .data-table-container {
         overflow-x: auto;
@@ -404,15 +389,6 @@
       .action-buttons {
         width: 100%;
         justify-content: flex-end;
-        flex-wrap: wrap;
-      }
-      
-      .search-container {
-        width: 100%;
-      }
-      
-      .search-input {
-        width: 100%;
       }
       
       .category-tabs {
@@ -442,6 +418,10 @@
       .detail-grid {
         grid-template-columns: 1fr;
       }
+      
+      .search-input {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -454,7 +434,7 @@
         <h1 class="dashboard-title">Project Database Management</h1>
         <div class="action-buttons" id="actionButtons">
           <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by Project Code, Name, or TVET College">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search projects...">
           </div>
           <input type="file" id="excelUpload" accept=".xlsx" style="display: none;">
           <button id="uploadBtn" class="btn btn-primary">
@@ -524,7 +504,7 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
       console.log('Firebase initialized successfully');
-      
+
       // Column categories based on provided CSV columns
       const columnCategories = {
         "Project Information": [
@@ -550,7 +530,7 @@
         "Business Ownership": [
           "Business Ownership Interest", "Number of Other Business Owners", 
           "Secondary Business Contact First Name/s", "Secondary Business Contact Surname", 
-          "Secondary Business Contact Cell Number"
+          "Secondary Business Contact Surname", "Secondary Business Contact Cell Number"
         ],
         "Business Details": [
           "Business Name", "Business Operating Start Date", "Years in Business", 
@@ -613,14 +593,13 @@
       const uploadBtn = document.getElementById('uploadBtn');
       const excelUpload = document.getElementById('excelUpload');
       const searchInput = document.getElementById('searchInput');
-      const actionButtons = document.getElementById('actionButtons');
 
       // Global variables
       let currentColumns = ["Project Code", "Project Name", "TVET College", "Project Status"];
       let currentPage = 1;
       const projectsPerPage = 10;
-      let filteredProjects = [];
       let allProjects = [];
+      let filteredProjects = [];
 
       // Check if initial upload is complete
       async function isUploadComplete() {
@@ -643,7 +622,6 @@
       // Initialize the dashboard
       document.addEventListener('DOMContentLoaded', async function() {
         console.log('DOM loaded, initializing dashboard');
-        // Check if upload is complete or data exists
         const uploadCompleted = await isUploadComplete();
         const hasData = await hasDataInFirestore();
         if (uploadCompleted || hasData) {
@@ -654,7 +632,7 @@
 
         initCategoryTabs();
         loadProjects();
-        
+
         // Event listeners
         closeModal.addEventListener('click', () => projectModal.classList.remove('active'));
         exportBtn.addEventListener('click', exportData);
@@ -662,11 +640,11 @@
         uploadBtn.addEventListener('click', () => excelUpload.click());
         excelUpload.addEventListener('change', handleExcelUpload);
         searchInput.addEventListener('input', handleSearch);
-        
+
         projectModal.addEventListener('click', (e) => {
           if (e.target === projectModal) projectModal.classList.remove('active');
         });
-        
+
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape' && projectModal.classList.contains('active')) {
             projectModal.classList.remove('active');
@@ -678,15 +656,21 @@
       function handleSearch() {
         const query = searchInput.value.toLowerCase().trim();
         console.log('Searching for:', query);
-        filteredProjects = allProjects.filter(project => {
-          return (
-            (project["Project Code"] || '').toLowerCase().includes(query) ||
-            (project["Project Name"] || '').toLowerCase().includes(query) ||
-            (project["TVET College"] || '').toLowerCase().includes(query)
-          );
-        });
-        console.log('Filtered projects:', filteredProjects.length);
-        currentPage = 1; // Reset to first page
+        if (query === '') {
+          filteredProjects = [...allProjects];
+        } else {
+          filteredProjects = allProjects.filter(project => {
+            return (
+              (project["Project Code"] && project["Project Code"].toLowerCase().includes(query)) ||
+              (project["Project Name"] && project["Project Name"].toLowerCase().includes(query)) ||
+              (project["TVET College"] && project["TVET College"].toLowerCase().includes(query)) ||
+              (project["Project Status"] && project["Project Status"].toLowerCase().includes(query)) ||
+              (project["First Name/s"] && project["First Name/s"].toLowerCase().includes(query)) ||
+              (project["Surname"] && project["Surname"].toLowerCase().includes(query))
+            );
+          });
+        }
+        currentPage = 1;
         displayProjects();
       }
 
@@ -701,8 +685,7 @@
         }
 
         loadingIndicator.style.display = 'block';
-        
-        // Check if data already exists
+
         const hasData = await hasDataInFirestore();
         if (hasData) {
           const overwrite = confirm('Data already exists in the database. Do you want to overwrite it with this Excel file?');
@@ -734,19 +717,26 @@
               throw new Error('Excel file is empty');
             }
 
-            // Extract headers and data
-            const headers = jsonData[0].map(header => header ? header.toString().trim().replace(/[^a-zA-Z0-9\s/]/g, '').replace(/\s+/g, ' ') : '');
+            // Normalize headers to handle whitespace and variations
+            const headers = jsonData[0].map(header => header ? header.toString().trim().replace(/\s+/g, ' ') : '');
             console.log('Headers:', headers);
-            const rows = jsonData.slice(1);
 
+            // Find Project Code column, with fallbacks
+            let projectCodeIndex = headers.indexOf('Project Code');
+            if (projectCodeIndex === -1) {
+              projectCodeIndex = headers.indexOf('New project name');
+            }
+            if (projectCodeIndex === -1) {
+              projectCodeIndex = headers.indexOf('Oroginal Project name');
+            }
+            if (projectCodeIndex === -1) {
+              throw new Error('Could not find "Project Code", "New project name", or "Oroginal Project name" in headers');
+            }
+            console.log('Project Code column index:', projectCodeIndex, 'Header:', headers[projectCodeIndex]);
+
+            const rows = jsonData.slice(1);
             if (rows.length === 0) {
               throw new Error('No data rows found in Excel file');
-            }
-
-            // Map headers to columnCategories
-            const projectCodeIndex = headers.indexOf('Project Code');
-            if (projectCodeIndex === -1) {
-              console.warn('Project Code header not found, will generate IDs for all rows');
             }
 
             const batch = writeBatch(db);
@@ -754,23 +744,32 @@
             let validRows = 0;
             let generatedIds = [];
 
+            // Handle duplicate headers
+            const headerCount = {};
+            headers.forEach((header, i) => {
+              if (headerCount[header]) {
+                headerCount[header]++;
+                headers[i] = `${header}_${headerCount[header]}`;
+              } else {
+                headerCount[header] = 1;
+              }
+            });
+
             rows.forEach((row, index) => {
               const rowData = {};
               headers.forEach((header, i) => {
                 rowData[header] = row[i] !== undefined ? row[i].toString().trim() : '';
               });
 
-              // Log first few rows for debugging
               if (index < 3) {
                 console.log(`Row ${index + 2} data:`, rowData);
               }
 
-              let projectCode = projectCodeIndex !== -1 ? row[projectCodeIndex] : '';
+              let projectCode = row[projectCodeIndex];
               if (!projectCode || projectCode.toString().trim() === '') {
-                // Generate a short unique ID
-                projectCode = `proj_${index + 1}`;
+                projectCode = `gen_${index}_${Math.random().toString(36).substr(2, 5)}`;
                 console.log(`Row ${index + 2}: No valid Project Code, using generated ID: ${projectCode}`);
-                rowData['Project Code'] = projectCode;
+                rowData[headers[projectCodeIndex]] = projectCode;
                 generatedIds.push(`Row ${index + 2}: ${projectCode}`);
               }
 
@@ -782,7 +781,7 @@
             console.log(`Uploading ${validRows} rows to Firestore`);
             if (generatedIds.length > 0) {
               console.log('Rows with generated IDs:', generatedIds);
-              alert(`Uploaded ${validRows} rows. ${generatedIds.length} rows had missing Project Codes and were assigned generated IDs (e.g., proj_1).\nDetails in console.`);
+              alert(`Uploaded ${validRows} rows. ${generatedIds.length} rows had missing Project Codes and were assigned generated IDs.\nDetails in console.`);
             } else {
               alert(`Successfully uploaded ${validRows} rows to Firebase!`);
             }
@@ -828,7 +827,7 @@
         console.log('Toggling category:', e.target.dataset.category);
         const category = e.target.dataset.category;
         e.target.classList.toggle('active');
-        
+
         if (e.target.classList.contains('active')) {
           columnCategories[category].forEach(col => {
             if (!currentColumns.includes(col)) currentColumns.push(col);
@@ -836,9 +835,9 @@
         } else {
           currentColumns = currentColumns.filter(col => !columnCategories[category].includes(col));
         }
-        
+
         if (!currentColumns.includes("Project Code")) currentColumns.unshift("Project Code");
-        
+
         displayProjects();
       }
 
@@ -863,9 +862,9 @@
       // Refresh data
       function refreshData() {
         console.log('Refreshing data');
-        searchInput.value = ''; // Clear search input
         loadingIndicator.style.display = 'block';
         tableBody.innerHTML = '';
+        searchInput.value = '';
         loadProjects();
       }
 
@@ -874,42 +873,42 @@
         console.log('Displaying projects:', filteredProjects.length);
         updateTableHeader();
         tableBody.innerHTML = '';
-        
+
         if (filteredProjects.length === 0) {
           console.log('No projects to display');
           noResults.style.display = 'block';
           pagination.innerHTML = '';
           return;
         }
-        
+
         noResults.style.display = 'none';
-        
+
         const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
         const startIndex = (currentPage - 1) * projectsPerPage;
         const endIndex = Math.min(startIndex + projectsPerPage, filteredProjects.length);
         const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
-        
+
         paginatedProjects.forEach(project => {
           const row = document.createElement('tr');
-          
+
           currentColumns.forEach(column => {
             const cell = document.createElement('td');
             cell.textContent = project[column] || '-';
             row.appendChild(cell);
           });
-          
+
           const actionCell = document.createElement('td');
           const viewBtn = document.createElement('button');
           viewBtn.className = 'btn btn-primary';
           viewBtn.style.padding = '5px 10px';
           viewBtn.innerHTML = '<i class="bi bi-eye"></i> View';
-          viewBtn.addEventListener('click', () => viewProjectDetails(project["Project Code"]));
+          viewBtn.addEventListener('click', () => viewProjectDetails(project["Project Code"] || project["New project name"] || project["Oroginal Project name"]));
           actionCell.appendChild(viewBtn);
           row.appendChild(actionCell);
-          
+
           tableBody.appendChild(row);
         });
-        
+
         generatePagination(totalPages);
       }
 
@@ -918,50 +917,54 @@
         console.log('Updating table header with columns:', currentColumns);
         tableHeader.innerHTML = '';
         const headerRow = document.createElement('tr');
-        
+
         currentColumns.forEach(column => {
           const th = document.createElement('th');
           th.textContent = column;
           headerRow.appendChild(th);
         });
-        
+
         const actionTh = document.createElement('th');
         actionTh.textContent = 'Actions';
         headerRow.appendChild(actionTh);
-        
+
         tableHeader.appendChild(headerRow);
       }
 
       // View project details in modal
       function viewProjectDetails(projectCode) {
         console.log('Viewing project details for:', projectCode);
-        const project = filteredProjects.find(p => p["Project Code"] === projectCode);
+        const project = filteredProjects.find(p => 
+          p["Project Code"] === projectCode || 
+          p["New project name"] === projectCode || 
+          p["Oroginal Project name"] === projectCode
+        );
         if (!project) {
           console.log('Project not found:', projectCode);
           return;
         }
-        
+
         let detailsHTML = '';
-        
+
         for (const category in columnCategories) {
           const categoryColumns = columnCategories[category];
           let hasData = false;
-          
+
           for (const col of categoryColumns) {
             if (project[col]) {
               hasData = true;
               break;
             }
           }
-          
+
           if (!hasData) continue;
-          
+
           detailsHTML += `
             <div class="detail-section">
               <h3>${category}</h3>
               <div class="detail-grid">
           `;
-          
+
           categoryColumns.forEach(col => {
             if (project[col]) {
               detailsHTML += `
@@ -972,10 +975,10 @@
               `;
             }
           });
-          
+
           detailsHTML += `</div></div>`;
         }
-        
+
         projectDetails.innerHTML = detailsHTML;
         projectModal.classList.add('active');
       }
@@ -984,9 +987,9 @@
       function generatePagination(totalPages) {
         console.log('Generating pagination for', totalPages, 'pages');
         pagination.innerHTML = '';
-        
+
         if (totalPages <= 1) return;
-        
+
         const prevBtn = document.createElement('button');
         prevBtn.className = 'page-btn';
         prevBtn.innerHTML = '&laquo;';
@@ -998,15 +1001,15 @@
           }
         });
         pagination.appendChild(prevBtn);
-        
+
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-        
+
         if (endPage - startPage + 1 < maxVisiblePages) {
           startPage = Math.max(1, endPage - maxVisiblePages + 1);
         }
-        
+
         if (startPage > 1) {
           const firstPageBtn = document.createElement('button');
           firstPageBtn.className = 'page-btn';
@@ -1016,7 +1019,7 @@
             displayProjects();
           });
           pagination.appendChild(firstPageBtn);
-          
+
           if (startPage > 2) {
             const ellipsis = document.createElement('span');
             ellipsis.textContent = '...';
@@ -1024,7 +1027,7 @@
             pagination.appendChild(ellipsis);
           }
         }
-        
+
         for (let i = startPage; i <= endPage; i++) {
           const pageBtn = document.createElement('button');
           pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
@@ -1035,7 +1038,7 @@
           });
           pagination.appendChild(pageBtn);
         }
-        
+
         if (endPage < totalPages) {
           if (endPage < totalPages - 1) {
             const ellipsis = document.createElement('span');
@@ -1043,7 +1046,7 @@
             ellipsis.style.padding = '8px 12px';
             pagination.appendChild(ellipsis);
           }
-          
+
           const lastPageBtn = document.createElement('button');
           lastPageBtn.className = 'page-btn';
           lastPageBtn.textContent = totalPages;
@@ -1053,7 +1056,7 @@
           });
           pagination.appendChild(lastPageBtn);
         }
-        
+
         const nextBtn = document.createElement('button');
         nextBtn.className = 'page-btn';
         nextBtn.innerHTML = '&raquo;';
@@ -1074,9 +1077,9 @@
           alert('No data to export');
           return;
         }
-        
-        let csvContent = currentColumns.join(',') + '\n';
-        
+
+        let csvContent = currentColumns.join(',') + ',Actions\n';
+
         filteredProjects.forEach(project => {
           const row = currentColumns.map(col => {
             let value = project[col] || '';
@@ -1087,7 +1090,7 @@
           });
           csvContent += row.join(',') + '\n';
         });
-        
+
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
