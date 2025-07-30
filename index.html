@@ -9,6 +9,49 @@
     <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
     <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
     <script src="Trans.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const video = document.querySelector('.hero-video');
+        const playButton = document.querySelector('.play-button');
+        const pauseButton = document.querySelector('.pause-button');
+        
+        // Set initial state
+        playButton.classList.remove('hidden');
+        pauseButton.classList.add('hidden');
+        
+        // Toggle play/pause when clicking the video
+        video.addEventListener('click', function() {
+          if (video.paused) {
+            video.play().catch(e => console.log('Play failed:', e));
+          } else {
+            video.pause();
+          }
+        });
+        
+        // Play button click handler
+        playButton.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent event from bubbling to video
+          video.play().catch(e => console.log('Play failed:', e));
+        });
+        
+        // Pause button click handler
+        pauseButton.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent event from bubbling to video
+          video.pause();
+        });
+        
+        // Update button states based on video events
+        video.addEventListener('play', function() {
+          playButton.classList.add('hidden');
+          pauseButton.classList.remove('hidden');
+        });
+        
+        video.addEventListener('pause', function() {
+          pauseButton.classList.add('hidden');
+          playButton.classList.remove('hidden');
+        });
+      });
+    </script>
 
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
     <link rel="stylesheet" href="index.css">
@@ -34,6 +77,12 @@
             <button class="play-button" aria-label="Play video">
               <svg class="play-icon" viewBox="0 0 24 24" fill="white">
                 <polygon points="5,3 19,12 5,21 5,3"></polygon>
+              </svg>
+            </button>
+            <button class="pause-button hidden" aria-label="Pause video">
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="white">
+                <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                <rect x="14" y="4" width="4" height="16" rx="1"></rect>
               </svg>
             </button>
           </div>
