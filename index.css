@@ -119,6 +119,11 @@
   transition: opacity 0.3s;
   font-size: 14px;
   font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero-button:nth-child(1) {
