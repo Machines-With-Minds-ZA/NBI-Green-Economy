@@ -51,6 +51,35 @@ try {
     });
   }
 
+  async function checkQuestionnaireCompletion(user) {
+    try {
+      const userDoc = await db.collection('users').doc(user.uid).get();
+      if (userDoc.exists) {
+        const data = userDoc.data();
+        if (data.questionnaireCompleted && data.questionnaireResponseId) {
+          const responseDoc = await db.collection('questionnaire_responses').doc(data.questionnaireResponseId).get();
+          if (responseDoc.exists) {
+            console.log(`User ${user.uid} has completed questionnaire with response ID: ${data.questionnaireResponseId}`);
+            return true;
+          } else {
+            console.warn(`Questionnaire response ID ${data.questionnaireResponseId} not found, resetting completion status`);
+            await db.collection('users').doc(user.uid).set({
+              questionnaireCompleted: false,
+              questionnaireResponseId: null
+            }, { merge: true });
+            return false;
+          }
+        }
+        return false;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error checking questionnaire completion:", error);
+      trackInteraction(user.uid, 'error', 'check_questionnaire', error.message);
+      return false;
+    }
+  }
+
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
       console.log("Persistence set to LOCAL");
@@ -100,7 +129,7 @@ try {
 
         if (email === 'nbigreeneconomy@gmail.com') {
           const actionCodeSettings = {
-            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signin.html',
+            url: 'https://nbigreeneconomy.netlify.app/LandingPage/SignInAndSignUp/SignIn.html',
             handleCodeInApp: true
           };
           try {
@@ -112,7 +141,7 @@ try {
             errorMessage.classList.remove('hidden');
             setTimeout(() => {
               errorMessage.classList.add('hidden');
-              window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
+              window.location.href = '/LandingPage/SignInAndSignUp/SignIn.html';
             }, 5000);
             trackInteraction(null, 'signup', 'email_link_sent', `Email: ${email}`);
           } catch (error) {
@@ -156,7 +185,7 @@ try {
             setTimeout(() => {
               errorMessage.classList.add('hidden');
               auth.signOut().then(() => {
-                window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
+                window.location.href = '/LandingPage/SignInAndSignUp/SignIn.html';
               });
             }, 5000);
           } catch (error) {
@@ -192,7 +221,14 @@ try {
           console.log("users doc written successfully");
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
-          window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
+
+          const questionnaireCompleted = await checkQuestionnaireCompletion(user);
+          const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+            ? '/interactions/interactions.html?userId=' + user.uid
+            : questionnaireCompleted
+              ? '/Dashboard/dashboard.html?userId=' + user.uid
+              : '/questionnaire/questionnaire.html?userId=' + user.uid;
+          window.location.href = redirectUrl;
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -227,7 +263,14 @@ try {
             console.log("users doc written successfully");
             trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
             hideLoader();
-            window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
+
+            const questionnaireCompleted = await checkQuestionnaireCompletion(user);
+            const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
+              ? '/interactions/interactions.html?userId=' + user.uid
+              : questionnaireCompleted
+                ? '/Dashboard/dashboard.html?userId=' + user.uid
+                : '/questionnaire/questionnaire.html?userId=' + user.uid;
+            window.location.href = redirectUrl;
           })
           .catch(error => {
             hideLoader();

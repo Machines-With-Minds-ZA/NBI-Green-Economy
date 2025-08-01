@@ -199,14 +199,7 @@
   // Initialize Questionnaire
   document.addEventListener("DOMContentLoaded", async () => {
     let userId = new URLSearchParams(window.location.search).get('userId');
-    let currentQuestion = 1;
-    const totalQuestions = document.querySelectorAll('.question-content').length;
-    const navItems = document.querySelectorAll('.nav-item');
-    const questionContents = document.querySelectorAll('.question-content');
-    const nextBtn = document.getElementById('nextBtn');
-    const finishBtn = document.getElementById('finishBtn');
-    const finishText = document.getElementById('finishText');
-
+    
     // Check for authenticated user and questionnaire completion
     auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -214,219 +207,244 @@
         showLoader();
         try {
           const userDoc = await db.collection('users').doc(userId).get();
-          if (userDoc.exists && userDoc.data().questionnaireCompleted) {
-            hideLoader();
-            window.location.href = `/Dashboard/dashboard.html?userId=${userId}`;
-            return;
+          if (userDoc.exists && userDoc.data().questionnaireCompleted && userDoc.data().questionnaireResponseId) {
+            console.log(`User ${userId} has completed questionnaire with response ID: ${userDoc.data().questionnaireResponseId}`);
+            // Verify questionnaire response exists
+            const responseDoc = await db.collection('questionnaire_responses').doc(userDoc.data().questionnaireResponseId).get();
+            if (responseDoc.exists) {
+              await trackUserInteraction(userId, 'page', 'redirect', 'Questionnaire completed, redirecting to dashboard');
+              window.location.href = `/Dashboard/dashboard.html?userId=${userId}`;
+              return;
+            } else {
+              console.warn(`Questionnaire response ID ${userDoc.data().questionnaireResponseId} not found, resetting completion status`);
+              await db.collection('users').doc(userId).set({ questionnaireCompleted: false, questionnaireResponseId: null }, { merge: true });
+            }
           }
         } catch (error) {
           console.error("Error checking questionnaire completion:", error);
+          await trackUserInteraction(userId, 'error', 'check_questionnaire', error.message);
         }
         hideLoader();
       } else {
         // Redirect to sign-in if not authenticated
+        await trackUserInteraction(null, 'auth', 'unauthenticated', 'Redirecting to sign-in');
         window.location.href = '/LandingPage/Signup&SignIn/Signin.html';
         return;
       }
-    });
 
-    // Show question with pop-up animation and manage finish button
-    function showQuestion(index) {
-      navItems.forEach(item => item.classList.remove('active'));
-      questionContents.forEach(content => {
-        content.classList.remove('active');
-        content.style.opacity = '0';
-        content.style.transform = 'scale(0.9)';
+      // Proceed with questionnaire if not completed
+      let currentQuestion = 1;
+      const totalQuestions = document.querySelectorAll('.question-content').length;
+      const navItems = document.querySelectorAll('.nav-item');
+      const questionContents = document.querySelectorAll('.question-content');
+      const nextBtn = document.getElementById('nextBtn');
+      const finishBtn = document.getElementById('finishBtn');
+      const finishText = document.getElementById('finishText');
+
+      // Show question with pop-up animation and manage finish button
+      function showQuestion(index) {
+        navItems.forEach(item => item.classList.remove('active'));
+        questionContents.forEach(content => {
+          content.classList.remove('active');
+          content.style.opacity = '0';
+          content.style.transform = 'scale(0.9)';
+        });
+
+        setTimeout(() => {
+          const activeNav = document.querySelector(`.nav-item[data-question="${index}"]`);
+          const activeContent = document.querySelector(`.question-content[data-question="${index}"]`);
+          if (activeNav && activeContent) {
+            activeNav.classList.add('active');
+            activeContent.classList.add('active');
+            activeContent.style.opacity = '1';
+            activeContent.style.transform = 'scale(1)';
+          }
+
+          nextBtn.style.display = index === 5 ? 'block' : 'none';
+          finishBtn.style.display = index === 7 && isFormComplete() ? 'block' : 'none';
+        }, 400);
+      }
+
+      function isFormComplete() {
+        const selections = {
+          1: document.querySelectorAll('.question-content[data-question="1"] .option-button.selected').length > 0,
+          2: document.querySelectorAll('.question-content[data-question="2"] .option-button.selected').length > 0,
+          3: document.querySelectorAll('.question-content[data-question="3"] .option-button.selected').length > 0,
+          4: document.querySelectorAll('.question-content[data-question="4"] .option-button.selected').length > 0,
+          6: document.querySelectorAll('.question-content[data-question="6"] .option-button.selected').length > 0,
+          5: document.getElementById('experienceLevel')?.value !== '',
+          7: document.getElementById('preferredLanguage')?.value !== ''
+        };
+        return Object.values(selections).every(Boolean);
+      }
+
+      showQuestion(currentQuestion);
+
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const questionIndex = parseInt(item.getAttribute('data-question'));
+          if (questionIndex !== currentQuestion) {
+            currentQuestion = questionIndex;
+            showQuestion(currentQuestion);
+          }
+        });
       });
 
-      setTimeout(() => {
-        const activeNav = document.querySelector(`.nav-item[data-question="${index}"]`);
-        const activeContent = document.querySelector(`.question-content[data-question="${index}"]`);
-        if (activeNav && activeContent) {
-          activeNav.classList.add('active');
-          activeContent.classList.add('active');
-          activeContent.style.opacity = '1';
-          activeContent.style.transform = 'scale(1)';
-        }
-
-        nextBtn.style.display = index === 5 ? 'block' : 'none';
-        finishBtn.style.display = index === 7 && isFormComplete() ? 'block' : 'none';
-      }, 400);
-    }
-
-    function isFormComplete() {
-      const selections = {
-        1: document.querySelectorAll('.question-content[data-question="1"] .option-button.selected').length > 0,
-        2: document.querySelectorAll('.question-content[data-question="2"] .option-button.selected').length > 0,
-        3: document.querySelectorAll('.question-content[data-question="3"] .option-button.selected').length > 0,
-        4: document.querySelectorAll('.question-content[data-question="4"] .option-button.selected').length > 0,
-        6: document.querySelectorAll('.question-content[data-question="6"] .option-button.selected').length > 0,
-        5: document.getElementById('experienceLevel')?.value !== '',
-        7: document.getElementById('preferredLanguage')?.value !== ''
-      };
-      return Object.values(selections).every(Boolean);
-    }
-
-    showQuestion(currentQuestion);
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const questionIndex = parseInt(item.getAttribute('data-question'));
-        if (questionIndex !== currentQuestion) {
-          currentQuestion = questionIndex;
+      nextBtn.addEventListener('click', () => {
+        if (currentQuestion === 5 && document.getElementById('experienceLevel').value !== '') {
+          currentQuestion = 6;
           showQuestion(currentQuestion);
         }
       });
-    });
 
-    nextBtn.addEventListener('click', () => {
-      if (currentQuestion === 5 && document.getElementById('experienceLevel').value !== '') {
-        currentQuestion = 6;
-        showQuestion(currentQuestion);
-      }
-    });
-
-    document.querySelectorAll('.option-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const questionIndex = parseInt(button.closest('.question-content').getAttribute('data-question'));
-        button.classList.toggle('selected');
-        if (userId) {
-          trackUserInteraction(userId, 'interaction', 'click', `${button.getAttribute('data-value')}: ${button.classList.contains('selected') ? 'selected' : 'deselected'}`);
-        }
-        resetInactivityTimer(userId);
-
-        if ([1, 2, 3, 4, 6].includes(questionIndex) && button.classList.contains('selected')) {
-          if (document.querySelectorAll(`.question-content[data-question="${questionIndex}"] .option-button.selected`).length === 1) {
-            currentQuestion = Math.min(questionIndex + 1, totalQuestions);
-            showQuestion(currentQuestion);
+      document.querySelectorAll('.option-button').forEach(button => {
+        button.addEventListener('click', () => {
+          const questionIndex = parseInt(button.closest('.question-content').getAttribute('data-question'));
+          button.classList.toggle('selected');
+          if (userId) {
+            trackUserInteraction(userId, 'interaction', 'click', `${button.getAttribute('data-value')}: ${button.classList.contains('selected') ? 'selected' : 'deselected'}`);
           }
-        }
+          resetInactivityTimer(userId);
+
+          if ([1, 2, 3, 4, 6].includes(questionIndex) && button.classList.contains('selected')) {
+            if (document.querySelectorAll(`.question-content[data-question="${questionIndex}"] .option-button.selected`).length === 1) {
+              currentQuestion = Math.min(questionIndex + 1, totalQuestions);
+              showQuestion(currentQuestion);
+            }
+          }
+        });
       });
-    });
 
-    const form = document.getElementById("questionnaireForm");
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      finishBtn.disabled = true;
-      finishText.innerHTML = '<span class="loading-spinner"></span>Finishing...';
-      showLoader();
-
-      const selectedButtons = {
-        role: Array.from(document.querySelectorAll('.question-content[data-question="1"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        primaryInterest: Array.from(document.querySelectorAll('.question-content[data-question="2"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        fundingType: Array.from(document.querySelectorAll('.question-content[data-question="3"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        businessSector: Array.from(document.querySelectorAll('.question-content[data-question="4"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
-        greenTools: Array.from(document.querySelectorAll('.question-content[data-question="6"] .option-button.selected')).map(btn => btn.getAttribute('data-value'))
-      };
-
-      const data = {
-        experienceLevel: document.getElementById('experienceLevel').value,
-        preferredLanguage: document.getElementById('preferredLanguage').value,
-        role: selectedButtons.role,
-        primaryInterest: selectedButtons.primaryInterest,
-        fundingType: selectedButtons.fundingType,
-        businessSector: selectedButtons.businessSector,
-        greenTools: selectedButtons.greenTools,
-        userId: userId,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      };
-
-      try {
-        await db.collection('questionnaire_responses').add(data);
-        if (userId) {
-          await db.collection('users').doc(userId).set({
-            questionnaireCompleted: true
-          }, { merge: true });
-          await trackUserInteraction(userId, 'form', 'submitted', JSON.stringify(data));
-        }
-        form.reset();
-        document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
-        const redirectUrl = userId && (await db.collection('users').doc(userId).get()).data()?.isAdmin
-          ? `/interactions/interactions.html?userId=${userId}`
-          : `/Dashboard/dashboard.html?userId=${userId}`;
-        window.location.href = redirectUrl;
-      } catch (error) {
-        console.error("Submission error:", error);
-        alert("There was an error submitting your form. Please try again.");
-        if (userId) {
-          await trackUserInteraction(userId, 'form', 'error', error.message);
-        }
-      } finally {
-        finishBtn.disabled = false;
-        finishText.textContent = "Finish";
-        hideLoader();
-      }
-    });
-
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", function (e) {
+      const form = document.getElementById("questionnaireForm");
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
-        if (userId) {
-          trackUserInteraction(userId, 'navigation', 'click', this.href);
+        finishBtn.disabled = true;
+        finishText.innerHTML = '<span class="loading-spinner"></span>Finishing...';
+        showLoader();
+
+        const selectedButtons = {
+          role: Array.from(document.querySelectorAll('.question-content[data-question="1"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+          primaryInterest: Array.from(document.querySelectorAll('.question-content[data-question="2"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+          fundingType: Array.from(document.querySelectorAll('.question-content[data-question="3"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+          businessSector: Array.from(document.querySelectorAll('.question-content[data-question="4"] .option-button.selected')).map(btn => btn.getAttribute('data-value')),
+          greenTools: Array.from(document.querySelectorAll('.question-content[data-question="6"] .option-button.selected')).map(btn => btn.getAttribute('data-value'))
+        };
+
+        const responseId = db.collection('questionnaire_responses').doc().id; // Generate unique PK
+
+        const data = {
+          responseId: responseId, // Store PK in response document
+          experienceLevel: document.getElementById('experienceLevel').value,
+          preferredLanguage: document.getElementById('preferredLanguage').value,
+          role: selectedButtons.role,
+          primaryInterest: selectedButtons.primaryInterest,
+          fundingType: selectedButtons.fundingType,
+          businessSector: selectedButtons.businessSector,
+          greenTools: selectedButtons.greenTools,
+          userId: userId,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        try {
+          // Store questionnaire response with PK
+          await db.collection('questionnaire_responses').doc(responseId).set(data);
+          if (userId) {
+            // Update user document with questionnaire completion status and response ID
+            await db.collection('users').doc(userId).set({
+              questionnaireCompleted: true,
+              questionnaireResponseId: responseId // Store PK reference
+            }, { merge: true });
+            await trackUserInteraction(userId, 'form', 'submitted', JSON.stringify(data));
+          }
+          form.reset();
+          document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+          const redirectUrl = userId && (await db.collection('users').doc(userId).get()).data()?.isAdmin
+            ? `/interactions/interactions.html?userId=${userId}`
+            : `/Dashboard/dashboard.html?userId=${userId}`;
+          window.location.href = redirectUrl;
+        } catch (error) {
+          console.error("Submission error:", error);
+          alert("There was an error submitting your form. Please try again.");
+          if (userId) {
+            await trackUserInteraction(userId, 'form', 'error', error.message);
+          }
+        } finally {
+          finishBtn.disabled = false;
+          finishText.textContent = "Finish";
+          hideLoader();
         }
       });
-    });
 
-    const formElements = document.querySelectorAll(".form-input, .form-select");
-    formElements.forEach((element) => {
-      element.addEventListener("focus", function () {
-        this.parentElement.style.transform = "scale(1.02)";
-        this.parentElement.style.transition = "transform 0.2s ease";
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (userId) {
+            trackUserInteraction(userId, 'navigation', 'click', this.href);
+          }
+        });
       });
-      element.addEventListener("blur", function () {
-        this.parentElement.style.transform = "scale(1)";
-      });
-    });
 
-    window.addEventListener("scroll", function () {
-      const hero = document.querySelector(".hero");
-      const scrolled = window.pageYOffset;
-      const parallax = scrolled * 0.5;
-      if (hero) {
-        hero.style.transform = `translateY(${parallax}px)`;
+      const formElements = document.querySelectorAll(".form-input, .form-select");
+      formElements.forEach((element) => {
+        element.addEventListener("focus", function () {
+          this.parentElement.style.transform = "scale(1.02)";
+          this.parentElement.style.transition = "transform 0.2s ease";
+        });
+        element.addEventListener("blur", function () {
+          this.parentElement.style.transform = "scale(1)";
+        });
+      });
+
+      window.addEventListener("scroll", function () {
+        const hero = document.querySelector(".hero");
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        if (hero) {
+          hero.style.transform = `translateY(${parallax}px)`;
+        }
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      const questionnaireContainer = document.querySelector(".questionnaire-container");
+      if (questionnaireContainer) {
+        questionnaireContainer.style.opacity = "0";
+        questionnaireContainer.style.transform = "translateY(30px)";
+        questionnaireContainer.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(questionnaireContainer);
+      }
+
+      if (userId) {
+        trackUserInteraction(userId, 'page', 'loaded', 'Questionnaire page');
+        resetInactivityTimer(userId);
+
+        document.addEventListener('click', (e) => {
+          const target = e.target.closest('button, select, input, a, .submit-btn, .nav-item, .option-button');
+          if (target) {
+            trackUserInteraction(userId, 'interaction', 'click', target.id || target.className || target.tagName);
+          }
+          resetInactivityTimer(userId);
+        });
+
+        document.addEventListener('input', (e) => {
+          if (e.target.matches('input, select')) {
+            trackUserInteraction(userId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
+          }
+          resetInactivityTimer(userId);
+        });
       }
     });
-
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-        }
-      });
-    }, observerOptions);
-
-    const questionnaireContainer = document.querySelector(".questionnaire-container");
-    if (questionnaireContainer) {
-      questionnaireContainer.style.opacity = "0";
-      questionnaireContainer.style.transform = "translateY(30px)";
-      questionnaireContainer.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-      observer.observe(questionnaireContainer);
-    }
-
-    if (userId) {
-      trackUserInteraction(userId, 'page', 'loaded', 'Questionnaire page');
-      resetInactivityTimer(userId);
-
-      document.addEventListener('click', (e) => {
-        const target = e.target.closest('button, select, input, a, .submit-btn, .nav-item, .option-button');
-        if (target) {
-          trackUserInteraction(userId, 'interaction', 'click', target.id || target.className || target.tagName);
-        }
-        resetInactivityTimer(userId);
-      });
-
-      document.addEventListener('input', (e) => {
-        if (e.target.matches('input, select')) {
-          trackUserInteraction(userId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
-        }
-        resetInactivityTimer(userId);
-      });
-    }
   });
 </script>
 </body>

@@ -4,7 +4,7 @@ class GreenEconomyHeader extends HTMLElement {
       <div class="header-outer">
         <header class="header">
           <div class="logo">
-            <a href="/index.html">
+            <a href="/index.html" id="logo-link">
               <img src="/Images/GET.png" alt="Logo" />
             </a>
           </div>
@@ -25,6 +25,35 @@ class GreenEconomyHeader extends HTMLElement {
         </header>
       </div>
     `;
+
+    // Add event listener for logo click to handle logout
+    const logoLink = this.querySelector('#logo-link');
+    if (logoLink) {
+      logoLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const user = firebase.auth().currentUser;
+          if (user) {
+            // User is logged in, perform logout
+            console.log('User is logged in, initiating logout...');
+            await firebase.auth().signOut();
+            // Clear any local storage items related to session
+            window.localStorage.removeItem('emailForSignIn');
+            // Track logout interaction
+            trackInteraction(user.uid, 'logout', 'logo_click');
+            console.log('User logged out successfully');
+          } else {
+            console.log('No user is logged in, redirecting to index...');
+          }
+          // Redirect to index page regardless of login state
+          window.location.href = '/index.html';
+        } catch (error) {
+          console.error('Error during logo click logout:', error);
+          // Redirect to index page even if logout fails
+          window.location.href = '/index.html';
+        }
+      });
+    }
   }
 }
 

@@ -56,11 +56,27 @@ try {
       const userDoc = await db.collection('users').doc(user.uid).get();
       if (userDoc.exists) {
         const data = userDoc.data();
-        return data.questionnaireCompleted || false;
+        if (data.questionnaireCompleted && data.questionnaireResponseId) {
+          // Verify the questionnaire response exists
+          const responseDoc = await db.collection('questionnaire_responses').doc(data.questionnaireResponseId).get();
+          if (responseDoc.exists) {
+            console.log(`User ${user.uid} has completed questionnaire with response ID: ${data.questionnaireResponseId}`);
+            return true;
+          } else {
+            console.warn(`Questionnaire response ID ${data.questionnaireResponseId} not found, resetting completion status`);
+            await db.collection('users').doc(user.uid).set({
+              questionnaireCompleted: false,
+              questionnaireResponseId: null
+            }, { merge: true });
+            return false;
+          }
+        }
+        return false;
       }
       return false;
     } catch (error) {
       console.error("Error checking questionnaire completion:", error);
+      trackInteraction(user.uid, 'error', 'check_questionnaire', error.message);
       return false;
     }
   }
@@ -105,7 +121,7 @@ try {
 
         if (email === 'nbigreeneconomy@gmail.com') {
           const actionCodeSettings = {
-            url: 'https://nbigreeneconomy.netlify.app/LandingPage/Signup&SignIn/Signin.html',
+            url: 'https://nbigreeneconomy.netlify.app/LandingPage/SignInAndSignUp/SignIn.html',
             handleCodeInApp: true
           };
           try {
@@ -150,7 +166,6 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: false,
-              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
@@ -191,7 +206,6 @@ try {
             userId: user.uid,
             email: user.email,
             isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-            questionnaireCompleted: false,
             language: document.documentElement.lang || 'en',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true });
@@ -234,7 +248,6 @@ try {
               userId: user.uid,
               email: user.email,
               isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-              questionnaireCompleted: false,
               language: document.documentElement.lang || 'en',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, { merge: true });
