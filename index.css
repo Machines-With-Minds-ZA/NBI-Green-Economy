@@ -63,39 +63,69 @@
   border-radius: 0px 0px 0 0;
 }
 
-.play-button, .pause-button {
+.play-pause-button {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
-  background: rgba(67, 220, 103, 0.7);
+  background: rgba(67, 220, 103, 0.9);
   border: none;
-  border-radius: 8px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0.9;
+  visibility: visible;
+  padding: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
 }
 
-.hero-video:hover + .play-button,
-.hero-video:hover + .pause-button,
-.play-button:hover,
-.pause-button:hover,
-.play-button:focus,
-.pause-button:focus {
+.play-pause-button:hover {
+  background: rgba(67, 220, 103, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.hero-video:hover + .play-pause-button,
+.play-pause-button:hover,
+.play-pause-button:focus {
   opacity: 0.9;
   visibility: visible;
 }
 
-.play-button.hidden,
-.pause-button.hidden {
+.play-icon, .pause-icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.2s ease;
+  position: relative;
+  left: 2px; /* Slight adjustment for play icon centering */
+}
+
+.pause-icon {
   display: none;
+  position: relative;
+  left: 0;
+}
+
+.play-pause-button.playing .play-icon {
+  display: none;
+}
+
+.play-pause-button.playing .pause-icon {
+  display: block;
+}
+
+.play-pause-button:not(.playing) .pause-icon {
+  display: none;
+}
+
+.play-pause-button:not(.playing) .play-icon {
+  display: block;
 }
 
 .play-icon,
