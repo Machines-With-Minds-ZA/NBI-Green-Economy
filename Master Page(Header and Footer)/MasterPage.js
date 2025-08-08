@@ -1,5 +1,8 @@
 class GreenEconomyHeader extends HTMLElement {
   connectedCallback() {
+    const currentPath = window.location.pathname;
+    const isDashboard = currentPath === '/Dashboard/dashboard.html';
+
     this.innerHTML = `
       <div class="header-outer">
         <header class="header">
@@ -9,20 +12,35 @@ class GreenEconomyHeader extends HTMLElement {
             </a>
           </div>
           <nav class="nav">
-            <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the green economy</a>
-            <a href="/LandingPage/Opportunities/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
-            <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM sector</a>
-            <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge hub</a>
+            ${isDashboard ? '<a href="/index.html">Home</a>' : ''}
+            ${!isDashboard ? `
+              <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the green economy</a>
+              <a href="/LandingPage/Opportunities/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
+              <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM sector</a>
+              <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge hub</a>
+            ` : ''}
             <select class="language-selector" onchange="changeLanguage(this.value)">
               <option value="" disabled selected data-i18n="header.select">Select</option>
               <option value="en">English</option>
               <option value="zu">isiZulu</option>
               <option value="tn">Tswana</option>
             </select>
-            <span class="search-icon">🔍</span>
+            <i class="fas fa-search search-icon" id="search-toggle"></i>
             <div class="blue-section"></div>
           </nav>
         </header>
+        <section class="search-section" id="search-popup" style="display: none;">
+          <div class="search-header">
+            <h3 data-i18n="header.ai-search-title">AI-Enhanced Search</h3>
+            <span class="search-close" id="search-close">×</span>
+          </div>
+          <div class="search-container">
+            <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+          </div>
+        </section>
       </div>
     `;
 
@@ -34,24 +52,140 @@ class GreenEconomyHeader extends HTMLElement {
         try {
           const user = firebase.auth().currentUser;
           if (user) {
-            // User is logged in, perform logout
             console.log('User is logged in, initiating logout...');
             await firebase.auth().signOut();
-            // Clear any local storage items related to session
             window.localStorage.removeItem('emailForSignIn');
-            // Track logout interaction
             trackInteraction(user.uid, 'logout', 'logo_click');
             console.log('User logged out successfully');
           } else {
             console.log('No user is logged in, redirecting to index...');
           }
-          // Redirect to index page regardless of login state
           window.location.href = '/index.html';
         } catch (error) {
           console.error('Error during logo click logout:', error);
-          // Redirect to index page even if logout fails
           window.location.href = '/index.html';
         }
+      });
+    }
+
+    // Add event listener for search toggle
+    const searchToggle = this.querySelector('#search-toggle');
+    const searchPopup = this.querySelector('#search-popup');
+    const searchClose = this.querySelector('#search-close');
+    if (searchToggle && searchPopup && searchClose) {
+      searchToggle.addEventListener('click', () => {
+        const isHidden = searchPopup.style.display === 'none';
+        searchPopup.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          searchPopup.classList.add('animate-in');
+          searchPopup.classList.remove('animate-out');
+        } else {
+          searchPopup.classList.add('animate-out');
+          searchPopup.classList.remove('animate-in');
+          setTimeout(() => {
+            searchPopup.style.display = 'none';
+          }, 300); // Match animation duration
+        }
+      });
+
+      searchClose.addEventListener('click', () => {
+        searchPopup.classList.add('animate-out');
+        searchPopup.classList.remove('animate-in');
+        setTimeout(() => {
+          searchPopup.style.display = 'none';
+        }, 300); // Match animation duration
+      });
+    }
+  }
+}
+
+class GreenEconomyDashboardHeader extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="header-outer">
+        <header class="header">
+          <div class="logo">
+            <a href="/index.html" id="logo-link">
+              <img src="/Images/GET.png" alt="Logo" />
+            </a>
+          </div>
+          <nav class="nav">
+            <a href="/index.html">Home</a>
+            <select class="language-selector" onchange="changeLanguage(this.value)">
+              <option value="" disabled selected data-i18n="header.select">Select</option>
+              <option value="en">English</option>
+              <option value="zu">isiZulu</option>
+              <option value="tn">Tswana</option>
+            </select>
+            <i class="fas fa-search search-icon" id="search-toggle"></i>
+            <div class="blue-section"></div>
+          </nav>
+        </header>
+        <section class="search-section" id="search-popup" style="display: none;">
+          <div class="search-header">
+            <h3 data-i18n="header.ai-search-title">AI-Enhanced Search</h3>
+            <span class="search-close" id="search-close">×</span>
+          </div>
+          <div class="search-container">
+            <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+          </div>
+        </section>
+      </div>
+    `;
+
+    // Add event listener for logo click to handle logout
+    const logoLink = this.querySelector('#logo-link');
+    if (logoLink) {
+      logoLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const user = firebase.auth().currentUser;
+          if (user) {
+            console.log('User is logged in, initiating logout...');
+            await firebase.auth().signOut();
+            window.localStorage.removeItem('emailForSignIn');
+            trackInteraction(user.uid, 'logout', 'logo_click');
+            console.log('User logged out successfully');
+          } else {
+            console.log('No user is logged in, redirecting to index...');
+          }
+          window.location.href = '/index.html';
+        } catch (error) {
+          console.error('Error during logo click logout:', error);
+          window.location.href = '/index.html';
+        }
+      });
+    }
+
+    // Add event listener for search toggle
+    const searchToggle = this.querySelector('#search-toggle');
+    const searchPopup = this.querySelector('#search-popup');
+    const searchClose = this.querySelector('#search-close');
+    if (searchToggle && searchPopup && searchClose) {
+      searchToggle.addEventListener('click', () => {
+        const isHidden = searchPopup.style.display === 'none';
+        searchPopup.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          searchPopup.classList.add('animate-in');
+          searchPopup.classList.remove('animate-out');
+        } else {
+          searchPopup.classList.add('animate-out');
+          searchPopup.classList.remove('animate-in');
+          setTimeout(() => {
+            searchPopup.style.display = 'none';
+          }, 300); // Match animation duration
+        }
+      });
+
+      searchClose.addEventListener('click', () => {
+        searchPopup.classList.add('animate-out');
+        searchPopup.classList.remove('animate-in');
+        setTimeout(() => {
+          searchPopup.style.display = 'none';
+        }, 300); // Match animation duration
       });
     }
   }
@@ -102,6 +236,7 @@ class GreenEconomyFooter extends HTMLElement {
 }
 
 customElements.define('green-economy-header', GreenEconomyHeader);
+customElements.define('green-economy-dashboard-header', GreenEconomyDashboardHeader);
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
 function navigateToFocusArea(areaId) {
@@ -181,6 +316,23 @@ window.logout = function() {
   });
 };
 
-window.home = function() {
-  window.location.href = '/index.html';
+window.home = async function() {
+  console.log('Logging out via Home...');
+  try {
+    const user = firebase.auth().currentUser;
+    if (user) {
+      await firebase.auth().signOut();
+      window.localStorage.removeItem('emailForSignIn');
+      window.history.pushState(null, document.title, window.location.href);
+      window.onpopstate = async function() {
+        await firebase.auth().signOut();
+        window.localStorage.removeItem('emailForSignIn');
+        window.location.href = '/index.html';
+      };
+    }
+    window.location.href = '/index.html';
+  } catch (error) {
+    console.error('Error during home logout:', error);
+    window.location.href = '/index.html';
+  }
 };

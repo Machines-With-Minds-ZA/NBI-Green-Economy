@@ -1,12 +1,12 @@
-// Handle hero button clicks
 document.addEventListener('DOMContentLoaded', function() {
     // Hero buttons
     const heroButtons = document.querySelectorAll('.hero-button');
     heroButtons.forEach(button => {
         button.addEventListener('click', function() {
             const buttonText = this.textContent.trim().toLowerCase();
+            const translatedLogin = i18next.t('buttons.login').toLowerCase();
             switch(buttonText) {
-                case 'access funding':
+                case 'get funding':
                     window.location.href = '/Funding Hub/Funding-Hub.html';
                     break;
                 case 'opportunities':
@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'irm sector':
                     window.location.href = '/LandingPage/IRM-Sector/IRMSector.html';
                     break;
-                case 'training':
-                    window.location.href = '/LandingPage/Knowledge-Hub/knowledge-hub.html';
+                case translatedLogin: // Dynamic check for translated "Sign in to Dashboard"
+                    window.location.href = '/LandingPage/SignInAndSignUp/SignIn.html';
                     break;
             }
         });
@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update footer links
     const footerLinks = {
-        'green_economy_network': '#',  // TODO: Add actual link
-        'live_events_calendar': '#',   // TODO: Add actual link
+        'green_economy_network': '#',
+        'live_events_calendar': '#',
         'green_opportunities': '/LandingPage/Opportunities/opportunities.html',
-        'news_updates': '#',           // TODO: Add actual link
-        'news_events': '#',            // TODO: Add actual link
+        'news_updates': '#',
+        'news_events': '#',
         'contact_us': '/LandingPage/About Page/about.html#contact',
-        'terms_reference': '#'         // TODO: Add actual link
+        'terms_reference': '#'
     };
 
     Object.entries(footerLinks).forEach(([key, url]) => {
@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth',
                     block: 'start'
                 });
-                // Update URL without adding to history
                 if (history.pushState) {
                     history.pushState(null, null, href);
                 } else {

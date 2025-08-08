@@ -7,15 +7,14 @@
     "paragraph3": "We help you together a step-by-step guide on how to access the benefits of a green economy and position your business to operate in a greener global",
     "videoAlt": "Introduction to the Green Economy"
   },
-  "buttons": {
-    "getFunding": "Access Funding",
-    "opportunities": "Opportunities",
-    "rmcsHub": "IRM Sector",
-    "training": "Training",
-    "findOutMore": "Discover More",
-    "viewMore": "View more",
-    "login": "Sign in to Dashboard"
-  },
+"buttons": {
+  "getFunding": "Get Funding",
+  "opportunities": "Opportunities",
+  "rmcsHub": "IRM Sector",
+  "login": "Login",  
+  "findOutMore": "Discover More",
+  "viewMore": "View more"
+},
   "focus": {
     "title": "Nine priority focus areas for the green economy in South Africa",
     "subtitle": "(Green Economy Summit, 2010)",

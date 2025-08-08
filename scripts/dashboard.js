@@ -9,10 +9,14 @@ const firebaseConfig = {
   measurementId: "G-37VRZ5CGE4"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
+// Initialize Firebase (optional, for interaction tracking)
+let db;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+}
 
 // Loader Functions
 function showLoader() {
@@ -21,6 +25,8 @@ function showLoader() {
   if (loader && loaderOverlay) {
     loader.style.display = 'block';
     loaderOverlay.style.display = 'block';
+  } else {
+    console.warn("Loader elements not found");
   }
 }
 
@@ -30,96 +36,132 @@ function hideLoader() {
   if (loader && loaderOverlay) {
     loader.style.display = 'none';
     loaderOverlay.style.display = 'none';
+  } else {
+    console.warn("Loader elements not found");
   }
 }
 
-// Interaction Tracking Function
+// Interaction Tracking Function (optional)
 function trackUserInteraction(tempUserId, category, action, label = "") {
-  db.collection('interactions').add({
-    tempUserId: tempUserId,
-    category: category,
-    action: action,
-    label: label,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    language: currentLanguage || 'en',
-    userAgent: navigator.userAgent
-  }).catch((error) => {
-    console.error("Error logging interaction to Firestore: ", error);
-  });
+  if (db) {
+    db.collection('interactions').add({
+      tempUserId: tempUserId,
+      category: category,
+      action: action,
+      label: label,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      language: 'en',
+      userAgent: navigator.userAgent
+    }).catch((error) => {
+      console.error("Error logging interaction to Firestore: ", error);
+      console.log(`Local log: tempUserId=${tempUserId}, category=${category}, action=${action}, label=${label}`);
+    });
+  } else {
+    console.log(`Local log: tempUserId=${tempUserId}, category=${category}, action=${action}, label=${label}`);
+  }
 }
 
-// Inactivity Timeout
-let inactivityTimeout;
-function resetInactivityTimer(tempUserId) {
-  clearTimeout(inactivityTimeout);
-  inactivityTimeout = setTimeout(async () => {
-    try {
-      await db.collection('temp_users').doc(tempUserId).delete();
-      trackUserInteraction(tempUserId, 'session', 'timeout', 'Redirected to sign-in due to inactivity');
-      await auth.signOut();
-      window.location.href = '../SignIn.html';
-    } catch (error) {
-      console.error("Error deleting temp user:", error);
-    }
-  }, 4 * 60 * 1000); // 4 minutes
+// Get Temporary User ID from URL or generate a guest ID
+let tempUserId = new URLSearchParams(window.location.search).get('tempUserId');
+if (!tempUserId) {
+  tempUserId = 'guest_' + Math.random().toString(36).substr(2, 9);
+  console.log("Generated guest tempUserId:", tempUserId);
 }
 
-// Get Temporary User ID from URL
-const urlParams = new URLSearchParams(window.location.search);
-const tempUserId = urlParams.get('tempUserId');
+// Navigation Paths
+const paths = {
+  funding: "../Funding Hub/Funding-Hub.html",
+  smme: "../SMME/smme.html",
+  toolkits: "../ToolKits/toolkits.html",
+  legal: "../Legal/legal.html"
+};
 
 // Initialize Dashboard
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded, initializing dashboard...");
   showLoader();
-  // Check if user is authenticated
-  const user = auth.currentUser;
-  if (!user || !tempUserId) {
-    console.log("No user or temp user ID, redirecting to sign-in...");
-    window.location.href = '../SignIn.html';
-    hideLoader();
-    return;
-  }
-
   try {
-    const userDoc = await db.collection('temp_users').doc(tempUserId).get();
-    if (!userDoc.exists || userDoc.data().userId !== user.uid) {
-      console.log("Invalid temp user ID or user mismatch, redirecting to sign-in...");
-      await auth.signOut();
-      window.location.href = '../SignIn.html';
-      hideLoader();
-      return;
-    }
-
     trackUserInteraction(tempUserId, 'page', 'loaded', 'Dashboard page');
-    resetInactivityTimer(tempUserId);
-
-    // Track all user interactions
-    document.addEventListener('click', (e) => {
-      const target = e.target.closest('button, select, input, a, .dashboard-card, .news-item, .news-category-btn, .btn');
-      if (target) {
-        trackUserInteraction(tempUserId, 'interaction', 'click', target.id || target.className || target.tagName);
-      }
-      resetInactivityTimer(tempUserId);
-    });
-
-    document.addEventListener('input', (e) => {
-      if (e.target.matches('input, select')) {
-        trackUserInteraction(tempUserId, 'interaction', 'input', `${e.target.id}: ${e.target.value}`);
-      }
-      resetInactivityTimer(tempUserId);
-    });
-
-    initializeSearch();
     initializeDashboard();
-    initializeNews();
-    updateLanguage(currentLanguage);
   } catch (error) {
-    console.error("Error validating temp user:", error);
-    await auth.signOut();
-    window.location.href = '../SignIn.html';
+    console.error("Error initializing dashboard:", error);
+    displayErrorMessage("Failed to initialize dashboard: " + error.message);
+  } finally {
     hideLoader();
   }
 });
+
+function initializeDashboard() {
+  console.log("Initializing dashboard cards...");
+  const dashboardCards = document.querySelectorAll(".dashboard-card");
+  console.log(`Found ${dashboardCards.length} dashboard cards`);
+  if (dashboardCards.length === 0) {
+    console.error("No dashboard cards found! Check HTML for .dashboard-card elements.");
+    displayErrorMessage("No dashboard cards found. Please check the page structure.");
+    return;
+  }
+  dashboardCards.forEach((card, index) => {
+    const section = card.getAttribute("data-section");
+    console.log(`Binding click handler for card ${index + 1}: ${section}`);
+    // Remove any existing listeners to prevent duplicates
+    card.removeEventListener("click", handleCardClick);
+    card.addEventListener("click", handleCardClick);
+    // Ensure card is interactive
+    card.style.cursor = "pointer";
+    card.style.pointerEvents = "auto";
+    card.style.position = "relative";
+    card.style.zIndex = "1";
+    // Debug: Log current listeners
+    console.log(`Card ${section} listener attached`);
+  });
+}
+
+function handleCardClick(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  const section = this.getAttribute("data-section");
+  console.log(`Card clicked: ${section}`);
+  if (!section) {
+    console.error("No data-section attribute found on clicked card");
+    displayErrorMessage("Navigation error: Invalid card section.");
+    return;
+  }
+  navigateToSection(section);
+}
+
+function navigateToSection(section) {
+  console.log(`Navigating to section: ${section}`);
+  trackUserInteraction(tempUserId, "navigation", `click_${section}`);
+  if (paths[section]) {
+    showLoader();
+    console.log(`Attempting to navigate to ${paths[section]}?tempUserId=${tempUserId}`);
+    try {
+      window.location.href = `${paths[section]}?tempUserId=${tempUserId}`;
+    } catch (error) {
+      console.error(`Navigation error for ${section}:`, error);
+      displayErrorMessage(`Navigation error: Unable to access ${section}.`);
+      hideLoader();
+    }
+  } else {
+    console.error(`Invalid section: ${section}`);
+    displayErrorMessage("Navigation error: Section not found.");
+    hideLoader();
+  }
+}
+
+function displayErrorMessage(message) {
+  const container = document.querySelector(".dashboard-grid") || document.querySelector(".container-full");
+  if (!container) {
+    console.error("No container found for error message");
+    return;
+  }
+  const errorDiv = document.createElement("div");
+  errorDiv.className = "error-message";
+  errorDiv.style = "color: red; text-align: center; padding: 1rem; font-weight: 500;";
+  errorDiv.textContent = message;
+  container.prepend(errorDiv);
+  setTimeout(() => errorDiv.remove(), 5000);
+}
 
 // Translations
 const translations = {
@@ -297,52 +339,6 @@ function performSearch(query) {
   trackUserInteraction(tempUserId, "search", "query", query);
 }
 
-function initializeDashboard() {
-  const dashboardCards = document.querySelectorAll(".dashboard-card");
-  dashboardCards.forEach((card) => {
-    card.removeEventListener("click", handleCardClick);
-    card.addEventListener("click", handleCardClick);
-  });
-}
-
-function handleCardClick(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  const section = this.getAttribute("data-section");
-  navigateToSection(section);
-}
-
-function navigateToSection(section) {
-  trackUserInteraction(tempUserId, "navigation", `click_${section}`);
-  const paths = {
-    funding: "../Funding Hub/Funding-Hub.html",
-    smme: "../SMME/smme.html",
-    toolkits: "../ToolKits/toolkits.html",
-    legal: "../Legal/legal.html"
-  };
-  if (paths[section]) {
-    showLoader();
-    fetch(paths[section], { method: 'HEAD' })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = `${paths[section]}?tempUserId=${tempUserId}`;
-        } else {
-          console.error(`Navigation failed: ${paths[section]} not found`);
-          displayErrorMessage(`Cannot navigate to ${section}: Page not found.`);
-          hideLoader();
-        }
-      })
-      .catch(error => {
-        console.error(`Navigation error for ${section}:`, error);
-        displayErrorMessage(`Navigation error: Unable to access ${section}.`);
-        hideLoader();
-      });
-  } else {
-    displayErrorMessage("Navigation error: Section not found.");
-    hideLoader();
-  }
-}
-
 async function initializeNews() {
   const newsGrid = document.getElementById("newsGrid");
   if (!newsGrid) return;
@@ -350,9 +346,14 @@ async function initializeNews() {
   renderNews();
   setupNewsEventListeners();
   // Only set interval if News API is enabled
-  const apiDoc = await db.collection('apis').doc('news-api').get();
-  if (apiDoc.exists && apiDoc.data().enabled) {
-    setInterval(updateNews, 30000);
+  try {
+    const apiDoc = await db.collection('apis').doc('news-api').get();
+    if (apiDoc.exists && apiDoc.data().enabled) {
+      setInterval(updateNews, 30000);
+    }
+  } catch (error) {
+    console.error("Error checking News API status:", error);
+    displayErrorMessage("Unable to verify News API status. News may not update automatically.");
   }
 }
 
@@ -363,8 +364,8 @@ async function fetchNews() {
     // Check if News API is enabled in Firestore
     const apiDoc = await db.collection('apis').doc('news-api').get();
     if (!apiDoc.exists || !apiDoc.data().enabled) {
-      newsData = [];
-      displayErrorMessage("News API is disabled. Please enable it in API Management.");
+      newsData = [...fallbackNewsData];
+      displayErrorMessage("News API is disabled. Showing cached content.");
       return;
     }
 
@@ -429,17 +430,6 @@ async function fetchNews() {
   }
 }
 
-function displayErrorMessage(message) {
-  const newsGrid = document.getElementById("newsGrid");
-  if (!newsGrid) return;
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "news-error";
-  errorDiv.style = "color: red; text-align: center; padding: 1rem; font-weight: 500;";
-  errorDiv.textContent = message;
-  newsGrid.prepend(errorDiv);
-  setTimeout(() => errorDiv.remove(), 5000);
-}
-
 function renderNews() {
   const newsGrid = document.getElementById("newsGrid");
   if (!newsGrid) return;
@@ -497,7 +487,7 @@ function setupNewsEventListeners() {
   const refreshBtn = document.getElementById("refreshNews");
   if (refreshBtn) {
     refreshBtn.removeEventListener("click", handleRefreshClick);
-    refreshBtn.addEventListener("click", handleRefreshClick);
+    btn.addEventListener("click", handleRefreshClick);
   }
 }
 
@@ -525,16 +515,21 @@ function handleRefreshClick() {
 }
 
 async function updateNews() {
-  const apiDoc = await db.collection('apis').doc('news-api').get();
-  if (!apiDoc.exists || !apiDoc.data().enabled) {
-    newsData = [];
+  try {
+    const apiDoc = await db.collection('apis').doc('news-api').get();
+    if (!apiDoc.exists || !apiDoc.data().enabled) {
+      newsData = [];
+      renderNews();
+      displayErrorMessage("News API is disabled. Auto-refresh stopped.");
+      return;
+    }
+    await fetchNews();
     renderNews();
-    displayErrorMessage("News API is disabled. Auto-refresh stopped.");
-    return;
+    trackUserInteraction(tempUserId, "news", "auto_update");
+  } catch (error) {
+    console.error("Error updating news:", error);
+    displayErrorMessage("Failed to update news: " + error.message);
   }
-  await fetchNews();
-  renderNews();
-  trackUserInteraction(tempUserId, "news", "auto_update");
 }
 
 function openNewsArticle(newsId) {
