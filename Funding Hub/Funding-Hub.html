@@ -16,7 +16,6 @@
             font-size: 1.1rem;
             color: white;
         }
-
         .filter-group {
             border: 1px solid white;
             border-radius: 8px;
@@ -25,7 +24,6 @@
             margin-bottom: 20px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
         }
-
         .filter-option {
             display: flex;
             justify-content: space-between;
@@ -38,23 +36,19 @@
             cursor: pointer;
             transition: background 0.2s, border-color 0.2s;
         }
-
         .filter-option:hover {
             background-color: #2e7d32;
             border-color: #ccc;
         }
-
         .filter-option.selected {
             border-color: #2e7d32;
             background-color: #2e7d32;
         }
-
         .check-indicator::before {
             content: "✔";
             color: #2e7d32;
             visibility: hidden;
         }
-
         .filter-option.selected .check-indicator::before {
             visibility: visible;
         }
@@ -79,16 +73,27 @@
                     </div>
                 </div>
             </section>
-
+            <!-- Back to Dashboard Button Below Hero -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                <button class="back-btn flex items-center" onclick="window.location.href='/Dashboard/dashboard.html'">
+                    <i class="bi bi-arrow-left mr-2"></i>
+                    Back to Dashboard
+                </button>
+            </div>
             <!-- Funding Search Section -->
             <section class="py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="funding-hub-form">
-                        <h2 class="flex items-center text-white text-xl font-semibold mb-6">
-                            <i class="bi bi-search mr-3"></i>
-                            Find Funding Opportunities
-                        </h2>
-                        
+                        <div class="flex items-center mb-6 gap-4 flex-wrap">
+                            <!--<button class="back-btn flex items-center" onclick="window.location.href='/Dashboard/dashboard.html'">
+                                <i class="bi bi-arrow-left mr-2"></i>
+                                Back to Dashboard
+                            </button>-->
+                            <h2 class="flex items-center text-white text-xl font-semibold">
+                                <i class="bi bi-search mr-3"></i>
+                                Find Funding Opportunities
+                            </h2>
+                        </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                             <!-- Sector Filter -->
                             <div>
@@ -116,7 +121,6 @@
                                     </div>
                                 </div>
                             </div>
-    
                             <!-- Funding Type Filter -->
                             <div>
                                 <h3>Funding Type</h3>
@@ -139,7 +143,6 @@
                                     </div>
                                 </div>
                             </div>
-    
                             <!-- Target Filter -->
                             <div>
                                 <h3>Target</h3>
@@ -155,7 +158,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="flex justify-between items-center pt-4 border-t border-white/20 mt-6">
                             <button onclick="applyFilters()" class="apply-btn flex items-center">
                                 <i class="bi bi-funnel mr-2"></i>
@@ -169,7 +171,6 @@
                     </div>
                 </div>
             </section>
-
             <!-- Funding Results Section -->
             <section class="py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -177,20 +178,17 @@
                         <div class="flex justify-between items-center mb-8">
                             <h2 class="text-2xl font-bold text-white">Available Funding Opportunities</h2>
                         </div>
-                        
                         <div id="funding-results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <!-- Results will be populated here by JavaScript -->
                         </div>
                     </div>
                 </div>
             </section>
-
             <!-- How to Apply Section -->
             <section class="py-16 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="funding-hub-form">
                         <h2 class="text-2xl font-bold text-gray-900 mb-12 text-center" style="color: white;">How to Apply for Funding</h2>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div class="text-center">
                                 <div class="w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -199,7 +197,6 @@
                                 <h3 class="text-xl font-bold mb-2 text-gray-900" style="color: white;">Find Suitable Opportunities</h3>
                                 <p class="text-gray-600" style="color: white;">Use our filters to identify funding programs that match your project type, sector, and financial needs.</p>
                             </div>
-                            
                             <div class="text-center">
                                 <div class="w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <span class="text-teal-700 text-2xl font-bold">2</span>
@@ -207,7 +204,6 @@
                                 <h3 class="text-xl font-bold mb-2 text-gray-900" style="color: white;">Review Requirements</h3>
                                 <p class="text-gray-600" style="color: white;">Carefully read the eligibility criteria and application requirements for each funding opportunity.</p>
                             </div>
-                            
                             <div class="text-center">
                                 <div class="w-16 h-16 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <span class="text-teal-700 text-2xl font-bold">3</span>
@@ -222,7 +218,6 @@
         </main>
         <green-economy-footer></green-economy-footer>
     </div>
-
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>

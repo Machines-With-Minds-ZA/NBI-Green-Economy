@@ -31,7 +31,7 @@ class GreenEconomyHeader extends HTMLElement {
         </header>
         <section class="search-section" id="search-popup" style="display: none;">
           <div class="search-header">
-            <h3 data-i18n="header.ai-search-title">AI-Enhanced Search</h3>
+            <h3 >AI-Enhanced Search</h3>
             <span class="search-close" id="search-close">×</span>
           </div>
           <div class="search-container">
