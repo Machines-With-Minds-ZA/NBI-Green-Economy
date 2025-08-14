@@ -251,5 +251,118 @@
 </section>
 
     <green-economy-footer></green-economy-footer>
+
+    <!-- Video Overlay -->
+    <div class="video-overlay" id="videoOverlay">
+      <div class="video-container">
+        <span class="close-video">&times;</span>
+        <div class="language-toggles">
+          <button class="lang-btn active" data-lang="eng">English</button>
+          <button class="lang-btn" data-lang="zulu">Zulu</button>
+          <button class="lang-btn" data-lang="tswana">Tswana</button>
+        </div>
+        <video id="floatingVideo" controls>
+          <source src="../../Videos/IRMSectorPage_Eng.mp4" type="video/mp4" data-lang="eng">
+          <source src="../../Videos/IRMSectorPage_Zulu.mp4" type="video/mp4" data-lang="zulu">
+          <!-- Tswana video will be handled by JavaScript -->
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Pulsing Icon -->
+    <div class="pulsing-icon" id="pulsingIcon">
+      <img src="../../Videos/Avatar.png" alt="Video Icon">
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const pulsingIcon = document.getElementById('pulsingIcon');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const floatingVideo = document.getElementById('floatingVideo');
+        const closeVideo = document.querySelector('.close-video');
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        // Video sources for different languages
+        const videoSources = {
+          'eng': '../../Videos/IRMSectorPage_Eng.mp4',
+          'zulu': '../../Videos/IRMSectorPage_Zulu.mp4',
+          'tswana': '../../Videos/IRMSectorPage_Tswana.mp4' // Fallback to English until Tswana is available
+        };
+        
+        // Current language
+        let currentLang = 'eng';
+        
+        // Toggle video overlay when clicking the pulsing icon
+        pulsingIcon.addEventListener('click', function(e) {
+          e.preventDefault();
+          videoOverlay.classList.toggle('active');
+          
+          if (videoOverlay.classList.contains('active')) {
+            // When showing the video
+            playCurrentVideo();
+            pulsingIcon.style.opacity = '0.7';
+          } else {
+            // When hiding the video
+            floatingVideo.pause();
+            pulsingIcon.style.opacity = '1';
+          }
+        });
+        
+        // Close video when clicking the close button
+        closeVideo.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeVideoPlayer();
+        });
+        
+        // Close video when clicking outside the video
+        videoOverlay.addEventListener('click', function(e) {
+          if (e.target === videoOverlay) {
+            closeVideoPlayer();
+          }
+        });
+        
+        // Handle language switching
+        langButtons.forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const lang = this.getAttribute('data-lang');
+            if (lang !== currentLang) {
+              // Update active button
+              langButtons.forEach(btn => btn.classList.remove('active'));
+              this.classList.add('active');
+              
+              // Update video source
+              currentLang = lang;
+              playCurrentVideo();
+            }
+          });
+        });
+        
+        // Pause video when it ends
+        floatingVideo.addEventListener('ended', function() {
+          closeVideoPlayer();
+        });
+        
+        // Play the current video based on selected language
+        function playCurrentVideo() {
+          const source = videoSources[currentLang];
+          if (source) {
+            const currentTime = floatingVideo.currentTime;
+            floatingVideo.src = source;
+            floatingVideo.load();
+            floatingVideo.currentTime = currentTime;
+            floatingVideo.play().catch(e => console.log('Video play failed:', e));
+          }
+        }
+        
+        // Close the video player
+        function closeVideoPlayer() {
+          videoOverlay.classList.remove('active');
+          floatingVideo.pause();
+          pulsingIcon.style.opacity = '1';
+        }
+      });
+    </script>
   </body>
 </html>
