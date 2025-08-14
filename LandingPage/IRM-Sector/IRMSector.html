@@ -297,6 +297,7 @@
         pulsingIcon.addEventListener('click', function(e) {
           e.preventDefault();
           videoOverlay.classList.toggle('active');
+          document.body.style.overflow = videoOverlay.classList.contains('active') ? 'hidden' : '';
           
           if (videoOverlay.classList.contains('active')) {
             // When showing the video
@@ -353,15 +354,29 @@
             floatingVideo.load();
             floatingVideo.currentTime = currentTime;
             floatingVideo.play().catch(e => console.log('Video play failed:', e));
+            
+            // Add event listener for when video can play through
+            floatingVideo.addEventListener('canplaythrough', function onCanPlay() {
+              floatingVideo.play().catch(e => console.log('Video auto-play failed:', e));
+              floatingVideo.removeEventListener('canplaythrough', onCanPlay);
+            });
           }
         }
         
         // Close the video player
         function closeVideoPlayer() {
           videoOverlay.classList.remove('active');
+          document.body.style.overflow = '';
           floatingVideo.pause();
           pulsingIcon.style.opacity = '1';
         }
+        
+        // Close video when pressing Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && videoOverlay.classList.contains('active')) {
+            closeVideoPlayer();
+          }
+        });
       });
     </script>
   </body>
