@@ -297,18 +297,16 @@
         pulsingIcon.addEventListener('click', function(e) {
           e.preventDefault();
           videoOverlay.classList.toggle('active');
-          document.body.style.overflow = videoOverlay.classList.contains('active') ? 'hidden' : '';
-          
+
           if (videoOverlay.classList.contains('active')) {
-            // When showing the video
             playCurrentVideo();
             pulsingIcon.style.opacity = '0.7';
           } else {
-            // When hiding the video
             floatingVideo.pause();
             pulsingIcon.style.opacity = '1';
           }
         });
+
         
         // Close video when clicking the close button
         closeVideo.addEventListener('click', function(e) {
