@@ -506,6 +506,32 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        // Hero video play/pause functionality
+        const heroVideo = document.querySelector('.hero-video');
+        const playPauseButton = document.querySelector('.play-pause-button');
+        const playIcon = playPauseButton.querySelector('.play-icon');
+        const pauseIcon = playPauseButton.querySelector('.pause-icon');
+        
+        // Toggle play/pause when clicking the button
+        playPauseButton.addEventListener('click', function() {
+          if (heroVideo.paused) {
+            heroVideo.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+          } else {
+            heroVideo.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+          }
+        });
+        
+        // Update button state when video ends
+        heroVideo.addEventListener('ended', function() {
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+        });
+        
+        // Pulsing icon video functionality
         const pulsingIcon = document.getElementById('pulsingIcon');
         const videoOverlay = document.getElementById('videoOverlay');
         const floatingVideo = document.getElementById('floatingVideo');
@@ -594,5 +620,4 @@
       });
     </script>
   </body>
->>>>>>> Stashed changes
 </html>

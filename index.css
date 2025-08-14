@@ -94,6 +94,36 @@
   height: 32px;
 }
 
+/* Hero Video Play/Pause Button */
+.play-pause-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.play-pause-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.play-pause-button .play-icon,
+.play-pause-button .pause-icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
 .hero-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
