@@ -9,6 +9,10 @@
     <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
     <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
     <script src="Trans.js"></script>
+    <script src="scripts/video-controls.js" defer></script>
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/index.js" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
     <link rel="stylesheet" href="index.css">
@@ -30,19 +34,25 @@
               loop
               playsinline
               class="hero-video"
+              autoplay
             ></video>
-            <button class="play-button" aria-label="Play video">
+            <button class="play-pause-button" aria-label="Play video">
               <svg class="play-icon" viewBox="0 0 24 24" fill="white">
                 <polygon points="5,3 19,12 5,21 5,3"></polygon>
+              </svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" fill="white" style="display: none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
               </svg>
             </button>
           </div>
           <div class="hero-buttons">
-            <button class="hero-button" data-i18n="buttons.getFunding">Access Funding</button>
+            <button class="hero-button" data-i18n="buttons.getFunding">Get Funding</button>
             <button class="hero-button" data-i18n="buttons.opportunities">Opportunities</button>
-            <button class="hero-button" data-i18n="buttons.rmcsHub">IRM Sector</button>
-            <button class="hero-button" data-i18n="buttons.training">Training</button>
-          </div>
+            <button class="hero-button" data-i18n="buttons.rmcsHub">Training</button>
+        <button class="hero-button" data-i18n="buttons.login">Log In</button>          
+
+</div>
         </div>
         <div class="hero-text">
           <h1 data-i18n="hero.title">A GREEN ECONOMY TOOLKIT</h1>
@@ -65,9 +75,9 @@
             a greener global
           </p>
 
-<a href="my-strapi-project/SignIn.html" class="getInvolved-button" style="display: inline-block; width: 150px; height: 40px; min-width: 0; padding: 6px 0; font-size: 12px; text-align: center; line-height: 28px; background-color: #2b9589; color: white; text-decoration: none; border-radius: 4px;">
+<!--<a href="LandingPage/SignInAndSignUp/SignIn.html" class="getInvolved-button" style="display: inline-block; width: 150px; height: 40px; min-width: 0; padding: 6px 0; font-size: 12px; text-align: center; line-height: 28px; background-color: #2b9589; color: white; text-decoration: none; border-radius: 4px;">
   Explore
-</a>
+</a> -->
 
         </div>
       </div>
@@ -427,5 +437,187 @@
     })(window, document, "clarity", "script", "s9a5dtbonc");
     </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.hero-video');
+    const playButton = document.querySelector('.play-button');
+    const pauseButton = document.querySelector('.pause-button');
+    
+    // Set initial state
+    playButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
+    
+    // Toggle play/pause when clicking the video
+    video.addEventListener('click', function() {
+      if (video.paused) {
+        video.play().catch(e => console.log('Play failed:', e));
+      } else {
+        video.pause();
+      }
+    });
+    
+    // Play button click handler
+    playButton.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent event from bubbling to video
+      video.play().catch(e => console.log('Play failed:', e));
+    });
+    
+    // Pause button click handler
+    pauseButton.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent event from bubbling to video
+      video.pause();
+    });
+    
+    // Update button states based on video events
+    video.addEventListener('play', function() {
+      playButton.classList.add('hidden');
+      pauseButton.classList.remove('hidden');
+    });
+    
+    video.addEventListener('pause', function() {
+      pauseButton.classList.add('hidden');
+      playButton.classList.remove('hidden');
+    });
+  });
+</script>
+
+    <!-- Video Overlay -->
+    <div class="video-overlay" id="videoOverlay">
+      <div class="video-container">
+        <span class="close-video">&times;</span>
+        <div class="language-toggles">
+          <button class="lang-btn active" data-lang="eng">English</button>
+          <button class="lang-btn" data-lang="zulu">Zulu</button>
+          <button class="lang-btn" data-lang="tswana">Tswana</button>
+        </div>
+        <video id="floatingVideo" controls>
+          <source src="Videos/Home_Eng.mp4" type="video/mp4" data-lang="eng">
+          <source src="Videos/Home_Zulu.mp4" type="video/mp4" data-lang="zulu">
+          <!-- Tswana video will be handled by JavaScript -->
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Pulsing Icon -->
+    <div class="pulsing-icon" id="pulsingIcon">
+      <img src="Videos/Avatar.png" alt="Video Icon">
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Hero video play/pause functionality
+        const heroVideo = document.querySelector('.hero-video');
+        const playPauseButton = document.querySelector('.play-pause-button');
+        const playIcon = playPauseButton.querySelector('.play-icon');
+        const pauseIcon = playPauseButton.querySelector('.pause-icon');
+        
+        // Toggle play/pause when clicking the button
+        playPauseButton.addEventListener('click', function() {
+          if (heroVideo.paused) {
+            heroVideo.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+          } else {
+            heroVideo.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+          }
+        });
+        
+        // Update button state when video ends
+        heroVideo.addEventListener('ended', function() {
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+        });
+        
+        // Pulsing icon video functionality
+        const pulsingIcon = document.getElementById('pulsingIcon');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const floatingVideo = document.getElementById('floatingVideo');
+        const closeVideo = document.querySelector('.close-video');
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        // Video sources for different languages
+        const videoSources = {
+          'eng': 'Videos/Home_Eng.mp4',
+          'zulu': 'Videos/Home_Zulu.mp4',
+          'tswana': 'Videos/Home_Eng.mp4' // Fallback to English until Tswana is available
+        };
+        
+        // Current language
+        let currentLang = 'eng';
+        
+        // Toggle video overlay when clicking the pulsing icon
+        pulsingIcon.addEventListener('click', function(e) {
+          e.preventDefault();
+          videoOverlay.classList.toggle('active');
+          
+          if (videoOverlay.classList.contains('active')) {
+            // When showing the video
+            playCurrentVideo();
+            pulsingIcon.style.opacity = '0.7';
+          } else {
+            // When hiding the video
+            floatingVideo.pause();
+            pulsingIcon.style.opacity = '1';
+          }
+        });
+        
+        // Close video when clicking the close button
+        closeVideo.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeVideoPlayer();
+        });
+        
+        // Close video when clicking outside the video
+        videoOverlay.addEventListener('click', function(e) {
+          if (e.target === videoOverlay) {
+            closeVideoPlayer();
+          }
+        });
+        
+        // Handle language switching
+        langButtons.forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const lang = this.getAttribute('data-lang');
+            if (lang !== currentLang) {
+              // Update active button
+              langButtons.forEach(btn => btn.classList.remove('active'));
+              this.classList.add('active');
+              
+              // Update video source
+              currentLang = lang;
+              playCurrentVideo();
+            }
+          });
+        });
+        
+        // Pause video when it ends
+        floatingVideo.addEventListener('ended', function() {
+          closeVideoPlayer();
+        });
+        
+        // Play the current video based on selected language
+        function playCurrentVideo() {
+          const source = videoSources[currentLang];
+          if (source) {
+            const currentTime = floatingVideo.currentTime;
+            floatingVideo.src = source;
+            floatingVideo.load();
+            floatingVideo.currentTime = currentTime;
+            floatingVideo.play().catch(e => console.log('Video play failed:', e));
+          }
+        }
+        
+        // Close the video player
+        function closeVideoPlayer() {
+          videoOverlay.classList.remove('active');
+          floatingVideo.pause();
+          pulsingIcon.style.opacity = '1';
+        }
+      });
+    </script>
   </body>
 </html>
