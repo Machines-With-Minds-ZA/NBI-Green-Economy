@@ -107,28 +107,22 @@ const businessesData = [
 
 // Initialize page
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM loaded, waiting for authentication and custom elements...");
-    auth.onAuthStateChanged((user) => {
-        if (!user) {
-            console.log("No user logged in, redirecting to sign-in...");
-            showLoader();
-            window.location.href = '../Sign In & Sign Up/SignIn.html';
-            return;
-        }
-        console.log("User authenticated:", user.uid);
-        Promise.all([
-            customElements.whenDefined("green-economy-header").catch(() => console.warn("Header not defined")),
-            customElements.whenDefined("green-economy-footer").catch(() => console.warn("Footer not defined"))
-        ]).then(() => {
-            console.log("Custom elements loaded, initializing SMME page...");
+    console.log("DOM loaded, initializing SMME page...");
+    showLoader();
+    
+    // Load custom elements and initialize page
+    Promise.all([
+        customElements.whenDefined("green-economy-header").catch(() => console.warn("Header not defined")),
+        customElements.whenDefined("green-economy-footer").catch(() => console.warn("Footer not defined"))
+    ]).then(() => {
+        console.log("Custom elements loaded, initializing SMME page...");
+        initializePage();
+    }).catch((error) => {
+        console.error("Error with custom elements:", error);
+        setTimeout(() => {
+            console.log("Fallback initialization triggered");
             initializePage();
-        }).catch((error) => {
-            console.error("Error with custom elements:", error);
-            setTimeout(() => {
-                console.log("Fallback initialization triggered");
-                initializePage();
-            }, 1000);
-        });
+        }, 1000);
     });
 });
 

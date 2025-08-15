@@ -71,7 +71,7 @@ if (!tempUserId) {
 // Navigation Paths
 const paths = {
   funding: "../Funding Hub/Funding-Hub.html",
-  smme: "../SMME/smme.html",
+  smme: "../Sections/SMME/smme.html",
   toolkits: "../ToolKits/toolkits.html",
   legal: "../Legal/legal.html"
 };

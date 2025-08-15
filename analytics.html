@@ -1,59 +1,169 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Website Analytics Dashboard</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics - Green Economy Toolkit</title>
+    <script src="Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="Trans.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="Master Page(Header and Footer)/MasterPage.css">
+    <style>
+      /* Base Styles */
+      :root {
+        --primary-color: #36aa51;
+        --primary-dark: #0c973f;
+        --secondary-color: #0891b2;
+        --secondary-dark: #2b9589;
+        --text-color: #333;
+        --light-bg: #f8fafc;
+        --white: #ffffff;
+        --box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        --border-radius: 8px;
+        --transition: all 0.3s ease;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        background: var(--light-bg);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      
+      .page-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 120px 20px 40px;
+        width: 100%;
+      }
+      
+      .analytics-header {
+        text-align: center;
+        color: var(--primary-dark);
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0 0 2.5rem;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+      
+      .analytics-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 2px;
+      }
+      
+      .analytics-container {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+        transition: var(--transition);
+      }
+      
+      .analytics-container:hover {
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      }
+      
+      .analytics-iframe {
+        width: 100%;
+        height: 2100px;
+        border: none;
+        border-radius: var(--border-radius);
+        background: var(--white);
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .page-container {
+          padding: 100px 15px 30px;
+        }
+        
+        .analytics-header {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+        
+        .analytics-iframe {
+          height: 1800px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .page-container {
+          padding: 80px 10px 20px;
+        }
+        
+        .analytics-header {
+          font-size: 1.75rem;
+          margin-bottom: 1.5rem;
+        }
+        
+        .analytics-container {
+          padding: 1.25rem;
+          margin-bottom: 1.5rem;
+        }
+        
+        .analytics-iframe {
+          height: 1500px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .analytics-header {
+          font-size: 1.5rem;
+        }
+        
+        .analytics-iframe {
+          height: 1200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <green-economy-header></green-economy-header>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    body {
-      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      background: #f8fafc;
-      margin: 0;
-      padding: 0;
-    }
-    .analytics-header {
-      text-align: center;
-      color: #0c973f;
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-top: 40px;
-      margin-bottom: 32px;
-      letter-spacing: -1px;
-    }
-    .analytics-container {
-      max-width: 1200px;
-      margin: 0 auto 40px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-      padding: 32px 24px 24px 24px;
-      min-height: 300px;
-    }
-    .analytics-iframe {
-      width: 100%;
-      height: 2125px;
-      border: none;
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      margin: 0;
-      display: block;
-    }
-    @media (max-width: 900px) {
-      .analytics-container { padding: 12px 2vw; }
-      .analytics-iframe { height: 1200px; }
-      .analytics-header { font-size: 1.4rem; }
-    }
-  </style>
-</head>
-<body>
-  <div class="analytics-header">Website Analytics Dashboard</div>
-  <div class="analytics-container">
-    <iframe class="analytics-iframe"
-      src="https://lookerstudio.google.com/embed/reporting/43d53996-0c4d-46c8-959d-ebdd45f17dae/page/kIV1C"
-      allowfullscreen
-      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-    </iframe>
-  </div>
-</body>
-</html> 
+    <!-- Footer -->
+    <green-economy-footer></green-economy-footer>
+
+    <script>
+      // Initialize i18next
+      document.addEventListener('DOMContentLoaded', function() {
+        i18next
+          .use(i18nextHttpBackend)
+          .use(i18nextBrowserLanguageDetector)
+          .init({
+            fallbackLng: 'en',
+            debug: false,
+            ns: ['translation'],
+            defaultNS: 'translation',
+            backend: {
+              loadPath: 'lang/{{lng}}.json',
+            },
+            detection: {
+              order: ['querystring', 'navigator'],
+              lookupQuerystring: 'lng',
+              caches: ['localStorage', 'cookie']
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

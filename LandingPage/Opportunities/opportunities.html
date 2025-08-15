@@ -15,7 +15,6 @@
     <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
     <link rel="stylesheet" href="Opportunities.css">
     <script src="Trans.js"></script>
-
   </head>
   <body>
     <!-- Header -->
@@ -78,7 +77,7 @@
       </div>
     </section>
 
-<!-- Logos Section -->
+    <!-- Logos Section -->
     <section class="partners">
       <div class="partners-content">
         <img src="../../Images/giz-logo_2024-11-11-133203_nara.jpg" alt="Partner Logo 1" class="partner-logo">
@@ -88,35 +87,31 @@
         <img src="../../Images/NBI-Logo.jpg" alt="Partner Logo 5" class="partner-logo">
       </div>
     </section>
-<!-- Newsletter Subscription Section -->
 
-<section class="login-section">
-  <div style="position: relative; max-width: 700px; margin: 0 auto;">
-    <h2 style="color: white; font-size: 20px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
-      Subscribe to our newsletter to get the latest information
-    </h2>
-
-    <form style="position: relative;">
-      <input 
-        type="email" 
-        placeholder="Your email" 
-        style="width: 100%; padding: 18px 50px 18px 25px; border: none; border-radius: 4px; font-size: 16px; color: #333; background: white;"
-      >
-      <button 
-        type="submit" 
-        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 22px; color: #009381; cursor: pointer;"
-      >
-        →
-      </button>
-    </form>
-  </div>
-
-  <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 15px; max-width: 700px; margin-left: auto; margin-right: auto;">
-    *Only relevant information, no spam
-  </p>
-</section>
-
-
+    <!-- Newsletter Subscription Section -->
+    <section class="login-section">
+      <div style="position: relative; max-width: 700px; margin: 0 auto;">
+        <h2 style="color: white; font-size: 20px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Subscribe to our newsletter to get the latest information
+        </h2>
+        <form style="position: relative;">
+          <input 
+            type="email" 
+            placeholder="Your email" 
+            style="width: 100%; padding: 18px 50px 18px 25px; border: none; border-radius: 4px; font-size: 16px; color: #333; background: white;"
+          >
+          <button 
+            type="submit" 
+            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 22px; color: #009381; cursor: pointer;"
+          >
+            →
+          </button>
+        </form>
+      </div>
+      <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 15px; max-width: 700px; margin-left: auto; margin-right: auto;">
+        *Only relevant information, no spam
+      </p>
+    </section>
 
     <!-- Footer -->
     <green-economy-footer></green-economy-footer>
@@ -146,7 +141,6 @@
         <video id="floatingVideo" controls>
           <source src="../../Videos/OpportunitiesPage_Eng.mp4" type="video/mp4" data-lang="eng">
           <source src="../../Videos/OpportunitiesPage_Zulu.mp4" type="video/mp4" data-lang="zulu">
-          <!-- Tswana video will be handled by JavaScript -->
           Your browser does not support the video tag.
         </video>
       </div>
@@ -179,7 +173,6 @@
         pulsingIcon.addEventListener('click', function(e) {
           e.preventDefault();
           videoOverlay.classList.toggle('active');
-          document.body.style.overflow = videoOverlay.classList.contains('active') ? 'hidden' : '';
           
           if (videoOverlay.classList.contains('active')) {
             // When showing the video
@@ -248,7 +241,6 @@
         // Close the video player
         function closeVideoPlayer() {
           videoOverlay.classList.remove('active');
-          document.body.style.overflow = '';
           floatingVideo.pause();
           pulsingIcon.style.opacity = '1';
         }
