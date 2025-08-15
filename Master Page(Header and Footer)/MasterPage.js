@@ -30,15 +30,18 @@ class GreenEconomyHeader extends HTMLElement {
           </nav>
         </header>
         <section class="search-section" id="search-popup" style="display: none;">
-          <div class="search-header">
-            <h3 >AI-Enhanced Search</h3>
-            <span class="search-close" id="search-close">×</span>
-          </div>
           <div class="search-container">
-            <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+            <div class="search-header">
+              <h3>Enhanced Search</h3>
+              <span class="search-close" id="search-close">×</span>
+            </div>
+            <div class="search-input-wrapper">
+              <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+            </div>
+            <div id="search-results" class="search-results max-h-96 overflow-y-auto"></div>
           </div>
         </section>
       </div>
@@ -84,7 +87,7 @@ class GreenEconomyHeader extends HTMLElement {
           searchPopup.classList.remove('animate-in');
           setTimeout(() => {
             searchPopup.style.display = 'none';
-          }, 300); // Match animation duration
+          }, 300);
         }
       });
 
@@ -93,9 +96,168 @@ class GreenEconomyHeader extends HTMLElement {
         searchPopup.classList.remove('animate-in');
         setTimeout(() => {
           searchPopup.style.display = 'none';
-        }, 300); // Match animation duration
+        }, 300);
       });
     }
+
+    // Setup search functionality with web scraping
+    const smartSearch = this.querySelector('#smartSearch');
+    const resultsDiv = this.querySelector('#search-results');
+    let index;
+
+    // Function to scrape content from a single page
+    async function scrapePageContent(url, isCurrentPage = false) {
+      try {
+        let content;
+        if (isCurrentPage) {
+          content = document;
+        } else {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Failed to fetch ${url}`);
+          const text = await response.text();
+          const parser = new DOMParser();
+          content = parser.parseFromString(text, 'text/html');
+        }
+
+        const mainContent = content.querySelector('main') || content.querySelector('body');
+        if (!mainContent) return [];
+
+        const documents = [];
+        const elements = mainContent.querySelectorAll('h1, h2, h3, p, div[data-i18n]');
+        elements.forEach((element, idx) => {
+          const text = element.textContent.trim();
+          if (text) {
+            documents.push({
+              id: `${url.replace(/[^a-zA-Z0-9]/g, '-')}-${idx}`,
+              title: element.tagName.toLowerCase().startsWith('h') ? text : `Content ${idx + 1}`,
+              body: text,
+              url: url + (element.id ? `#${element.id}` : '')
+            });
+          }
+        });
+        return documents;
+      } catch (error) {
+        console.error(`Error scraping ${url}:`, error);
+        return [];
+      }
+    }
+
+    // Build Lunr index from multiple pages
+    async function buildIndex() {
+      const pages = [
+        { url: window.location.pathname, isCurrentPage: true },
+        { url: '/LandingPage/IRM-Sector/IRMSector.html', isCurrentPage: false },
+        { url: '/LandingPage/Knowledge-Hub/knowledge-hub.html', isCurrentPage: false }
+      ];
+
+      const allDocuments = [];
+      for (const page of pages) {
+        const documents = await scrapePageContent(page.url, page.isCurrentPage);
+        allDocuments.push(...documents);
+      }
+
+      index = lunr(function () {
+        this.ref('id');
+        this.field('title', { boost: 10 });
+        this.field('body');
+        this.metadataWhitelist = ['position'];
+        allDocuments.forEach(doc => this.add(doc), this);
+      });
+    }
+
+    // Perform search
+    function performSearch(query) {
+      if (!index) return [];
+      const enhancedQuery = query.split(' ').map(term => term + '~1').join(' ');
+      return index.search(enhancedQuery);
+    }
+
+    // Highlight matches
+    function highlightText(text, positions) {
+      let highlighted = '';
+      let lastEnd = 0;
+      positions.sort((a, b) => a.start - b.start);
+      positions.forEach(pos => {
+        const start = pos.start;
+        const end = pos.start + pos.length;
+        highlighted += text.substring(lastEnd, start) + '<mark>' + text.substring(start, end) + '</mark>';
+        lastEnd = end;
+      });
+      highlighted += text.substring(lastEnd);
+      return highlighted;
+    }
+
+    // Debounce function
+    function debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    if (smartSearch && resultsDiv) {
+      smartSearch.addEventListener('input', debounce(async (e) => {
+        const query = e.target.value.trim();
+        resultsDiv.innerHTML = '';
+        if (!query) {
+          resultsDiv.innerHTML = '<p class="p-4 text-gray-600">Start typing to see suggestions...</p>';
+          return;
+        }
+
+        if (!index) await buildIndex();
+        const results = performSearch(query);
+        if (results.length === 0) {
+          resultsDiv.innerHTML = '<p class="p-4 text-gray-600">No results found.</p>';
+          return;
+        }
+
+        const pages = [
+          { url: window.location.pathname },
+          { url: '/LandingPage/IRM-Sector/IRMSector.html' },
+          { url: '/LandingPage/Knowledge-Hub/knowledge-hub.html' }
+        ];
+
+        const allDocuments = [];
+        for (const page of pages) {
+          allDocuments.push(...await scrapePageContent(page.url, page.url === window.location.pathname));
+        }
+
+        results.slice(0, 5).forEach(result => {
+          const doc = allDocuments.find(d => d.id === result.ref);
+          if (!doc) return;
+
+          let snippet = doc.body.substring(0, 150) + (doc.body.length > 150 ? '...' : '');
+          const bodyMetadata = result.matchData.metadata;
+          if (bodyMetadata && Object.keys(bodyMetadata).length > 0) {
+            const positions = [];
+            Object.values(bodyMetadata).forEach(meta => {
+              if (meta.body && meta.body.position) {
+                meta.body.position.forEach(pos => positions.push({ start: pos[0], length: pos[1] }));
+              }
+            });
+            if (positions.length > 0) {
+              snippet = highlightText(doc.body.substring(0, 150) + (doc.body.length > 150 ? '...' : ''), positions);
+            }
+          }
+
+          const div = document.createElement('div');
+          div.classList.add('p-4', 'border-b', 'border-gray-200', 'hover:bg-gray-50', 'cursor-pointer');
+          div.innerHTML = `
+            <a href="${doc.url}" class="text-blue-600 font-semibold block">${doc.title}</a>
+            <p class="text-sm text-gray-600">${snippet}</p>
+          `;
+          div.addEventListener('click', () => {
+            window.location.href = doc.url;
+            searchPopup.style.display = 'none';
+          });
+          resultsDiv.appendChild(div);
+        });
+      }, 300));
+    }
+
+    // Build index on load
+    buildIndex();
   }
 }
 
@@ -122,15 +284,18 @@ class GreenEconomyDashboardHeader extends HTMLElement {
           </nav>
         </header>
         <section class="search-section" id="search-popup" style="display: none;">
-          <div class="search-header">
-            <h3 data-i18n="header.ai-search-title">AI-Enhanced Search</h3>
-            <span class="search-close" id="search-close">×</span>
-          </div>
           <div class="search-container">
-            <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+            <div class="search-header">
+              <h3 data-i18n="header.ai-search-title">Enhanced Search</h3>
+              <span class="search-close" id="search-close">×</span>
+            </div>
+            <div class="search-input-wrapper">
+              <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <input type="text" class="search-input" id="smartSearch" data-i18n="[placeholder]header.search-placeholder" placeholder="Search green funding, businesses, tools...">
+            </div>
+            <div id="search-results" class="search-results max-h-96 overflow-y-auto"></div>
           </div>
         </section>
       </div>
@@ -176,7 +341,7 @@ class GreenEconomyDashboardHeader extends HTMLElement {
           searchPopup.classList.remove('animate-in');
           setTimeout(() => {
             searchPopup.style.display = 'none';
-          }, 300); // Match animation duration
+          }, 300);
         }
       });
 
@@ -185,9 +350,168 @@ class GreenEconomyDashboardHeader extends HTMLElement {
         searchPopup.classList.remove('animate-in');
         setTimeout(() => {
           searchPopup.style.display = 'none';
-        }, 300); // Match animation duration
+        }, 300);
       });
     }
+
+    // Setup search functionality with web scraping
+    const smartSearch = this.querySelector('#smartSearch');
+    const resultsDiv = this.querySelector('#search-results');
+    let index;
+
+    // Function to scrape content from a single page
+    async function scrapePageContent(url, isCurrentPage = false) {
+      try {
+        let content;
+        if (isCurrentPage) {
+          content = document;
+        } else {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`Failed to fetch ${url}`);
+          const text = await response.text();
+          const parser = new DOMParser();
+          content = parser.parseFromString(text, 'text/html');
+        }
+
+        const mainContent = content.querySelector('main') || content.querySelector('body');
+        if (!mainContent) return [];
+
+        const documents = [];
+        const elements = mainContent.querySelectorAll('h1, h2, h3, p, div[data-i18n]');
+        elements.forEach((element, idx) => {
+          const text = element.textContent.trim();
+          if (text) {
+            documents.push({
+              id: `${url.replace(/[^a-zA-Z0-9]/g, '-')}-${idx}`,
+              title: element.tagName.toLowerCase().startsWith('h') ? text : `Content ${idx + 1}`,
+              body: text,
+              url: url + (element.id ? `#${element.id}` : '')
+            });
+          }
+        });
+        return documents;
+      } catch (error) {
+        console.error(`Error scraping ${url}:`, error);
+        return [];
+      }
+    }
+
+    // Build Lunr index from multiple pages
+    async function buildIndex() {
+      const pages = [
+        { url: window.location.pathname, isCurrentPage: true },
+        { url: '/LandingPage/IRM-Sector/IRMSector.html', isCurrentPage: false },
+        { url: '/LandingPage/Knowledge-Hub/knowledge-hub.html', isCurrentPage: false }
+      ];
+
+      const allDocuments = [];
+      for (const page of pages) {
+        const documents = await scrapePageContent(page.url, page.isCurrentPage);
+        allDocuments.push(...documents);
+      }
+
+      index = lunr(function () {
+        this.ref('id');
+        this.field('title', { boost: 10 });
+        this.field('body');
+        this.metadataWhitelist = ['position'];
+        allDocuments.forEach(doc => this.add(doc), this);
+      });
+    }
+
+    // Perform search
+    function performSearch(query) {
+      if (!index) return [];
+      const enhancedQuery = query.split(' ').map(term => term + '~1').join(' ');
+      return index.search(enhancedQuery);
+    }
+
+    // Highlight matches
+    function highlightText(text, positions) {
+      let highlighted = '';
+      let lastEnd = 0;
+      positions.sort((a, b) => a.start - b.start);
+      positions.forEach(pos => {
+        const start = pos.start;
+        const end = pos.start + pos.length;
+        highlighted += text.substring(lastEnd, start) + '<mark>' + text.substring(start, end) + '</mark>';
+        lastEnd = end;
+      });
+      highlighted += text.substring(lastEnd);
+      return highlighted;
+    }
+
+    // Debounce function
+    function debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    if (smartSearch && resultsDiv) {
+      smartSearch.addEventListener('input', debounce(async (e) => {
+        const query = e.target.value.trim();
+        resultsDiv.innerHTML = '';
+        if (!query) {
+          resultsDiv.innerHTML = '<p class="p-4 text-gray-600">Start typing to see suggestions...</p>';
+          return;
+        }
+
+        if (!index) await buildIndex();
+        const results = performSearch(query);
+        if (results.length === 0) {
+          resultsDiv.innerHTML = '<p class="p-4 text-gray-600">No results found.</p>';
+          return;
+        }
+
+        const pages = [
+          { url: window.location.pathname },
+          { url: '/LandingPage/IRM-Sector/IRMSector.html' },
+          { url: '/LandingPage/Knowledge-Hub/knowledge-hub.html' }
+        ];
+
+        const allDocuments = [];
+        for (const page of pages) {
+          allDocuments.push(...await scrapePageContent(page.url, page.url === window.location.pathname));
+        }
+
+        results.slice(0, 5).forEach(result => {
+          const doc = allDocuments.find(d => d.id === result.ref);
+          if (!doc) return;
+
+          let snippet = doc.body.substring(0, 150) + (doc.body.length > 150 ? '...' : '');
+          const bodyMetadata = result.matchData.metadata;
+          if (bodyMetadata && Object.keys(bodyMetadata).length > 0) {
+            const positions = [];
+            Object.values(bodyMetadata).forEach(meta => {
+              if (meta.body && meta.body.position) {
+                meta.body.position.forEach(pos => positions.push({ start: pos[0], length: pos[1] }));
+              }
+            });
+            if (positions.length > 0) {
+              snippet = highlightText(doc.body.substring(0, 150) + (doc.body.length > 150 ? '...' : ''), positions);
+            }
+          }
+
+          const div = document.createElement('div');
+          div.classList.add('p-4', 'border-b', 'border-gray-200', 'hover:bg-gray-50', 'cursor-pointer');
+          div.innerHTML = `
+            <a href="${doc.url}" class="text-blue-600 font-semibold block">${doc.title}</a>
+            <p class="text-sm text-gray-600">${snippet}</p>
+          `;
+          div.addEventListener('click', () => {
+            window.location.href = doc.url;
+            searchPopup.style.display = 'none';
+          });
+          resultsDiv.appendChild(div);
+        });
+      }, 300));
+    }
+
+    // Build index on load
+    buildIndex();
   }
 }
 

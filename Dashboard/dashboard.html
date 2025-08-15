@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
 </head>
 <body>
     <div class="loader-overlay" id="loader-overlay"></div>
@@ -82,45 +83,6 @@
                     </div>
                 </div>
             </section>
-            <!--<section class="news-section" style="margin: 0 1.5rem 3rem 1.5rem">
-                <div class="news-header">
-                    <div class="news-title-section">
-                        <div class="news-icon">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--green-dark); margin-bottom: 0.25rem;">Green Economy News</h3>
-                            <p style="font-size: 0.875rem; color: var(--muted-foreground)">Latest updates from the sustainable economy</p>
-                        </div>
-                    </div>
-                    <div class="news-live-indicator">
-                        <div class="live-dot"></div>
-                        <span style="font-size: 0.875rem; font-weight: 500; color: var(--green-primary)">Live</span>
-                    </div>
-                </div>
-                <div style="margin-bottom: 1.5rem">
-                    <button class="news-category-btn active" data-category="all">All News</button>
-                    <button class="news-category-btn" data-category="Energy">Energy</button>
-                    <button class="news-category-btn" data-category="Finance">Finance</button>
-                    <button class="news-category-btn" data-category="Business">Business</button>
-                    <button class="news-category-btn" data-category="Technology">Technology</button>
-                    <button class="news-category-btn" data-category="Education">Education</button>
-                </div>
-                <div id="newsGrid" class="news-grid"></div>
-                <div class="text-center" style="margin-bottom: 1rem">
-                    <button id="loadMoreNews" class="btn btn-primary">Load More News</button>
-                </div>
-                <div style="text-align: right">
-                    <button id="refreshNews" class="btn" style="background: var(--light-bg); color: var(--green-primary)">
-                        <svg style="width: 1rem; height: 1rem; margin-right: 0.5rem; display: inline;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                        </svg>
-                        Refresh News
-                    </button>
-                </div>
-            </section>-->
             <section class="personas-section" style="margin: 0 1.5rem 3rem 1.5rem">
                 <h2 class="section-title" data-translate="personas-title">Built for Every Green Economy Participant</h2>
                 <div class="personas-grid">
@@ -168,73 +130,11 @@
                     </div>
                 </div>
             </section>
-            <!--<section class="quick-actions" style="margin: 0 1.5rem 3rem 1.5rem">
-                <h3 style="font-size: 2rem; font-weight: 700; color: var(--green-dark); margin-bottom: 1.5rem;">Quick Actions</h3>
-                <div class="quick-actions-grid">
-                    <div class="quick-action-card">
-                        <h4 class="quick-action-title">Recent Activity</h4>
-                        <div class="activity-item">
-                            <div class="activity-dot green"></div>
-                            <span class="activity-text">Funding application submitted</span>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-dot accent"></div>
-                            <span class="activity-text">New SMME verified</span>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-dot green"></div>
-                            <span class="activity-text">Toolkit downloaded</span>
-                        </div>
-                    </div>
-                    <div class="quick-action-card">
-                        <h4 class="quick-action-title">Featured Resources</h4>
-                        <div class="resource-item">
-                            <div class="resource-title">Green Energy Guide</div>
-                            <div class="resource-description">Complete solar installation toolkit</div>
-                        </div>
-                        <div class="resource-item">
-                            <div class="resource-title">Carbon Credit Calculator</div>
-                            <div class="resource-description">Measure your environmental impact</div>
-                        </div>
-                        <div class="resource-item">
-                            <div class="resource-title">Sustainability Certification</div>
-                            <div class="resource-description">Get certified for green practices</div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
         </div>
     </main>
     <green-economy-footer></green-economy-footer>
-    <div class="ai-assistant-btn" onclick="openAIAssistant()">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-    </div>
-    <div id="aiModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeAIAssistant()">×</span>
-            <div class="chat-container">
-                <h3 data-translate="ai-assistant-title">AI Assistant</h3>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message ai">
-                        <div class="message-content" data-translate="ai-welcome">Sawubona! Hello! Dumelang! 🌱 I'm your Green Economy AI Assistant. I can help you in isiZulu, English, or Tswana. How can I assist you with green economy opportunities today?</div>
-                    </div>
-                </div>
-                <div class="chat-input-container">
-                    <input type="text" id="chatInput" class="chat-input" placeholder="Ask me about green economy opportunities..." data-translate-placeholder="ai-input-placeholder">
-                    <button class="chat-send" onclick="sendMessage()">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="../scripts/dashboard.js">
-
-    </script>
+<green-economy-chatbot></green-economy-chatbot>
+    <script src="../scripts/chatbot.js"></script>
+        <script src="../scripts/dashboard.js"></script>
 </body>
 </html>

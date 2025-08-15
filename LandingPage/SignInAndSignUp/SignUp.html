@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .loader {
@@ -90,21 +91,5 @@
     <div class="loader" id="loader"></div>
 
     <script src="../../scripts/signup.js"></script>
-    <script>
-      const emailInput = document.getElementById('email');
-      if (emailInput) {
-        emailInput.addEventListener('input', (e) => {
-          const passwordField = document.getElementById('password')?.parentElement;
-          const confirmPasswordField = document.getElementById('confirm-password')?.parentElement;
-          if (e.target.value === 'nbigreeneconomy@gmail.com') {
-            if (passwordField) passwordField.style.display = 'none';
-            if (confirmPasswordField) confirmPasswordField.style.display = 'none';
-          } else {
-            if (passwordField) passwordField.style.display = 'block';
-            if (confirmPasswordField) confirmPasswordField.style.display = 'block';
-          }
-        });
-      }
-    </script>
 </body>
 </html>
