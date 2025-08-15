@@ -16,8 +16,8 @@ class GreenEconomyHeader extends HTMLElement {
             ${!isDashboard ? `
               <a href="/LandingPage/About Page/about.html" data-i18n="header.funding">About the green economy</a>
               <a href="/LandingPage/Opportunities/opportunities.html" data-i18n="header.opportunities">Opportunities</a>
-              <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM sector</a>
-              <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge hub</a>
+              <a href="/LandingPage/IRM-Sector/IRMSector.html" data-i18n="header.find_a_job">IRM Sector</a>
+              <a href="/LandingPage/Knowledge-Hub/knowledge-hub.html" data-i18n="header.training">Knowledge HUB</a>
             ` : ''}
             <select class="language-selector" onchange="changeLanguage(this.value)">
               <option value="" disabled selected data-i18n="header.select">Select</option>
@@ -240,7 +240,8 @@ customElements.define('green-economy-dashboard-header', GreenEconomyDashboardHea
 customElements.define('green-economy-footer', GreenEconomyFooter);
 
 function navigateToFocusArea(areaId) {
-  window.location.href = `/LADINGPAGES/Focus-Area/focus-area.html?area=${areaId}`;
+//  window.location.href = `/LandingPage/Focus-Area/focus-area.html?area=${areaId}`;
+   window.location.href = `/LandingPage/Focus-Area/focus-area.html?area=${areaId}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

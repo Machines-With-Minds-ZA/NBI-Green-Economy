@@ -335,11 +335,14 @@
 }
 
 .business-card.green-card {
-  background: #36aa51;
+  /*they are swapped in the design but will leave the class names as is*/
+  /*background: #0891b2; */
+  background:  #2b9589;
 }
 
 .business-card.blue-card {
-  background: #0891b2;
+  /*they are swapped in the design but will leave the class names as is*/
+  background: #36aa51;
 }
 
 .business-card-image {
