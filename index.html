@@ -603,10 +603,9 @@
         function playCurrentVideo() {
           const source = videoSources[currentLang];
           if (source) {
-            const currentTime = floatingVideo.currentTime;
             floatingVideo.src = source;
             floatingVideo.load();
-            floatingVideo.currentTime = currentTime;
+            floatingVideo.currentTime = 0; // Always start from the beginning
             floatingVideo.play().catch(e => console.log('Video play failed:', e));
           }
         }
