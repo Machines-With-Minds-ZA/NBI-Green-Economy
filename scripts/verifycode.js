@@ -8,7 +8,7 @@ const firebaseConfig = {
   measurementId: "G-37VRZ5CGE4"
 };
 
-console.log("Initializing Firebase...");
+console.log("Initializing Firebase at 10:37 PM SAST, Aug 15, 2025...");
 try {
   const app = firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
@@ -50,6 +50,8 @@ try {
     });
   }
 
+  const HARDCODED_CODE = 'K7mP!qR9@wT#xY'; // Hardcoded 14-character verification code and password
+
   async function hashCode(code) {
     const encoder = new TextEncoder();
     const data = encoder.encode(code);
@@ -58,7 +60,7 @@ try {
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM fully loaded for VerifyCode page");
+    console.log("DOM fully loaded for VerifyCode page at 10:37 PM SAST, Aug 15, 2025");
 
     const verifyBtn = document.getElementById('verify-btn');
     const errorMessage = document.getElementById('error-message');
@@ -67,12 +69,22 @@ try {
       return;
     }
 
+    // Get email from URL query parameter or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email') || window.localStorage.getItem('adminEmail');
+
+    if (!email || email !== 'nbigreeneconomy@gmail.com') {
+      errorMessage.textContent = "Invalid or unauthorized email.";
+      errorMessage.classList.remove('hidden');
+      setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+      return;
+    }
+
     verifyBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       const code = document.getElementById('verification-code')?.value.trim();
-      const email = window.localStorage.getItem('adminEmail');
-      if (!code || !email) {
-        errorMessage.textContent = "Code or email not found.";
+      if (!code) {
+        errorMessage.textContent = "Please enter the verification code.";
         errorMessage.classList.remove('hidden');
         setTimeout(() => errorMessage.classList.add('hidden'), 5000);
         return;
@@ -83,15 +95,9 @@ try {
 
       try {
         const codeHash = await hashCode(code);
-        const querySnapshot = await db.collection('verification_codes')
-          .where('email', '==', email)
-          .where('codeHash', '==', codeHash)
-          .where('expiresAt', '>=', new Date())
-          .orderBy('expiresAt', 'desc')
-          .limit(1)
-          .get();
+        const codeDoc = await db.collection('verification_codes').doc(email).get();
 
-        if (querySnapshot.empty) {
+        if (!codeDoc.exists || codeDoc.data().codeHash !== codeHash || codeDoc.data().expiresAt.toDate() < new Date()) {
           hideLoader();
           errorMessage.textContent = "Invalid or expired verification code.";
           errorMessage.classList.remove('hidden');
@@ -100,7 +106,44 @@ try {
           return;
         }
 
-        const userCredential = await auth.signInWithEmailAndPassword(email, 'temporaryPassword'); // Use a temporary password
+        // Store the hashed password in the authentication collection
+        const passwordHash = await hashCode(HARDCODED_CODE);
+        await db.collection('authentication').doc(email).set({
+          email: email,
+          passwordHash: passwordHash,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        // Sign in or create the admin user using the hardcoded password
+        let userCredential;
+        try {
+          userCredential = await auth.signInWithEmailAndPassword(email, HARDCODED_CODE);
+          console.log("User signed in with stored password");
+        } catch (error) {
+          if (error.code === 'auth/user-not-found') {
+            userCredential = await auth.createUserWithEmailAndPassword(email, HARDCODED_CODE);
+            console.log("User created with hardcoded password");
+          } else if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+            // Update the password if it exists but is incorrect
+            const user = auth.currentUser;
+            if (user) {
+              await user.updatePassword(HARDCODED_CODE);
+              userCredential = await auth.signInWithEmailAndPassword(email, HARDCODED_CODE);
+              console.log("Password updated and user signed in");
+            } else {
+              await auth.sendPasswordResetEmail(email);
+              hideLoader();
+              errorMessage.textContent = "Password issue detected. A password reset email has been sent.";
+              errorMessage.classList.remove('hidden');
+              setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+              trackInteraction(null, 'verify', 'failure', 'Password issue');
+              return;
+            }
+          } else {
+            throw error;
+          }
+        }
+
         const user = userCredential.user;
         await db.collection('users').doc(user.uid).set({
           userId: user.uid,
@@ -110,8 +153,9 @@ try {
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        await querySnapshot.docs[0].ref.delete(); // Delete used code
+        await db.collection('verification_codes').doc(email).delete(); // Delete used code
         window.localStorage.removeItem('adminEmail');
+        window.localStorage.removeItem('verificationPending');
         console.log("User authenticated and admin status set");
         trackInteraction(user.uid, 'verify', 'success', `Email: ${email}`);
         hideLoader();
@@ -120,7 +164,7 @@ try {
         hideLoader();
         console.error("Verification error:", error);
         trackInteraction(null, 'verify', 'failure', error.message);
-        errorMessage.textContent = error.message;
+        errorMessage.textContent = error.message || "Verification failed.";
         errorMessage.classList.remove('hidden');
         setTimeout(() => errorMessage.classList.add('hidden'), 5000);
       }

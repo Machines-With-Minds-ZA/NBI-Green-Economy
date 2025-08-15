@@ -12,7 +12,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .loader {
             display: none;
@@ -50,18 +49,15 @@
         <main class="flex-grow flex items-center justify-center py-16 relative">
             <div class="blurry-bg"></div>
             <div class="form-container max-w-md w-full mx-4 p-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-i18n="verify.header">Verify Your Code</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-i18n="verify.header">Verify Your Admin Code</h2>
                 <div class="space-y-6">
                     <div>
                         <label for="verification-code" class="block text-sm font-medium text-gray-700" data-i18n="verify.code_label">Verification Code</label>
-                        <input id="verification-code" type="text" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="Enter 14-character code" data-i18n="verify.code_placeholder">
+                        <input id="verification-code" type="text" required class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-green-primary focus:border-green-primary" placeholder="Enter your code" data-i18n="verify.code_placeholder">
                     </div>
-                    <div id="error-message" class="error-message hidden"></div>
-                    <button id="verify-btn" class="w-full sign-in-btn font-semibold py-2 px-4 rounded-md transition-all duration-300" data-i18n="verify.verify_button">Verify</button>
+                    <div id="error-message" class="error-message hidden text-red-600"></div>
+                    <button id="verify-btn" class="w-full sign-in-btn font-semibold py-2 px-4 rounded-md transition-all duration-300" data-i18n="verify.verify_button">Verify Code</button>
                 </div>
-                <p class="mt-6 text-center text-sm text-gray-600">
-                    <span data-i18n="verify.back_to_signin">Didn't receive a code?</span> <a href="SignIn.html" class="text-green-primary hover:underline inline-link" data-i18n="verify.sign_in_link">Back to Sign In</a>
-                </p>
             </div>
         </main>
         <green-economy-footer></green-economy-footer>
