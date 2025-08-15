@@ -178,10 +178,7 @@ const translations = {
     "toolkits-desc": "Access green economy tools and seamless redirects to external applications.",
     "legal-title": "Legal & Compliance",
     "legal-desc": "Clearly defined policies and limited liability statements integrated into the platform.",
-    "personas-title": "Built for Every Green Economy Participant",
-    "ai-assistant-title": "AI Assistant",
-    "ai-welcome": "Sawubona! Hello! Dumelang! 🌱 I'm your Green Economy AI Assistant. I can help you in isiZulu, English, or Tswana. How can I assist you with green economy opportunities today?",
-    "ai-input-placeholder": "Ask me about green economy opportunities..."
+    "personas-title": "Built for Every Green Economy Participant"
   },
   zu: {
     "dashboard-title": "Ukubuka Idashboard",
@@ -196,10 +193,7 @@ const translations = {
     "toolkits-desc": "Finyelela amatulusi omnotho oluhlaza kanye nokudlulisela ngaphandle koluleko.",
     "legal-title": "Ezomthetho Nokulandela",
     "legal-desc": "Izinqubomgomo ezicacile nezitatimende zomthwalo ohlinzekwe endaweni.",
-    "personas-title": "Yakhelwe Bonke Abahlanganyeli Bomnotho Oluhlaza",
-    "ai-assistant-title": "Umsizi we-AI",
-    "ai-welcome": "Sawubona! 🌱 NginguMsizi wakho we-AI womnotho oluhlaza. Ngingakusiza ngesiZulu, isiNgisi, noma isiTswana. Ngingakusiza kanjani namathuba omnotho oluhlaza namuhla?",
-    "ai-input-placeholder": "Ngibuze ngamathuba omnotho oluhlaza..."
+    "personas-title": "Yakhelwe Bonke Abahlanganyeli Bomnotho Oluhlaza"
   },
   tn: {
     "dashboard-title": "Ponopesiso ya Dashboard",
@@ -214,10 +208,7 @@ const translations = {
     "toolkits-desc": "Hwetša didirišwa tsa ikonomi e tala le diphetišetšo tše di se nago bothata.",
     "legal-title": "Semolao le Go Latela",
     "legal-desc": "Melawana e e tlhalogantšegago le dipego tsa boikarabelo tše di akaretšweng.",
-    "personas-title": "E Agilwe Batšeakarolo Botlhe ba Ikonomi e Tala",
-    "ai-assistant-title": "Mothusi wa AI",
-    "ai-welcome": "Dumelang! 🌱 Ke Mothusi wa gago wa AI wa ikonomi e tala. Nka go thuša ka Setswana, Sekgowa kgotsa isiZulu. Nka go thuša jang ka ditšhono tsa ikonomi e tala gompieno?",
-    "ai-input-placeholder": "Mpotse ka ditšhono tsa ikonomi e tala..."
+    "personas-title": "E Agilwe Batšeakarolo Botlhe ba Ikonomi e Tala"
   }
 };
 
@@ -225,7 +216,6 @@ let newsData = [];
 let currentLanguage = "en";
 let currentNewsCategory = "all";
 let displayedNewsCount = 4;
-let chatMessages = [];
 const DEFAULT_IMAGE = "https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg";
 
 const fallbackNewsData = [
@@ -487,7 +477,7 @@ function setupNewsEventListeners() {
   const refreshBtn = document.getElementById("refreshNews");
   if (refreshBtn) {
     refreshBtn.removeEventListener("click", handleRefreshClick);
-    btn.addEventListener("click", handleRefreshClick);
+    refreshBtn.addEventListener("click", handleRefreshClick);
   }
 }
 
@@ -514,24 +504,6 @@ function handleRefreshClick() {
   });
 }
 
-async function updateNews() {
-  try {
-    const apiDoc = await db.collection('apis').doc('news-api').get();
-    if (!apiDoc.exists || !apiDoc.data().enabled) {
-      newsData = [];
-      renderNews();
-      displayErrorMessage("News API is disabled. Auto-refresh stopped.");
-      return;
-    }
-    await fetchNews();
-    renderNews();
-    trackUserInteraction(tempUserId, "news", "auto_update");
-  } catch (error) {
-    console.error("Error updating news:", error);
-    displayErrorMessage("Failed to update news: " + error.message);
-  }
-}
-
 function openNewsArticle(newsId) {
   const news = newsData.find((n) => n.id === newsId);
   if (news && news.url) {
@@ -542,91 +514,7 @@ function openNewsArticle(newsId) {
   }
 }
 
-function openAIAssistant() {
-  const modal = document.getElementById("aiModal");
-  if (modal) {
-    modal.style.display = "flex";
-    trackUserInteraction(tempUserId, "ai_assistant", "opened");
-  }
-}
-
-function closeAIAssistant() {
-  const modal = document.getElementById("aiModal");
-  if (modal) {
-    modal.style.display = "none";
-    trackUserInteraction(tempUserId, "ai_assistant", "closed");
-  }
-}
-
-function sendMessage() {
-  const input = document.getElementById("chatInput");
-  if (!input) return;
-  const message = input.value.trim();
-  if (!message) return;
-
-  addMessage(message, "user");
-  input.value = "";
-  trackUserInteraction(tempUserId, "ai_chat", "message_sent");
-
-  setTimeout(() => {
-    const aiResponse = generateAIResponse(message);
-    addMessage(aiResponse, "ai");
-  }, 1000);
-}
-
-function addMessage(content, sender) {
-  const messagesContainer = document.getElementById("chatMessages");
-  if (!messagesContainer) return;
-  const messageDiv = document.createElement("div");
-  messageDiv.className = `message ${sender}`;
-  messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
-  messagesContainer.appendChild(messageDiv);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  chatMessages.push({ content, sender, timestamp: new Date() });
-}
-
-function generateAIResponse(userMessage) {
-  const responses = {
-    en: [
-      "I can help you find green funding opportunities. What type of project are you working on?",
-      "Let me connect you with relevant SMME businesses in your area. What industry are you interested in?",
-      "I can guide you to the right sustainability toolkit. What environmental challenge are you facing?",
-      "Great question! I can help you understand the legal requirements for green business certification."
-    ],
-    zu: [
-      "Ngingakusiza ukuthola amathuba ezimali eziluhlaza. Yiluphi uhlobo lwephrojekthi osebenza ngalo?",
-      "Ake ngikuxhumanise namabhizinisi afanele endaweni yakho. Yimuphi umkhakha onomdla ngawo?",
-      "Ngingakuqondisa kutulusi efanele. Yiyiphi inselelo yendalo obhekane nayo?",
-      "Umbuzo omuhle! Ngingakusiza ukuqonda izidingo zomthetho zokuqinisekisa ibhizinisi eliluhlaza."
-    ],
-    tn: [
-      "Nka go thuša go bona ditšhono tsa madi a tala. Ke morojwa ofe o o sebetsang ka ona?",
-      "A ke go golagane le dikgwebo tše di maleba mo kgaolong ya gago. Ke intasteri efe e o nang le kgatlhego go yona?",
-      "Nka go dira gore o itekanele le sebereka se se maleba. Ke tlhohlo efe ya tikologo e o lebaneng le yona?",
-      "Potšišo e botse! Nka go thuša go tlhaloganya ditlhokwa tsa semolao tsa netefatso ya dikgwebo tše di tala."
-    ]
-  };
-  const langResponses = responses[currentLanguage] || responses.en;
-  return langResponses[Math.floor(Math.random() * langResponses.length)];
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-  const chatInput = document.getElementById("chatInput");
-  if (chatInput) {
-    chatInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        sendMessage();
-      }
-    });
-  }
-
-  window.addEventListener("click", function (e) {
-    const modal = document.getElementById("aiModal");
-    if (e.target === modal) {
-      closeAIAssistant();
-    }
-  });
-
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();

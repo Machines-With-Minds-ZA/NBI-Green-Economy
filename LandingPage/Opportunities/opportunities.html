@@ -15,7 +15,8 @@
     <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
     <link rel="stylesheet" href="Opportunities.css">
     <script src="Trans.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
   </head>
   <body>
     <!-- Header -->
@@ -120,6 +121,8 @@
 
     <!-- Footer -->
     <green-economy-footer></green-economy-footer>
+    <green-economy-chatbot></green-economy-chatbot>
+    <script src="../../scripts/chatbot.js"></script>
 
     <script>
       document.querySelectorAll('.business-card-button').forEach((button) => {

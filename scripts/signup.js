@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
   apiKey: "AIzaSyCfa827mvCLf1ETts6B_DmCfb7owTohBxk",
   authDomain: "nbi-green-economy.firebaseapp.com",
@@ -13,6 +14,7 @@ try {
   const app = firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
+  const functions = firebase.functions();
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   console.log("Firebase initialized successfully");
 
@@ -80,6 +82,22 @@ try {
     }
   }
 
+  function generateVerificationCode() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let code = '';
+    for (let i = 0; i < 14; i++) {
+      code += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return code;
+  }
+
+  async function hashCode(code) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(code);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
       console.log("Persistence set to LOCAL");
@@ -97,6 +115,21 @@ try {
 
   document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded for SignUp page");
+
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+      emailInput.addEventListener('input', (e) => {
+        const passwordField = document.getElementById('password')?.parentElement;
+        const confirmPasswordField = document.getElementById('confirm-password')?.parentElement;
+        if (e.target.value === 'nbigreeneconomy@gmail.com') {
+          if (passwordField) passwordField.style.display = 'none';
+          if (confirmPasswordField) confirmPasswordField.style.display = 'none';
+        } else {
+          if (passwordField) passwordField.style.display = 'block';
+          if (confirmPasswordField) confirmPasswordField.style.display = 'block';
+        }
+      });
+    }
 
     const signUpBtn = document.getElementById('sign-up-btn');
     const googleSignUpBtn = document.getElementById('google-sign-up-btn');
@@ -116,7 +149,7 @@ try {
           return;
         }
 
-        if (password !== confirmPassword) {
+        if (email !== 'nbigreeneconomy@gmail.com' && password !== confirmPassword) {
           errorMessage.textContent = "Passwords do not match.";
           errorMessage.classList.remove('hidden');
           trackInteraction(null, 'signup', 'failure', 'Passwords do not match');
@@ -128,25 +161,32 @@ try {
         showLoader();
 
         if (email === 'nbigreeneconomy@gmail.com') {
-          const actionCodeSettings = {
-            url: 'https://nbigreeneconomy.netlify.app/LandingPage/SignInAndSignUp/SignIn.html',
-            handleCodeInApp: true
-          };
           try {
-            console.log("Sending sign-up link to:", email);
-            await auth.sendSignInLinkToEmail(email, actionCodeSettings);
-            window.localStorage.setItem('emailForSignIn', email);
+            const code = generateVerificationCode();
+            const codeHash = await hashCode(code);
+            const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+            await db.collection('verification_codes').add({
+              email: email,
+              codeHash: codeHash,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              expiresAt: expiresAt
+            });
+
+            const sendEmail = functions.httpsCallable('sendVerificationEmail');
+            await sendEmail({ email: email, code: code });
+
+            window.localStorage.setItem('adminEmail', email);
             hideLoader();
-            errorMessage.textContent = "A sign-in link has been sent to your email to complete sign-up.";
+            errorMessage.textContent = "A verification code has been sent to your email.";
             errorMessage.classList.remove('hidden');
             setTimeout(() => {
               errorMessage.classList.add('hidden');
-              window.location.href = '/LandingPage/SignInAndSignUp/SignIn.html';
-            }, 5000);
-            trackInteraction(null, 'signup', 'email_link_sent', `Email: ${email}`);
+              window.location.href = 'VerifyCode.html';
+            }, 3000);
+            trackInteraction(null, 'signup', 'code_sent', `Email: ${email}`);
           } catch (error) {
             hideLoader();
-            console.error("Passwordless sign-up error:", error);
+            console.error("Admin sign-up error:", error);
             trackInteraction(null, 'signup', 'failure', error.message);
             errorMessage.textContent = error.message;
             errorMessage.classList.remove('hidden');
@@ -185,7 +225,7 @@ try {
             setTimeout(() => {
               errorMessage.classList.add('hidden');
               auth.signOut().then(() => {
-                window.location.href = '/LandingPage/SignInAndSignUp/SignIn.html';
+                window.location.href = 'SignIn.html';
               });
             }, 5000);
           } catch (error) {
@@ -222,13 +262,29 @@ try {
           trackInteraction(user.uid, 'signup', 'success', 'Google');
           hideLoader();
 
-          const questionnaireCompleted = await checkQuestionnaireCompletion(user);
-          const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-            ? '/interactions/interactions.html?userId=' + user.uid
-            : questionnaireCompleted
+          if (user.email === 'nbigreeneconomy@gmail.com') {
+            const code = generateVerificationCode();
+            const codeHash = await hashCode(code);
+            const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+            await db.collection('verification_codes').add({
+              email: user.email,
+              codeHash: codeHash,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              expiresAt: expiresAt
+            });
+
+            const sendEmail = functions.httpsCallable('sendVerificationEmail');
+            await sendEmail({ email: user.email, code: code });
+
+            window.localStorage.setItem('adminEmail', user.email);
+            window.location.href = 'VerifyCode.html';
+          } else {
+            const questionnaireCompleted = await checkQuestionnaireCompletion(user);
+            const redirectUrl = questionnaireCompleted
               ? '/Dashboard/dashboard.html?userId=' + user.uid
               : '/questionnaire/questionnaire.html?userId=' + user.uid;
-          window.location.href = redirectUrl;
+            window.location.href = redirectUrl;
+          }
         } catch (error) {
           hideLoader();
           console.error("Google sign-up error:", error);
@@ -241,58 +297,6 @@ try {
           }
         }
       });
-    }
-
-    if (auth.isSignInWithEmailLink(window.location.href)) {
-      const email = window.localStorage.getItem('emailForSignIn');
-      if (email) {
-        console.log("Handling email link sign-up for:", email);
-        showLoader();
-        auth.signInWithEmailLink(email, window.location.href)
-          .then(async (userCredential) => {
-            window.localStorage.removeItem('emailForSignIn');
-            const user = userCredential.user;
-            await db.collection('users').doc(user.uid).set({
-              userId: user.uid,
-              email: user.email,
-              isAdmin: user.email === 'nbigreeneconomy@gmail.com',
-              questionnaireCompleted: false,
-              language: document.documentElement.lang || 'en',
-              createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-            console.log("users doc written successfully");
-            trackInteraction(user.uid, 'signup', 'success', `Email: ${email}`);
-            hideLoader();
-
-            const questionnaireCompleted = await checkQuestionnaireCompletion(user);
-            const redirectUrl = user.email === 'nbigreeneconomy@gmail.com'
-              ? '/interactions/interactions.html?userId=' + user.uid
-              : questionnaireCompleted
-                ? '/Dashboard/dashboard.html?userId=' + user.uid
-                : '/questionnaire/questionnaire.html?userId=' + user.uid;
-            window.location.href = redirectUrl;
-          })
-          .catch(error => {
-            hideLoader();
-            console.error("Error completing passwordless sign-up:", error);
-            trackInteraction(null, 'signup', 'failure', error.message);
-            const errorMessage = document.getElementById('error-message');
-            if (errorMessage) {
-              errorMessage.textContent = error.message;
-              errorMessage.classList.remove('hidden');
-              setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-            }
-          });
-      } else {
-        console.error("No email found in localStorage for email link sign-up");
-        const errorMessage = document.getElementById('error-message');
-        if (errorMessage) {
-          errorMessage.textContent = "No email found for sign-up. Please try again.";
-          errorMessage.classList.remove('hidden');
-          setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-        }
-        hideLoader();
-      }
     }
 
     if (typeof updateLanguage === 'function') {

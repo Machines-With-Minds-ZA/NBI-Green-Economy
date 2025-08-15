@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Green Economy Toolkit</title>
+    <script src="../Master Page(Header and Footer)/MasterPage.js"></script>
+    <script src="https://unpkg.com/i18next@22/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="Trans.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../Master Page(Header and Footer)/MasterPage.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --green-primary: #4eb5a6;
+        --green-dark: #005d6a;
+        --green-light: #b8e5e1;
+        --green-accent: #7cc8bc;
+        --light-bg: #f8fffe;
+        --background: #ffffff;
+        --foreground: #0f172a;
+        --card: #ffffff;
+        --card-foreground: #0f172a;
+        --border: #e2e8f0;
+        --muted-foreground: #64748b;
+        --primary: #1e293b;
+        --primary-foreground: #f8fafc;
+        --secondary: #f1f5f9;
+        --secondary-foreground: #1e293b;
+        --radius: 10rem;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .main {
+        padding-top: 5rem;
+        min-height: 100vh;
+      }
+
+      .hero {
+        position: relative;
+        height: 400px;
+        background-image: linear-gradient(rgba(0, 93, 106, 0.7), rgba(78, 181, 166, 0.7)),
+                        url("https://images.pexels.com/photos/371917/pexels-photo-371917.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 3rem;
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 2rem 3rem;
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--green-dark);
+        margin-bottom: 1rem;
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding: 0 2rem;
+      }
+
+      .dashboard-card {
+        background: var(--card);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-icon {
+        width: 3rem;
+        height: 3rem;
+        color: var(--green-dark);
+        margin: 0 auto 1rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--card-foreground);
+      }
+
+      .card-description {
+        color: var(--muted-foreground);
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          height: auto;
+          min-height: 200px;
+          border-radius: 0.5rem;
+        }
+        .hero-content {
+          padding: 1rem;
+          max-width: 100%;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('manage-events').addEventListener('click', () => {
+          window.location.href = 'ManageEvents.html';
+        });
+        document.getElementById('manage-news').addEventListener('click', () => {
+          window.location.href = 'ManageNews.html';
+        });
+        document.getElementById('manage-database').addEventListener('click', () => {
+          window.location.href = 'database.html';
+        });
+        document.getElementById('manage-funding').addEventListener('click', () => {
+          window.location.href = 'ManageFunding.html';
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <green-economy-header></green-economy-header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Admin Dashboard</h1>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="dashboard-card" id="manage-events">
+        <i class="fas fa-calendar-alt card-icon"></i>
+        <h3 class="card-title">Manage Events</h3>
+        <p class="card-description">Add or edit events for the index page.</p>
+      </div>
+      <div class="dashboard-card" id="manage-news">
+        <i class="fas fa-newspaper card-icon"></i>
+        <h3 class="card-title">Manage News</h3>
+        <p class="card-description">Update the news section on the index page.</p>
+      </div>
+      <div class="dashboard-card" id="manage-database">
+        <i class="fas fa-database card-icon"></i>
+        <h3 class="card-title">Manage Database</h3>
+        <p class="card-description">Access and manage the database.</p>
+      </div>
+      <div class="dashboard-card" id="manage-funding">
+        <i class="fas fa-money-check-alt card-icon"></i>
+        <h3 class="card-title">Manage Funding</h3>
+        <p class="card-description">Add or update funding opportunities.</p>
+      </div>
+    </section>
+
+    <green-economy-footer></green-economy-footer>
+  </body>
+</html>

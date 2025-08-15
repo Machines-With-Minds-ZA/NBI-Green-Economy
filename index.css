@@ -72,7 +72,7 @@
   height: 64px;
   background: rgba(67, 220, 103, 0.9);
   border: none;
-  border-radius: 50%;
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
