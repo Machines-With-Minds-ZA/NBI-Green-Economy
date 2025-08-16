@@ -140,10 +140,8 @@
     <!-- Header -->
     <green-economy-header></green-economy-header>
     <body>
-      <div class="analytics-header">Website Analytics Dashboard</div>
       <div class="analytics-container">
-        <iframe class="analytics-iframe"
-          src="https://lookerstudio.google.com/embed/reporting/43d53996-0c4d-46c8-959d-ebdd45f17dae/page/kIV1C"
+        <iframe id="analyticsIframe" class="analytics-iframe"
           allowfullscreen
           sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
         </iframe>
@@ -153,8 +151,43 @@
     <green-economy-footer></green-economy-footer>
 
     <script>
-      // Initialize i18next
+      // Default date range and selections
+      const DEFAULT_DATE_RANGE = {
+        startDate: '2023-01-01',  // Set your desired start date (YYYY-MM-DD)
+        endDate: '2025-12-31'     // Set your desired end date (YYYY-MM-DD)
+      };
+      
+      // Default filter values
+      const DEFAULT_FILTERS = {
+        // Add your specific filter parameters here
+        // Example: 'params.analysis.parameterName': 'parameterValue'
+      };
+
+      // Function to generate the iframe URL with parameters
+      function generateAnalyticsUrl() {
+        const baseUrl = 'https://lookerstudio.google.com/embed/reporting/43d53996-0c4d-46c8-959d-ebdd45f17dae/page/kIV1C';
+        const params = new URLSearchParams();
+        
+        // Add date range parameters
+        params.append('params', JSON.stringify({
+          'ds.connector': 'bigquery',
+          'ds.project_id': 'your-project-id', // Replace with your project ID
+          'ds.sql': `SELECT * FROM your_dataset.your_table 
+                    WHERE date BETWEEN '${DEFAULT_DATE_RANGE.startDate}' AND '${DEFAULT_DATE_RANGE.endDate}'
+                    ORDER BY date DESC`
+        }));
+        
+        // Add any additional filters
+        Object.entries(DEFAULT_FILTERS).forEach(([key, value]) => {
+          params.append(key, value);
+        });
+        
+        return `${baseUrl}?${params.toString()}`;
+      }
+
+      // Initialize the page
       document.addEventListener('DOMContentLoaded', function() {
+        // Initialize i18next
         i18next
           .use(i18nextHttpBackend)
           .use(i18nextBrowserLanguageDetector)
@@ -172,6 +205,10 @@
               caches: ['localStorage', 'cookie']
             }
           });
+        
+        // Update iframe source with parameters
+        const iframe = document.querySelector('.analytics-iframe');
+        iframe.src = generateAnalyticsUrl();
       });
     </script>
   </body>

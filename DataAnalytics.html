@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics - Green Economy</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="Master Page(Header and Footer)/MasterPage.css">
+    <style>
+        :root {
+            --primary-color: #36aa51;
+            --primary-dark: #0c973f;
+            --secondary-color: #0891b2;
+            --secondary-dark: #2b9589;
+            --text-color: #333;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 20px 40px;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .dashboard-header h1 {
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin: 0.5rem 0;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #4caf50;
+        }
+
+        .stat-change.negative {
+            color: #f44336;
+        }
+
+        .chart-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+        }
+
+        .chart-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-container {
+                padding: 100px 15px 30px;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <green-economy-header></green-economy-header>
+
+    <div class="page-container">
+        <div class="dashboard-header">
+            <h1>Data Analytics Dashboard</h1>
+            <p>Comprehensive insights and analytics for the Green Economy initiative</p>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <h3>Total Visitors</h3>
+                <div class="stat-value" id="totalVisitors">0</div>
+                <div class="stat-change">
+                    <i class="fas fa-arrow-up"></i> 12% from last month
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Users</h3>
+                <div class="stat-value" id="activeUsers">0</div>
+                <div class="stat-change">
+                    <i class="fas fa-arrow-up"></i> 8% from last month
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Page Views</h3>
+                <div class="stat-value" id="pageViews">0</div>
+                <div class="stat-change negative">
+                    <i class="fas fa-arrow-down"></i> 3% from last month
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Engagement Rate</h3>
+                <div class="stat-value" id="engagementRate">0%</div>
+                <div class="stat-change">
+                    <i class="fas fa-arrow-up"></i> 5% from last month
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Charts Row -->
+        <div class="dashboard-row">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>User Engagement</h2>
+                    <div class="chart-actions">
+                        <button class="btn btn-outline">Export</button>
+                    </div>
+                </div>
+                <canvas id="engagementChart"></canvas>
+            </div>
+        </div>
+
+        <div class="dashboard-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>Page Views by Section</h2>
+                    <div class="chart-actions">
+                        <button class="btn btn-outline">Export</button>
+                    </div>
+                </div>
+                <canvas id="pageViewsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2>Traffic Sources</h2>
+                </div>
+                <canvas id="trafficSourcesChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h2>Recent Activity</h2>
+                <div class="chart-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="recentActivity">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Visitors</th>
+                            <th>Avg. Time</th>
+                            <th>Bounce Rate</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <green-economy-footer></green-economy-footer>
+
+    <script>
+        // Firebase configuration and initialization
+        if (!firebase.apps.length) {
+            const firebaseConfig = {
+                apiKey: "AIzaSyCfa827mvCLf1ETts6B_DmCfb7owTohBxk",
+                authDomain: "nbi-green-economy.firebaseapp.com",
+                projectId: "nbi-green-economy",
+                storageBucket: "nbi-green-economy.firebasestorage.app",
+                messagingSenderId: "53732340059",
+                appId: "1:53732340059:web:3fb3f086c6662e1e9baa7e",
+                measurementId: "G-37VRZ5CGE4"
+            };
+            firebase.initializeApp(firebaseConfig);
+        }
+        
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        
+        // Initialize Analytics
+        let analyticsData = {
+            totalVisitors: 0,
+            activeUsers: 0,
+            pageViews: 0,
+            engagementRate: 0,
+            engagementData: [0, 0, 0, 0, 0, 0, 0],
+            pageViewsData: [0, 0, 0, 0, 0, 0, 0],
+            trafficSources: {
+                direct: 0,
+                organic: 0,
+                referral: 0,
+                social: 0
+            },
+            recentActivity: []
+        };
+        
+        // Fetch analytics data from Firestore
+        async function fetchAnalyticsData() {
+            try {
+                // Get analytics data from Firestore
+                const analyticsDoc = await db.collection('analytics').doc('dashboard').get();
+                if (analyticsDoc.exists) {
+                    const data = analyticsDoc.data();
+                    analyticsData = {
+                        ...analyticsData,
+                        ...data
+                    };
+                    updateDashboard();
+                } else {
+                    console.log('No analytics data found');
+                }
+                
+                // Get recent activity
+                const activitySnapshot = await db.collection('analytics')
+                    .doc('recentActivity')
+                    .collection('items')
+                    .orderBy('timestamp', 'desc')
+                    .limit(5)
+                    .get();
+                    
+                analyticsData.recentActivity = activitySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                
+                updateDashboard();
+                
+            } catch (error) {
+                console.error('Error fetching analytics data:', error);
+            }
+        }
+        
+        // Update the dashboard with real data
+        function updateDashboard() {
+            // Update stats
+            document.getElementById('totalVisitors').textContent = analyticsData.totalVisitors.toLocaleString();
+            document.getElementById('activeUsers').textContent = analyticsData.activeUsers.toLocaleString();
+            document.getElementById('pageViews').textContent = analyticsData.pageViews.toLocaleString();
+            document.getElementById('engagementRate').textContent = analyticsData.engagementRate + '%';
+            
+            // Update recent activity table
+            const activityTableBody = document.getElementById('activityTableBody');
+            activityTableBody.innerHTML = ''; // Clear existing rows
+            
+            analyticsData.recentActivity.forEach(activity => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${activity.page || 'N/A'}</td>
+                    <td>${activity.visitors ? activity.visitors.toLocaleString() : '0'}</td>
+                    <td>${activity.avgTime || '0:00'}</td>
+                    <td>${activity.bounceRate || '0%'}</td>
+                    <td><span class="stat-change ${activity.status === 'up' ? '' : 'negative'}">
+                        <i class="fas fa-arrow-${activity.status || 'up'}"></i> ${activity.change || '0%'}
+                    </span></td>
+                `;
+                activityTableBody.appendChild(row);
+            });
+            
+            // Update charts
+            updateCharts();
+        }
+
+        // Initialize charts and fetch data when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Sign in first
+            const isSignedIn = await signInAdmin();
+            if (!isSignedIn) {
+                console.error('Failed to authenticate with Firebase');
+                return;
+            }
+            
+            // Fetch data from Firestore
+            fetchAnalyticsData();
+            
+            // Set up real-time listener for updates
+            db.collection('analytics').doc('dashboard')
+                .onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        analyticsData = {
+                            ...analyticsData,
+                            ...data
+                        };
+                        updateDashboard();
+                    }
+                });
+                
+            // Set up real-time listener for recent activity
+            db.collection('analytics')
+                .doc('recentActivity')
+                .collection('items')
+                .orderBy('timestamp', 'desc')
+                .limit(5)
+                .onSnapshot((snapshot) => {
+                    analyticsData.recentActivity = snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    updateDashboard();
+                });
+            // Engagement Chart
+            const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+            new Chart(engagementCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Engagement Rate',
+                        data: analyticsData.engagementData || [0, 0, 0, 0, 0, 0, 0],
+                        borderColor: '#36aa51',
+                        backgroundColor: 'rgba(54, 170, 81, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Page Views Chart
+            const pageViewsCtx = document.getElementById('pageViewsChart').getContext('2d');
+            new Chart(pageViewsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Home', 'About', 'Services', 'Contact', 'Blog', 'Resources', 'FAQ'],
+                    datasets: [{
+                        label: 'Page Views',
+                        data: analyticsData.pageViewsData || [0, 0, 0, 0, 0, 0, 0],
+                        backgroundColor: [
+                            'rgba(54, 170, 81, 0.7)',
+                            'rgba(8, 145, 178, 0.7)',
+                            'rgba(43, 149, 137, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(5, 150, 105, 0.7)',
+                            'rgba(6, 95, 70, 0.7)',
+                            'rgba(4, 120, 87, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 170, 81, 1)',
+                            'rgba(8, 145, 178, 1)',
+                            'rgba(43, 149, 137, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(5, 150, 105, 1)',
+                            'rgba(6, 95, 70, 1)',
+                            'rgba(4, 120, 87, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+
+        // Load MasterPage components
+        document.addEventListener('DOMContentLoaded', function() {
+            // This will be handled by MasterPage.js
+        });
+    </script>
+
+    <!-- Activity Logs Section -->
+    <div class="chart-container">
+        <div class="chart-header">
+            <h2>User Activity Logs</h2>
+            <div class="chart-actions">
+                <select id="logFilter" class="btn btn-outline">
+                    <option value="all">All Actions</option>
+                    <option value="page_view">Page Views</option>
+                    <option value="click">Clicks</option>
+                    <option value="form_submit">Form Submissions</option>
+                    <option value="outbound_click">Outbound Clicks</option>
+                </select>
+                <input type="date" id="logDateFilter" class="btn btn-outline">
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="activityLogsTable">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>User</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Page</th>
+                    </tr>
+                </thead>
+                <tbody id="activityLogsBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MasterPage Script -->
+    <script src="Master Page(Header and Footer)/MasterPage.js"></script>
+    
+    <!-- Activity Logger -->
+    <script src="scripts/activityLogger.js"></script>
+    
+    <script>
+        // Get existing Firebase app instance
+        const app = firebase.app();
+        
+        // Load and display activity logs
+        async function loadActivityLogs(filter = 'all', dateFilter = null) {
+            const logsBody = document.getElementById('activityLogsBody');
+            logsBody.innerHTML = '<tr><td colspan="5" class="text-center">Loading...</td></tr>';
+            
+            try {
+                let query = db.collection('userSessions')
+                    .orderBy('lastActivity', 'desc')
+                    .limit(50);
+                
+                const snapshot = await query.get();
+                
+                if (snapshot.empty) {
+                    logsBody.innerHTML = '<tr><td colspan="5" class="text-center">No activity logs found</td></tr>';
+                    return;
+                }
+                
+                let logs = [];
+                snapshot.forEach(doc => {
+                    const session = doc.data();
+                    if (session.actions) {
+                        Object.entries(session.actions).forEach(([timestamp, action]) => {
+                            if (filter === 'all' || action.type === filter) {
+                                if (!dateFilter || new Date(action.timestamp).toDateString() === new Date(dateFilter).toDateString()) {
+                                    logs.push({
+                                        ...action,
+                                        userEmail: session.userEmail || 'Anonymous',
+                                        sessionId: doc.id
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                // Sort by timestamp
+                logs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                // Display logs
+                if (logs.length === 0) {
+                    logsBody.innerHTML = '<tr><td colspan="5" class="text-center">No matching activity found</td></tr>';
+                    return;
+                }
+                
+                logsBody.innerHTML = logs.map(log => `
+                    <tr>
+                        <td>${new Date(log.timestamp).toLocaleString()}</td>
+                        <td>${log.userEmail}</td>
+                        <td>
+                            <span class="badge ${getActionBadgeClass(log.type)}">
+                                ${formatActionType(log.type)}
+                            </span>
+                        </td>
+                        <td>${formatActionDetails(log)}</td>
+                        <td>${log.page || 'N/A'}</td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading activity logs:', error);
+                logsBody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading activity logs</td></tr>';
+            }
+        }
+        
+        function formatActionType(type) {
+            return type
+                .split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+        
+        function getActionBadgeClass(type) {
+            const classes = {
+                'page_view': 'bg-primary',
+                'click': 'bg-info text-dark',
+                'form_submit': 'bg-success',
+                'outbound_click': 'bg-warning text-dark',
+                'session_end': 'bg-secondary'
+            };
+            return classes[type] || 'bg-secondary';
+        }
+        
+        function formatActionDetails(action) {
+            switch(action.type) {
+                case 'page_view':
+                    return `Viewed ${action.details.page || 'page'}`;
+                case 'click':
+                    return `Clicked on ${action.details.tagName}${action.details.id ? `#${action.details.id}` : ''}${action.details.className ? `.${action.details.className.split(' ').join('.')}` : ''}`;
+                case 'form_submit':
+                    return `Submitted form: ${action.details.formId || 'unnamed form'}`;
+                case 'outbound_click':
+                    return `Clicked external link to ${action.details.url}`;
+                default:
+                    return JSON.stringify(action.details || {});
+            }
+        }
+        
+        // Set up event listeners for filters
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('logDateFilter').value = today;
+            
+            // Load initial logs
+            loadActivityLogs('all', today);
+            
+            // Set up filter change handlers
+            document.getElementById('logFilter').addEventListener('change', (e) => {
+                const dateFilter = document.getElementById('logDateFilter').value;
+                loadActivityLogs(e.target.value, dateFilter);
+            });
+            
+            document.getElementById('logDateFilter').addEventListener('change', (e) => {
+                const actionFilter = document.getElementById('logFilter').value;
+                loadActivityLogs(actionFilter, e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
